@@ -1,0 +1,6280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="English Course Lesson 1 presentation: Introductions.">
+  <title>English Course - Lesson 1 - Introductions</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    
+    html {
+      min-height: 100%;
+      text-size-adjust: 100%;
+    }
+    
+    body {
+      min-height: 100%;
+      margin: 0;
+    }
+    
+    body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
+      margin: 0;
+    }
+    
+    ul[role="list"],
+    ol[role="list"] {
+      list-style: none;
+    }
+    
+    img, picture, video, canvas, svg {
+      display: block;
+      max-width: 100%;
+    }
+    
+    input, button, textarea, select {
+      font: inherit;
+    }
+    
+    button, select {
+      color: inherit;
+    }
+    
+    button {
+      cursor: pointer;
+    }
+    
+    button:disabled {
+      cursor: not-allowed;
+    }
+    
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    [hidden] {
+      display: none !important;
+    }
+    :root {
+      --color-page: #f5f7fa;
+      --color-surface: #ffffff;
+      --color-surface-soft: #f0f4f7;
+      --color-ink: #161616;
+      --color-muted: #5b6470;
+      --color-line: #d7dde4;
+      --color-accent: #007c78;
+      --color-accent-strong: #005f5c;
+      --color-accent-soft: #d8f1ee;
+      --color-warm: #c8562f;
+      --color-warm-soft: #ffe3d6;
+      --color-focus: #f7b801;
+      --shadow-soft: 0 18px 60px rgba(20, 28, 38, 0.12);
+      --shadow-panel: 0 8px 28px rgba(20, 28, 38, 0.1);
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.5rem;
+      --space-6: 2rem;
+      --space-7: 3rem;
+      --space-8: 4rem;
+      --font-body: Arial, Helvetica, sans-serif;
+      --font-display: Georgia, "Times New Roman", serif;
+      --app-header-height: 5.75rem;
+      --slide-max-width: 1180px;
+      --transition-fast: 160ms ease;
+      --transition-medium: 260ms ease;
+    }
+    body {
+      background: var(--color-page);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      font-size: 1.125rem;
+      line-height: 1.5;
+    }
+    
+    h1,
+    h2,
+    h3 {
+      color: var(--color-ink);
+      font-family: var(--font-display);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+    
+    h1 {
+      font-size: 4.75rem;
+    }
+    
+    h2 {
+      font-size: 4rem;
+    }
+    
+    h3 {
+      font-size: 2.25rem;
+    }
+    
+    p {
+      max-width: 70ch;
+    }
+    
+    th {
+      font-weight: 700;
+      text-align: left;
+    }
+    
+    .app-eyebrow,
+    .slide-kicker {
+      color: var(--color-accent-strong);
+      font-size: 0.875rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+    
+    .app-title {
+      color: var(--color-ink);
+      font-size: 1.25rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    
+    .slide-count {
+      color: var(--color-muted);
+      font-size: 1rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    
+    .course-app {
+      --slide-body-size: 1.125rem;
+      --slide-font-scale: 1;
+      --slide-h1-size: 4.75rem;
+      --slide-h2-size: 4rem;
+      --slide-h3-size: 2.25rem;
+      --slide-kicker-size: 0.875rem;
+      --slide-meta-size: 1.25rem;
+      --slide-count-size: 1rem;
+    }
+    
+    .course-app[data-font-size="small"] {
+      --slide-font-scale: 0.9;
+    }
+    
+    .course-app[data-font-size="large"] {
+      --slide-font-scale: 1.16;
+    }
+    
+    .course-app .slide {
+      font-size: calc(var(--slide-body-size) * var(--slide-font-scale));
+    }
+    
+    .course-app .slide h1 {
+      font-size: calc(var(--slide-h1-size) * var(--slide-font-scale));
+    }
+    
+    .course-app .slide h2 {
+      font-size: calc(var(--slide-h2-size) * var(--slide-font-scale));
+    }
+    
+    .course-app .slide h3 {
+      font-size: calc(var(--slide-h3-size) * var(--slide-font-scale));
+    }
+    
+    .course-app .slide .slide-kicker {
+      font-size: calc(var(--slide-kicker-size) * var(--slide-font-scale));
+    }
+    
+    .course-app .slide .app-title {
+      font-size: calc(var(--slide-meta-size) * var(--slide-font-scale));
+    }
+    
+    .course-app .slide .slide-count {
+      font-size: calc(var(--slide-count-size) * var(--slide-font-scale));
+    }
+    .skip-link {
+      background: var(--color-focus);
+      color: var(--color-ink);
+      font-weight: 800;
+      left: var(--space-4);
+      padding: var(--space-3) var(--space-4);
+      position: fixed;
+      top: var(--space-4);
+      transform: translateY(-150%);
+      transition: transform var(--transition-fast);
+      z-index: 30;
+    }
+    
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+    
+    .sr-only {
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
+    
+    .course-app {
+      display: block;
+      min-height: 100vh;
+    }
+    
+    .lesson-deck {
+      min-height: 100vh;
+      padding: 0;
+    }
+    
+    .slide:focus-visible {
+      outline: 4px solid var(--color-focus);
+      outline-offset: 3px;
+    }
+    .slide {
+      background:
+        linear-gradient(90deg, var(--color-accent-soft), transparent 34%),
+        var(--color-surface);
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      margin: 0;
+      max-width: none;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+    
+    .slide-header {
+      border-bottom: 1px solid var(--color-line);
+      display: grid;
+      gap: var(--space-2);
+      padding: var(--space-6) var(--space-7) var(--space-5);
+    }
+    
+    .slide-content {
+      align-items: stretch;
+      display: grid;
+      gap: var(--space-5);
+      padding: var(--space-6) var(--space-7);
+    }
+    
+    .slide-content-centered {
+      align-items: center;
+    }
+    
+    .slide-footer {
+      align-items: center;
+      border-top: 1px solid var(--color-line);
+      display: flex;
+      gap: var(--space-4);
+      justify-content: space-between;
+      padding: var(--space-4) var(--space-7);
+    }
+    
+    .slide-progress {
+      background: var(--color-surface-soft);
+      border-radius: 999px;
+      height: 0.85rem;
+      overflow: hidden;
+      width: min(100%, 38rem);
+    }
+    
+    .slide-progress span {
+      background: linear-gradient(90deg, var(--color-accent), var(--color-warm));
+      border-radius: inherit;
+      display: block;
+      height: 100%;
+      transition: width var(--transition-medium);
+      width: 0;
+    }
+    
+    .content-panel,
+    .dialogue-box,
+    .review-box,
+    .homework-box,
+    .hero-placeholder {
+      align-content: start;
+      display: grid;
+      gap: var(--space-5);
+    }
+    
+    .content-panel {
+      grid-template-columns: 1fr;
+    }
+    
+    .two-column {
+      align-items: stretch;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+    .placeholder-line,
+    .placeholder-card,
+    .info-box,
+    .grammar-box,
+    .exercise-box,
+    .activity-box,
+    .media-placeholder,
+    .audio-player-placeholder {
+      border: 2px dashed var(--color-line);
+      border-radius: var(--radius-sm);
+      color: var(--color-muted);
+      font-weight: 800;
+    }
+    
+    .placeholder-line {
+      align-items: center;
+      background: var(--color-surface);
+      display: flex;
+      min-height: 4rem;
+      padding: var(--space-4) var(--space-5);
+    }
+    
+    .placeholder-line-large {
+      color: var(--color-ink);
+      font-family: var(--font-display);
+      font-size: 3rem;
+      line-height: 1.1;
+      min-height: 6rem;
+    }
+    
+    .placeholder-stack {
+      display: grid;
+      gap: var(--space-4);
+    }
+    
+    .placeholder-grid {
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .placeholder-grid-compact {
+      grid-template-columns: repeat(3, minmax(9rem, 1fr));
+    }
+    
+    .placeholder-card,
+    .info-box,
+    .grammar-box,
+    .exercise-box,
+    .activity-box,
+    .media-placeholder {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.76);
+      display: flex;
+      min-height: 7rem;
+      padding: var(--space-5);
+    }
+    
+    .placeholder-card-tall {
+      min-height: 22rem;
+    }
+    
+    .placeholder-card-wide {
+      min-height: 10rem;
+    }
+    
+    .info-box {
+      background: var(--color-accent-soft);
+      border-color: var(--color-accent);
+      color: var(--color-accent-strong);
+    }
+    
+    .cover-slide {
+      background:
+        linear-gradient(90deg, var(--color-accent-soft), transparent 42%),
+        var(--color-surface);
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    
+    .cover-header {
+      border-bottom: 0;
+      padding-bottom: var(--space-4);
+    }
+    
+    .cover-title-stack {
+      display: grid;
+      gap: var(--space-3);
+      max-width: 56rem;
+    }
+    
+    .cover-title-stack h1 {
+      max-width: 11ch;
+    }
+    
+    .cover-lesson,
+    .cover-subtitle {
+      margin: 0;
+    }
+    
+    .cover-lesson {
+      color: var(--color-accent-strong);
+      font-size: calc(1.35rem * var(--slide-font-scale));
+      font-weight: 900;
+      line-height: 1.15;
+    }
+    
+    .cover-subtitle {
+      color: var(--color-ink);
+      font-size: calc(2.6rem * var(--slide-font-scale));
+      font-weight: 800;
+      line-height: 1.1;
+    }
+    
+    .cover-slide-content {
+      align-items: center;
+      padding-top: 0;
+    }
+    
+    .cover-hero-art {
+      justify-self: center;
+      margin: 0;
+      min-height: 0;
+      width: min(100%, 72rem, max(34rem, calc((100vh - 24rem) * 16 / 9)));
+    }
+    
+    .cover-hero-image {
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-panel);
+      display: block;
+      height: auto;
+      object-fit: contain;
+      width: 100%;
+    }
+    
+    .learn-slide .slide-content {
+      align-items: start;
+    }
+    
+    .learn-panel {
+      align-content: stretch;
+    }
+    
+    .learn-grid {
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    
+    .learn-card {
+      align-content: start;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-panel);
+      display: grid;
+      gap: var(--space-3);
+      min-height: 13.5rem;
+      padding: var(--space-5);
+    }
+    
+    .learn-icon {
+      font-size: calc(2.4rem * var(--slide-font-scale));
+      line-height: 1;
+    }
+    
+    .course-app .slide .learn-card h3 {
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      font-size: calc(1.45rem * var(--slide-font-scale));
+      font-weight: 900;
+      line-height: 1.15;
+      margin: 0;
+    }
+    
+    .learn-card p {
+      color: var(--color-muted);
+      font-size: calc(1.12rem * var(--slide-font-scale));
+      font-weight: 800;
+      line-height: 1.3;
+      margin: 0;
+    }
+    
+    .warmup-slide .slide-content {
+      align-items: start;
+    }
+    
+    .warmup-panel {
+      gap: var(--space-4);
+    }
+    
+    .warmup-illustration {
+      justify-self: center;
+      margin: 0;
+      width: min(100%, 78rem, max(36rem, calc((100vh - 20rem) * 16 / 9)));
+    }
+    
+    .warmup-illustration img {
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-panel);
+      display: block;
+      height: auto;
+      object-fit: contain;
+      width: 100%;
+    }
+    
+    .warmup-questions {
+      display: grid;
+      gap: var(--space-3);
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      list-style-position: outside;
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+    
+    .warmup-questions li {
+      color: var(--color-ink);
+      font-size: calc(1.04rem * var(--slide-font-scale));
+      font-weight: 850;
+      line-height: 1.25;
+      padding-right: var(--space-2);
+    }
+    
+    .teacher-note {
+      color: var(--color-muted);
+      font-size: calc(0.95rem * var(--slide-font-scale));
+      font-weight: 700;
+      justify-self: center;
+      margin: 0;
+      text-align: center;
+    }
+    
+    .greetings-slide .slide-content {
+      align-items: start;
+    }
+    
+    .greetings-slide {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    
+    .greetings-panel {
+      gap: var(--space-5);
+    }
+    
+    .greetings-panel-visual {
+      align-items: center;
+      gap: var(--space-5);
+      grid-template-columns: minmax(0, 1.18fr) minmax(19rem, 0.82fr);
+    }
+    
+    .greetings-illustration-placeholder {
+      align-items: center;
+      aspect-ratio: 16 / 9;
+      background: rgba(255, 255, 255, 0.72);
+      border: 2px dashed var(--color-line);
+      border-radius: var(--radius-sm);
+      color: var(--color-muted);
+      display: grid;
+      justify-self: center;
+      margin: 0;
+      max-height: 18rem;
+      max-width: 46rem;
+      place-items: center;
+      text-align: center;
+      width: min(100%, 46rem);
+    }
+    
+    .greetings-illustration-placeholder figcaption {
+      display: grid;
+      gap: var(--space-2);
+      padding: var(--space-5);
+    }
+    
+    .greetings-illustration-placeholder strong {
+      color: var(--color-accent-strong);
+      font-size: calc(1.35rem * var(--slide-font-scale));
+      line-height: 1.15;
+    }
+    
+    .greetings-illustration-placeholder span {
+      font-size: calc(1rem * var(--slide-font-scale));
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    
+    .greetings-illustration {
+      aspect-ratio: auto;
+      background: transparent;
+      border: 0;
+      box-shadow: var(--shadow-panel);
+      height: clamp(10rem, 30vh, 18rem);
+      max-height: none;
+      overflow: visible;
+    }
+    
+    .greetings-illustration img {
+      border-radius: var(--radius-sm);
+      display: block;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      width: 100%;
+    }
+    
+    .greetings-panel-visual .greetings-illustration {
+      align-self: center;
+      height: auto;
+      max-width: none;
+      width: 100%;
+    }
+    
+    .greetings-panel-visual .greetings-illustration img {
+      height: auto;
+    }
+    
+    .greetings-card-grid {
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .greetings-panel-visual .greetings-card-grid {
+      gap: var(--space-3);
+      grid-template-columns: 1fr;
+    }
+    
+    .greetings-card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-panel);
+      display: grid;
+      gap: var(--space-4);
+      padding: var(--space-5);
+    }
+    
+    .greetings-panel-visual .greetings-card {
+      gap: var(--space-2);
+      padding: var(--space-4);
+    }
+    
+    .course-app .slide .greetings-card h3 {
+      color: var(--color-accent-strong);
+      font-family: var(--font-body);
+      font-size: calc(1.55rem * var(--slide-font-scale));
+      font-weight: 900;
+      line-height: 1.15;
+      margin: 0;
+    }
+    
+    .greetings-card ul {
+      display: grid;
+      gap: var(--space-3);
+      list-style-position: outside;
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+    
+    .greetings-panel-visual .greetings-card ul {
+      gap: var(--space-2);
+    }
+    
+    .greetings-card li {
+      color: var(--color-ink);
+      font-size: calc(1.22rem * var(--slide-font-scale));
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    
+    .greetings-panel-visual .greetings-card li {
+      font-size: calc(1rem * var(--slide-font-scale));
+      line-height: 1.18;
+    }
+    
+    .greetings-practice-slide {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    
+    .greetings-practice-slide .slide-content {
+      align-items: start;
+    }
+    
+    .practice-subtitle {
+      color: var(--color-muted);
+      font-size: calc(1.35rem * var(--slide-font-scale));
+      font-weight: 800;
+      line-height: 1.25;
+      margin: 0;
+    }
+    
+    .greetings-practice-panel {
+      gap: var(--space-5);
+    }
+    
+    .greetings-practice-panel-visual {
+      align-items: center;
+      gap: var(--space-5);
+      grid-template-columns: minmax(0, 1.1fr) minmax(21rem, 0.9fr);
+    }
+    
+    .practice-illustration-placeholder {
+      align-items: center;
+      aspect-ratio: 16 / 9;
+      background: rgba(255, 255, 255, 0.72);
+      border: 2px dashed var(--color-line);
+      border-radius: var(--radius-sm);
+      color: var(--color-muted);
+      display: grid;
+      justify-self: center;
+      margin: 0;
+      max-height: 11rem;
+      max-width: 30rem;
+      place-items: center;
+      text-align: center;
+      width: min(100%, 30rem);
+    }
+    
+    .practice-illustration-placeholder figcaption {
+      display: grid;
+      gap: var(--space-2);
+      padding: var(--space-4);
+    }
+    
+    .practice-illustration-placeholder strong {
+      color: var(--color-accent-strong);
+      font-size: calc(1.18rem * var(--slide-font-scale));
+      line-height: 1.15;
+    }
+    
+    .practice-illustration-placeholder span {
+      font-size: calc(0.92rem * var(--slide-font-scale));
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    
+    .practice-illustration {
+      aspect-ratio: auto;
+      background: transparent;
+      border: 0;
+      box-shadow: var(--shadow-panel);
+      height: clamp(8rem, 25vh, 14rem);
+      max-height: none;
+      max-width: 44rem;
+      overflow: visible;
+      width: min(100%, 44rem);
+    }
+    
+    .practice-illustration img {
+      border-radius: var(--radius-sm);
+      display: block;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      width: 100%;
+    }
+    
+    .greetings-practice-panel-visual .practice-illustration {
+      align-self: center;
+      height: auto;
+      max-width: none;
+      width: 100%;
+    }
+    
+    .greetings-practice-panel-visual .practice-illustration img {
+      height: auto;
+    }
+    
+    .matching-columns,
+    .choice-grid,
+    .conversation-grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+    
+    .matching-columns {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .greetings-practice-panel-visual .matching-columns {
+      gap: var(--space-3);
+      grid-template-columns: 1fr;
+    }
+    
+    .greetings-practice-panel-choice .choice-grid {
+      gap: var(--space-3);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .greetings-practice-panel-conversations .conversation-grid {
+      gap: var(--space-3);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .choice-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    
+    .conversation-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    
+    .practice-card,
+    .choice-card,
+    .conversation-card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-panel);
+      display: grid;
+      gap: var(--space-3);
+      padding: var(--space-5);
+    }
+    
+    .greetings-practice-panel-visual .practice-card {
+      gap: var(--space-2);
+      padding: var(--space-4);
+    }
+    
+    .greetings-practice-panel-choice .choice-card {
+      gap: var(--space-2);
+      padding: var(--space-3);
+    }
+    
+    .greetings-practice-panel-conversations .conversation-card {
+      gap: var(--space-2);
+      padding: var(--space-4);
+    }
+    
+    .course-app .slide .practice-card h3,
+    .course-app .slide .choice-card h3,
+    .course-app .slide .conversation-card h3 {
+      color: var(--color-accent-strong);
+      font-family: var(--font-body);
+      font-size: calc(1.35rem * var(--slide-font-scale));
+      font-weight: 900;
+      line-height: 1.15;
+      margin: 0;
+    }
+    
+    .practice-card ul,
+    .choice-card ul {
+      display: grid;
+      gap: var(--space-3);
+      list-style-position: outside;
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+    
+    .greetings-practice-panel-visual .practice-card ul {
+      gap: var(--space-2);
+    }
+    
+    .greetings-practice-panel-choice .choice-card ul {
+      gap: var(--space-1);
+    }
+    
+    .choice-card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    .practice-card li,
+    .choice-card li,
+    .conversation-card p {
+      color: var(--color-ink);
+      font-size: calc(1.08rem * var(--slide-font-scale));
+      font-weight: 800;
+      line-height: 1.28;
+      margin: 0;
+    }
+    
+    .greetings-practice-panel-visual .practice-card li {
+      font-size: calc(0.98rem * var(--slide-font-scale));
+      line-height: 1.16;
+    }
+    
+    .greetings-practice-panel-choice .choice-card li {
+      font-size: calc(0.86rem * var(--slide-font-scale));
+      line-height: 1.12;
+    }
+    
+    .greetings-practice-panel-conversations .conversation-card p {
+      font-size: calc(0.96rem * var(--slide-font-scale));
+      line-height: 1.16;
+    }
+    
+    .choice-card p {
+      color: var(--color-muted);
+      font-size: calc(1rem * var(--slide-font-scale));
+      font-weight: 800;
+      line-height: 1.3;
+      margin: 0;
+    }
+    
+    .greetings-practice-panel-choice .choice-card p {
+      font-size: calc(0.86rem * var(--slide-font-scale));
+      line-height: 1.16;
+    }
+    
+    .conversation-card p strong {
+      color: var(--color-accent-strong);
+    }
+    
+    .introductions-slide {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    
+    .introductions-slide .slide-content {
+      align-items: start;
+    }
+    
+    .intro-subtitle {
+      color: var(--color-muted);
+      font-size: calc(1.35rem * var(--slide-font-scale));
+      font-weight: 800;
+      line-height: 1.25;
+      margin: 0;
+    }
+    
+    .introductions-panel {
+      gap: var(--space-5);
+    }
+    
+    .introductions-panel-visual {
+      align-items: center;
+      gap: var(--space-5);
+      grid-template-columns: minmax(0, 1.12fr) minmax(20rem, 0.88fr);
+    }
+    
+    .intro-illustration-placeholder {
+      align-items: center;
+      aspect-ratio: 16 / 9;
+      background: rgba(255, 255, 255, 0.72);
+      border: 2px dashed var(--color-line);
+      border-radius: var(--radius-sm);
+      color: var(--color-muted);
+      display: grid;
+      justify-self: center;
+      margin: 0;
+      max-height: 11rem;
+      max-width: 30rem;
+      place-items: center;
+      text-align: center;
+      width: min(100%, 30rem);
+    }
+    
+    .intro-illustration-placeholder figcaption {
+      display: grid;
+      gap: var(--space-2);
+      padding: var(--space-4);
+    }
+    
+    .intro-illustration-placeholder strong {
+      color: var(--color-accent-strong);
+      font-size: calc(1.18rem * var(--slide-font-scale));
+      line-height: 1.15;
+    }
+    
+    .intro-illustration-placeholder span {
+      font-size: calc(0.92rem * var(--slide-font-scale));
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    
+    .intro-illustration {
+      aspect-ratio: auto;
+      background: transparent;
+      border: 0;
+      box-shadow: var(--shadow-panel);
+      max-height: none;
+      max-width: none;
+      overflow: visible;
+      width: 100%;
+    }
+    
+    .intro-illustration img {
+      border-radius: var(--radius-sm);
+      display: block;
+      height: auto;
+      object-fit: contain;
+      object-position: center;
+      width: 100%;
+    }
+    
+    .intro-expression-stack {
+      display: grid;
+      gap: var(--space-4);
+    }
+    
+    .intro-expression-grid,
+    .intro-conversation-grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+    
+    .intro-expression-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .intro-expression-grid-wide {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    
+    .introductions-panel-self .intro-expression-grid {
+      gap: var(--space-3);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .introductions-panel-someone .intro-expression-grid-wide {
+      gap: var(--space-3);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .introductions-panel-someone .intro-expression-card:last-child {
+      grid-column: 1 / -1;
+    }
+    
+    .intro-conversation-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .introductions-panel-complete .intro-conversation-grid {
+      gap: var(--space-3);
+      grid-template-columns: 1fr;
+    }
+    
+    .intro-expression-card,
+    .intro-conversation-card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-panel);
+      display: grid;
+      gap: var(--space-3);
+      padding: var(--space-5);
+    }
+    
+    .intro-expression-card {
+      align-items: center;
+      color: var(--color-ink);
+      font-size: calc(1.24rem * var(--slide-font-scale));
+      font-weight: 850;
+      line-height: 1.25;
+      min-height: 5.5rem;
+    }
+    
+    .introductions-panel-self .intro-expression-card {
+      font-size: calc(1rem * var(--slide-font-scale));
+      min-height: 4.25rem;
+      padding: var(--space-4);
+    }
+    
+    .introductions-panel-someone .intro-expression-card {
+      font-size: calc(0.98rem * var(--slide-font-scale));
+      min-height: 4rem;
+      padding: var(--space-4);
+    }
+    
+    .introductions-panel-complete .intro-conversation-card {
+      gap: var(--space-2);
+      padding: var(--space-4);
+    }
+    
+    .course-app .slide .intro-conversation-card h3 {
+      color: var(--color-accent-strong);
+      font-family: var(--font-body);
+      font-size: calc(1.45rem * var(--slide-font-scale));
+      font-weight: 900;
+      line-height: 1.15;
+      margin: 0;
+    }
+    
+    .intro-conversation-card p {
+      color: var(--color-ink);
+      font-size: calc(1.16rem * var(--slide-font-scale));
+      font-weight: 800;
+      line-height: 1.28;
+      margin: 0;
+    }
+    
+    .introductions-panel-complete .intro-conversation-card p {
+      font-size: calc(0.94rem * var(--slide-font-scale));
+      line-height: 1.12;
+    }
+    
+    .intro-note {
+      color: var(--color-muted);
+      font-size: calc(1rem * var(--slide-font-scale));
+      font-weight: 800;
+      justify-self: center;
+      line-height: 1.3;
+      margin: 0;
+      text-align: center;
+    }
+    
+    .vocabulary-slide {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    
+    .vocabulary-slide .slide-content {
+      align-items: start;
+    }
+    
+    .vocabulary-panel {
+      gap: var(--space-5);
+    }
+    
+    .vocab-illustration-placeholder {
+      align-items: center;
+      aspect-ratio: 16 / 9;
+      background: rgba(255, 255, 255, 0.72);
+      border: 2px dashed var(--color-line);
+      border-radius: var(--radius-sm);
+      color: var(--color-accent-strong);
+      display: grid;
+      font-size: calc(1.18rem * var(--slide-font-scale));
+      font-weight: 900;
+      justify-self: center;
+      margin: 0;
+      max-height: 10rem;
+      max-width: 28rem;
+      place-items: center;
+      text-align: center;
+      width: min(100%, 28rem);
+    }
+    
+    .vocab-illustration-placeholder figcaption {
+      padding: var(--space-4);
+    }
+    
+    .vocab-card-grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+    
+    .vocab-card-grid-jobs {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .vocab-card-grid-pairs {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    
+    .vocab-card-grid-office {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    
+    .vocab-card,
+    .vocab-pair-card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-panel);
+      color: var(--color-ink);
+      display: grid;
+      font-size: calc(1.2rem * var(--slide-font-scale));
+      font-weight: 850;
+      line-height: 1.22;
+      min-height: 5rem;
+      padding: var(--space-5);
+    }
+    
+    .vocab-card {
+      align-items: center;
+    }
+    
+    .vocab-pair-card {
+      align-items: center;
+      gap: var(--space-2);
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    }
+    
+    .vocab-pair-card span:nth-child(2) {
+      color: var(--color-accent-strong);
+      font-weight: 900;
+    }
+    
+    .job-example-section {
+      display: grid;
+      gap: var(--space-3);
+    }
+    
+    .job-example-section h3 {
+      color: var(--color-accent-strong);
+      font-family: var(--font-sans);
+      font-size: calc(1.08rem * var(--slide-font-scale));
+      font-weight: 900;
+      margin: 0;
+    }
+    
+    .course-app .slide .job-example-section h3 {
+      font-family: var(--font-sans);
+      font-size: calc(1.08rem * var(--slide-font-scale));
+    }
+    
+    .job-example-grid,
+    .job-preposition-grid {
+      display: grid;
+      gap: var(--space-3);
+    }
+    
+    .job-example-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    
+    .job-preposition-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .job-example-card,
+    .job-preposition-grid article {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-panel);
+      color: var(--color-ink);
+      font-size: calc(0.92rem * var(--slide-font-scale));
+      line-height: 1.25;
+      padding: var(--space-3);
+    }
+    
+    .job-example-card p {
+      margin: 0;
+    }
+    
+    .job-example-card p + p {
+      margin-top: var(--space-2);
+    }
+    
+    .job-example-card strong,
+    .job-preposition-grid strong {
+      color: var(--color-accent-strong);
+      font-weight: 900;
+    }
+    
+    .vocab-info-section {
+      display: grid;
+      gap: var(--space-3);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .vocab-info-section-office {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    
+    .vocab-info-card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-panel);
+      color: var(--color-ink);
+      display: grid;
+      gap: var(--space-2);
+      padding: var(--space-3);
+    }
+    
+    .vocab-info-card h3 {
+      color: var(--color-accent-strong);
+      font-family: var(--font-sans);
+      font-size: calc(0.9rem * var(--slide-font-scale));
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    
+    .course-app .slide .vocab-info-card h3 {
+      font-family: var(--font-sans);
+      font-size: calc(0.9rem * var(--slide-font-scale));
+    }
+    
+    .vocab-info-card p {
+      font-size: calc(0.9rem * var(--slide-font-scale));
+      font-weight: 720;
+      line-height: 1.28;
+      margin: 0;
+    }
+    
+    .vocab-info-card strong {
+      color: var(--color-accent-strong);
+      font-weight: 900;
+    }
+    
+    .main-context-slide {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    
+    .main-context-slide .slide-content {
+      align-items: stretch;
+    }
+    
+    .main-context-panel {
+      align-items: stretch;
+      display: grid;
+      gap: var(--space-5);
+      grid-template-columns: minmax(0, 1.35fr) minmax(22rem, 0.9fr);
+    }
+    
+    .main-context-placeholder {
+      align-items: center;
+      aspect-ratio: 16 / 9;
+      background: rgba(255, 255, 255, 0.72);
+      border: 2px dashed var(--color-line);
+      border-radius: var(--radius-sm);
+      color: var(--color-accent-strong);
+      display: grid;
+      font-size: calc(1.35rem * var(--slide-font-scale));
+      font-weight: 900;
+      margin: 0;
+      min-height: 28rem;
+      place-items: center;
+      text-align: center;
+    }
+    
+    .main-context-placeholder figcaption {
+      padding: var(--space-5);
+    }
+    
+    .context-card-grid {
+      display: grid;
+      gap: var(--space-3);
+    }
+    
+    .context-character-card,
+    .context-narration-card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-panel);
+      display: grid;
+      gap: var(--space-3);
+      padding: var(--space-4);
+    }
+    
+    .context-character-card header {
+      display: grid;
+      gap: var(--space-1);
+    }
+    
+    .course-app .slide .context-character-card h3 {
+      color: var(--color-accent-strong);
+      font-family: var(--font-body);
+      font-size: calc(1.25rem * var(--slide-font-scale));
+      font-weight: 900;
+      line-height: 1.15;
+      margin: 0;
+    }
+    
+    .context-character-card header p {
+      color: var(--color-muted);
+      font-size: calc(0.92rem * var(--slide-font-scale));
+      font-weight: 800;
+      line-height: 1.2;
+      margin: 0;
+    }
+    
+    .speech-lines {
+      border-left: 4px solid var(--color-accent);
+      display: grid;
+      gap: var(--space-1);
+      padding-left: var(--space-3);
+    }
+    
+    .speech-lines p,
+    .context-narration-card p {
+      color: var(--color-ink);
+      font-size: calc(1rem * var(--slide-font-scale));
+      font-weight: 850;
+      line-height: 1.25;
+      margin: 0;
+    }
+    
+    .context-narration-card {
+      align-content: center;
+      background: var(--color-accent-soft);
+      border-color: var(--color-accent);
+    }
+    
+    .meet-team-slide {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    
+    .meet-team-subtitle {
+      color: var(--color-muted);
+      font-size: calc(1.18rem * var(--slide-font-scale));
+      font-weight: 800;
+      line-height: 1.35;
+      margin: 0;
+    }
+    
+    .meet-team-content {
+      align-items: stretch;
+    }
+    
+    .meet-team-panel {
+      align-content: stretch;
+    }
+    
+    .meet-team-grid {
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    
+    .team-card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-panel);
+      display: grid;
+      gap: var(--space-3);
+      grid-template-rows: minmax(0, 1fr) auto;
+      min-height: 18rem;
+      overflow: hidden;
+      padding: var(--space-3);
+    }
+    
+    .team-portrait-frame {
+      align-items: end;
+      background: var(--color-surface);
+      border-radius: var(--radius-sm);
+      display: grid;
+      min-height: 11.5rem;
+      overflow: hidden;
+    }
+    
+    .team-portrait {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      width: 100%;
+    }
+    
+    .team-card-text {
+      display: grid;
+      gap: var(--space-1);
+      min-height: 4.75rem;
+      text-align: center;
+    }
+    
+    .course-app .slide .team-card h3 {
+      color: var(--color-accent-strong);
+      font-family: var(--font-body);
+      font-size: calc(1.16rem * var(--slide-font-scale));
+      font-weight: 900;
+      line-height: 1.15;
+      margin: 0;
+    }
+    
+    .team-card p {
+      color: var(--color-muted);
+      font-size: calc(0.9rem * var(--slide-font-scale));
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 0;
+      max-width: none;
+    }
+    
+    .vocabulary-practice-intro-slide .slide-content {
+      align-items: center;
+    }
+    
+    .vocabulary-practice-intro-panel {
+      justify-items: start;
+      max-width: 46rem;
+    }
+    
+    .vocabulary-practice-intro-panel p {
+      color: var(--color-muted);
+      font-size: calc(1.45rem * var(--slide-font-scale));
+      font-weight: 800;
+      line-height: 1.35;
+      margin: 0;
+    }
+    
+    .practice-open-button {
+      align-items: center;
+      display: inline-flex;
+      justify-content: center;
+      min-width: 18rem;
+      text-decoration: none;
+    }
+    
+    .practice-page {
+      background:
+        linear-gradient(90deg, var(--color-accent-soft), transparent 34%),
+        var(--color-surface);
+      display: grid;
+      gap: var(--space-6);
+      min-height: 100vh;
+      padding: var(--space-7);
+    }
+    
+    .practice-page-header {
+      display: grid;
+      gap: var(--space-3);
+    }
+    
+    .practice-page-header p:last-child {
+      color: var(--color-muted);
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin: 0;
+    }
+    
+    .practice-score-card {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-panel);
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: auto minmax(10rem, 1fr);
+      padding: var(--space-5);
+      position: sticky;
+      top: var(--space-4);
+      z-index: 10;
+    }
+    
+    .practice-score-label {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    
+    .practice-score {
+      color: var(--color-ink);
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin: 0;
+    }
+    
+    .practice-score-bar {
+      background: var(--color-surface-soft);
+      border-radius: 999px;
+      height: 0.85rem;
+      overflow: hidden;
+    }
+    
+    .practice-score-bar span {
+      background: linear-gradient(90deg, var(--color-accent), var(--color-warm));
+      border-radius: inherit;
+      display: block;
+      height: 100%;
+      transition: width var(--transition-medium);
+      width: 0;
+    }
+    
+    .practice-section {
+      display: grid;
+      gap: var(--space-4);
+    }
+    
+    .practice-section h2 {
+      border-bottom: 1px solid var(--color-line);
+      padding-bottom: var(--space-3);
+    }
+    
+    .practice-exercise {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-panel);
+      display: grid;
+      gap: var(--space-4);
+      padding: var(--space-5);
+    }
+    
+    .practice-exercise.is-correct {
+      border-color: var(--color-accent);
+    }
+    
+    .practice-exercise.is-incorrect {
+      border-color: var(--color-warm);
+    }
+    
+    .practice-exercise header {
+      display: grid;
+      gap: var(--space-2);
+    }
+    
+    .practice-exercise header p {
+      color: var(--color-accent-strong);
+      font-size: 0.9rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    
+    .practice-exercise h3 {
+      font-family: var(--font-body);
+      font-size: 1.45rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin: 0;
+    }
+    
+    .practice-exercise fieldset {
+      border: 0;
+      display: grid;
+      gap: var(--space-3);
+      margin: 0;
+      padding: 0;
+    }
+    
+    .practice-exercise legend {
+      color: var(--color-muted);
+      font-weight: 800;
+      margin-bottom: var(--space-2);
+    }
+    
+    .practice-exercise label,
+    .practice-match-list label,
+    .blank-field {
+      align-items: center;
+      color: var(--color-ink);
+      display: flex;
+      gap: var(--space-3);
+      font-size: 1.08rem;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    
+    .practice-exercise input[type="radio"] {
+      accent-color: var(--color-accent);
+    }
+    
+    .practice-exercise input[type="text"],
+    .practice-exercise select {
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      color: var(--color-ink);
+      min-height: 2.75rem;
+      padding: var(--space-2) var(--space-3);
+    }
+    
+    .practice-match-list {
+      display: grid;
+      gap: var(--space-3);
+    }
+    
+    .practice-match-list label {
+      align-items: center;
+      display: grid;
+      gap: var(--space-3);
+      grid-template-columns: minmax(0, 1fr) minmax(12rem, 0.7fr);
+    }
+    
+    .blank-field {
+      flex-wrap: wrap;
+    }
+    
+    .blank-field input {
+      min-width: min(16rem, 100%);
+    }
+    
+    .practice-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+    
+    .practice-actions button {
+      border: 0;
+      border-radius: var(--radius-sm);
+      font-weight: 900;
+      min-height: 2.85rem;
+      padding: 0 var(--space-5);
+    }
+    
+    .practice-actions [data-check] {
+      background: var(--color-accent);
+      color: var(--color-surface);
+    }
+    
+    .practice-actions [data-retry] {
+      background: var(--color-surface-soft);
+      color: var(--color-ink);
+    }
+    
+    .practice-feedback {
+      color: var(--color-muted);
+      font-weight: 850;
+      margin: 0;
+    }
+    
+    .practice-exercise.is-correct .practice-feedback {
+      color: var(--color-accent-strong);
+    }
+    
+    .practice-exercise.is-incorrect .practice-feedback {
+      color: #7d311c;
+    }
+    
+    .workbook-font-controls {
+      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-panel);
+      display: flex;
+      gap: var(--space-1);
+      padding: var(--space-1);
+      position: fixed;
+      right: var(--space-5);
+      top: var(--space-5);
+      z-index: 20;
+    }
+    
+    .workbook-font-controls button {
+      background: transparent;
+      border: 0;
+      border-radius: var(--radius-sm);
+      color: var(--color-muted);
+      font-size: 0.9rem;
+      font-weight: 900;
+      min-height: 2.3rem;
+      min-width: 2.6rem;
+    }
+    
+    .workbook-font-controls button:hover,
+    .workbook-font-controls button.active {
+      background: var(--color-accent);
+      color: var(--color-surface);
+    }
+    
+    .workbook-page {
+      background:
+        radial-gradient(circle at 92% 10%, rgba(200, 86, 47, 0.14), transparent 28%),
+        linear-gradient(135deg, var(--color-surface), var(--color-accent-soft));
+      color: var(--color-ink);
+      display: grid;
+      font-size: calc(1.125rem * var(--workbook-font-scale, 1));
+      gap: var(--space-6);
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: var(--space-7) var(--space-5);
+      width: min(100%, 980px);
+    }
+    
+    .workbook-top {
+      align-items: center;
+      border-bottom: 2px solid rgba(0, 124, 120, 0.18);
+      color: var(--color-muted);
+      display: flex;
+      font-size: 0.82rem;
+      font-weight: 800;
+      gap: var(--space-4);
+      justify-content: space-between;
+      letter-spacing: 0.09em;
+      padding-bottom: var(--space-3);
+      text-transform: uppercase;
+    }
+    
+    .workbook-course {
+      color: var(--color-accent-strong);
+      font-weight: 900;
+    }
+    
+    .workbook-hero {
+      display: grid;
+      gap: var(--space-2);
+    }
+    
+    .workbook-hero h1 {
+      font-size: 3.1rem;
+      line-height: 1.04;
+    }
+    
+    .workbook-hero p:last-child {
+      color: var(--color-muted);
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin: 0;
+    }
+    
+    .workbook-shell {
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid rgba(20, 28, 38, 0.08);
+      border-radius: calc(var(--radius-md) * 2);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+    
+    .workbook-status {
+      background: rgba(20, 28, 38, 0.1);
+      display: grid;
+      gap: 1px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .workbook-status > div {
+      background: var(--color-surface);
+      padding: var(--space-5);
+    }
+    
+    .workbook-status small {
+      color: var(--color-muted);
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      margin-bottom: var(--space-2);
+      text-transform: uppercase;
+    }
+    
+    .workbook-status strong {
+      font-size: 1.15rem;
+      font-weight: 900;
+    }
+    
+    .workbook-progress-track {
+      background: var(--color-surface-soft);
+      height: 0.55rem;
+    }
+    
+    .workbook-progress-bar {
+      background: linear-gradient(90deg, var(--color-accent), var(--color-warm));
+      height: 100%;
+      transition: width var(--transition-medium);
+      width: 0;
+    }
+    
+    .workbook-exercise,
+    .workbook-result {
+      padding: var(--space-6);
+    }
+    
+    .workbook-question-section {
+      color: var(--color-accent-strong);
+      font-size: 0.85rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      margin: 0 0 var(--space-3);
+      text-transform: uppercase;
+    }
+    
+    .workbook-question-title {
+      color: var(--color-ink);
+      font-family: var(--font-display);
+      font-size: 4.4rem;
+      line-height: 1;
+      margin: 0;
+    }
+    
+    .workbook-question-prompt {
+      color: var(--color-muted);
+      font-size: 1.16rem;
+      font-weight: 850;
+      margin: var(--space-3) 0 0;
+    }
+    
+    .workbook-options {
+      display: grid;
+      gap: var(--space-3);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin: var(--space-6) 0 var(--space-5);
+    }
+    
+    .workbook-answer {
+      background: var(--color-surface);
+      border: 2px solid rgba(20, 28, 38, 0.12);
+      border-radius: calc(var(--radius-md) * 1.5);
+      box-shadow: 0 8px 22px rgba(20, 28, 38, 0.08);
+      color: var(--color-ink);
+      font-size: 1.18rem;
+      font-weight: 900;
+      min-height: 4rem;
+      padding: var(--space-3);
+      transition: transform var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+    }
+    
+    .workbook-answer:hover:not(:disabled) {
+      border-color: var(--color-accent);
+      transform: translateY(-1px);
+    }
+    
+    .workbook-answer:disabled {
+      cursor: default;
+    }
+    
+    .workbook-answer.correct {
+      background: var(--color-accent-soft);
+      border-color: var(--color-accent);
+      color: var(--color-accent-strong);
+    }
+    
+    .workbook-answer.incorrect {
+      background: var(--color-warm-soft);
+      border-color: var(--color-warm);
+      color: #7d311c;
+    }
+    
+    .workbook-answer .mark {
+      display: inline-block;
+      font-weight: 900;
+      min-width: 1.8em;
+    }
+    
+    .workbook-blank-form {
+      align-items: end;
+      display: grid;
+      gap: var(--space-3);
+      grid-template-columns: minmax(0, 1fr) minmax(13rem, 0.6fr) auto;
+      margin: var(--space-6) 0 var(--space-5);
+    }
+    
+    .workbook-blank-form label {
+      color: var(--color-ink);
+      font-size: 1.35rem;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+    
+    .workbook-blank-form input {
+      background: var(--color-surface);
+      border: 2px solid rgba(20, 28, 38, 0.12);
+      border-radius: var(--radius-md);
+      color: var(--color-ink);
+      min-height: 3.2rem;
+      padding: var(--space-3);
+    }
+    
+    .workbook-writing-form {
+      display: grid;
+      gap: var(--space-3);
+      margin: var(--space-6) 0 var(--space-5);
+    }
+    
+    .workbook-writing-form label {
+      color: var(--color-ink);
+      font-size: 1.18rem;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+    
+    .workbook-writing-form textarea {
+      background: var(--color-surface);
+      border: 2px solid rgba(20, 28, 38, 0.12);
+      border-radius: var(--radius-md);
+      color: var(--color-ink);
+      font: inherit;
+      min-height: 12rem;
+      padding: var(--space-4);
+      resize: vertical;
+    }
+    
+    .workbook-writing-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+    
+    .workbook-sample-answer {
+      background: var(--color-accent-soft);
+      border-left: 7px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      color: var(--color-accent-strong);
+      font-weight: 850;
+      line-height: 1.45;
+      margin: 0;
+      padding: var(--space-4);
+    }
+    
+    .workbook-multi-form {
+      display: grid;
+      gap: var(--space-4);
+      margin: var(--space-6) 0 var(--space-5);
+    }
+    
+    .workbook-multi-items {
+      display: grid;
+      gap: var(--space-3);
+    }
+    
+    .workbook-multi-item {
+      background: var(--color-surface);
+      border: 2px solid rgba(20, 28, 38, 0.12);
+      border-radius: calc(var(--radius-md) * 1.5);
+      display: grid;
+      gap: var(--space-3);
+      margin: 0;
+      padding: var(--space-4);
+    }
+    
+    .workbook-multi-item legend {
+      color: var(--color-ink);
+      font-size: 1.02rem;
+      font-weight: 900;
+      line-height: 1.35;
+      padding: 0 var(--space-2);
+    }
+    
+    .workbook-multi-item label {
+      color: var(--color-ink);
+      font-weight: 850;
+    }
+    
+    .workbook-multi-item input[type="text"] {
+      background: var(--color-surface);
+      border: 2px solid rgba(20, 28, 38, 0.12);
+      border-radius: var(--radius-md);
+      color: var(--color-ink);
+      min-height: 3.2rem;
+      padding: var(--space-3);
+      width: 100%;
+    }
+    
+    .workbook-multi-options {
+      display: grid;
+      gap: var(--space-2);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .workbook-multi-options label {
+      align-items: center;
+      background: var(--color-surface-soft);
+      border-radius: var(--radius-md);
+      display: flex;
+      gap: var(--space-2);
+      min-height: 3rem;
+      padding: var(--space-3);
+    }
+    
+    .workbook-multi-options input {
+      accent-color: var(--color-accent);
+      flex: 0 0 auto;
+    }
+    
+    .workbook-item-feedback {
+      color: var(--color-muted);
+      font-size: 0.96rem;
+      font-weight: 850;
+      line-height: 1.35;
+      margin: 0;
+    }
+    
+    .workbook-multi-item.is-correct {
+      border-color: var(--color-accent);
+    }
+    
+    .workbook-multi-item.is-correct .workbook-item-feedback {
+      color: var(--color-accent-strong);
+    }
+    
+    .workbook-multi-item.is-incorrect {
+      border-color: var(--color-warm);
+    }
+    
+    .workbook-multi-item.is-incorrect .workbook-item-feedback {
+      color: #7d311c;
+    }
+    
+    .workbook-feedback {
+      background: var(--color-surface);
+      border: 1px solid rgba(20, 28, 38, 0.1);
+      border-radius: calc(var(--radius-md) * 2);
+      min-height: 5.5rem;
+      padding: var(--space-4) var(--space-5);
+    }
+    
+    .workbook-feedback strong {
+      display: block;
+      font-size: 1.08rem;
+      margin-bottom: var(--space-2);
+    }
+    
+    .workbook-feedback p {
+      color: var(--color-muted);
+      line-height: 1.45;
+      margin: 0;
+    }
+    
+    .workbook-feedback.correct {
+      border-left: 7px solid var(--color-accent);
+    }
+    
+    .workbook-feedback.incorrect {
+      border-left: 7px solid var(--color-warm);
+    }
+    
+    .workbook-actions {
+      align-items: center;
+      display: flex;
+      gap: var(--space-3);
+      justify-content: flex-end;
+      margin-top: var(--space-5);
+    }
+    
+    .workbook-primary {
+      background: var(--color-accent);
+      border: 0;
+      border-radius: calc(var(--radius-md) * 1.5);
+      color: var(--color-surface);
+      font-weight: 900;
+      min-height: 3rem;
+      padding: var(--space-3) var(--space-5);
+    }
+    
+    .workbook-secondary {
+      background: var(--color-surface-soft);
+      border: 0;
+      border-radius: calc(var(--radius-md) * 1.5);
+      color: var(--color-ink);
+      font-weight: 900;
+      min-height: 3rem;
+      padding: var(--space-3) var(--space-5);
+    }
+    
+    .workbook-primary:disabled {
+      background: var(--color-line);
+      color: var(--color-muted);
+    }
+    
+    .listening-challenge-slide .slide-content {
+      align-items: center;
+    }
+    
+    .listening-slide-subtitle {
+      color: var(--color-muted);
+      font-size: calc(1.35rem * var(--slide-font-scale));
+      font-weight: 800;
+      line-height: 1.25;
+      margin: 0;
+    }
+    
+    .listening-challenge-panel {
+      justify-items: start;
+      max-width: 56rem;
+    }
+    
+    .listening-challenge-panel p {
+      color: var(--color-muted);
+      font-size: calc(1.34rem * var(--slide-font-scale));
+      font-weight: 800;
+      line-height: 1.4;
+      margin: 0;
+    }
+    
+    .listening-challenge-note {
+      color: var(--color-accent-strong) !important;
+      font-size: calc(1.08rem * var(--slide-font-scale)) !important;
+    }
+    
+    .listening-page {
+      width: min(100%, 1180px);
+    }
+    
+    .listening-hero {
+      padding-right: 9rem;
+    }
+    
+    .listening-page-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-top: var(--space-3);
+    }
+    
+    .listening-status {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .listening-sections {
+      display: grid;
+      gap: var(--space-5);
+      padding: var(--space-6);
+    }
+    
+    .listening-audio-section {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--color-line);
+      border-radius: calc(var(--radius-md) * 1.5);
+      box-shadow: var(--shadow-panel);
+      display: grid;
+      gap: var(--space-5);
+      padding: var(--space-5);
+      scroll-margin-top: var(--space-6);
+    }
+    
+    .listening-audio-section.is-current {
+      border-color: var(--color-accent);
+    }
+    
+    .listening-audio-header {
+      display: grid;
+      gap: var(--space-2);
+    }
+    
+    .listening-audio-meta,
+    .listening-audio-score {
+      color: var(--color-accent-strong);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    
+    .listening-audio-header h2 {
+      font-size: 2.4rem;
+      line-height: 1.08;
+      margin: 0;
+    }
+    
+    .listening-situation {
+      color: var(--color-muted);
+      font-size: 1.08rem;
+      font-weight: 800;
+      line-height: 1.4;
+      margin: 0;
+    }
+    
+    .listening-audio-section audio {
+      width: 100%;
+    }
+    
+    .listening-question-form {
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .listening-question {
+      background: var(--color-surface);
+      border: 2px solid rgba(20, 28, 38, 0.12);
+      border-radius: calc(var(--radius-md) * 1.5);
+      display: grid;
+      gap: var(--space-3);
+      margin: 0;
+      min-width: 0;
+      padding: var(--space-4);
+    }
+    
+    .listening-question.is-correct {
+      border-color: var(--color-accent);
+    }
+    
+    .listening-question.is-incorrect {
+      border-color: var(--color-warm);
+    }
+    
+    .listening-question legend {
+      color: var(--color-ink);
+      font-size: 1rem;
+      font-weight: 900;
+      line-height: 1.35;
+      padding: 0 var(--space-2);
+    }
+    
+    .listening-options {
+      display: grid;
+      gap: var(--space-2);
+    }
+    
+    .listening-options label,
+    .listening-blank-field {
+      align-items: center;
+      background: var(--color-surface-soft);
+      border: 1px solid transparent;
+      border-radius: var(--radius-md);
+      color: var(--color-ink);
+      display: flex;
+      gap: var(--space-2);
+      font-weight: 850;
+      line-height: 1.25;
+      min-height: 2.85rem;
+      padding: var(--space-3);
+    }
+    
+    .listening-options label.is-correct {
+      background: var(--color-accent-soft);
+      border-color: var(--color-accent);
+      color: var(--color-accent-strong);
+    }
+    
+    .listening-options label.is-incorrect {
+      background: var(--color-warm-soft);
+      border-color: var(--color-warm);
+      color: #7d311c;
+    }
+    
+    .listening-options input {
+      accent-color: var(--color-accent);
+      flex: 0 0 auto;
+    }
+    
+    .listening-blank-field {
+      align-items: start;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+    
+    .listening-blank-field span {
+      color: var(--color-muted);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    
+    .listening-blank-field input {
+      background: var(--color-surface);
+      border: 2px solid rgba(20, 28, 38, 0.12);
+      border-radius: var(--radius-md);
+      color: var(--color-ink);
+      min-height: 2.85rem;
+      padding: var(--space-2) var(--space-3);
+      width: 100%;
+    }
+    
+    .listening-question-feedback {
+      color: var(--color-muted);
+      font-size: 0.92rem;
+      font-weight: 850;
+      line-height: 1.35;
+      margin: 0;
+    }
+    
+    .listening-question.is-correct .listening-question-feedback {
+      color: var(--color-accent-strong);
+    }
+    
+    .listening-question.is-incorrect .listening-question-feedback {
+      color: #7d311c;
+    }
+    
+    .listening-feedback {
+      background: var(--color-surface);
+      border: 1px solid rgba(20, 28, 38, 0.1);
+      border-radius: calc(var(--radius-md) * 1.5);
+      min-height: 4.5rem;
+      padding: var(--space-4);
+    }
+    
+    .listening-feedback.correct {
+      border-left: 7px solid var(--color-accent);
+    }
+    
+    .listening-feedback.incorrect {
+      border-left: 7px solid var(--color-warm);
+    }
+    
+    .listening-feedback strong,
+    .listening-feedback p {
+      display: block;
+      margin: 0;
+    }
+    
+    .listening-feedback strong {
+      color: var(--color-ink);
+      margin-bottom: var(--space-1);
+    }
+    
+    .listening-feedback p {
+      color: var(--color-muted);
+      font-weight: 800;
+      line-height: 1.4;
+    }
+    
+    .listening-actions,
+    .listening-audio-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+    
+    .listening-actions {
+      justify-content: flex-end;
+    }
+    
+    .listening-audio-nav {
+      border-top: 1px solid var(--color-line);
+      justify-content: space-between;
+      padding-top: var(--space-4);
+    }
+    
+    .listening-transcript {
+      background: var(--color-accent-soft);
+      border: 1px solid rgba(0, 124, 120, 0.24);
+      border-radius: calc(var(--radius-md) * 1.5);
+      display: grid;
+      gap: var(--space-3);
+      padding: var(--space-5);
+    }
+    
+    .listening-transcript[hidden] {
+      display: none;
+    }
+    
+    .listening-transcript h3 {
+      color: var(--color-accent-strong);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    
+    .listening-transcript-lines {
+      display: grid;
+      gap: var(--space-3);
+    }
+    
+    .listening-transcript-lines p {
+      border-left: 4px solid var(--color-accent);
+      color: var(--color-ink);
+      font-weight: 800;
+      line-height: 1.45;
+      margin: 0;
+      padding-left: var(--space-3);
+    }
+    
+    .listening-transcript-lines strong {
+      color: var(--color-accent-strong);
+    }
+    
+    .listening-score-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .listening-page button:focus-visible,
+    .listening-page a:focus-visible,
+    .listening-page input:focus-visible,
+    .listening-page audio:focus-visible {
+      outline: 4px solid var(--color-focus);
+      outline-offset: 2px;
+    }
+    
+    .workbook-result {
+      display: none;
+    }
+    
+    .workbook-result.active {
+      display: block;
+    }
+    
+    .workbook-result h2 {
+      font-size: 3.2rem;
+      margin: 0 0 var(--space-2);
+    }
+    
+    .workbook-score-line {
+      color: var(--color-muted);
+      font-size: 1.12rem;
+      font-weight: 800;
+      margin: 0;
+    }
+    
+    .workbook-score-card {
+      display: grid;
+      gap: var(--space-3);
+      grid-template-columns: repeat(3, 1fr);
+      margin: var(--space-5) 0;
+    }
+    
+    .workbook-score-card-wide {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .workbook-score-card div {
+      background: var(--color-surface);
+      border-radius: calc(var(--radius-md) * 1.5);
+      box-shadow: 0 8px 22px rgba(20, 28, 38, 0.08);
+      padding: var(--space-5);
+    }
+    
+    .workbook-score-card small {
+      color: var(--color-muted);
+      display: block;
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    
+    .workbook-score-card strong {
+      color: var(--color-accent-strong);
+      display: block;
+      font-size: 1.55rem;
+      margin-top: var(--space-2);
+    }
+    
+    .workbook-message {
+      background: var(--color-surface);
+      border-left: 7px solid var(--color-warm);
+      border-radius: calc(var(--radius-md) * 1.5);
+      font-size: 1.12rem;
+      font-weight: 850;
+      margin: 0 0 var(--space-5);
+      padding: var(--space-5);
+    }
+    
+    .workbook-result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+    
+    .workbook-return-link {
+      align-items: center;
+      display: inline-flex;
+      justify-content: center;
+      text-decoration: none;
+    }
+    
+    .grammar-box {
+      background: var(--color-surface);
+      border-color: var(--color-accent);
+      color: var(--color-ink);
+      min-height: 18rem;
+    }
+    
+    .exercise-box {
+      background: var(--color-warm-soft);
+      border-color: var(--color-warm);
+      color: #7d311c;
+      min-height: 9rem;
+    }
+    
+    .activity-box {
+      background: #eef5ff;
+      border-color: #2f6fed;
+      color: #244f9e;
+      min-height: 12rem;
+    }
+    
+    .dialogue-line {
+      align-items: start;
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      display: grid;
+      gap: var(--space-3);
+      grid-template-columns: 12rem 1fr;
+      min-height: 5.5rem;
+      padding: var(--space-4);
+    }
+    
+    .dialogue-line span {
+      color: var(--color-accent-strong);
+      font-weight: 900;
+    }
+    
+    .dialogue-line p {
+      color: var(--color-muted);
+      font-weight: 700;
+    }
+    
+    .dialogue-slide {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    
+    .dialogue-slide .slide-content {
+      align-items: start;
+    }
+    
+    .dialogue-card-list {
+      display: grid;
+      gap: var(--space-3);
+    }
+    
+    .dialogue-turn {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      display: grid;
+      gap: var(--space-3);
+      grid-template-columns: 5rem minmax(0, 1fr);
+      padding: var(--space-3);
+    }
+    
+    .dialogue-turn img {
+      height: 4.75rem;
+      object-fit: contain;
+      width: 100%;
+    }
+    
+    .dialogue-turn-content {
+      display: grid;
+      gap: var(--space-1);
+    }
+    
+    .dialogue-speaker {
+      color: var(--color-accent-strong);
+      font-size: 0.88rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    
+    .dialogue-speech {
+      color: var(--color-ink);
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      font-weight: 850;
+      line-height: 1.32;
+      margin: 0;
+    }
+    
+    .responsive-table {
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      overflow-x: auto;
+    }
+    
+    .template-table th,
+    .template-table td {
+      border-bottom: 1px solid var(--color-line);
+      padding: var(--space-4);
+      vertical-align: top;
+    }
+    
+    .template-table th {
+      background: var(--color-accent);
+      color: var(--color-surface);
+    }
+    
+    .template-table tr:last-child td {
+      border-bottom: 0;
+    }
+    
+    .media-placeholder {
+      aspect-ratio: 16 / 9;
+      justify-content: center;
+      min-height: 0;
+      text-align: center;
+    }
+    
+    .audio-player-placeholder {
+      align-items: center;
+      background: var(--color-surface);
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: auto 1fr auto;
+      min-height: 6rem;
+      padding: var(--space-4);
+    }
+    
+    .media-button {
+      background: var(--color-accent);
+      border: 0;
+      border-radius: var(--radius-sm);
+      color: var(--color-surface);
+      font-weight: 900;
+      min-height: 3.25rem;
+      padding: 0 var(--space-5);
+    }
+    
+    .waveform-placeholder {
+      align-items: center;
+      display: flex;
+      gap: var(--space-2);
+      height: 3rem;
+    }
+    
+    .waveform-placeholder span {
+      background: var(--color-line);
+      border-radius: 999px;
+      display: block;
+      height: 1.2rem;
+      width: 0.65rem;
+    }
+    
+    .waveform-placeholder span:nth-child(2),
+    .waveform-placeholder span:nth-child(5) {
+      height: 2rem;
+    }
+    
+    .waveform-placeholder span:nth-child(3) {
+      height: 2.6rem;
+    }
+    
+    .grammar-slide {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    
+    .grammar-slide .slide-content {
+      align-items: start;
+    }
+    
+    .grammar-slide .content-panel {
+      gap: var(--space-4);
+    }
+    
+    .grammar-subtitle {
+      color: var(--color-muted);
+      font-size: calc(1.18rem * var(--slide-font-scale));
+      font-weight: 800;
+      line-height: 1.35;
+      margin: 0;
+    }
+    
+    .grammar-content {
+      align-items: start;
+    }
+    
+    .grammar-lesson-layout {
+      align-items: start;
+      display: grid;
+      gap: var(--space-5);
+      grid-template-columns: minmax(0, 1fr);
+    }
+    
+    .grammar-main-stack {
+      display: grid;
+      gap: var(--space-4);
+      min-width: 0;
+    }
+    
+    .grammar-pronouns-slide .grammar-main-stack {
+      grid-template-columns: minmax(0, 0.55fr) minmax(0, 0.45fr);
+    }
+    
+    .grammar-pronouns-slide .grammar-table {
+      grid-column: 1 / -1;
+    }
+    
+    .grammar-two-column {
+      align-items: stretch;
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: minmax(0, 1fr) minmax(13rem, 0.7fr);
+    }
+    
+    .grammar-illustration-placeholder {
+      align-items: center;
+      color: var(--color-accent-strong);
+      display: grid;
+      font-size: calc(1.05rem * var(--slide-font-scale));
+      justify-items: center;
+      line-height: 1.25;
+      margin: 0;
+      min-height: 12rem;
+      padding: var(--space-4);
+      text-align: center;
+    }
+    
+    .grammar-note {
+      background: var(--color-accent-soft);
+      border: 1px solid var(--color-accent);
+      border-radius: var(--radius-sm);
+      color: var(--color-accent-strong);
+      font-size: calc(1.08rem * var(--slide-font-scale));
+      font-weight: 850;
+      line-height: 1.35;
+      margin: 0;
+      padding: var(--space-4);
+    }
+    
+    .grammar-three-column {
+      align-items: stretch;
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: minmax(16rem, 0.95fr) minmax(15rem, 0.8fr) minmax(18rem, 1.15fr);
+    }
+    
+    .grammar-stack {
+      display: grid;
+      gap: var(--space-4);
+    }
+    
+    .grammar-card,
+    .grammar-portrait-card,
+    .grammar-structure-panel,
+    .grammar-contrast {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+    }
+    
+    .grammar-card {
+      display: grid;
+      gap: var(--space-3);
+      padding: var(--space-4);
+    }
+    
+    .grammar-card h3 {
+      color: var(--color-accent-strong);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+    
+    .course-app .slide .grammar-card h3 {
+      font-family: var(--font-body);
+      font-size: calc(1rem * var(--slide-font-scale));
+    }
+    
+    .grammar-card p {
+      margin: 0;
+    }
+    
+    .grammar-table .template-table {
+      width: 100%;
+    }
+    
+    .grammar-table .template-table th,
+    .grammar-table .template-table td {
+      padding: var(--space-3) var(--space-4);
+    }
+    
+    .grammar-example-list {
+      display: grid;
+      gap: var(--space-2);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .grammar-example-list li {
+      border-left: 4px solid var(--color-accent);
+      padding-left: var(--space-3);
+    }
+    
+    .grammar-example-list-columns {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .grammar-span {
+      grid-column: 1 / -1;
+    }
+    
+    .grammar-form-groups {
+      display: grid;
+      gap: var(--space-2);
+    }
+    
+    .grammar-form-groups p {
+      background: var(--color-accent-soft);
+      border-radius: var(--radius-sm);
+      color: var(--color-accent-strong);
+      font-weight: 800;
+      margin: 0;
+      padding: var(--space-2) var(--space-3);
+    }
+    
+    .grammar-contrast {
+      display: grid;
+      gap: var(--space-2);
+      padding: var(--space-4);
+    }
+    
+    .grammar-contrast p {
+      margin: 0;
+    }
+    
+    .grammar-contrast p:nth-child(odd) {
+      border-left: 4px solid var(--color-warm);
+      padding-left: var(--space-3);
+    }
+    
+    .grammar-contrast p:nth-child(even) {
+      border-left: 4px solid var(--color-accent);
+      padding-left: var(--space-3);
+    }
+    
+    .grammar-contrast-compact p {
+      font-size: calc(1.08rem * var(--slide-font-scale));
+      font-weight: 850;
+    }
+    
+    .grammar-contrast-grid,
+    .grammar-term-grid,
+    .grammar-tips-grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+    
+    .grammar-contrast-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .grammar-term-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .grammar-use-grid {
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .grammar-use-slide .grammar-use-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    
+    .grammar-tips-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .grammar-reference-card {
+      background: var(--color-accent-soft);
+    }
+    
+    .grammar-structure-panel {
+      color: var(--color-accent-strong);
+      font-size: calc(2rem * var(--slide-font-scale));
+      font-weight: 900;
+      padding: var(--space-5);
+      text-align: center;
+    }
+    
+    .grammar-tagged-examples {
+      display: grid;
+      gap: var(--space-3);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .grammar-tagged-examples p {
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      display: grid;
+      gap: var(--space-2);
+      margin: 0;
+      padding: var(--space-4);
+    }
+    
+    .grammar-token {
+      border-radius: var(--radius-sm);
+      display: block;
+      font-weight: 900;
+      padding: var(--space-2) var(--space-3);
+    }
+    
+    .grammar-token small {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+    
+    .grammar-token-subject {
+      background: var(--color-accent-soft);
+      color: var(--color-accent-strong);
+    }
+    
+    .grammar-token-verb {
+      background: var(--color-warm-soft);
+      color: var(--color-warm);
+    }
+    
+    .grammar-token-complement {
+      background: var(--color-surface-soft);
+      color: var(--color-ink);
+    }
+    
+    .be-highlight {
+      background: var(--color-warm-soft);
+      border-radius: var(--radius-sm);
+      color: var(--color-warm);
+      display: inline-block;
+      font-weight: 900;
+      padding: 0 var(--space-1);
+    }
+    
+    .verb-group-list,
+    .verb-reference-row {
+      display: grid;
+      gap: var(--space-3);
+    }
+    
+    .verb-group-list p,
+    .verb-reference-row p {
+      background: var(--color-accent-soft);
+      border: 1px solid rgba(0, 124, 120, 0.24);
+      border-radius: var(--radius-sm);
+      color: var(--color-accent-strong);
+      font-size: calc(1.14rem * var(--slide-font-scale));
+      font-weight: 900;
+      line-height: 1.2;
+      margin: 0;
+      padding: var(--space-4);
+    }
+    
+    .verb-group-list span,
+    .verb-reference-row span {
+      color: var(--color-warm);
+      display: block;
+      font-family: var(--font-display);
+      font-size: calc(1.55rem * var(--slide-font-scale));
+      line-height: 1.05;
+      margin-top: var(--space-1);
+    }
+    
+    .verb-reference-row {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .apostrophe {
+      color: var(--color-warm);
+      font-size: 1.18em;
+      font-weight: 900;
+    }
+    
+    .contraction-pair-list {
+      display: grid;
+      gap: var(--space-2);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .contraction-pair-list li {
+      background: var(--color-surface);
+      border-left: 4px solid var(--color-accent);
+      border-radius: var(--radius-sm);
+      font-size: calc(1.02rem * var(--slide-font-scale));
+      font-weight: 850;
+      line-height: 1.35;
+      padding: var(--space-3) var(--space-4);
+    }
+    
+    .negative-highlight {
+      background: var(--color-warm-soft);
+      border-radius: var(--radius-sm);
+      color: var(--color-warm);
+      display: inline-block;
+      font-weight: 900;
+      padding: 0 var(--space-1);
+    }
+    
+    .negative-comparison-grid,
+    .sentence-pattern-grid {
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .comparison-column {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      display: grid;
+      gap: var(--space-3);
+      padding: var(--space-4);
+    }
+    
+    .comparison-column h3 {
+      color: var(--color-accent-strong);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    
+    .comparison-column ul {
+      display: grid;
+      gap: var(--space-2);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .comparison-column li {
+      align-items: start;
+      border-left: 4px solid var(--color-accent);
+      display: grid;
+      gap: var(--space-2);
+      grid-template-columns: minmax(6.5rem, auto) minmax(0, 1fr);
+      line-height: 1.25;
+      padding-left: var(--space-3);
+    }
+    
+    .comparison-column-negative li {
+      border-left-color: var(--color-warm);
+    }
+    
+    .comparison-column li > span:first-child {
+      color: var(--color-muted);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    
+    .grammar-portrait-card {
+      align-items: center;
+      display: grid;
+      gap: var(--space-3);
+      grid-template-columns: minmax(7rem, 0.5fr) minmax(0, 1fr);
+      margin: 0;
+      padding: var(--space-4);
+    }
+    
+    .grammar-portrait-card img {
+      height: 12rem;
+      object-fit: contain;
+      width: 100%;
+    }
+    
+    .grammar-portrait-card figcaption {
+      display: grid;
+      gap: var(--space-2);
+    }
+    
+    .grammar-portrait-card strong {
+      color: var(--color-ink);
+      font-size: 1.25rem;
+    }
+    
+    .grammar-portrait-card span {
+      color: var(--color-muted);
+      font-weight: 800;
+    }
+    
+    .question-structure-panel {
+      display: grid;
+      gap: var(--space-3);
+    }
+    
+    .question-conversion-grid,
+    .question-pair-grid,
+    .question-reference-grid,
+    .yes-no-answer-grid,
+    .yes-no-note-grid,
+    .question-word-grid,
+    .work-question-grid,
+    .country-nationality-grid,
+    .question-review-grid,
+    .question-pattern-grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+    
+    .question-conversion-grid {
+      align-items: stretch;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    }
+    
+    .question-conversion-card {
+      align-content: center;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      display: grid;
+      gap: var(--space-3);
+      padding: var(--space-4);
+    }
+    
+    .question-conversion-card h3,
+    .question-review-card h3,
+    .question-pattern-card h3 {
+      color: var(--color-accent-strong);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    
+    .course-app .slide .question-conversion-card h3,
+    .course-app .slide .question-review-card h3,
+    .course-app .slide .question-pattern-card h3 {
+      font-family: var(--font-body);
+      font-size: calc(0.85rem * var(--slide-font-scale));
+    }
+    
+    .question-conversion-card p {
+      color: var(--color-ink);
+      font-size: calc(1.55rem * var(--slide-font-scale));
+      font-weight: 900;
+      line-height: 1.2;
+      margin: 0;
+    }
+    
+    .question-arrow {
+      align-self: center;
+      color: var(--color-warm);
+      font-size: calc(2.2rem * var(--slide-font-scale));
+      font-weight: 900;
+    }
+    
+    .question-pair-list,
+    .short-answer-examples,
+    .name-question-list,
+    .name-answer-list,
+    .dialogue-mini,
+    .question-review-list {
+      display: grid;
+      gap: var(--space-2);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .question-pair-list li,
+    .short-answer-examples li,
+    .dialogue-mini li,
+    .question-review-list li {
+      border-left: 4px solid var(--color-accent);
+      line-height: 1.3;
+      padding-left: var(--space-3);
+    }
+    
+    .question-pair-list span,
+    .short-answer-examples span,
+    .dialogue-mini span {
+      color: var(--color-muted);
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    
+    .question-reference-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .yes-no-answer-grid,
+    .yes-no-note-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .question-word-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .question-pattern-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .question-pattern-card {
+      background: var(--color-accent-soft);
+      border: 1px solid rgba(0, 124, 120, 0.24);
+      border-radius: var(--radius-sm);
+      color: var(--color-accent-strong);
+      display: grid;
+      gap: var(--space-2);
+      padding: var(--space-4);
+    }
+    
+    .question-pattern-card p {
+      font-size: calc(1.28rem * var(--slide-font-scale));
+      font-weight: 900;
+      line-height: 1.25;
+      margin: 0;
+    }
+    
+    .name-question-list li,
+    .name-answer-list li {
+      background: var(--color-surface);
+      border-radius: var(--radius-sm);
+      color: var(--color-ink);
+      font-weight: 850;
+      line-height: 1.3;
+      padding: var(--space-3) var(--space-4);
+    }
+    
+    .name-dialogue-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      display: grid;
+      gap: var(--space-3);
+      padding: var(--space-4);
+    }
+    
+    .dialogue-mini li:nth-child(even) {
+      border-left-color: var(--color-warm);
+    }
+    
+    .work-question-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .country-nationality-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .question-review-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .question-review-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      display: grid;
+      gap: var(--space-2);
+      padding: var(--space-4);
+    }
+    
+    .question-review-card-wide {
+      grid-column: span 2;
+    }
+    
+    .communication-slide {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    
+    .communication-slide .slide-content {
+      align-items: start;
+    }
+    
+    .communication-final-slide .slide-header {
+      padding-bottom: var(--space-4);
+    }
+    
+    .communication-final-slide .slide-content {
+      padding-bottom: var(--space-4);
+      padding-top: var(--space-4);
+    }
+    
+    .course-app .communication-final-slide h2 {
+      font-size: calc(3.25rem * var(--slide-font-scale));
+    }
+    
+    .communication-slide .content-panel {
+      gap: var(--space-4);
+    }
+    
+    .communication-subtitle {
+      color: var(--color-muted);
+      font-size: calc(1.35rem * var(--slide-font-scale));
+      font-weight: 800;
+      line-height: 1.25;
+      margin: 0;
+    }
+    
+    .communication-grid,
+    .communication-question-grid,
+    .communication-activity-grid,
+    .communication-language-grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+    
+    .communication-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .communication-question-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    
+    .communication-final-panel {
+      align-items: stretch;
+      grid-template-columns: minmax(0, 1fr);
+      overflow-y: auto;
+    }
+    
+    .communication-illustration-placeholder {
+      align-items: center;
+      aspect-ratio: 16 / 9;
+      background: rgba(255, 255, 255, 0.72);
+      border: 2px dashed var(--color-line);
+      border-radius: var(--radius-sm);
+      color: var(--color-accent-strong);
+      display: grid;
+      font-size: calc(1.08rem * var(--slide-font-scale));
+      font-weight: 900;
+      justify-items: center;
+      line-height: 1.25;
+      margin: 0;
+      min-height: 100%;
+      padding: var(--space-5);
+      text-align: center;
+    }
+    
+    .communication-activity-grid {
+      align-items: stretch;
+      gap: var(--space-3);
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 0.68fr);
+    }
+    
+    .communication-language-card {
+      grid-column: 1 / -1;
+    }
+    
+    .communication-time-card {
+      align-content: center;
+      grid-column: 4;
+      grid-row: 1;
+    }
+    
+    .communication-language-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .communication-card,
+    .communication-portrait-card,
+    .communication-flow-panel {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+    }
+    
+    .communication-card {
+      display: grid;
+      gap: var(--space-2);
+      min-width: 0;
+      padding: var(--space-3);
+    }
+    
+    .communication-card h3,
+    .communication-flow-panel h3 {
+      color: var(--color-accent-strong);
+      font-family: var(--font-body);
+      font-size: calc(0.86rem * var(--slide-font-scale));
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      margin: 0;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+    
+    .course-app .slide .communication-card h3,
+    .course-app .slide .communication-flow-panel h3 {
+      font-family: var(--font-body);
+      font-size: calc(0.86rem * var(--slide-font-scale));
+    }
+    
+    .communication-card p {
+      font-size: calc(0.76rem * var(--slide-font-scale));
+      font-weight: 750;
+      line-height: 1.2;
+      margin: 0;
+    }
+    
+    .communication-card h4 {
+      color: var(--color-muted);
+      font-family: var(--font-body);
+      font-size: calc(0.78rem * var(--slide-font-scale));
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      margin: 0 0 var(--space-2);
+      text-transform: uppercase;
+    }
+    
+    .communication-compact-list {
+      display: grid;
+      gap: var(--space-1);
+      font-size: calc(0.72rem * var(--slide-font-scale));
+      line-height: 1.25;
+      list-style-position: outside;
+      margin: 0;
+      padding-left: 1.15rem;
+    }
+    
+    .communication-compact-list li {
+      font-size: calc(0.76rem * var(--slide-font-scale));
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    
+    .communication-time-card p {
+      color: var(--color-accent-strong);
+      font-family: var(--font-display);
+      font-size: calc(1.55rem * var(--slide-font-scale));
+      font-weight: 900;
+      line-height: 1;
+    }
+    
+    .communication-example-list {
+      display: grid;
+      gap: var(--space-3);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .communication-example-list li {
+      border-left: 4px solid var(--color-accent);
+      display: grid;
+      gap: var(--space-1);
+      padding-left: var(--space-3);
+    }
+    
+    .communication-example-list strong {
+      color: var(--color-ink);
+    }
+    
+    .communication-example-list span {
+      color: var(--color-muted);
+      font-weight: 700;
+    }
+    
+    .communication-example-list-large {
+      font-size: 1.15rem;
+    }
+    
+    .communication-portrait-card {
+      align-items: center;
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: minmax(8rem, 0.45fr) minmax(0, 1fr);
+      margin: 0;
+      padding: var(--space-4);
+    }
+    
+    .communication-portrait-card img {
+      height: 18rem;
+      object-fit: contain;
+      width: 100%;
+    }
+    
+    .communication-portrait-card figcaption {
+      display: grid;
+      gap: var(--space-2);
+    }
+    
+    .communication-portrait-card strong {
+      color: var(--color-ink);
+      font-size: 1.35rem;
+    }
+    
+    .communication-portrait-card span {
+      color: var(--color-muted);
+      font-weight: 800;
+    }
+    
+    .communication-flow-panel {
+      display: grid;
+      gap: var(--space-4);
+      padding: var(--space-4);
+    }
+    
+    .communication-flow-list {
+      align-items: center;
+      display: grid;
+      gap: var(--space-3);
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .communication-flow-list li {
+      background: var(--color-accent-soft);
+      border-radius: var(--radius-sm);
+      color: var(--color-accent-strong);
+      font-weight: 900;
+      min-height: 4.5rem;
+      padding: var(--space-3);
+      position: relative;
+      text-align: center;
+    }
+    
+    .communication-flow-list li:not(:last-child)::after {
+      color: var(--color-warm);
+      content: "↓";
+      font-size: 1.6rem;
+      font-weight: 900;
+      position: absolute;
+      right: -1.05rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+    }
+    
+    .slide-font-size-control {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-panel);
+      display: inline-flex;
+      gap: var(--space-1);
+      padding: var(--space-1);
+      position: absolute;
+      right: var(--space-5);
+      top: var(--space-4);
+      z-index: 10;
+    }
+    
+    .slide-font-size-button {
+      background: transparent;
+      border: 0;
+      border-radius: var(--radius-sm);
+      color: var(--color-muted);
+      font-size: 0.95rem;
+      font-weight: 900;
+      line-height: 1;
+      min-height: 2.4rem;
+      min-width: 2.8rem;
+      padding: 0 var(--space-2);
+      transition: background-color var(--transition-fast), color var(--transition-fast);
+    }
+    
+    .slide-font-size-button:hover,
+    .slide-font-size-button:focus-visible {
+      color: var(--color-accent-strong);
+    }
+    
+    .slide-font-size-button:focus-visible {
+      outline: 4px solid var(--color-focus);
+      outline-offset: 2px;
+    }
+    
+    .slide-font-size-button[aria-pressed="true"] {
+      background: var(--color-accent);
+      color: var(--color-surface);
+    }
+    .slide.is-active {
+      animation: slide-in var(--transition-medium);
+    }
+    
+    @keyframes slide-in {
+      from {
+        opacity: 0;
+        transform: translateY(0.75rem);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 1ms !important;
+        scroll-behavior: auto !important;
+        transition-duration: 1ms !important;
+      }
+    }
+    @media (max-width: 980px) {
+      .lesson-deck {
+        padding: 0;
+      }
+    
+      .slide {
+        min-height: 100vh;
+      }
+    
+      .slide-header,
+      .slide-content,
+      .slide-footer {
+        padding-left: var(--space-5);
+        padding-right: var(--space-5);
+      }
+    
+      .slide-font-size-control {
+        right: var(--space-4);
+        top: var(--space-3);
+      }
+    
+      h1 {
+        font-size: 3.25rem;
+      }
+    
+      h2 {
+        font-size: 2.875rem;
+      }
+    
+      .two-column,
+      .placeholder-grid,
+      .placeholder-grid-compact,
+      .grammar-lesson-layout,
+      .grammar-two-column,
+      .grammar-three-column,
+      .grammar-term-grid,
+      .grammar-tagged-examples,
+      .grammar-contrast-grid,
+      .grammar-example-list-columns,
+      .negative-comparison-grid,
+      .sentence-pattern-grid,
+      .verb-reference-row,
+      .question-conversion-grid,
+      .question-reference-grid,
+      .yes-no-answer-grid,
+      .yes-no-note-grid,
+      .question-word-grid,
+      .question-pattern-grid,
+      .work-question-grid,
+      .country-nationality-grid,
+      .question-review-grid,
+      .communication-grid,
+      .communication-question-grid,
+      .communication-final-panel,
+      .communication-activity-grid {
+        grid-template-columns: 1fr;
+      }
+    
+      .communication-language-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    
+      .communication-language-card {
+        grid-column: auto;
+      }
+    
+      .communication-time-card {
+        grid-column: auto;
+        grid-row: auto;
+      }
+    
+      .question-arrow {
+        justify-self: start;
+      }
+    
+      .question-review-card-wide {
+        grid-column: auto;
+      }
+    
+      .communication-flow-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    
+      .communication-flow-list li:not(:last-child)::after {
+        content: "";
+      }
+    
+      .grammar-tips-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    
+      .grammar-use-slide .grammar-use-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    
+      .cover-subtitle {
+        font-size: calc(2.2rem * var(--slide-font-scale));
+      }
+    
+      .learn-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    
+      .learn-card {
+        min-height: 11rem;
+      }
+    
+      .warmup-questions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    
+      .greetings-card {
+        gap: var(--space-3);
+      }
+    
+      .choice-grid,
+      .conversation-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    
+      .practice-illustration-placeholder {
+        max-height: 9rem;
+      }
+    
+      .intro-expression-grid,
+      .intro-expression-grid-wide {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    
+      .intro-illustration-placeholder {
+        max-height: 9rem;
+      }
+    
+      .introductions-panel-visual {
+        grid-template-columns: 1fr;
+      }
+    
+      .introductions-panel-visual .intro-illustration {
+        max-height: none;
+      }
+    
+      .greetings-panel-visual,
+      .greetings-practice-panel-visual {
+        grid-template-columns: 1fr;
+      }
+    
+      .greetings-practice-panel-visual .practice-illustration {
+        max-height: none;
+      }
+    
+      .greetings-panel-visual .greetings-card-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    
+      .greetings-practice-panel-choice .choice-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    
+      .vocab-card-grid-jobs,
+      .vocab-card-grid-pairs,
+      .vocab-card-grid-office {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    
+      .job-example-grid,
+      .job-preposition-grid,
+      .vocab-info-section,
+      .vocab-info-section-office {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    
+      .vocab-illustration-placeholder {
+        max-height: 8rem;
+      }
+    
+      .main-context-panel {
+        grid-template-columns: 1fr;
+      }
+    
+      .main-context-placeholder {
+        min-height: 18rem;
+      }
+    
+      .context-card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    
+      .meet-team-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    
+      .team-card {
+        min-height: 17rem;
+      }
+    
+      .practice-page {
+        padding: var(--space-5);
+      }
+    
+      .workbook-font-controls {
+        right: var(--space-4);
+        top: var(--space-4);
+      }
+    
+      .workbook-page {
+        padding: var(--space-6) var(--space-4);
+      }
+    
+      .workbook-top {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: var(--space-2);
+        padding-right: 8.5rem;
+      }
+    
+      .workbook-hero h1,
+      .workbook-result h2 {
+        font-size: 2.7rem;
+      }
+    
+      .workbook-question-title {
+        font-size: 3.5rem;
+      }
+    
+      .workbook-options {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    
+      .workbook-blank-form {
+        align-items: stretch;
+        grid-template-columns: 1fr;
+      }
+    
+      .workbook-score-card {
+        grid-template-columns: 1fr;
+      }
+    
+      .workbook-score-card-wide {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    
+      .listening-hero {
+        padding-right: 8.5rem;
+      }
+    
+      .listening-status,
+      .listening-score-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    
+      .listening-question-form {
+        grid-template-columns: 1fr;
+      }
+    
+      .workbook-actions {
+        justify-content: stretch;
+      }
+    
+      .workbook-primary,
+      .workbook-secondary {
+        width: 100%;
+      }
+    
+      .listening-hero {
+        padding-right: 0;
+      }
+    
+      .listening-page-actions,
+      .listening-actions,
+      .listening-audio-nav {
+        align-items: stretch;
+        flex-direction: column;
+      }
+    
+      .listening-status,
+      .listening-score-grid {
+        grid-template-columns: 1fr;
+      }
+    
+      .listening-sections,
+      .listening-audio-section,
+      .listening-transcript {
+        padding: var(--space-4);
+      }
+    
+      .listening-audio-header h2 {
+        font-size: 2rem;
+      }
+    
+      .listening-blank-field {
+        grid-template-columns: 1fr;
+      }
+    
+      .practice-match-list label {
+        grid-template-columns: 1fr;
+      }
+    
+      .grammar-illustration-placeholder {
+        min-height: 10rem;
+      }
+    
+      .grammar-portrait-card,
+      .communication-portrait-card {
+        grid-template-columns: minmax(7rem, 0.35fr) minmax(0, 1fr);
+      }
+    
+      .placeholder-line-large {
+        font-size: 2.25rem;
+      }
+    
+      .course-app {
+        --slide-h1-size: 3.25rem;
+        --slide-h2-size: 2.875rem;
+      }
+    }
+    
+    @media (max-width: 620px) {
+      body {
+        font-size: 1rem;
+      }
+    
+      h1 {
+        font-size: 2.5rem;
+      }
+    
+      h2 {
+        font-size: 2.125rem;
+      }
+    
+      .slide-header,
+      .slide-content,
+      .slide-footer {
+        padding: var(--space-4);
+      }
+    
+      .slide-font-size-control {
+        right: var(--space-3);
+        top: var(--space-3);
+      }
+    
+      .slide-font-size-button {
+        min-height: 2.2rem;
+        min-width: 2.45rem;
+        padding: 0 var(--space-1);
+      }
+    
+      .slide-footer {
+        align-items: stretch;
+        flex-direction: column;
+      }
+    
+      .cover-header {
+        padding-bottom: var(--space-3);
+      }
+    
+      .cover-title-stack {
+        gap: var(--space-2);
+      }
+    
+      .cover-title-stack h1 {
+        max-width: none;
+      }
+    
+      .cover-subtitle {
+        font-size: calc(1.75rem * var(--slide-font-scale));
+      }
+    
+      .slide-progress {
+        width: 100%;
+      }
+    
+      .learn-grid {
+        grid-template-columns: 1fr;
+      }
+    
+      .learn-card {
+        min-height: 0;
+      }
+    
+      .warmup-questions {
+        grid-template-columns: 1fr;
+      }
+    
+      .greetings-panel {
+        gap: var(--space-4);
+      }
+    
+      .greetings-illustration-placeholder {
+        max-height: none;
+      }
+    
+      .greetings-card {
+        padding: var(--space-4);
+      }
+    
+      .greetings-panel-visual .greetings-card-grid {
+        grid-template-columns: 1fr;
+      }
+    
+      .matching-columns,
+      .choice-grid,
+      .conversation-grid {
+        grid-template-columns: 1fr;
+      }
+    
+      .greetings-practice-panel-choice .choice-grid {
+        grid-template-columns: 1fr;
+      }
+    
+      .greetings-practice-panel-conversations .conversation-grid {
+        grid-template-columns: 1fr;
+      }
+    
+      .practice-illustration-placeholder {
+        max-height: none;
+      }
+    
+      .practice-card,
+      .choice-card,
+      .conversation-card {
+        padding: var(--space-4);
+      }
+    
+      .intro-expression-grid,
+      .intro-expression-grid-wide,
+      .intro-conversation-grid {
+        grid-template-columns: 1fr;
+      }
+    
+      .intro-illustration-placeholder {
+        max-height: none;
+      }
+    
+      .introductions-panel-self .intro-expression-grid {
+        grid-template-columns: 1fr;
+      }
+    
+      .introductions-panel-someone .intro-expression-grid-wide {
+        grid-template-columns: 1fr;
+      }
+    
+      .introductions-panel-someone .intro-expression-card:last-child {
+        grid-column: auto;
+      }
+    
+      .intro-expression-card,
+      .intro-conversation-card {
+        padding: var(--space-4);
+      }
+    
+      .vocab-card-grid-jobs,
+      .vocab-card-grid-pairs,
+      .vocab-card-grid-office {
+        grid-template-columns: 1fr;
+      }
+    
+      .job-example-grid,
+      .job-preposition-grid,
+      .vocab-info-section,
+      .vocab-info-section-office {
+        grid-template-columns: 1fr;
+      }
+    
+      .vocab-illustration-placeholder {
+        max-height: none;
+      }
+    
+      .vocab-card,
+      .vocab-pair-card {
+        min-height: 0;
+        padding: var(--space-4);
+      }
+    
+      .grammar-pronouns-slide .grammar-main-stack,
+      .grammar-use-grid {
+        grid-template-columns: 1fr;
+      }
+    
+      .grammar-pronouns-slide .grammar-table {
+        grid-column: auto;
+      }
+    
+      .main-context-placeholder {
+        min-height: 14rem;
+      }
+    
+      .context-card-grid {
+        grid-template-columns: 1fr;
+      }
+    
+      .meet-team-grid {
+        grid-template-columns: 1fr;
+      }
+    
+      .meet-team-subtitle {
+        font-size: calc(1.05rem * var(--slide-font-scale));
+      }
+    
+      .team-card {
+        min-height: 18rem;
+      }
+    
+      .team-portrait-frame {
+        min-height: 12rem;
+      }
+    
+      .practice-page {
+        padding: var(--space-4);
+      }
+    
+      .workbook-font-controls {
+        right: var(--space-3);
+        top: var(--space-3);
+      }
+    
+      .workbook-font-controls button {
+        min-height: 2.2rem;
+        min-width: 2.45rem;
+      }
+    
+      .workbook-page {
+        gap: var(--space-5);
+        padding: 5.25rem var(--space-3) var(--space-4);
+      }
+    
+      .workbook-hero h1,
+      .workbook-result h2 {
+        font-size: 2.25rem;
+      }
+    
+      .workbook-shell {
+        border-radius: var(--radius-md);
+      }
+    
+      .workbook-status {
+        grid-template-columns: 1fr;
+      }
+    
+      .workbook-status > div,
+      .workbook-exercise,
+      .workbook-result,
+      .workbook-score-card div,
+      .workbook-message {
+        padding: var(--space-4);
+      }
+    
+      .workbook-question-title {
+        font-size: 2.75rem;
+      }
+    
+      .workbook-question-prompt,
+      .workbook-blank-form label,
+      .workbook-writing-form label {
+        font-size: 1.08rem;
+      }
+    
+      .workbook-options {
+        grid-template-columns: 1fr;
+      }
+    
+      .workbook-multi-options,
+      .workbook-score-card-wide {
+        grid-template-columns: 1fr;
+      }
+    
+      .workbook-writing-actions {
+        flex-direction: column;
+      }
+    
+      .workbook-writing-form textarea {
+        min-height: 10rem;
+      }
+    
+      .practice-score-card {
+        grid-template-columns: 1fr;
+        position: static;
+      }
+    
+      .practice-exercise {
+        padding: var(--space-4);
+      }
+    
+      .practice-exercise label,
+      .practice-match-list label,
+      .blank-field {
+        align-items: start;
+      }
+    
+      .practice-exercise input[type="text"],
+      .practice-exercise select,
+      .blank-field input {
+        width: 100%;
+      }
+    
+      .dialogue-line,
+      .dialogue-turn,
+      .audio-player-placeholder,
+      .grammar-use-grid,
+      .grammar-portrait-card,
+      .communication-portrait-card,
+      .communication-language-grid,
+      .communication-flow-list {
+        grid-template-columns: 1fr;
+      }
+    
+      .grammar-subtitle {
+        font-size: calc(1.05rem * var(--slide-font-scale));
+      }
+    
+      .grammar-illustration-placeholder {
+        min-height: 8rem;
+        padding: var(--space-4);
+      }
+    
+      .template-table th,
+      .template-table td,
+      .grammar-table .template-table th,
+      .grammar-table .template-table td {
+        padding: var(--space-3);
+      }
+    
+      .grammar-structure-panel {
+        font-size: 1.35rem;
+        padding: var(--space-4);
+      }
+    
+      .comparison-column li {
+        grid-template-columns: 1fr;
+      }
+    
+      .question-conversion-card p,
+      .question-pattern-card p {
+        font-size: calc(1.18rem * var(--slide-font-scale));
+      }
+    
+      .verb-group-list p,
+      .verb-reference-row p,
+      .contraction-pair-list li {
+        padding: var(--space-3);
+      }
+    
+      .grammar-portrait-card img {
+        height: 10rem;
+      }
+    
+      .communication-portrait-card img {
+        height: 12rem;
+      }
+    
+      .grammar-tips-grid {
+        grid-template-columns: 1fr;
+      }
+    
+      .course-app {
+        --slide-body-size: 1rem;
+        --slide-h1-size: 2.5rem;
+        --slide-h2-size: 2.125rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#lesson-deck">Skip to lesson slides</a>
+
+  <div class="course-app" data-course-app>
+    <main id="lesson-deck" class="lesson-deck" aria-live="polite">
+      <section class="slide cover-slide is-active" id="slide-cover" data-slide aria-labelledby="slide-cover-title" tabindex="-1">
+        <header class="slide-header cover-header">
+          <div class="cover-title-stack">
+            <h1 id="slide-cover-title">English Course</h1>
+            <p class="cover-lesson">Lesson 1</p>
+            <p class="cover-subtitle">Introductions</p>
+          </div>
+        </header>
+        <div class="slide-content cover-slide-content">
+          <figure class="cover-hero-art" aria-label="Lesson cover illustration">
+            <img
+              class="cover-hero-image"
+              src="assets/images/lesson-1-introductions-cover.png"
+              alt="Adults greeting each other for the first time in an international English-learning environment."
+            >
+          </figure>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="1">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 1 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide learn-slide" id="slide-objectives" data-slide aria-labelledby="slide-objectives-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <h2 id="slide-objectives-title">What You'll Learn</h2>
+        </header>
+        <div class="slide-content">
+          <article class="content-panel learn-panel" aria-label="Lesson objectives">
+            <div class="learn-grid">
+              <article class="learn-card">
+                <span class="learn-icon" aria-hidden="true">👋</span>
+                <h3>Greet people</h3>
+                <p>Hello! Good morning!</p>
+              </article>
+              <article class="learn-card">
+                <span class="learn-icon" aria-hidden="true">🙋</span>
+                <h3>Introduce yourself</h3>
+                <p>I'm Daniel.</p>
+              </article>
+              <article class="learn-card">
+                <span class="learn-icon" aria-hidden="true">❓</span>
+                <h3>Ask someone's name</h3>
+                <p>What's your name?</p>
+              </article>
+              <article class="learn-card">
+                <span class="learn-icon" aria-hidden="true">🌎</span>
+                <h3>Say where you are from</h3>
+                <p>I'm from Brazil.</p>
+              </article>
+              <article class="learn-card">
+                <span class="learn-icon" aria-hidden="true">💼</span>
+                <h3>Talk about your job</h3>
+                <p>I'm an engineer.</p>
+              </article>
+              <article class="learn-card">
+                <span class="learn-icon" aria-hidden="true">📘</span>
+                <h3>Use the verb BE</h3>
+                <p>I am &bull; You are &bull; She is</p>
+              </article>
+              <article class="learn-card">
+                <span class="learn-icon" aria-hidden="true">💬</span>
+                <h3>Ask simple questions</h3>
+                <p>Are you a teacher?</p>
+              </article>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="2">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 2 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide warmup-slide" id="slide-warm-up" data-slide aria-labelledby="slide-warm-up-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <h2 id="slide-warm-up-title">Warm-up</h2>
+        </header>
+        <div class="slide-content warmup-slide-content">
+          <article class="content-panel warmup-panel" aria-label="Warm-up discussion">
+            <figure class="warmup-illustration">
+              <img
+                src="assets/images/lesson-1-warm-up.png"
+                alt="Six adults meeting for the first time before an English training session at an international company."
+              >
+            </figure>
+            <ul class="warmup-questions">
+              <li>Where are they?</li>
+              <li>Are they meeting for the first time?</li>
+              <li>How many people can you see?</li>
+              <li>Are they happy?</li>
+              <li>What are they talking about?</li>
+            </ul>
+            <p class="teacher-note"><em>There are no right or wrong answers. Just try!</em></p>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="3">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 3 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide greetings-slide" id="slide-greetings" data-slide aria-labelledby="slide-greetings-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <h2 id="slide-greetings-title">Greetings</h2>
+        </header>
+        <div class="slide-content greetings-slide-content">
+          <article class="content-panel greetings-panel greetings-panel-visual" aria-label="Greetings, farewells and introductory expressions">
+            <figure class="greetings-illustration-placeholder greetings-illustration">
+              <img
+                src="assets/images/lesson-1-greetings-office.png"
+                alt="Four office scenes showing colleagues saying good morning, goodbye, nice to meet you and welcome."
+              >
+            </figure>
+            <div class="greetings-card-grid">
+              <article class="greetings-card">
+                <h3>Saying Hello</h3>
+                <ul>
+                  <li>Hello</li>
+                  <li>Hi</li>
+                  <li>Good morning</li>
+                  <li>Good afternoon</li>
+                  <li>Good evening</li>
+                </ul>
+              </article>
+              <article class="greetings-card">
+                <h3>Saying Goodbye</h3>
+                <ul>
+                  <li>Goodbye</li>
+                  <li>Bye</li>
+                  <li>See you later</li>
+                  <li>Have a nice day</li>
+                </ul>
+              </article>
+              <article class="greetings-card">
+                <h3>Useful Expressions</h3>
+                <ul>
+                  <li>Nice to meet you.</li>
+                  <li>Nice to meet you, too.</li>
+                  <li>Welcome!</li>
+                </ul>
+              </article>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="4">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 4 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide greetings-practice-slide" id="slide-greetings-practice-choose" data-slide aria-labelledby="slide-greetings-practice-choose-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <h2 id="slide-greetings-practice-choose-title">Choose the Best Expression</h2>
+        </header>
+        <div class="slide-content greetings-practice-content">
+          <article class="content-panel greetings-practice-panel greetings-practice-panel-visual greetings-practice-panel-choice" aria-label="Choose the best greeting expression">
+            <figure class="practice-illustration-placeholder practice-illustration">
+              <img
+                src="assets/images/lesson-1-greetings-practice-choose.png"
+                alt="Office scenes showing a visitor entering the company, two colleagues meeting in the corridor and an employee leaving the office."
+              >
+            </figure>
+            <div class="choice-grid">
+              <article class="choice-card">
+                <h3>Situation 1</h3>
+                <p>You arrive at work at 8:00 a.m.</p>
+                <ul>
+                  <li>○ Hi</li>
+                  <li>○ Good morning</li>
+                  <li>○ Goodbye</li>
+                </ul>
+              </article>
+              <article class="choice-card">
+                <h3>Situation 2</h3>
+                <p>You leave the office.</p>
+                <ul>
+                  <li>○ Goodbye</li>
+                  <li>○ Hello</li>
+                  <li>○ Welcome</li>
+                </ul>
+              </article>
+              <article class="choice-card">
+                <h3>Situation 3</h3>
+                <p>You meet your new manager.</p>
+                <ul>
+                  <li>○ Nice to meet you.</li>
+                  <li>○ Goodbye.</li>
+                  <li>○ See you later.</li>
+                </ul>
+              </article>
+              <article class="choice-card">
+                <h3>Situation 4</h3>
+                <p>A visitor arrives at your company.</p>
+                <ul>
+                  <li>○ Welcome!</li>
+                  <li>○ Goodbye!</li>
+                  <li>○ Good night!</li>
+                </ul>
+              </article>
+              <article class="choice-card">
+                <h3>Situation 5</h3>
+                <p>You meet a colleague in the afternoon.</p>
+                <ul>
+                  <li>○ Good afternoon.</li>
+                  <li>○ Good morning.</li>
+                  <li>○ Goodbye.</li>
+                </ul>
+              </article>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="5">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 5 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide introductions-slide" id="slide-introducing-yourself" data-slide aria-labelledby="slide-introducing-yourself-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <h2 id="slide-introducing-yourself-title">Introducing Yourself</h2>
+          <p class="intro-subtitle">The most common ways to introduce yourself.</p>
+        </header>
+        <div class="slide-content introductions-content">
+          <article class="content-panel introductions-panel introductions-panel-visual introductions-panel-self" aria-label="Introducing yourself expressions">
+            <figure class="intro-illustration-placeholder intro-illustration">
+              <img
+                src="assets/images/lesson-1-introducing-yourself.png"
+                alt="Three office scenes showing Emma and Daniel introducing themselves and saying nice to meet you."
+              >
+            </figure>
+            <div class="intro-expression-stack">
+              <div class="intro-expression-grid">
+                <article class="intro-expression-card">My name is Daniel.</article>
+                <article class="intro-expression-card">I'm Daniel.</article>
+                <article class="intro-expression-card">I'm a software developer.</article>
+                <article class="intro-expression-card">I work at GlobalTech.</article>
+                <article class="intro-expression-card">I'm from Brazil.</article>
+                <article class="intro-expression-card">I'm Brazilian.</article>
+              </div>
+              <p class="intro-note">There are many ways to introduce yourself. These are the most common ones.</p>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="6">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 6 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide introductions-slide" id="slide-introducing-someone" data-slide aria-labelledby="slide-introducing-someone-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <h2 id="slide-introducing-someone-title">Introducing Yourself and Someone</h2>
+          <p class="intro-subtitle">Introduce yourself, then introduce your partner.</p>
+        </header>
+        <div class="slide-content introductions-content">
+          <article class="content-panel introductions-panel introductions-panel-visual introductions-panel-complete" aria-label="Introducing yourself and someone activity">
+            <figure class="intro-illustration-placeholder intro-illustration">
+              <img
+                src="assets/images/lesson-1-complete-introduction.png"
+                alt="Emma and Daniel introduce themselves during a first meeting in an office reception area."
+              >
+            </figure>
+            <div class="intro-conversation-grid">
+              <article class="intro-conversation-card">
+                <h3>1. Introduce yourself</h3>
+                <p>Hello! I'm...</p>
+                <p>I'm a...</p>
+                <p>I work at...</p>
+                <p>I'm from...</p>
+                <p>Nice to meet you.</p>
+              </article>
+              <article class="intro-conversation-card">
+                <h3>2. Introduce your partner</h3>
+                <p>This is...</p>
+                <p>He's / She's a...</p>
+                <p>He / She works at...</p>
+                <p>He's / She's from...</p>
+                <p>Nice to meet you, too.</p>
+              </article>
+            </div>
+            <p class="intro-note">Work in pairs. Introduce yourself first. Then introduce your partner to another pair.</p>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="7">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 7 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide vocabulary-slide" id="slide-vocabulary-jobs" data-slide aria-labelledby="slide-vocabulary-jobs-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <h2 id="slide-vocabulary-jobs-title">Jobs</h2>
+        </header>
+        <div class="slide-content vocabulary-content">
+          <article class="content-panel vocabulary-panel" aria-label="Jobs vocabulary">
+            <div class="vocab-card-grid vocab-card-grid-jobs">
+              <article class="vocab-card">Software Developer</article>
+              <article class="vocab-card">Project Manager</article>
+              <article class="vocab-card">Sales Manager</article>
+              <article class="vocab-card">HR Specialist</article>
+              <article class="vocab-card">Receptionist</article>
+              <article class="vocab-card">Intern</article>
+            </div>
+            <div class="job-example-section" aria-label="Jobs example questions and answers">
+              <h3>Example Questions &amp; Answers</h3>
+              <div class="job-example-grid">
+                <article class="job-example-card">
+                  <p><strong>What do you do?</strong></p>
+                  <p>I work as a software developer.</p>
+                </article>
+                <article class="job-example-card">
+                  <p><strong>What do you do at GlobalTech?</strong></p>
+                  <p>I work as a project manager.</p>
+                </article>
+                <article class="job-example-card">
+                  <p><strong>Where do you work?</strong></p>
+                  <p>I work at GlobalTech.</p>
+                </article>
+                <article class="job-example-card">
+                  <p><strong>Which department are you in?</strong></p>
+                  <p>I'm in the Sales department.</p>
+                </article>
+              </div>
+              <div class="job-preposition-grid">
+                <article><strong>as</strong> + job<br>I work as an intern.</article>
+                <article><strong>at</strong> + company<br>I work at GlobalTech.</article>
+                <article><strong>in</strong> + department<br>I'm in the HR department.</article>
+              </div>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="8">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 8 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide vocabulary-slide" id="slide-vocabulary-countries" data-slide aria-labelledby="slide-vocabulary-countries-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <h2 id="slide-vocabulary-countries-title">Countries &amp; Nationalities</h2>
+        </header>
+        <div class="slide-content vocabulary-content">
+          <article class="content-panel vocabulary-panel" aria-label="Countries and nationalities vocabulary">
+            <div class="vocab-card-grid vocab-card-grid-pairs">
+              <article class="vocab-pair-card"><span>Brazil</span><span>&rarr;</span><span>Brazilian</span></article>
+              <article class="vocab-pair-card"><span>England</span><span>&rarr;</span><span>British</span></article>
+              <article class="vocab-pair-card"><span>Spain</span><span>&rarr;</span><span>Spanish</span></article>
+              <article class="vocab-pair-card"><span>France</span><span>&rarr;</span><span>French</span></article>
+              <article class="vocab-pair-card"><span>Italy</span><span>&rarr;</span><span>Italian</span></article>
+              <article class="vocab-pair-card"><span>Japan</span><span>&rarr;</span><span>Japanese</span></article>
+              <article class="vocab-pair-card"><span>United States</span><span>&rarr;</span><span>American</span></article>
+            </div>
+            <div class="vocab-info-section" aria-label="Countries and nationalities examples">
+              <article class="vocab-info-card">
+                <h3>Capital Letters</h3>
+                <p>Nationalities start with a capital letter: <strong>Brazilian</strong>, <strong>British</strong>, <strong>Japanese</strong>.</p>
+              </article>
+              <article class="vocab-info-card">
+                <h3>Country</h3>
+                <p><strong>Where are you from?</strong><br>I'm from Brazil.</p>
+              </article>
+              <article class="vocab-info-card">
+                <h3>Nationality</h3>
+                <p><strong>What's your nationality?</strong><br>I'm Brazilian.</p>
+              </article>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="9">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 9 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide vocabulary-slide" id="slide-vocabulary-office" data-slide aria-labelledby="slide-vocabulary-office-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <h2 id="slide-vocabulary-office-title">At the Office</h2>
+        </header>
+        <div class="slide-content vocabulary-content">
+          <article class="content-panel vocabulary-panel" aria-label="Office vocabulary">
+            <div class="vocab-card-grid vocab-card-grid-office">
+              <article class="vocab-card">Company</article>
+              <article class="vocab-card">Office</article>
+              <article class="vocab-card">Team</article>
+              <article class="vocab-card">Department</article>
+              <article class="vocab-card">Meeting</article>
+              <article class="vocab-card">Meeting Room</article>
+              <article class="vocab-card">Reception</article>
+              <article class="vocab-card">Colleague</article>
+              <article class="vocab-card">Employee</article>
+              <article class="vocab-card">Visitor</article>
+              <article class="vocab-card">ID Badge</article>
+            </div>
+            <div class="vocab-info-section vocab-info-section-office" aria-label="Office vocabulary groups">
+              <article class="vocab-info-card">
+                <h3>Places</h3>
+                <p><strong>Company</strong><br><strong>Office</strong><br><strong>Department</strong><br><strong>Reception</strong><br><strong>Meeting Room</strong></p>
+              </article>
+              <article class="vocab-info-card">
+                <h3>People</h3>
+                <p><strong>Team</strong><br><strong>Colleague</strong><br><strong>Visitor</strong></p>
+              </article>
+              <article class="vocab-info-card">
+                <h3>Work Words</h3>
+                <p><strong>Meeting</strong><br><strong>ID Badge</strong></p>
+              </article>
+              <article class="vocab-info-card">
+                <h3>Practice Focus</h3>
+                <p><strong>Reception</strong><br><strong>Meeting Room</strong><br><strong>ID Badge</strong></p>
+              </article>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="10">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 10 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide meet-team-slide" id="slide-meet-the-team" data-slide aria-labelledby="slide-meet-the-team-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <h2 id="slide-meet-the-team-title">Meet the Team</h2>
+          <p class="meet-team-subtitle">These are your new colleagues at GlobalTech.</p>
+        </header>
+        <div class="slide-content meet-team-content">
+          <article class="content-panel meet-team-panel" aria-label="GlobalTech team characters">
+            <div class="meet-team-grid">
+              <article class="team-card">
+                <div class="team-portrait-frame">
+                  <img class="team-portrait" src="assets/images/characters/DanielCosta.png" alt="Portrait of Daniel Costa.">
+                </div>
+                <div class="team-card-text">
+                  <h3>Daniel Costa</h3>
+                  <p>Software Developer</p>
+                  <p>Brazilian</p>
+                </div>
+              </article>
+              <article class="team-card">
+                <div class="team-portrait-frame">
+                  <img class="team-portrait" src="assets/images/characters/EmmaJohnson.png" alt="Portrait of Emma Johnson.">
+                </div>
+                <div class="team-card-text">
+                  <h3>Emma Johnson</h3>
+                  <p>Project Manager</p>
+                  <p>British</p>
+                </div>
+              </article>
+              <article class="team-card">
+                <div class="team-portrait-frame">
+                  <img class="team-portrait" src="assets/images/characters/CarlosRamirez.png" alt="Portrait of Carlos Ramírez.">
+                </div>
+                <div class="team-card-text">
+                  <h3>Carlos Ramírez</h3>
+                  <p>Sales Manager</p>
+                  <p>Spanish</p>
+                </div>
+              </article>
+              <article class="team-card">
+                <div class="team-portrait-frame">
+                  <img class="team-portrait" src="assets/images/characters/SophieMartin.png" alt="Portrait of Sophie Martin.">
+                </div>
+                <div class="team-card-text">
+                  <h3>Sophie Martin</h3>
+                  <p>HR Specialist</p>
+                  <p>French</p>
+                </div>
+              </article>
+              <article class="team-card">
+                <div class="team-portrait-frame">
+                  <img class="team-portrait" src="assets/images/characters/KenjiTanaka.png" alt="Portrait of Kenji Tanaka.">
+                </div>
+                <div class="team-card-text">
+                  <h3>Kenji Tanaka</h3>
+                  <p>Software Tester</p>
+                  <p>Japanese</p>
+                </div>
+              </article>
+              <article class="team-card">
+                <div class="team-portrait-frame">
+                  <img class="team-portrait" src="assets/images/characters/OliviaBrown.png" alt="Portrait of Olivia Brown.">
+                </div>
+                <div class="team-card-text">
+                  <h3>Olivia Brown</h3>
+                  <p>Business Analyst</p>
+                  <p>American</p>
+                </div>
+              </article>
+              <article class="team-card">
+                <div class="team-portrait-frame">
+                  <img class="team-portrait" src="assets/images/characters/LucaRossi.png" alt="Portrait of Luca Rossi.">
+                </div>
+                <div class="team-card-text">
+                  <h3>Luca Rossi</h3>
+                  <p>UX Designer</p>
+                  <p>Italian</p>
+                </div>
+              </article>
+              <article class="team-card">
+                <div class="team-portrait-frame">
+                  <img class="team-portrait" src="assets/images/characters/MiaChen.png" alt="Portrait of Mia Chen.">
+                </div>
+                <div class="team-card-text">
+                  <h3>Mia Chen</h3>
+                  <p>Marketing Intern</p>
+                  <p>Chinese</p>
+                </div>
+              </article>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="11">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 11 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide vocabulary-practice-intro-slide" id="slide-vocabulary-practice" data-slide aria-labelledby="slide-vocabulary-practice-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <h2 id="slide-vocabulary-practice-title">Vocabulary Practice</h2>
+        </header>
+        <div class="slide-content vocabulary-practice-intro-content">
+          <article class="content-panel vocabulary-practice-intro-panel" aria-label="Vocabulary practice introduction">
+            <p>Practice the vocabulary from this lesson before moving on to grammar.</p>
+            <a class="media-button practice-open-button" href="workbook/vocabulary-practice.html" target="_blank" rel="noopener">Open Vocabulary Practice</a>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="12">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 12 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide grammar-slide grammar-pronouns-slide" id="slide-grammar-pronouns" data-slide aria-labelledby="slide-grammar-pronouns-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <p class="slide-kicker">Grammar</p>
+          <h2 id="slide-grammar-pronouns-title">Personal Pronouns</h2>
+          <p class="grammar-subtitle">Words we use instead of names and nouns.</p>
+        </header>
+        <div class="slide-content grammar-content">
+          <article class="content-panel grammar-lesson-layout" aria-label="Personal pronouns grammar reference">
+            <div class="grammar-main-stack">
+              <div class="responsive-table grammar-table" role="region" aria-label="Personal pronouns table">
+                <table class="template-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Pronoun</th>
+                      <th scope="col">Portuguese</th>
+                      <th scope="col">Example</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>I</td>
+                      <td>eu</td>
+                      <td>I am Daniel.</td>
+                    </tr>
+                    <tr>
+                      <td>You</td>
+                      <td>você / vocês</td>
+                      <td>You are a visitor.</td>
+                    </tr>
+                    <tr>
+                      <td>He</td>
+                      <td>ele</td>
+                      <td>He is Carlos.</td>
+                    </tr>
+                    <tr>
+                      <td>She</td>
+                      <td>ela</td>
+                      <td>She is Emma.</td>
+                    </tr>
+                    <tr>
+                      <td>It</td>
+                      <td>ele / ela for things and animals</td>
+                      <td>It is an ID badge.</td>
+                    </tr>
+                    <tr>
+                      <td>We</td>
+                      <td>nós</td>
+                      <td>We are colleagues.</td>
+                    </tr>
+                    <tr>
+                      <td>They</td>
+                      <td>eles / elas</td>
+                      <td>They are employees.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="grammar-note">In English, a complete sentence normally needs a subject.</p>
+              <div class="grammar-contrast grammar-contrast-compact" aria-label="Subject contrast">
+                <p>Am a software developer. &mdash; <strong>Incorrect</strong></p>
+                <p>I am a software developer. &mdash; <strong>Correct</strong></p>
+              </div>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="13">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 13 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide grammar-slide grammar-to-be-slide" id="slide-grammar-to-be" data-slide aria-labelledby="slide-grammar-to-be-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <p class="slide-kicker">Grammar</p>
+          <h2 id="slide-grammar-to-be-title">The Verb to Be</h2>
+          <p class="grammar-subtitle">Affirmative forms</p>
+        </header>
+        <div class="slide-content grammar-content">
+          <article class="content-panel grammar-lesson-layout" aria-label="Verb to be affirmative forms">
+            <div class="grammar-main-stack">
+              <div class="grammar-two-column">
+                <div class="responsive-table grammar-table" role="region" aria-label="Verb to be table">
+                  <table class="template-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Verb</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>I</td>
+                        <td><span class="be-highlight">am</span></td>
+                      </tr>
+                      <tr>
+                        <td>You</td>
+                        <td><span class="be-highlight">are</span></td>
+                      </tr>
+                      <tr>
+                        <td>He</td>
+                        <td><span class="be-highlight">is</span></td>
+                      </tr>
+                      <tr>
+                        <td>She</td>
+                        <td><span class="be-highlight">is</span></td>
+                      </tr>
+                      <tr>
+                        <td>It</td>
+                        <td><span class="be-highlight">is</span></td>
+                      </tr>
+                      <tr>
+                        <td>We</td>
+                        <td><span class="be-highlight">are</span></td>
+                      </tr>
+                      <tr>
+                        <td>They</td>
+                        <td><span class="be-highlight">are</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="verb-group-list" aria-label="Verb to be groups">
+                  <p>I <span>am</span></p>
+                  <p>He / She / It <span>is</span></p>
+                  <p>You / We / They <span>are</span></p>
+                </div>
+              </div>
+              <ul class="grammar-example-list grammar-example-list-columns">
+                <li>I <span class="be-highlight">am</span> Brazilian.</li>
+                <li>You <span class="be-highlight">are</span> the new employee.</li>
+                <li>He <span class="be-highlight">is</span> a sales manager.</li>
+                <li>She <span class="be-highlight">is</span> British.</li>
+                <li>It <span class="be-highlight">is</span> the meeting room.</li>
+                <li>We <span class="be-highlight">are</span> on the same team.</li>
+                <li>They <span class="be-highlight">are</span> visitors.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="14">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 14 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide grammar-slide grammar-contractions-slide" id="slide-grammar-contractions" data-slide aria-labelledby="slide-grammar-contractions-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <p class="slide-kicker">Grammar</p>
+          <h2 id="slide-grammar-contractions-title">Full Forms and Contractions</h2>
+          <p class="grammar-subtitle">Two natural ways to say the same thing</p>
+        </header>
+        <div class="slide-content grammar-content">
+          <article class="content-panel grammar-lesson-layout" aria-label="Full forms and contractions">
+            <div class="grammar-main-stack">
+              <div class="grammar-two-column">
+                <div class="responsive-table grammar-table" role="region" aria-label="Full forms and contractions table">
+                  <table class="template-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Full Form</th>
+                        <th scope="col">Contraction</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>I am</td>
+                        <td>I<span class="apostrophe">'</span>m</td>
+                      </tr>
+                      <tr>
+                        <td>You are</td>
+                        <td>You<span class="apostrophe">'</span>re</td>
+                      </tr>
+                      <tr>
+                        <td>He is</td>
+                        <td>He<span class="apostrophe">'</span>s</td>
+                      </tr>
+                      <tr>
+                        <td>She is</td>
+                        <td>She<span class="apostrophe">'</span>s</td>
+                      </tr>
+                      <tr>
+                        <td>It is</td>
+                        <td>It<span class="apostrophe">'</span>s</td>
+                      </tr>
+                      <tr>
+                        <td>We are</td>
+                        <td>We<span class="apostrophe">'</span>re</td>
+                      </tr>
+                      <tr>
+                        <td>They are</td>
+                        <td>They<span class="apostrophe">'</span>re</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="grammar-note">Contractions are very common in spoken English and informal written English.</p>
+              </div>
+              <ul class="contraction-pair-list">
+                <li>I am Daniel. / I<span class="apostrophe">'</span>m Daniel.</li>
+                <li>She is a project manager. / She<span class="apostrophe">'</span>s a project manager.</li>
+                <li>He is from Spain. / He<span class="apostrophe">'</span>s from Spain.</li>
+                <li>We are colleagues. / We<span class="apostrophe">'</span>re colleagues.</li>
+                <li>They are at GlobalTech. / They<span class="apostrophe">'</span>re at GlobalTech.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="15">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 15 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide grammar-slide grammar-sentences-slide" id="slide-grammar-building-sentences" data-slide aria-labelledby="slide-grammar-building-sentences-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <p class="slide-kicker">Grammar</p>
+          <h2 id="slide-grammar-building-sentences-title">Building Affirmative Sentences</h2>
+        </header>
+        <div class="slide-content grammar-content">
+          <article class="content-panel grammar-lesson-layout" aria-label="Building affirmative sentences">
+            <div class="grammar-main-stack">
+              <div class="grammar-structure-panel">Subject + Verb to Be + Complement</div>
+              <div class="grammar-term-grid">
+                <article class="grammar-card">
+                  <h3>Subject</h3>
+                  <p>The person, group, animal or thing.</p>
+                </article>
+                <article class="grammar-card">
+                  <h3>Verb to Be</h3>
+                  <p>Am, is or are.</p>
+                </article>
+                <article class="grammar-card">
+                  <h3>Complement</h3>
+                  <p>Information about the subject.</p>
+                </article>
+              </div>
+              <div class="grammar-tagged-examples" aria-label="Sentence structure examples">
+                <p>
+                  <span class="grammar-token grammar-token-subject"><small>Subject</small>I</span>
+                  <span class="grammar-token grammar-token-verb"><small>Verb</small>am</span>
+                  <span class="grammar-token grammar-token-complement"><small>Complement</small>Daniel</span>
+                </p>
+                <p>
+                  <span class="grammar-token grammar-token-subject"><small>Subject</small>Emma</span>
+                  <span class="grammar-token grammar-token-verb"><small>Verb</small>is</span>
+                  <span class="grammar-token grammar-token-complement"><small>Complement</small>a project manager</span>
+                </p>
+                <p>
+                  <span class="grammar-token grammar-token-subject"><small>Subject</small>Carlos</span>
+                  <span class="grammar-token grammar-token-verb"><small>Verb</small>is</span>
+                  <span class="grammar-token grammar-token-complement"><small>Complement</small>Spanish</span>
+                </p>
+                <p>
+                  <span class="grammar-token grammar-token-subject"><small>Subject</small>They</span>
+                  <span class="grammar-token grammar-token-verb"><small>Verb</small>are</span>
+                  <span class="grammar-token grammar-token-complement"><small>Complement</small>in the meeting room</span>
+                </p>
+              </div>
+              <ul class="grammar-example-list grammar-example-list-columns">
+                <li>I'm Daniel.</li>
+                <li>I'm Brazilian.</li>
+                <li>I'm a software developer.</li>
+                <li>Emma is a project manager.</li>
+                <li>Carlos is Spanish.</li>
+                <li>Mia is an intern.</li>
+                <li>We're colleagues.</li>
+                <li>They're in the meeting room.</li>
+                <li>It's an ID badge.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="16">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 16 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide vocabulary-practice-intro-slide grammar-practice-intro-slide" id="slide-grammar-practice" data-slide aria-labelledby="slide-grammar-practice-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <h2 id="slide-grammar-practice-title">Grammar Practice</h2>
+        </header>
+        <div class="slide-content vocabulary-practice-intro-content">
+          <article class="content-panel vocabulary-practice-intro-panel" aria-label="Grammar practice introduction">
+            <p>Practice the grammar from this lesson before moving on.</p>
+            <a class="media-button practice-open-button" href="workbook/grammar-practice.html" target="_blank" rel="noopener">Open Grammar Practice</a>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="17">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 17 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide grammar-slide grammar-negative-slide" id="slide-grammar-negative-sentences" data-slide aria-labelledby="slide-grammar-negative-sentences-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <p class="slide-kicker">Grammar</p>
+          <h2 id="slide-grammar-negative-sentences-title">The Verb to Be — Negative</h2>
+          <p class="grammar-subtitle">Add not after am, is or are.</p>
+        </header>
+        <div class="slide-content grammar-content">
+          <article class="content-panel grammar-lesson-layout" aria-label="Negative sentences with the verb to be">
+            <div class="grammar-main-stack">
+              <div class="grammar-structure-panel">Subject + Verb to Be + <span class="negative-highlight">Not</span> + Complement</div>
+              <div class="grammar-two-column">
+                <div class="responsive-table grammar-table" role="region" aria-label="Negative forms table">
+                  <table class="template-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Negative Form</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>I</td>
+                        <td>am <span class="negative-highlight">not</span></td>
+                      </tr>
+                      <tr>
+                        <td>You</td>
+                        <td>are <span class="negative-highlight">not</span></td>
+                      </tr>
+                      <tr>
+                        <td>He</td>
+                        <td>is <span class="negative-highlight">not</span></td>
+                      </tr>
+                      <tr>
+                        <td>She</td>
+                        <td>is <span class="negative-highlight">not</span></td>
+                      </tr>
+                      <tr>
+                        <td>It</td>
+                        <td>is <span class="negative-highlight">not</span></td>
+                      </tr>
+                      <tr>
+                        <td>We</td>
+                        <td>are <span class="negative-highlight">not</span></td>
+                      </tr>
+                      <tr>
+                        <td>They</td>
+                        <td>are <span class="negative-highlight">not</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="grammar-main-stack">
+                  <p class="grammar-note">Use <span class="negative-highlight">not</span> after am, is or are to make a negative sentence.</p>
+                  <ul class="grammar-example-list">
+                    <li>I am <span class="negative-highlight">not</span> a visitor.</li>
+                    <li>You are <span class="negative-highlight">not</span> late.</li>
+                    <li>He is <span class="negative-highlight">not</span> British.</li>
+                    <li>She is <span class="negative-highlight">not</span> an intern.</li>
+                    <li>It is <span class="negative-highlight">not</span> an office.</li>
+                    <li>We are <span class="negative-highlight">not</span> in the meeting room.</li>
+                    <li>They are <span class="negative-highlight">not</span> managers.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="18">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 18 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide grammar-slide grammar-negative-slide" id="slide-grammar-negative-contractions" data-slide aria-labelledby="slide-grammar-negative-contractions-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <p class="slide-kicker">Grammar</p>
+          <h2 id="slide-grammar-negative-contractions-title">Negative Contractions</h2>
+          <p class="grammar-subtitle">Short forms are common in spoken English.</p>
+        </header>
+        <div class="slide-content grammar-content">
+          <article class="content-panel grammar-lesson-layout" aria-label="Negative contractions with the verb to be">
+            <div class="grammar-main-stack">
+              <div class="grammar-two-column">
+                <div class="responsive-table grammar-table" role="region" aria-label="Negative contractions table">
+                  <table class="template-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Full Form</th>
+                        <th scope="col">Contraction</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>I am not</td>
+                        <td><span class="negative-highlight">I'm not</span></td>
+                      </tr>
+                      <tr>
+                        <td>You are not</td>
+                        <td>You <span class="negative-highlight">aren't</span></td>
+                      </tr>
+                      <tr>
+                        <td>He is not</td>
+                        <td>He <span class="negative-highlight">isn't</span></td>
+                      </tr>
+                      <tr>
+                        <td>She is not</td>
+                        <td>She <span class="negative-highlight">isn't</span></td>
+                      </tr>
+                      <tr>
+                        <td>It is not</td>
+                        <td>It <span class="negative-highlight">isn't</span></td>
+                      </tr>
+                      <tr>
+                        <td>We are not</td>
+                        <td>We <span class="negative-highlight">aren't</span></td>
+                      </tr>
+                      <tr>
+                        <td>They are not</td>
+                        <td>They <span class="negative-highlight">aren't</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="grammar-main-stack">
+                  <p class="grammar-note">There is no standard contraction <strong>amn't</strong>. Use <span class="negative-highlight">I'm not</span>.</p>
+                  <ul class="contraction-pair-list">
+                    <li>I am not an intern. / <span class="negative-highlight">I'm not</span> an intern.</li>
+                    <li>You are not a visitor. / You <span class="negative-highlight">aren't</span> a visitor.</li>
+                    <li>He is not American. / He <span class="negative-highlight">isn't</span> American.</li>
+                    <li>She is not in Sales. / She <span class="negative-highlight">isn't</span> in Sales.</li>
+                    <li>We are not late. / We <span class="negative-highlight">aren't</span> late.</li>
+                    <li>They are not in the office. / They <span class="negative-highlight">aren't</span> in the office.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="19">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 19 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide grammar-slide grammar-negative-slide" id="slide-grammar-using-negative" data-slide aria-labelledby="slide-grammar-using-negative-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <p class="slide-kicker">Grammar</p>
+          <h2 id="slide-grammar-using-negative-title">Using Negative Sentences</h2>
+          <p class="grammar-subtitle">Correcting information</p>
+        </header>
+        <div class="slide-content grammar-content">
+          <article class="content-panel grammar-lesson-layout" aria-label="Using negative sentences to correct information">
+            <div class="grammar-main-stack">
+              <div class="grammar-use-grid">
+                <article class="grammar-card">
+                  <h3>Name</h3>
+                  <ul class="grammar-example-list">
+                    <li>I'm Daniel.</li>
+                    <li><span class="negative-highlight">I'm not</span> Carlos.</li>
+                    <li>She's Emma.</li>
+                    <li>She <span class="negative-highlight">isn't</span> Sophie.</li>
+                  </ul>
+                </article>
+                <article class="grammar-card">
+                  <h3>Job</h3>
+                  <ul class="grammar-example-list">
+                    <li>Daniel is a software developer.</li>
+                    <li>He <span class="negative-highlight">isn't</span> a sales manager.</li>
+                    <li>Mia is an intern.</li>
+                    <li>She <span class="negative-highlight">isn't</span> a project manager.</li>
+                  </ul>
+                </article>
+                <article class="grammar-card">
+                  <h3>Nationality</h3>
+                  <ul class="grammar-example-list">
+                    <li>Carlos is Spanish.</li>
+                    <li>He <span class="negative-highlight">isn't</span> Brazilian.</li>
+                    <li>Emma is British.</li>
+                    <li>She <span class="negative-highlight">isn't</span> American.</li>
+                  </ul>
+                </article>
+                <article class="grammar-card">
+                  <h3>Workplace</h3>
+                  <ul class="grammar-example-list">
+                    <li>Sophie is in Human Resources.</li>
+                    <li>She <span class="negative-highlight">isn't</span> in Sales.</li>
+                    <li>Kenji is on the software team.</li>
+                    <li>He <span class="negative-highlight">isn't</span> at reception.</li>
+                    <li>We are at GlobalTech.</li>
+                    <li>We <span class="negative-highlight">aren't</span> in the meeting room.</li>
+                  </ul>
+                </article>
+              </div>
+              <div class="verb-reference-row" aria-label="Negative verb to be reference">
+                <p>I <span>am not / I'm not</span></p>
+                <p>He / She / It <span>is not / isn't</span></p>
+                <p>You / We / They <span>are not / aren't</span></p>
+              </div>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="20">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 20 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide vocabulary-practice-intro-slide grammar-practice-intro-slide grammar-practice-negative-intro-slide" id="slide-grammar-practice-negative" data-slide aria-labelledby="slide-grammar-practice-negative-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <h2 id="slide-grammar-practice-negative-title">Grammar Practice</h2>
+          <p class="grammar-subtitle">The Verb to Be — Negative</p>
+        </header>
+        <div class="slide-content vocabulary-practice-intro-content">
+          <article class="content-panel vocabulary-practice-intro-panel" aria-label="Grammar practice 2 introduction">
+            <p>Practice negative sentences with am not, isn't and aren't.</p>
+            <a class="media-button practice-open-button" href="workbook/grammar-practice-negative.html" target="_blank" rel="noopener">Open Grammar Practice</a>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="21">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 21 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide grammar-slide grammar-questions-slide" id="slide-grammar-yes-no-questions" data-slide aria-labelledby="slide-grammar-yes-no-questions-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <p class="slide-kicker">Grammar</p>
+          <h2 id="slide-grammar-yes-no-questions-title">Yes/No Questions and Short Answers</h2>
+          <p class="grammar-subtitle">Use yes or no, then repeat the verb.</p>
+        </header>
+        <div class="slide-content grammar-content">
+          <article class="content-panel grammar-lesson-layout" aria-label="Yes/no questions and short answers with the verb to be">
+            <div class="grammar-main-stack">
+              <div class="question-conversion-grid" aria-label="Affirmative sentence and question comparison">
+                <article class="question-conversion-card">
+                  <h3>Affirmative</h3>
+                  <p>You <span class="be-highlight">are</span> a visitor.</p>
+                </article>
+                <div class="question-arrow" aria-hidden="true">→</div>
+                <article class="question-conversion-card">
+                  <h3>Question</h3>
+                  <p><span class="be-highlight">Are</span> you a visitor?</p>
+                </article>
+              </div>
+              <div class="grammar-structure-panel">Verb to Be + Subject + Complement?</div>
+              <div class="yes-no-answer-grid">
+                <article class="grammar-card">
+                  <h3>Yes Answers</h3>
+                  <ul class="short-answer-examples">
+                    <li><span>Are you Brazilian?</span>Yes, I am.</li>
+                    <li><span>Is she a project manager?</span>Yes, she is.</li>
+                    <li><span>Are they colleagues?</span>Yes, they are.</li>
+                  </ul>
+                </article>
+                <article class="grammar-card">
+                  <h3>No Answers</h3>
+                  <ul class="short-answer-examples">
+                    <li><span>Are you Spanish?</span>No, I'm not.</li>
+                    <li><span>Is he an intern?</span>No, he isn't.</li>
+                    <li><span>Are we in Sales?</span>No, we aren't.</li>
+                  </ul>
+                </article>
+              </div>
+              <div class="yes-no-note-grid">
+                <article class="grammar-card">
+                  <h3>Use No</h3>
+                  <p><strong>No</strong> answers the question.</p>
+                  <p>Are you a visitor? <strong>No</strong>, I'm not.</p>
+                </article>
+                <article class="grammar-card">
+                  <h3>Use Not</h3>
+                  <p><strong>Not</strong> makes the verb negative.</p>
+                  <p>I am <strong>not</strong>. / She is <strong>not</strong>. / They are <strong>not</strong>.</p>
+                </article>
+              </div>
+              <p class="grammar-note">Do not answer only <strong>Yes</strong> or <strong>No</strong>. A short answer sounds more complete and natural.</p>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="22">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 22 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide grammar-slide grammar-questions-slide" id="slide-grammar-personal-work-questions" data-slide aria-labelledby="slide-grammar-personal-work-questions-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <p class="slide-kicker">Grammar</p>
+          <h2 id="slide-grammar-personal-work-questions-title">Personal and Work Questions</h2>
+          <p class="grammar-subtitle">Use what, where and which in workplace introductions.</p>
+        </header>
+        <div class="slide-content grammar-content">
+          <article class="content-panel grammar-lesson-layout" aria-label="Personal and work questions">
+            <div class="grammar-main-stack">
+              <div class="question-word-grid">
+                <article class="grammar-card">
+                  <h3>What</h3>
+                  <p>Use <strong>what</strong> for general information.</p>
+                  <ul class="grammar-example-list">
+                    <li>What&rsquo;s your name? My name is Daniel.</li>
+                    <li>What do you do? I&rsquo;m a software developer.</li>
+                  </ul>
+                </article>
+                <article class="grammar-card">
+                  <h3>Where</h3>
+                  <p>Use <strong>where</strong> for places.</p>
+                  <ul class="grammar-example-list">
+                    <li>Where are you from? I&rsquo;m from Brazil.</li>
+                    <li>Where do you work? I work at GlobalTech.</li>
+                  </ul>
+                </article>
+                <article class="grammar-card">
+                  <h3>Which</h3>
+                  <p>Use <strong>which</strong> when choosing from a group.</p>
+                  <ul class="grammar-example-list">
+                    <li>Which department are you in? I&rsquo;m in Sales.</li>
+                    <li>Which company do you work for? I work for GlobalTech.</li>
+                  </ul>
+                </article>
+              </div>
+              <article class="name-dialogue-card" aria-label="Short workplace introduction exchange">
+                <ul class="dialogue-mini">
+                  <li><span>A</span>What&rsquo;s your name?</li>
+                  <li><span>B</span>My name is Emma.</li>
+                  <li><span>A</span>What do you do?</li>
+                  <li><span>B</span>I&rsquo;m a project manager.</li>
+                  <li><span>A</span>Which department are you in?</li>
+                  <li><span>B</span>I&rsquo;m in the IT department.</li>
+                </ul>
+              </article>
+              <p class="grammar-note">What&rsquo;s is the contraction of What is. Learn &ldquo;What do you do?&rdquo; and &ldquo;Where do you work?&rdquo; as complete workplace questions now.</p>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="23">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 23 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide grammar-slide grammar-questions-slide" id="slide-grammar-question-review" data-slide aria-labelledby="slide-grammar-question-review-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <p class="slide-kicker">Grammar</p>
+          <h2 id="slide-grammar-question-review-title">Question Review</h2>
+          <p class="grammar-subtitle">Useful questions for meeting someone</p>
+        </header>
+        <div class="slide-content grammar-content">
+          <article class="content-panel grammar-lesson-layout" aria-label="Question review">
+            <div class="grammar-main-stack">
+              <div class="question-review-grid">
+                <article class="question-review-card">
+                  <h3>Name</h3>
+                  <ul class="question-review-list">
+                    <li>What&rsquo;s your name?</li>
+                    <li>My name is...</li>
+                  </ul>
+                </article>
+                <article class="question-review-card">
+                  <h3>Job</h3>
+                  <ul class="question-review-list">
+                    <li>What do you do?</li>
+                    <li>I&rsquo;m a...</li>
+                  </ul>
+                </article>
+                <article class="question-review-card">
+                  <h3>Company</h3>
+                  <ul class="question-review-list">
+                    <li>Where do you work?</li>
+                    <li>I work at...</li>
+                  </ul>
+                </article>
+                <article class="question-review-card">
+                  <h3>Country</h3>
+                  <ul class="question-review-list">
+                    <li>Where are you from?</li>
+                    <li>I&rsquo;m from...</li>
+                  </ul>
+                </article>
+                <article class="question-review-card">
+                  <h3>Nationality</h3>
+                  <ul class="question-review-list">
+                    <li>What&rsquo;s your nationality?</li>
+                    <li>I&rsquo;m...</li>
+                  </ul>
+                </article>
+                <article class="question-review-card question-review-card-wide">
+                  <h3>Yes/No</h3>
+                  <ul class="question-review-list">
+                    <li>Are you the new employee? Yes, I am. / No, I&rsquo;m not.</li>
+                    <li>Is she your manager? Yes, she is. / No, she isn&rsquo;t.</li>
+                  </ul>
+                </article>
+              </div>
+              <div class="question-pattern-grid">
+                <article class="question-pattern-card">
+                  <h3>Yes/No question</h3>
+                  <p>Am / Is / Are + Subject + Complement?</p>
+                </article>
+                <article class="question-pattern-card">
+                  <h3>Information question</h3>
+                  <p>Question word + complete question</p>
+                  <p>What's your name? / Where do you work?</p>
+                </article>
+              </div>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="24">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 24 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide vocabulary-practice-intro-slide grammar-practice-intro-slide grammar-practice-questions-intro-slide" id="slide-grammar-practice-questions" data-slide aria-labelledby="slide-grammar-practice-questions-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <h2 id="slide-grammar-practice-questions-title">Grammar Practice</h2>
+          <p class="grammar-subtitle">Questions with the Verb to Be</p>
+        </header>
+        <div class="slide-content vocabulary-practice-intro-content">
+          <article class="content-panel vocabulary-practice-intro-panel" aria-label="Grammar practice 3 introduction">
+            <p>Practice questions, short answers and useful expressions for meeting someone.</p>
+            <a class="media-button practice-open-button" href="workbook/grammar-practice-questions.html" target="_blank" rel="noopener">Open Grammar Practice</a>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="25">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 25 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide communication-slide communication-final-slide" id="slide-communication" data-slide aria-labelledby="slide-communication-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <p class="slide-kicker">Communication</p>
+          <h2 id="slide-communication-title">Communication</h2>
+          <p class="communication-subtitle">Meet a New Colleague</p>
+        </header>
+        <div class="slide-content communication-content">
+          <article class="content-panel communication-final-panel" aria-label="Final communication activity">
+            <div class="communication-activity-grid">
+              <article class="communication-card communication-situation-card" aria-labelledby="communication-situation-title">
+                <h3 id="communication-situation-title">Situation</h3>
+                <p>Imagine this situation:</p>
+                <p>Today is your first day at a new international company.</p>
+                <p>First, interview your partner.</p>
+                <p>Then, join another pair and introduce your partner to the other students.</p>
+              </article>
+
+              <article class="communication-card communication-step-card" aria-labelledby="communication-step-one-title">
+                <h3 id="communication-step-one-title">Step 1</h3>
+                <p><strong>Interview Your Partner</strong></p>
+                <p>Work in pairs.</p>
+                <p>Student A interviews Student B.</p>
+                <p>Then switch roles.</p>
+                <p>Ask and answer these questions:</p>
+                <ul class="communication-compact-list">
+                  <li>What's your name?</li>
+                  <li>What do you do?</li>
+                  <li>Where do you work?</li>
+                  <li>Which department are you in?</li>
+                  <li>Where are you from?</li>
+                  <li>What's your nationality?</li>
+                </ul>
+                <p>Take short notes about your partner.</p>
+              </article>
+
+              <article class="communication-card communication-step-card" aria-labelledby="communication-step-two-title">
+                <h3 id="communication-step-two-title">Step 2</h3>
+                <p><strong>Introduce Your Partner</strong></p>
+                <p>Join another pair.</p>
+                <p>Introduce your partner to the other two students.</p>
+                <p>Do not read your notes if possible.</p>
+                <p>Speak naturally.</p>
+              </article>
+
+              <article class="communication-card communication-language-card" aria-labelledby="communication-useful-language-title">
+                <h3 id="communication-useful-language-title">Useful Language</h3>
+                <div class="communication-language-grid">
+                  <div>
+                    <h4>Questions</h4>
+                    <ul class="communication-compact-list">
+                      <li>What's your name?</li>
+                      <li>What do you do?</li>
+                      <li>Where do you work?</li>
+                      <li>Which department are you in?</li>
+                      <li>Where are you from?</li>
+                      <li>What's your nationality?</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Answers</h4>
+                    <ul class="communication-compact-list">
+                      <li>My name is...</li>
+                      <li>I'm...</li>
+                      <li>I'm a...</li>
+                      <li>I work at...</li>
+                      <li>I'm in...</li>
+                      <li>I'm from...</li>
+                      <li>I'm...</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Introducing Someone</h4>
+                    <ul class="communication-compact-list">
+                      <li>This is...</li>
+                      <li>His name is...</li>
+                      <li>Her name is...</li>
+                      <li>He's...</li>
+                      <li>She's...</li>
+                      <li>He works at...</li>
+                      <li>She works at...</li>
+                      <li>He's from...</li>
+                      <li>She's from...</li>
+                      <li>Nice to meet you.</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+
+              <article class="communication-card communication-time-card" aria-labelledby="communication-time-title">
+                <h3 id="communication-time-title">Estimated Time</h3>
+                <p>12&ndash;15 minutes</p>
+              </article>
+            </div>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="26">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 26 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide listening-challenge-slide" id="slide-listening-challenge" data-slide aria-labelledby="slide-listening-challenge-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <p class="slide-kicker">Listening</p>
+          <h2 id="slide-listening-challenge-title">Listening Challenge</h2>
+          <p class="listening-slide-subtitle">Listen to five workplace conversations.</p>
+        </header>
+        <div class="slide-content listening-challenge-content">
+          <article class="content-panel listening-challenge-panel" aria-label="Listening Challenge introduction">
+            <p>Listen carefully and complete the activities. You do not need to understand every word. Focus on names, jobs, countries, companies and workplace information.</p>
+            <a class="media-button practice-open-button" href="workbook/listening-challenge.html" target="_blank" rel="noopener">Open Listening Challenge</a>
+            <p class="listening-challenge-note">You can listen to each conversation more than once.</p>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="27">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 27 / 28</p>
+        </footer>
+      </section>
+
+      <section class="slide vocabulary-practice-intro-slide homework-intro-slide" id="slide-homework" data-slide aria-labelledby="slide-homework-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <p class="slide-kicker">Homework</p>
+          <h2 id="slide-homework-title">Homework</h2>
+          <p class="practice-subtitle">Lesson 1 General Review</p>
+        </header>
+        <div class="slide-content vocabulary-practice-intro-content">
+          <article class="content-panel vocabulary-practice-intro-panel" aria-label="Homework introduction">
+            <p>Complete the final review independently before moving on to Lesson 2.</p>
+            <a class="media-button practice-open-button" href="workbook/homework.html" target="_blank" rel="noopener">Open Homework</a>
+            <p class="listening-challenge-note">Estimated time: 45&ndash;60 minutes.</p>
+          </article>
+        </div>
+        <footer class="slide-footer">
+          <div class="slide-progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="28" aria-valuenow="28">
+            <span data-progress-fill></span>
+          </div>
+          <p class="slide-count" data-slide-count>Slide 28 / 28</p>
+        </footer>
+      </section>
+    </main>
+  </div>
+  <script>
+    (function attachUtils(window) {
+      "use strict";
+    
+      var CourseTemplate = window.CourseTemplate || {};
+    
+      function queryAll(selector, root) {
+        return Array.prototype.slice.call((root || document).querySelectorAll(selector));
+      }
+    
+      function query(selector, root) {
+        return (root || document).querySelector(selector);
+      }
+    
+      function clamp(value, min, max) {
+        return Math.min(Math.max(value, min), max);
+      }
+    
+      function getTitle(slide) {
+        var heading = slide.querySelector("h1, h2, h3");
+        return heading ? heading.textContent.trim() : "Untitled slide";
+      }
+    
+      function isTypingTarget(element) {
+        if (!element) {
+          return false;
+        }
+    
+        var tagName = element.tagName ? element.tagName.toLowerCase() : "";
+        return tagName === "input" ||
+          tagName === "textarea" ||
+          tagName === "select" ||
+          element.isContentEditable;
+      }
+    
+      CourseTemplate.Utils = {
+        clamp: clamp,
+        getTitle: getTitle,
+        isTypingTarget: isTypingTarget,
+        query: query,
+        queryAll: queryAll
+      };
+    
+      window.CourseTemplate = CourseTemplate;
+    })(window);
+  </script>
+  <script>
+    (function attachSlides(window) {
+      "use strict";
+    
+      var CourseTemplate = window.CourseTemplate || {};
+      var Utils = CourseTemplate.Utils;
+    
+      function createSlideStore(root) {
+        var slides = Utils.queryAll("[data-slide]", root);
+        var activeIndex = slides.findIndex(function findActive(slide) {
+          return slide.classList.contains("is-active");
+        });
+        var hashIndex = getIndexFromHash();
+        var currentIndex = hashIndex !== null ? hashIndex : activeIndex;
+    
+        if (currentIndex < 0) {
+          currentIndex = 0;
+        }
+    
+        function getIndexFromHash() {
+          var raw = window.location.hash.slice(1);
+          var parsed = Number.parseInt(raw, 10);
+    
+          if (!Number.isFinite(parsed)) {
+            return null;
+          }
+    
+          return Utils.clamp(parsed - 1, 0, slides.length - 1);
+        }
+    
+        function syncHash(index) {
+          var nextHash = String(index + 1);
+    
+          if (window.location.hash.slice(1) !== nextHash) {
+            window.location.hash = nextHash;
+          }
+        }
+    
+        function getTotal() {
+          return slides.length;
+        }
+    
+        function getCurrentIndex() {
+          return currentIndex;
+        }
+    
+        function getCurrentSlide() {
+          return slides[currentIndex];
+        }
+    
+        function getSlideMeta(index) {
+          var slide = slides[index];
+          return {
+            index: index,
+            number: index + 1,
+            total: getTotal(),
+            title: Utils.getTitle(slide),
+            slide: slide
+          };
+        }
+    
+        function announceChange() {
+          root.dispatchEvent(new CustomEvent("slidechange", {
+            detail: getSlideMeta(currentIndex)
+          }));
+        }
+    
+        function setActive(index, options) {
+          var nextIndex = Utils.clamp(index, 0, slides.length - 1);
+          var shouldFocus = options && options.focus;
+          var shouldUpdateHash = !(options && options.updateHash === false);
+    
+          slides.forEach(function updateSlide(slide, slideIndex) {
+            var isActive = slideIndex === nextIndex;
+            slide.classList.toggle("is-active", isActive);
+            slide.hidden = !isActive;
+            slide.setAttribute("aria-hidden", String(!isActive));
+          });
+    
+          currentIndex = nextIndex;
+    
+          if (shouldUpdateHash) {
+            syncHash(currentIndex);
+          }
+    
+          if (shouldFocus && slides[currentIndex]) {
+            slides[currentIndex].focus({ preventScroll: true });
+          }
+    
+          announceChange();
+        }
+    
+        function next(options) {
+          setActive(currentIndex + 1, options);
+        }
+    
+        function previous(options) {
+          setActive(currentIndex - 1, options);
+        }
+    
+        slides.forEach(function initializeSlide(slide, index) {
+          var isActive = index === currentIndex;
+          slide.hidden = !isActive;
+          slide.setAttribute("aria-hidden", String(!isActive));
+        });
+    
+        window.addEventListener("hashchange", function onHashChange() {
+          var nextIndex = getIndexFromHash();
+    
+          if (nextIndex === null || nextIndex === currentIndex) {
+            return;
+          }
+    
+          setActive(nextIndex, { focus: true, updateHash: false });
+        });
+    
+        return {
+          getCurrentIndex: getCurrentIndex,
+          getCurrentSlide: getCurrentSlide,
+          getSlideMeta: getSlideMeta,
+          getTotal: getTotal,
+          goTo: setActive,
+          next: next,
+          previous: previous,
+          slides: slides
+        };
+      }
+    
+      CourseTemplate.Slides = {
+        createSlideStore: createSlideStore
+      };
+    
+      window.CourseTemplate = CourseTemplate;
+    })(window);
+  </script>
+  <script>
+    (function attachProgress(window) {
+      "use strict";
+    
+      var CourseTemplate = window.CourseTemplate || {};
+      var Utils = CourseTemplate.Utils;
+    
+      function createProgress(root, slideStore) {
+        var fills = Utils.queryAll("[data-progress-fill]", root);
+        var counters = Utils.queryAll("[data-slide-count]", root);
+        var bars = Utils.queryAll(".slide-progress", root);
+    
+        function update(meta) {
+          var percent = meta.total > 0 ? (meta.number / meta.total) * 100 : 0;
+          var label = "Slide " + meta.number + " / " + meta.total;
+    
+          fills.forEach(function updateFill(fill) {
+            fill.style.width = percent + "%";
+          });
+    
+          counters.forEach(function updateCounter(counter) {
+            counter.textContent = label;
+          });
+    
+          bars.forEach(function updateBar(bar) {
+            bar.setAttribute("aria-valuemax", String(meta.total));
+            bar.setAttribute("aria-valuenow", String(meta.number));
+            bar.setAttribute("aria-valuetext", label);
+          });
+        }
+    
+        root.addEventListener("slidechange", function onSlideChange(event) {
+          update(event.detail);
+        });
+    
+        update(slideStore.getSlideMeta(slideStore.getCurrentIndex()));
+    
+        return {
+          update: update
+        };
+      }
+    
+      CourseTemplate.Progress = {
+        createProgress: createProgress
+      };
+    
+      window.CourseTemplate = CourseTemplate;
+    })(window);
+  </script>
+  <script>
+    (function attachNavigation(window) {
+      "use strict";
+    
+      var CourseTemplate = window.CourseTemplate || {};
+      var Utils = CourseTemplate.Utils;
+    
+      function createNavigation(root, slideStore) {
+        var previousButton = Utils.query("[data-action='previous']");
+        var nextButton = Utils.query("[data-action='next']");
+        var select = Utils.query("[data-slide-select]");
+    
+        function populateSelect() {
+          if (!select) {
+            return;
+          }
+    
+          slideStore.slides.forEach(function addOption(slide, index) {
+            var option = document.createElement("option");
+            option.value = String(index);
+            option.textContent = index + 1 + ". " + Utils.getTitle(slide);
+            select.appendChild(option);
+          });
+        }
+    
+        function updateControls(meta) {
+          if (previousButton) {
+            previousButton.disabled = meta.index === 0;
+          }
+    
+          if (nextButton) {
+            nextButton.disabled = meta.index === meta.total - 1;
+          }
+    
+          if (select) {
+            select.value = String(meta.index);
+          }
+        }
+    
+        if (previousButton) {
+          previousButton.addEventListener("click", function goPrevious() {
+            slideStore.previous({ focus: true });
+          });
+        }
+    
+        if (nextButton) {
+          nextButton.addEventListener("click", function goNext() {
+            slideStore.next({ focus: true });
+          });
+        }
+    
+        if (select) {
+          select.addEventListener("change", function goSelected(event) {
+            slideStore.goTo(Number(event.target.value), { focus: true });
+          });
+        }
+    
+        var clickTarget = Utils.query("#lesson-deck", root) || root;
+    
+        clickTarget.addEventListener("click", function onDeckClick(event) {
+          if (Utils.isTypingTarget(event.target) || event.target.closest("a, button, select, textarea, input")) {
+            return;
+          }
+    
+          var viewportMidpoint = window.innerWidth / 2;
+    
+          if (event.clientX < viewportMidpoint) {
+            slideStore.previous({ focus: true });
+            return;
+          }
+    
+          slideStore.next({ focus: true });
+        });
+    
+        root.addEventListener("slidechange", function onSlideChange(event) {
+          updateControls(event.detail);
+        });
+    
+        populateSelect();
+        updateControls(slideStore.getSlideMeta(slideStore.getCurrentIndex()));
+    
+        return {
+          updateControls: updateControls
+        };
+      }
+    
+      CourseTemplate.Navigation = {
+        createNavigation: createNavigation
+      };
+    
+      window.CourseTemplate = CourseTemplate;
+    })(window);
+  </script>
+  <script>
+    (function attachKeyboard(window) {
+      "use strict";
+    
+      var CourseTemplate = window.CourseTemplate || {};
+      var Utils = CourseTemplate.Utils;
+    
+      function registerKeyboardNavigation(target, slideStore) {
+        target.addEventListener("keydown", function onKeyDown(event) {
+          if (Utils.isTypingTarget(event.target) || event.altKey || event.ctrlKey || event.metaKey) {
+            return;
+          }
+    
+          if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
+            event.preventDefault();
+            slideStore.next({ focus: true });
+          }
+    
+          if (event.key === "ArrowLeft" || event.key === "PageUp" || event.key === "Backspace") {
+            event.preventDefault();
+            slideStore.previous({ focus: true });
+          }
+    
+          if (event.key === "Home") {
+            event.preventDefault();
+            slideStore.goTo(0, { focus: true });
+          }
+    
+          if (event.key === "End") {
+            event.preventDefault();
+            slideStore.goTo(slideStore.getTotal() - 1, { focus: true });
+          }
+        });
+      }
+    
+      CourseTemplate.Keyboard = {
+        register: registerKeyboardNavigation
+      };
+    
+      window.CourseTemplate = CourseTemplate;
+    })(window);
+  </script>
+  <script>
+    (function attachUIHelpers(window) {
+      "use strict";
+    
+      var CourseTemplate = window.CourseTemplate || {};
+      var Utils = CourseTemplate.Utils;
+    
+      function preparePlaceholders(root) {
+        var slides = Utils.queryAll("[data-slide]", root);
+    
+        slides.forEach(function markSlide(slide) {
+          var placeholders = Utils.queryAll(
+            ".placeholder-line, .placeholder-card, .info-box, .grammar-box, .exercise-box, .activity-box, .media-placeholder, .audio-player-placeholder",
+            slide
+          );
+    
+          slide.dataset.placeholderCount = String(placeholders.length);
+        });
+      }
+    
+      function createFontSizeControl(root) {
+        var storageKey = "english-course-font-size";
+        var options = [
+          { value: "small", label: "-A", ariaLabel: "Diminuir tamanho da fonte dos slides" },
+          { value: "normal", label: "A", ariaLabel: "Usar tamanho normal da fonte dos slides" },
+          { value: "large", label: "A+", ariaLabel: "Aumentar tamanho da fonte dos slides" }
+        ];
+        var slides = Utils.queryAll("[data-slide]", root);
+        var buttons = [];
+    
+        function getSavedSize() {
+          try {
+            return window.localStorage.getItem(storageKey);
+          } catch (error) {
+            return null;
+          }
+        }
+    
+        function saveSize(size) {
+          try {
+            window.localStorage.setItem(storageKey, size);
+          } catch (error) {
+            return;
+          }
+        }
+    
+        function applySize(size) {
+          var selectedSize = options.some(function hasOption(option) {
+            return option.value === size;
+          }) ? size : "normal";
+    
+          root.setAttribute("data-font-size", selectedSize);
+    
+          buttons.forEach(function updateButton(button) {
+            button.setAttribute("aria-pressed", String(button.dataset.fontSizeOption === selectedSize));
+          });
+    
+          saveSize(selectedSize);
+        }
+    
+        slides.forEach(function addControl(slide) {
+          var control = document.createElement("div");
+          control.className = "slide-font-size-control";
+          control.setAttribute("role", "group");
+          control.setAttribute("aria-label", "Tamanho da fonte dos slides");
+    
+          options.forEach(function addButton(option) {
+            var button = document.createElement("button");
+            button.className = "slide-font-size-button";
+            button.type = "button";
+            button.textContent = option.label;
+            button.dataset.fontSizeOption = option.value;
+            button.setAttribute("aria-label", option.ariaLabel);
+            button.addEventListener("click", function onClick() {
+              applySize(option.value);
+            });
+    
+            buttons.push(button);
+            control.appendChild(button);
+          });
+    
+          slide.appendChild(control);
+        });
+    
+        applySize(getSavedSize() || "normal");
+    
+        return {
+          applySize: applySize
+        };
+      }
+    
+      CourseTemplate.UI = {
+        createFontSizeControl: createFontSizeControl,
+        prepare: preparePlaceholders
+      };
+    
+      window.CourseTemplate = CourseTemplate;
+    })(window);
+  </script>
+  <script>
+    (function bootCourseTemplate(window, document) {
+      "use strict";
+    
+      document.addEventListener("DOMContentLoaded", function onReady() {
+        var CourseTemplate = window.CourseTemplate;
+        var root = document.querySelector("[data-course-app]");
+    
+        if (!root || !CourseTemplate) {
+          return;
+        }
+    
+        var slideStore = CourseTemplate.Slides.createSlideStore(root);
+    
+        CourseTemplate.UI.prepare(root);
+        CourseTemplate.UI.createFontSizeControl(root);
+        CourseTemplate.Progress.createProgress(root, slideStore);
+        CourseTemplate.Navigation.createNavigation(root, slideStore);
+        CourseTemplate.Keyboard.register(document, slideStore);
+    
+        slideStore.goTo(slideStore.getCurrentIndex());
+      });
+    })(window, document);
+  </script>
+</body>
+</html>

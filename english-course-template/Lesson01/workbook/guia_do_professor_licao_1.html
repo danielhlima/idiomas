@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Guide - Lesson 1</title>
+  <style>
+    :root {
+      --bg: #f4fbfa;
+      --panel: #ffffff;
+      --ink: #172126;
+      --muted: #59656f;
+      --brand: #007f78;
+      --brand-dark: #00645f;
+      --line: #d7e2e5;
+      --soft: #e9f7f5;
+      --warn: #fff4da;
+      --shadow: 0 16px 45px rgba(22, 39, 46, 0.12);
+      --radius: 14px;
+      --font-scale: 1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(0, 127, 120, 0.13), rgba(255, 255, 255, 0.9) 22rem),
+        var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      font-size: calc(18px * var(--font-scale));
+      line-height: 1.55;
+    }
+
+    button,
+    select {
+      font: inherit;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1rem;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      min-width: 0;
+    }
+
+    .brand strong {
+      display: block;
+      color: var(--brand-dark);
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .brand span {
+      display: block;
+      overflow: hidden;
+      font-size: 1rem;
+      font-weight: 750;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      justify-content: flex-end;
+    }
+
+    .controls button,
+    .controls select {
+      min-height: 2.3rem;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel);
+      color: var(--ink);
+      font-weight: 700;
+      padding: 0.45rem 0.65rem;
+    }
+
+    .controls button.primary {
+      background: var(--brand);
+      color: #fff;
+      border-color: var(--brand);
+    }
+
+    .controls button:focus-visible,
+    .controls select:focus-visible,
+    .jump-link:focus-visible {
+      outline: 3px solid rgba(0, 127, 120, 0.32);
+      outline-offset: 2px;
+    }
+
+    main {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    .guide-slide {
+      display: none;
+      min-height: calc(100vh - 9rem);
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(1.1rem, 2.5vw, 2rem);
+    }
+
+    .guide-slide.active {
+      display: block;
+    }
+
+    .slide-head {
+      display: grid;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .slide-number {
+      color: var(--brand-dark);
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      line-height: 1.02;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--brand-dark);
+      font-size: clamp(1.35rem, 2.4vw, 2.1rem);
+    }
+
+    h3 {
+      margin: 0 0 0.55rem;
+      color: var(--brand-dark);
+      font-size: 1.05rem;
+    }
+
+    .context {
+      color: var(--muted);
+      font-size: 1.02rem;
+      font-weight: 650;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+
+    .card.focus {
+      background: var(--soft);
+      border-color: rgba(0, 127, 120, 0.28);
+    }
+
+    .card.warning {
+      background: var(--warn);
+      border-color: #f0d99e;
+    }
+
+    ul,
+    ol {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    li + li {
+      margin-top: 0.35rem;
+    }
+
+    .script {
+      margin: 0.25rem 0 0;
+      padding: 0.85rem;
+      border-left: 4px solid var(--brand);
+      background: #f8fffe;
+      color: #253238;
+      font-style: italic;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2rem;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--brand-dark);
+      font-size: 0.9rem;
+      font-weight: 800;
+      padding: 0.35rem 0.75rem;
+    }
+
+    .footer {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .progress {
+      overflow: hidden;
+      width: min(420px, 48vw);
+      height: 0.55rem;
+      border-radius: 999px;
+      background: #dfe8eb;
+    }
+
+    .progress span {
+      display: block;
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--brand), #d6633f);
+      transition: width 160ms ease;
+    }
+
+    .jump-link {
+      color: var(--brand-dark);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    @media (max-width: 820px) {
+      .topbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .controls {
+        justify-content: flex-start;
+      }
+
+      .controls select {
+        width: 100%;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .guide-slide {
+        min-height: calc(100vh - 13rem);
+      }
+
+      .footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .progress {
+        width: 100%;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        font-size: 12pt;
+      }
+
+      .topbar,
+      .footer {
+        display: none;
+      }
+
+      main {
+        width: 100%;
+        padding: 0;
+      }
+
+      .guide-slide {
+        display: block !important;
+        min-height: auto;
+        margin: 0 0 1rem;
+        break-inside: avoid;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <strong>Teacher Guide</strong>
+        <span>Lesson 1 - Nice to Meet You</span>
+      </div>
+      <div class="controls" aria-label="Guide controls">
+        <button type="button" data-prev>Previous</button>
+        <button class="primary" type="button" data-next>Next</button>
+        <select id="slideSelect" aria-label="Go to slide"></select>
+        <button type="button" data-font="-1">-A</button>
+        <button type="button" data-font="0">A</button>
+        <button type="button" data-font="1">A+</button>
+      </div>
+    </header>
+
+    <main id="slides" aria-live="polite">
+      <section class="guide-slide active" data-title="Cover">
+        <div class="slide-head">
+          <div class="slide-number">Slide 1 of 28</div>
+          <h1>Cover</h1>
+          <p class="context">On the classroom screen: English Course, Lesson 1, Introductions.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Set the scene for the class: first lesson, first meeting, international and professional context.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Greet the class in English: "Good morning" or "Good evening".</li>
+              <li>Show the image and ask what they notice before explaining any content.</li>
+              <li>Explain that the whole lesson simulates a first day at an international company.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Suggested Script</h3>
+            <p class="script">"Today we start Lesson 1. The situation is simple: first day at an international company. You will meet people, say your name, your job and where you are from."</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Do not introduce grammar yet. The initial goal is confidence and context, not accuracy.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 2 min</span><span class="pill">Mode: whole class</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="What You'll Learn">
+        <div class="slide-head">
+          <div class="slide-number">Slide 2 of 28</div>
+          <h1>What You'll Learn</h1>
+          <p class="context">On the classroom screen: objectives in cards.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Show the lesson path and reduce anxiety: students will know exactly what they will be able to do.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Read each card aloud naturally.</li>
+              <li>Ask for choral repetition only for the simplest example sentences.</li>
+              <li>Connect each objective to a real workplace situation.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Quick Questions</h3>
+            <ul>
+              <li>"Which objective is easy for you?"</li>
+              <li>"Which objective is new?"</li>
+              <li>"Do you use English at work?"</li>
+            </ul>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Do not turn this slide into a grammar lesson. It is a learning promise.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 3 min</span><span class="pill">Mode: teacher + class</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Warm-up">
+        <div class="slide-head">
+          <div class="slide-number">Slide 3 of 28</div>
+          <h1>Warm-up</h1>
+          <p class="context">On the classroom screen: an image of people meeting and observation questions.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Activate prior knowledge and get students speaking even with limited English.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ol>
+              <li>Give students 30 seconds to observe the image silently.</li>
+              <li>Ask the questions one by one.</li>
+              <li>Accept short answers: "office", "six people", "happy", "meeting".</li>
+              <li>Reformulate answers in correct English without interrupting too much.</li>
+            </ol>
+          </article>
+          <article class="card">
+            <h3>Light Correction</h3>
+            <p>Student: "They in office." Teacher: "Good. They are in an office."</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>This slide says there are no right or wrong answers. Keep the atmosphere safe.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 5 min</span><span class="pill">Mode: whole class</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Greetings">
+        <div class="slide-head">
+          <div class="slide-number">Slide 4 of 28</div>
+          <h1>Greetings</h1>
+          <p class="context">On the classroom screen: hello, goodbye and useful expressions.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Present basic communicative language for greetings and farewells.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Model each expression with natural intonation.</li>
+              <li>Ask for group repetition and then pair repetition.</li>
+              <li>Highlight context differences: time of day, first meeting, leaving.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Micro-Practice</h3>
+            <p>Say situations and ask for quick responses: "8 a.m.", "first meeting", "leaving work".</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Do not explain pronunciation technically. Use modeling and short repetition.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 6 min</span><span class="pill">Mode: repetition + pairs</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Choose the Best Expression">
+        <div class="slide-head">
+          <div class="slide-number">Slide 5 of 28</div>
+          <h1>Choose the Best Expression</h1>
+          <p class="context">On the classroom screen: situations with three options each.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Consolidate the choice of appropriate expressions in workplace contexts.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Read the situation, give students 5 seconds and ask for a finger vote: 1, 2 or 3.</li>
+              <li>Then ask one student to say the full expression.</li>
+              <li>Repeat the correct expression with the class.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Pace</h3>
+            <p>Keep it quick. This is an initial fluency exercise, not a long discussion.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>"Good night" is not a common greeting in this context; if it comes up, explain that it is usually a farewell before going to sleep.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 4 min</span><span class="pill">Mode: whole class</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Introducing Yourself">
+        <div class="slide-head">
+          <div class="slide-number">Slide 6 of 28</div>
+          <h1>Introducing Yourself</h1>
+          <p class="context">On the classroom screen: expressions for name, job, company and origin.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Give students a ready-to-use model for a professional self-introduction.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Read the cards in sequence as if it were a real introduction.</li>
+              <li>Ask for line-by-line repetition.</li>
+              <li>Replace Daniel with your own name to model personalization.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Quick Practice</h3>
+            <p>Ask students to choose 3 sentences to say about themselves. Do not require all of them yet.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Do not explain the verb to be yet. Use the sentences as communicative chunks.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 6 min</span><span class="pill">Mode: individual + pairs</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Introducing Yourself and Someone">
+        <div class="slide-head">
+          <div class="slide-number">Slide 7 of 28</div>
+          <h1>Introducing Yourself and Someone</h1>
+          <p class="context">On the classroom screen: complete introduction image and prompts for introducing yourself and a colleague.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Bring two simple skills together in one oral practice: talking about yourself and introducing another person.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ol>
+              <li>Model it yourself: "Hello, I'm Daniel. I'm a teacher. I'm from Brazil."</li>
+              <li>Then point to a volunteer and model: "This is Ana. She's a colleague. She's from Brazil."</li>
+              <li>Put students in pairs. Each student gives their own introduction first.</li>
+              <li>Then join two pairs. Each student introduces their partner to the other pair.</li>
+            </ol>
+          </article>
+          <article class="card">
+            <h3>Tablet Model</h3>
+            <p class="script">"First say: I'm... Then say: This is... Use he for a man and she for a woman. Keep it short."</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Do not turn this into a grammar lesson. If there is a he/she error, simply reformulate correctly and keep fluency moving.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 8 min</span><span class="pill">Mode: pairs + groups of 4</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Jobs">
+        <div class="slide-head">
+          <div class="slide-number">Slide 8 of 28</div>
+          <h1>Jobs</h1>
+          <p class="context">On the classroom screen: six jobs plus example questions and answers with workplace prepositions.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Present essential job vocabulary and show the correct prepositions for common workplace answers.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Read each job and ask for repetition.</li>
+              <li>Ask who knows someone with that job.</li>
+              <li>Connect the words to sentences: "I'm a..." without explaining articles in detail.</li>
+              <li>Use the examples to highlight: work as + job, work at + company, in + department.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Quick Activity</h3>
+            <p>Ask one question and point to the preposition: "Where do you work?" -> "I work at GlobalTech." Then students create one answer with as, at or in.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Avoid long lists of extra jobs. Keep the focus on the lesson vocabulary and on the three useful patterns: as + job, at + company, in + department.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 6 min</span><span class="pill">Mode: whole class</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Countries & Nationalities">
+        <div class="slide-head">
+          <div class="slide-number">Slide 9 of 28</div>
+          <h1>Countries & Nationalities</h1>
+          <p class="context">On the classroom screen: country -> nationality pairs, capitalization note and example questions.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Differentiate country and nationality for professional introductions and reinforce that nationalities use capital letters in English.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Model: "I'm from Brazil. I'm Brazilian."</li>
+              <li>Ask the class to repeat in pairs: country, nationality.</li>
+              <li>Ask quick prompts: "France?" The class answers "French".</li>
+              <li>Point to the examples and ask: "Country or nationality?" before students answer.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Key Point</h3>
+            <p>Country answers "Where are you from?". Nationality answers "What's your nationality?". In English: Brazilian, British, Spanish, French, Italian, Japanese and American start with capital letters.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Do not use flags or stereotypes. Keep the focus linguistic.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 6 min</span><span class="pill">Mode: quick drilling</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="At the Office">
+        <div class="slide-head">
+          <div class="slide-number">Slide 10 of 28</div>
+          <h1>At the Office</h1>
+          <p class="context">On the classroom screen: office vocabulary grouped by simple categories.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Prepare the office words students will need for the next practice activity.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Read the words once with the class.</li>
+              <li>Use the cards below to group the words: places, people and work words.</li>
+              <li>Ask quick recognition questions: "Place or person?" / "Meeting room or reception?"</li>
+              <li>Do not add new verbs or long example sentences here.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Practical Check</h3>
+            <p>Point to a word and ask students to say the category: place, person or work word.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Keep this slide as vocabulary recognition only. The practice activity will recycle the key words.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 5 min</span><span class="pill">Mode: whole class</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Meet the Team">
+        <div class="slide-head">
+          <div class="slide-number">Slide 11 of 28</div>
+          <h1>Meet the Team</h1>
+          <p class="context">On the classroom screen: eight characters with name, job and nationality.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Establish recurring characters and create material for future questions.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Introduce each character in one sentence: "This is Daniel. He's a Software Developer. He's Brazilian."</li>
+              <li>Then ask: "Who is British?", "Who is an intern?"</li>
+              <li>Ask students to choose one character and introduce them.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Practice</h3>
+            <p>Student A asks "Who is she/he?". Student B answers with name and job.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Do not test prior knowledge of the characters. Everything should be visible or contextualized.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 8 min</span><span class="pill">Mode: whole class + pairs</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Vocabulary Practice">
+        <div class="slide-head">
+          <div class="slide-number">Slide 12 of 28</div>
+          <h1>Vocabulary Practice</h1>
+          <p class="context">On the classroom screen: button to open external practice.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Consolidate vocabulary before moving into grammar.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Explain that this is a separate interactive practice activity.</li>
+              <li>If teaching in person with a projector, solve a few questions together.</li>
+              <li>If each student has a device, ask for individual work and circulate around the room.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Before Opening</h3>
+            <p>Tell students that mistakes are part of review and that the score is meant to guide study.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Do not spend too much time here. If the class is running late, leave part of it for autonomous practice.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 8-12 min</span><span class="pill">Mode: guided practice</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Personal Pronouns">
+        <div class="slide-head">
+          <div class="slide-number">Slide 13 of 28</div>
+          <h1>Personal Pronouns</h1>
+          <p class="context">On the classroom screen: I, you, he, she, it, we, they table.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Show that English sentences usually need an explicit subject.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Use students' names and character names to replace them with pronouns.</li>
+              <li>Show the contrast: "Am a developer" is incorrect; "I am a developer" is correct.</li>
+              <li>Ask for examples: "Daniel" -> "he"; "Emma" -> "she"; "Daniel and Emma" -> "they".</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Key Point</h3>
+            <p>In Portuguese, we often omit the subject; in A1 English, we will always use the subject.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Do not complicate "it" with exceptions. Use "ID badge", "office", "company".</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 8 min</span><span class="pill">Mode: explanation + check</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="The Verb to Be">
+        <div class="slide-head">
+          <div class="slide-number">Slide 14 of 28</div>
+          <h1>The Verb to Be</h1>
+          <p class="context">On the classroom screen: am, is, are with subjects.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Teach the affirmative form of the verb to be for identity, job, nationality and location.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ol>
+              <li>Present it as a table with three families: I am; he/she/it is; you/we/they are.</li>
+              <li>Say that the verb changes according to the person, but keep the explanation short.</li>
+              <li>Do echo repetition with the class: "I am", "She is", "They are".</li>
+              <li>Then complete identity sentences: "I am Daniel", "She is Emma", "They are colleagues".</li>
+              <li>Close by returning to the professional context: name, job, nationality, company.</li>
+            </ol>
+          </article>
+          <article class="card">
+            <h3>Check</h3>
+            <p>Do call and response: you say "I", the class says "am"; you say "Emma", the class says "is"; you say "Daniel and Emma", the class says "are". Then ask for a complete sentence with each one.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Do not introduce questions or negatives yet; they will come later.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 8 min</span><span class="pill">Mode: explanation + drilling</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Full Forms and Contractions">
+        <div class="slide-head">
+          <div class="slide-number">Slide 15 of 28</div>
+          <h1>Full Forms and Contractions</h1>
+          <p class="context">On the classroom screen: I am/I'm, you are/you're, etc.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Help students recognize full forms and contractions as equivalent.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Read the full form first, then the contraction.</li>
+              <li>Explain that contractions sound more natural in speech.</li>
+              <li>Ask for oral transformation: "I am" -> "I'm"; "They are" -> "They're".</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Quick Practice</h3>
+            <p>Show a full sentence and ask for the contracted version; then do the opposite.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Do not treat contractions as too informal. In professional conversations, they are natural.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 7 min</span><span class="pill">Mode: oral transformation</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Building Affirmative Sentences">
+        <div class="slide-head">
+          <div class="slide-number">Slide 16 of 28</div>
+          <h1>Building Affirmative Sentences</h1>
+          <p class="context">On the classroom screen: Subject + Verb to Be + Complement structure.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Organize the basic order of affirmative sentences in English.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Write in the air or on the board: Subject | be | complement.</li>
+              <li>Use examples from the screen and ask the class to identify each part.</li>
+              <li>Do oral sentence building: "Mia / project manager" -> "Mia is a project manager."</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Check</h3>
+            <p>Ask: "What is the subject?", "What is the verb?", "What is the complement?"</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Do not overload students with grammar terms. Use them as a tool, not as the goal.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 7 min</span><span class="pill">Mode: guided analysis</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Grammar Practice">
+        <div class="slide-head">
+          <div class="slide-number">Slide 17 of 28</div>
+          <h1>Grammar Practice</h1>
+          <p class="context">On the classroom screen: button to open external affirmative grammar practice.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Practice pronouns, am/is/are, contractions and sentence structure.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Open the practice and solve the first items with the class.</li>
+              <li>Then let students try individually or in pairs.</li>
+              <li>When correcting, ask "Why am/is/are?" to reinforce the rule.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Strategy</h3>
+            <p>If the class is tired, select key items and leave the rest as review.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Do not move on to negatives until am/is/are feels reasonably stable.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 10-15 min</span><span class="pill">Mode: external practice</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="The Verb to Be - Negative">
+        <div class="slide-head">
+          <div class="slide-number">Slide 18 of 28</div>
+          <h1>The Verb to Be - Negative</h1>
+          <p class="context">On the classroom screen: Subject + be + not + complement structure.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Teach how to make information negative with am not, is not and are not.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Start with contrast: "I am a teacher" / "I am not a student".</li>
+              <li>Visually highlight that "not" comes after the verb to be.</li>
+              <li>Use examples with jobs and nationalities.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Check</h3>
+            <p>Say an affirmative sentence and ask for the negative version.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Do not introduce "don't" here. For this lesson, negatives are with the verb to be.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 8 min</span><span class="pill">Mode: guided explanation</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Negative Contractions">
+        <div class="slide-head">
+          <div class="slide-number">Slide 19 of 28</div>
+          <h1>Negative Contractions</h1>
+          <p class="context">On the classroom screen: is not/isn't, are not/aren't, I'm not.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Show natural negative forms in speech and everyday writing.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Show that "am not" becomes "I'm not", not "amn't".</li>
+              <li>Do transformation: "She is not" -> "She isn't".</li>
+              <li>Ask for repetition with natural rhythm.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Quick Practice</h3>
+            <p>The teacher says the full form; the class answers with the contraction.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Accept both full forms and contractions in student answers.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 6 min</span><span class="pill">Mode: drilling</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Using Negative Sentences">
+        <div class="slide-head">
+          <div class="slide-number">Slide 20 of 28</div>
+          <h1>Using Negative Sentences</h1>
+          <p class="context">On the classroom screen: using negatives to correct information.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Apply negatives in communicative situations: correcting job, country, location or identity.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Say incorrect information and ask for correction: "Emma is Brazilian."</li>
+              <li>Student answers: "No, she isn't. She's British."</li>
+              <li>Do it in pairs using cards/characters from the previous screen.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Student Activity</h3>
+            <p>Ask each student to say one true sentence about themselves and one negative sentence.</p>
+            <p class="script">"I'm Brazilian. I'm not Spanish." / "I'm a manager. I'm not an intern."</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>If a student only says "No", encourage the full sentence, but accept it as an initial step. Keep the activity personal or fictional; do not force real company information.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 8 min</span><span class="pill">Mode: oral correction</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Grammar Practice - Negative">
+        <div class="slide-head">
+          <div class="slide-number">Slide 21 of 28</div>
+          <h1>Grammar Practice</h1>
+          <p class="context">On the classroom screen: external practice with negatives.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Review am not, isn't, aren't and correction of information.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Explain that full forms and contractions can both be correct.</li>
+              <li>Ask students to read feedback carefully.</li>
+              <li>After a few items, ask them to explain their choice to a partner.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Check</h3>
+            <p>If many students make mistakes, return to the previous slide for 2 minutes and redo examples.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Reinforce: "He isn't" = "He is not"; both forms are valid.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 10-15 min</span><span class="pill">Mode: external practice</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Yes/No Questions and Short Answers">
+        <div class="slide-head">
+          <div class="slide-number">Slide 22 of 28</div>
+          <h1>Yes/No Questions and Short Answers</h1>
+          <p class="context">On the classroom screen: questions with am/is/are plus affirmative and negative short answers.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Teach question word order with the verb to be and help students answer with yes/no plus the correct verb.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Show the transformation: "You are a visitor" -> "Are you a visitor?"</li>
+              <li>Use a physical gesture: the verb moves to the front.</li>
+              <li>Then point to the short answers: "Yes, I am." / "No, I'm not."</li>
+              <li>Ask students to answer orally using the same verb they hear in the question.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Controlled Practice</h3>
+            <p>Say: "Are you Brazilian?" Students answer: "Yes, I am." Then say: "Are you Spanish?" Students answer: "No, I'm not."</p>
+          </article>
+          <article class="card warning">
+            <h3>No vs. Not</h3>
+            <p>Explain simply: <strong>no</strong> answers the question; <strong>not</strong> makes the verb negative. Example: "No, I'm not."</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 8 min</span><span class="pill">Mode: guided transformation</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Personal and Work Questions">
+        <div class="slide-head">
+          <div class="slide-number">Slide 23 of 28</div>
+          <h1>Personal and Work Questions</h1>
+          <p class="context">On the classroom screen: questions with what, where and which for workplace introductions.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Help students ask about name, job, workplace, department, country and nationality using common question words.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Point to <strong>what</strong>: use it for general information, such as name or job.</li>
+              <li>Point to <strong>where</strong>: use it for places, such as country or company.</li>
+              <li>Point to <strong>which</strong>: use it when choosing from a known group, such as a department.</li>
+              <li>Read the mini-dialogue once, then ask students to replace the answers with their own information.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Micro-Dialogue</h3>
+            <p>A: What's your name? B: My name is Ana. A: What do you do? B: I'm an analyst. A: Which department are you in? B: I'm in Sales.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Teach "What do you do?" and "Where do you work?" as complete workplace questions now. Avoid a long do/does explanation in Lesson 1.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 6 min</span><span class="pill">Mode: mingling</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Question Review">
+        <div class="slide-head">
+          <div class="slide-number">Slide 24 of 28</div>
+          <h1>Question Review</h1>
+          <p class="context">On the classroom screen: review of the main lesson questions.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Bring all useful questions together before the final grammar and communication practice.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Read each question and ask for a model answer.</li>
+              <li>Then do pair rotation: each student asks 4 questions.</li>
+              <li>Change partners to increase repetition without making it tiring.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Oral Checklist</h3>
+            <p>Name, job, company, department, country, nationality, yes/no question.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Some useful workplace questions, such as &ldquo;What do you do?&rdquo; and &ldquo;Where do you work?&rdquo;, are learned here as complete expressions. Do not explain their full grammar yet.</p>
+            <p>This slide prepares students for autonomy. Speak less and let students practice more.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 8 min</span><span class="pill">Mode: pair rotation</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Grammar Practice - Questions">
+        <div class="slide-head">
+          <div class="slide-number">Slide 25 of 28</div>
+          <h1>Grammar Practice</h1>
+          <p class="context">On the classroom screen: external practice with questions and short answers.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Consolidate word order in questions, short answers and personal questions.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Open the practice and demonstrate the thinking process: verb first, then subject.</li>
+              <li>Reinforce that contractions and full forms can both be correct.</li>
+              <li>Use feedback from mistakes to review quickly with the class.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Strategy</h3>
+            <p>If there is little time, do the most representative items and leave the rest for individual review.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Avoid explaining new topics here. The practice should consolidate, not expand.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 10-15 min</span><span class="pill">Mode: external practice</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Communication">
+        <div class="slide-head">
+          <div class="slide-number">Slide 26 of 28</div>
+          <h1>Communication</h1>
+          <p class="context">On the classroom screen: final activity "Meet a New Colleague".</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Use everything from the lesson in an oral activity with an interview and colleague introduction.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ol>
+              <li>Explain the situation: first day at an international company.</li>
+              <li>Pairs: A interviews B; then they switch roles.</li>
+              <li>Pairs join together: each student introduces their partner.</li>
+              <li>Ask for short presentations to the class.</li>
+            </ol>
+          </article>
+          <article class="card">
+            <h3>Teacher's Role</h3>
+            <p>Circulate, note recurring errors and give general feedback at the end without interrupting speaking too much.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Do not let students read everything. Encourage short notes and natural speech.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 12-15 min</span><span class="pill">Mode: pairs -> groups of 4</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Listening Challenge">
+        <div class="slide-head">
+          <div class="slide-number">Slide 27 of 28</div>
+          <h1>Listening Challenge</h1>
+          <p class="context">On the classroom screen: button to open the listening challenge with five audio files.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Train listening comprehension focused on names, jobs, countries, companies and work information.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Explain that students do not need to understand every word.</li>
+              <li>Tell them to listen first for general meaning.</li>
+              <li>Then ask them to pay attention to specific details in the questions.</li>
+              <li>Release the transcript only after the first attempt.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Strategy</h3>
+            <p>For a live class, do 1 or 2 audio files together and leave the rest for individual practice.</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Do not turn listening into translation. The focus is to locate information and confirm hypotheses.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 10-20 min</span><span class="pill">Mode: guided listening</span></div>
+      </section>
+
+      <section class="guide-slide" data-title="Homework">
+        <div class="slide-head">
+          <div class="slide-number">Slide 28 of 28</div>
+          <h1>Homework</h1>
+          <p class="context">On the classroom screen: button to open Lesson 1 homework.</p>
+        </div>
+        <div class="grid">
+          <article class="card focus">
+            <h3>Objective</h3>
+            <p>Close the lesson and guide autonomous review before Lesson 2.</p>
+          </article>
+          <article class="card">
+            <h3>How to Teach</h3>
+            <ul>
+              <li>Explain that the homework reviews all of Lesson 1.</li>
+              <li>Show that there are 40 exercises and a final listening section.</li>
+              <li>Tell students to do it calmly, in 45-60 minutes.</li>
+              <li>Tell them to use the result as a review diagnostic.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Suggested Closing</h3>
+            <p class="script">"Great work today. You can now greet people, introduce yourself, ask simple questions and talk about work. Please complete the homework before Lesson 2."</p>
+          </article>
+          <article class="card warning">
+            <h3>Note</h3>
+            <p>Do not start new content. This slide is for closure, organization and next steps.</p>
+          </article>
+        </div>
+        <div class="meta-row"><span class="pill">Time: 3 min</span><span class="pill">Mode: closing</span></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="progress" aria-hidden="true"><span id="progressFill"></span></div>
+      <div><span id="counter">Slide 1 / 28</span> - Use the keyboard arrows or the buttons.</div>
+      <a class="jump-link" href="../index.html#1">Open Lesson 1</a>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var slides = Array.prototype.slice.call(document.querySelectorAll(".guide-slide"));
+      var select = document.getElementById("slideSelect");
+      var counter = document.getElementById("counter");
+      var progressFill = document.getElementById("progressFill");
+      var fontScale = 1;
+      var current = getIndexFromHash();
+
+      slides.forEach(function (slide, index) {
+        var option = document.createElement("option");
+        option.value = String(index);
+        option.textContent = (index + 1) + ". " + slide.dataset.title;
+        select.appendChild(option);
+      });
+
+      function clamp(value, min, max) {
+        return Math.min(max, Math.max(min, value));
+      }
+
+      function getIndexFromHash() {
+        var raw = window.location.hash.replace("#", "");
+        var parsed = Number.parseInt(raw, 10);
+        return Number.isFinite(parsed) ? clamp(parsed - 1, 0, slides.length - 1) : 0;
+      }
+
+      function showSlide(index, updateHash) {
+        current = clamp(index, 0, slides.length - 1);
+        slides.forEach(function (slide, slideIndex) {
+          slide.classList.toggle("active", slideIndex === current);
+        });
+        select.value = String(current);
+        counter.textContent = "Slide " + (current + 1) + " / " + slides.length;
+        progressFill.style.width = (((current + 1) / slides.length) * 100) + "%";
+
+        if (updateHash !== false) {
+          window.location.hash = String(current + 1);
+        }
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function changeFont(delta) {
+        if (delta === 0) {
+          fontScale = 1;
+        } else {
+          fontScale = clamp(fontScale + (delta * 0.08), 0.84, 1.24);
+        }
+        document.documentElement.style.setProperty("--font-scale", String(fontScale));
+      }
+
+      document.querySelector("[data-prev]").addEventListener("click", function () {
+        showSlide(current - 1);
+      });
+
+      document.querySelector("[data-next]").addEventListener("click", function () {
+        showSlide(current + 1);
+      });
+
+      select.addEventListener("change", function () {
+        showSlide(Number(select.value));
+      });
+
+      Array.prototype.slice.call(document.querySelectorAll("[data-font]")).forEach(function (button) {
+        button.addEventListener("click", function () {
+          changeFont(Number(button.dataset.font));
+        });
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight" || event.key === "PageDown") {
+          showSlide(current + 1);
+        }
+        if (event.key === "ArrowLeft" || event.key === "PageUp") {
+          showSlide(current - 1);
+        }
+      });
+
+      window.addEventListener("hashchange", function () {
+        showSlide(getIndexFromHash(), false);
+      });
+
+      showSlide(current, false);
+    })();
+  </script>
+</body>
+</html>
