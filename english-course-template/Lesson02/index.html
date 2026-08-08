@@ -463,13 +463,14 @@
       align-self: center;
       aspect-ratio: 16 / 10;
       background: rgba(255, 255, 255, 0.76);
-      border: 2px dashed var(--color-line);
+      border: 1px solid var(--color-line);
       border-radius: var(--radius-sm);
       color: var(--color-muted);
       display: grid;
       justify-self: stretch;
       margin: 0;
       min-height: 19rem;
+      overflow: hidden;
       place-items: center;
       text-align: center;
     }
@@ -484,6 +485,13 @@
       color: var(--color-accent-strong);
       font-size: calc(1.35rem * var(--slide-font-scale));
       line-height: 1.15;
+    }
+
+    .lesson2-slide-image {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
     }
     
     .cover-objectives {
@@ -649,12 +657,13 @@
     .lesson2-learn-placeholder {
       align-items: center;
       background: rgba(255, 255, 255, 0.68);
-      border: 2px dashed var(--color-line);
+      border: 1px solid var(--color-line);
       border-radius: var(--radius-sm);
       color: var(--color-muted);
       display: grid;
       margin: 0;
       min-height: 15rem;
+      overflow: hidden;
       place-items: center;
       text-align: center;
     }
@@ -726,12 +735,13 @@
     .lesson2-warmup-placeholder {
       align-items: center;
       background: rgba(255, 255, 255, 0.82);
-      border: 2px dashed var(--color-line);
+      border: 1px solid var(--color-line);
       border-radius: var(--radius-sm);
       color: var(--color-muted);
       display: grid;
       margin: 0;
       min-height: 26rem;
+      overflow: hidden;
       place-items: center;
       text-align: center;
       width: 100%;
@@ -917,6 +927,10 @@
       max-width: none;
     }
 
+    .lesson2-audio-box audio {
+      width: 100%;
+    }
+
     .lesson2-listening-questions {
       align-content: start;
       display: grid;
@@ -1075,12 +1089,13 @@
     .lesson2-office-placeholder {
       align-items: center;
       background: rgba(255, 255, 255, 0.82);
-      border: 2px dashed var(--color-line);
+      border: 1px solid var(--color-line);
       border-radius: var(--radius-sm);
       color: var(--color-muted);
       display: grid;
       margin: 0;
       min-height: 28rem;
+      overflow: hidden;
       place-items: center;
       text-align: center;
       width: 100%;
@@ -1662,8 +1677,8 @@
     .lesson2-position-placeholder {
       align-items: center;
       aspect-ratio: 4 / 3;
-      background: rgba(255, 255, 255, 0.82);
-      border: 2px dashed var(--color-line);
+      background: #fff;
+      border: 1px solid var(--color-line);
       border-radius: var(--radius-sm);
       color: var(--color-muted);
       display: grid;
@@ -1671,9 +1686,20 @@
       font-weight: 850;
       line-height: 1.15;
       min-height: 3.5rem;
-      padding: var(--space-2);
+      overflow: hidden;
+      padding: 0;
       place-items: center;
+      position: relative;
       text-align: center;
+    }
+
+    .lesson2-position-placeholder img {
+      display: block;
+      height: calc(100% - var(--space-2));
+      inset: var(--space-1);
+      object-fit: contain;
+      position: absolute;
+      width: calc(100% - var(--space-2));
     }
 
     .lesson2-vocab-list li {
@@ -6193,9 +6219,7 @@
               <p class="cover-subtitle">Describe objects, places and people around you.</p>
             </div>
             <figure class="cover-illustration-placeholder" aria-label="Lesson 2 Cover Illustration">
-              <figcaption>
-                <strong>Lesson 2 Cover Illustration</strong>
-              </figcaption>
+              <img class="lesson2-slide-image" src="assets/images/lesson2-slide-01.png" alt="Modern office workspace with people and office objects.">
             </figure>
           </div>
           <section class="cover-objectives" aria-label="Lesson objectives">
@@ -6250,9 +6274,7 @@
                 </ul>
               </section>
               <figure class="lesson2-learn-placeholder" aria-label="What You'll Learn Illustration">
-                <figcaption>
-                  <strong>What You'll Learn Illustration</strong>
-                </figcaption>
+                <img class="lesson2-slide-image" src="assets/images/lesson2-slide-02.png" alt="Modern office desk with laptop, monitor, notebook, phone, keys and desk objects.">
               </figure>
             </aside>
           </div>
@@ -6278,9 +6300,7 @@
         </header>
         <div class="slide-content lesson2-warmup-content">
           <figure class="lesson2-warmup-placeholder" aria-label="Office Desk Illustration">
-            <figcaption>
-              <strong>Office Desk Illustration</strong>
-            </figcaption>
+            <img class="lesson2-slide-image" src="assets/images/lesson2-slide-03.png" alt="Office desk with a monitor, keyboard, mouse, notebook, phone, bag, keys, mug and water bottle.">
           </figure>
           <div class="lesson2-warmup-bottom">
             <section class="lesson2-warmup-card" aria-label="Student instructions">
@@ -6325,6 +6345,9 @@
             <div class="lesson2-audio-box" data-audio-file="audio_listening1_lesson2.mp3" aria-label="Listening audio">
               <p class="lesson2-audio-label">Audio</p>
               <p class="lesson2-audio-title">Lost Office Keys</p>
+              <audio controls preload="metadata" src="assets/audio/audio_listening1_lesson2.mp3">
+                Your browser does not support the audio element.
+              </audio>
             </div>
           </section>
           <section class="lesson2-listening-questions" aria-label="Listening questions">
@@ -6387,9 +6410,7 @@
               </ul>
             </section>
             <figure class="lesson2-office-placeholder" aria-label="Modern Office Desk Illustration">
-              <figcaption>
-                <strong>Modern Office Desk Illustration</strong>
-              </figcaption>
+              <img class="lesson2-slide-image" src="assets/images/lesson2-slide-05.png" alt="Meeting room with people and office objects on a table.">
             </figure>
           </div>
           <section class="lesson2-office-speaking" aria-label="Speaking activity">
@@ -6518,6 +6539,9 @@
             <div class="lesson2-audio-box" data-audio-file="audio_listening2_lesson2.mp3" aria-label="Listening audio">
               <p class="lesson2-audio-label">Audio</p>
               <p class="lesson2-audio-title">Preparing the Meeting Room</p>
+              <audio controls preload="metadata" src="assets/audio/audio_listening2_lesson2.mp3">
+                Your browser does not support the audio element.
+              </audio>
             </div>
           </section>
           <section class="lesson2-listening-questions" aria-label="Listening question">
@@ -6845,6 +6869,9 @@
             <div class="lesson2-audio-box" data-audio-file="audio_listening3_lesson2.mp3" aria-label="Listening audio">
               <p class="lesson2-audio-label">Audio</p>
               <p class="lesson2-audio-title">My New Office</p>
+              <audio controls preload="metadata" src="assets/audio/audio_listening3_lesson2.mp3">
+                Your browser does not support the audio element.
+              </audio>
             </div>
           </section>
           <section class="lesson2-listening-questions" aria-label="Listening questions">
@@ -6916,49 +6943,63 @@
                   <strong>on</strong>
                   <span>The phone is on the desk.</span>
                 </div>
-                <div class="lesson2-position-placeholder">on diagram</div>
+                <div class="lesson2-position-placeholder">
+                  <img src="assets/images/phone_on_desk.png" alt="Phone on the desk.">
+                </div>
               </li>
               <li class="lesson2-position-item">
                 <div class="lesson2-position-copy">
                   <strong>in</strong>
                   <span>The notebook is in the bag.</span>
                 </div>
-                <div class="lesson2-position-placeholder">in diagram</div>
+                <div class="lesson2-position-placeholder">
+                  <img src="assets/images/notebook_in_bag.png" alt="Notebook in the bag.">
+                </div>
               </li>
               <li class="lesson2-position-item">
                 <div class="lesson2-position-copy">
                   <strong>under</strong>
                   <span>The keys are under the chair.</span>
                 </div>
-                <div class="lesson2-position-placeholder">under diagram</div>
+                <div class="lesson2-position-placeholder">
+                  <img src="assets/images/keys_under_chair.png" alt="Keys under the chair.">
+                </div>
               </li>
               <li class="lesson2-position-item">
                 <div class="lesson2-position-copy">
                   <strong>next to</strong>
                   <span>The bag is next to the desk.</span>
                 </div>
-                <div class="lesson2-position-placeholder">next to diagram</div>
+                <div class="lesson2-position-placeholder">
+                  <img src="assets/images/bag_next_desk.png" alt="Bag next to the desk.">
+                </div>
               </li>
               <li class="lesson2-position-item">
                 <div class="lesson2-position-copy">
                   <strong>between</strong>
                   <span>The coffee mug is between the phone and the notebook.</span>
                 </div>
-                <div class="lesson2-position-placeholder">between diagram</div>
+                <div class="lesson2-position-placeholder">
+                  <img src="assets/images/coffe_mug_between.png" alt="Coffee mug between the phone and the notebook.">
+                </div>
               </li>
               <li class="lesson2-position-item">
                 <div class="lesson2-position-copy">
                   <strong>behind</strong>
                   <span>The keys are behind the monitor.</span>
                 </div>
-                <div class="lesson2-position-placeholder">behind diagram</div>
+                <div class="lesson2-position-placeholder">
+                  <img src="assets/images/keys_behind.png" alt="Keys behind the monitor.">
+                </div>
               </li>
               <li class="lesson2-position-item">
                 <div class="lesson2-position-copy">
                   <strong>in front of</strong>
                   <span>The photo is in front of the monitor.</span>
                 </div>
-                <div class="lesson2-position-placeholder">front diagram</div>
+                <div class="lesson2-position-placeholder">
+                  <img src="assets/images/photo_infront.png" alt="Photo in front of the monitor.">
+                </div>
               </li>
             </ul>
           </section>
@@ -7033,15 +7074,15 @@
             <section class="lesson2-feelings-panel" aria-label="Feelings examples">
               <h3 class="lesson2-feelings-heading">Examples</h3>
               <ul class="lesson2-feelings-example-list">
-                <li>I'm happy.</li>
-                <li>I'm sad.</li>
-                <li>I'm busy.</li>
-                <li>I'm tired.</li>
-                <li>I'm hungry.</li>
-                <li>I'm thirsty.</li>
-                <li>I'm excited.</li>
-                <li>I'm nervous.</li>
-                <li>I'm relaxed.</li>
+                <li>We are happy in the new office.</li>
+                <li>He is sad today.</li>
+                <li>They are busy before the meeting.</li>
+                <li>She is tired after work.</li>
+                <li>I'm hungry before lunch.</li>
+                <li>You are thirsty after class.</li>
+                <li>We are excited about the presentation.</li>
+                <li>She is nervous before speaking.</li>
+                <li>They are relaxed in the meeting room.</li>
               </ul>
             </section>
           </div>
@@ -7085,6 +7126,9 @@
             <div class="lesson2-audio-box" data-audio-file="audio_listening4_lesson2.mp3" aria-label="Listening audio">
               <p class="lesson2-audio-label">Audio</p>
               <p class="lesson2-audio-title">Before the Presentation</p>
+              <audio controls preload="metadata" src="assets/audio/audio_listening4_lesson2.mp3">
+                Your browser does not support the audio element.
+              </audio>
             </div>
           </section>
           <section class="lesson2-listening-questions" aria-label="Listening questions">
@@ -7546,7 +7590,10 @@
         var clickTarget = Utils.query("#lesson-deck", root) || root;
     
         clickTarget.addEventListener("click", function onDeckClick(event) {
-          if (Utils.isTypingTarget(event.target) || event.target.closest("a, button, select, textarea, input")) {
+          if (
+            Utils.isTypingTarget(event.target) ||
+            event.target.closest("a, audio, button, select, textarea, input, details, summary, .lesson2-listening-transcript")
+          ) {
             return;
           }
     
