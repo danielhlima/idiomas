@@ -1,0 +1,1492 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lección 1 · Primeros pasos · Versión 01</title>
+<style>
+:root{
+  --red:#aa151b; --gold:#f1bf00; --ink:#172033; --muted:#667085;
+  --paper:#fffdf8; --blue:#2d5ea8; --green:#2d7a5b; --soft:#f4efe4;
+  --font-scale:1;
+  --slide-pad-y:28px; --slide-pad-x:54px; --slide-pad-bottom:26px;
+  --slide-pad-y-mobile:20px; --slide-pad-x-mobile:28px; --slide-pad-bottom-mobile:26px;
+  --content-offset:58px; --foot-x:54px; --foot-x-mobile:28px;
+  --grid-gap:16px; --grid-gap-small:10px; --cloud-gap:9px;
+  --card-pad:19px; --card-pad-small:13px 15px; --term-gap:7px; --translation-gap:5px;
+  --fs-top:13px; --fs-subtitle:30px; --fs-h1:39px; --fs-h1-mobile:30px; --fs-h2:46px; --fs-h3:24px; --fs-foot:12px;
+  --fs-lead:22px; --fs-badge:14px; --fs-stack:31px; --fs-sentence:30px; --fs-card:20px; --fs-compact-card:18px; --fs-small:13px;
+  --fs-vocab-strong:26px; --fs-vocab-small:15px; --fs-vocab-list:18px; --fs-example-big:24px; --fs-example-compact:17px; --fs-note:17px;
+  --fs-builder-small:26px; --fs-arrow:32px; --fs-growth:25px; --fs-article-cell:23px; --fs-article-head:17px; --fs-article:35px;
+  --fs-article-pt:16px; --fs-micro:25px; --fs-word:19px; --fs-ending-b:30px; --fs-ending-span:18px; --fs-compare:17px;
+  --fs-transform:22px; --fs-exercise-number:13px; --fs-concordance:25px; --fs-pairs:16px; --fs-color:15px; --fs-adjective:13px;
+  --fs-word-dense:17px; --fs-small-dense:12px;
+  --fs-pronoun-b:21px; --fs-pronoun-span:14px; --fs-verb:20px; --fs-verb-translation:13px; --fs-ser-estar-h3:34px; --fs-ser-estar-p:16px;
+  --fs-summary:19px; --fs-summary-span:24px; --fs-final:22px; --fs-workbook-icon:86px; --fs-workbook-h3:30px; --fs-workbook-p:20px;
+  --fs-huge:68px; --fs-closing-p:24px; --fs-closing-sentence:33px; --fs-translation:13px; --fs-title-translation:16px; --fs-controls:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;font-family:Inter,Segoe UI,Arial,sans-serif;background:#111;color:var(--ink)}
+.slide{position:absolute;inset:0;padding:var(--slide-pad-y) var(--slide-pad-x) var(--slide-pad-bottom);background:
+radial-gradient(circle at 88% 8%,rgba(241,191,0,.18),transparent 30%),
+linear-gradient(135deg,#fff,#f7f1e5);opacity:0;transform:scale(.99);
+transition:.35s ease;pointer-events:none;overflow:hidden}
+.slide.active{opacity:1;transform:none;pointer-events:auto}
+.top{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(170,21,27,.18);padding-bottom:9px;font-size:var(--fs-top);letter-spacing:.09em}
+.course{font-weight:900;color:var(--red)} .count{color:var(--muted)}
+.content{height:calc(100% - var(--content-offset));display:flex;flex-direction:column}
+.subtitle{margin-top:9px;color:var(--muted);font-size:var(--fs-subtitle);line-height:1.12;overflow-wrap:break-word}
+h1{font-size:var(--fs-h1);line-height:1.05;margin:7px 0 13px}
+h2{font-size:var(--fs-h2);line-height:1.08;margin:12px 0 18px}
+h3{font-size:var(--fs-h3);margin:0 0 12px}
+.body{flex:1;min-height:0;overflow:auto;padding-right:6px}
+.body::-webkit-scrollbar{width:10px}.body::-webkit-scrollbar-thumb{background:#d4ccbd;border-radius:99px}
+.body.scrollable{overflow:auto;padding-right:6px}
+.foot{position:absolute;left:var(--foot-x);right:var(--foot-x);bottom:10px;border-top:1px solid #ddd;padding-top:7px;color:#777;font-size:var(--fs-foot);display:flex;justify-content:space-between}
+.cover-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;height:88%}
+.eyebrow{font-weight:900;letter-spacing:.14em;color:var(--red)}
+.lead{font-size:var(--fs-lead);line-height:1.42}.badge{display:inline-block;background:white;border:1px solid #ddd;border-radius:999px;padding:10px 16px;font-weight:800;font-size:var(--fs-badge)}
+.cover-visual{background:white;border-radius:28px;padding:34px;box-shadow:0 24px 60px #0002}
+.stack{display:flex;gap:10px;flex-wrap:wrap}.stack span{font-size:var(--fs-stack);font-weight:900;padding:13px 18px;border-radius:14px;background:var(--soft)}
+.stack span:nth-child(1){color:var(--red)}.stack span:nth-child(4){color:var(--blue)}
+.sentence{font-size:var(--fs-sentence);font-weight:900;margin-top:26px}
+.cards{display:grid;gap:var(--grid-gap)}.cards.two{grid-template-columns:repeat(2,1fr)}.cards.three{grid-template-columns:repeat(3,1fr)}.cards.four{grid-template-columns:repeat(4,1fr)}
+.cards>div,.examples>div,.exercise-call,.rule-box,.note,.teacher-question,.workbook,.contrast>div{background:white;border-radius:18px;padding:var(--card-pad);box-shadow:0 8px 22px #0001;font-size:var(--fs-card)}
+.cards.compact>div,.cards.compact>a{font-size:var(--fs-compact-card);display:flex;flex-direction:column;gap:var(--term-gap)}.cards small,.examples small{color:var(--muted);font-size:var(--fs-small)}
+.lesson-objectives-map{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+.lesson-objectives-map>div{gap:10px}
+.lesson-objectives-map small{color:var(--red);font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.lesson-objectives-map b{font-size:calc(var(--fs-compact-card) * 1.05);line-height:1.15}
+.lesson-objectives-map ul{display:grid;gap:5px;margin:0;padding-left:18px;color:var(--ink);font-size:calc(var(--fs-small) * 1.08);font-weight:750;line-height:1.23}
+.lesson-objectives-message{margin-top:16px}.lesson-objectives-message p{font-size:var(--fs-example-compact);padding:14px 16px}
+.vocab-grid{display:grid;gap:var(--grid-gap)}.vocab-grid.four{grid-template-columns:repeat(4,1fr)}.vocab-grid>div{background:white;border-radius:20px;padding:30px 18px;text-align:center;box-shadow:0 8px 22px #0001}.vocab-grid strong{display:block;font-size:var(--fs-vocab-strong)}.vocab-grid small{display:block;margin-top:8px;color:var(--muted);font-size:var(--fs-vocab-small)}
+.teacher-question{margin-top:20px;border-left:6px solid var(--gold)}
+.audio-card{margin-top:18px;background:white;border-left:6px solid var(--blue);border-radius:18px;padding:14px 16px;box-shadow:0 8px 22px #0001;display:grid;grid-template-columns:1fr minmax(240px,420px);gap:14px;align-items:center;font-size:var(--fs-card)}
+.audio-card small{display:block;color:var(--muted);font-size:var(--fs-small);font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.audio-card b{display:block;margin-top:4px}.audio-card audio{width:100%;height:38px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.vocab-list{display:grid;gap:var(--grid-gap-small)}.vocab-list>div{background:white;border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;gap:var(--term-gap);box-shadow:0 6px 18px #0001;font-size:var(--fs-vocab-list)}.vocab-list span{color:var(--muted)}
+.examples{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.examples>div{display:flex;flex-direction:column;gap:var(--term-gap);line-height:1.2}.examples.big>div{font-size:var(--fs-example-big)}.examples.compact{grid-template-columns:repeat(3,1fr)}.examples.compact>div{font-size:var(--fs-example-compact)}
+.note{margin-top:14px;border-left:6px solid var(--gold);font-size:var(--fs-note)}.rule-box{margin-top:18px;text-align:center;border:2px solid var(--gold)}
+.sentence-builder{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:12px;align-items:center;margin-top:35px}
+.sentence-builder>div:not(.arrow){background:white;border-radius:18px;padding:24px;text-align:center;box-shadow:0 8px 22px #0001}
+.sentence-builder span{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--red);color:#fff;font-weight:900}
+.sentence-builder b,.sentence-builder small{display:block;margin-top:10px}.sentence-builder small{font-size:var(--fs-builder-small)}.arrow{font-size:var(--fs-arrow);color:var(--red)}
+.growth{display:flex;gap:18px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:26px}.growth p{background:white;border-radius:16px;padding:18px 24px;font-size:var(--fs-growth);box-shadow:0 8px 22px #0001;margin:0}
+.article-table{display:grid;grid-template-columns:.8fr 1fr 1fr;max-width:700px;margin:22px auto 0;background:#ddd;gap:2px;border-radius:18px;overflow:hidden}
+.article-table>div{background:white;padding:19px;text-align:center;font-size:var(--fs-article-cell)}.article-table .head{background:var(--ink);color:white;font-size:var(--fs-article-head)}.article-table .label{font-weight:900}.article-table .article{font-size:var(--fs-article);color:var(--red);font-weight:900}.article-table .article span,.article-table .label span,.article-table .head span{display:block}
+.micro-summary{text-align:center;font-size:var(--fs-micro);font-weight:800;margin-top:24px}
+.word-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--grid-gap-small)}.word-columns.two{grid-template-columns:repeat(2,1fr)}.word-columns.dense{grid-template-columns:repeat(4,1fr)}
+.word-columns>div{background:white;border-radius:13px;padding:var(--card-pad-small);font-size:var(--fs-word);box-shadow:0 5px 15px #0001;line-height:1.15}.word-columns small{display:block;color:var(--muted);margin-top:var(--translation-gap);font-size:var(--fs-small)}.word-columns.dense>div{padding:9px 11px;font-size:var(--fs-word-dense)}.word-columns.dense small{font-size:var(--fs-small-dense)}
+.lexicon-sections{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.lexicon-section h3{margin-bottom:10px;color:var(--red)}
+.lexicon-section .word-columns{grid-template-columns:repeat(2,1fr)}
+.lexicon-section .word-columns.dense{grid-template-columns:repeat(3,1fr)}
+.lexicon-section .word-columns>div{font-size:calc(var(--fs-word) * 1.22)}
+.lexicon-section .word-columns.dense>div{font-size:calc(var(--fs-word-dense) * 1.28)}
+.lexicon-section .word-columns small{font-size:var(--fs-small)}
+.lexicon-section .word-columns.dense small{font-size:var(--fs-small-dense)}
+.ending-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.ending-grid>div{background:white;border-radius:18px;padding:22px;box-shadow:0 8px 22px #0001}.ending-grid b{display:block;color:var(--red);font-size:var(--fs-ending-b);margin-bottom:14px}.ending-grid p{margin:0 0 9px;line-height:1.15;font-size:var(--fs-ending-span)}.ending-grid p:last-child{margin-bottom:0}
+.ending-grid.big-nouns p{font-size:calc(var(--fs-ending-span) * 1.25)}
+.ending-grid.big-nouns .pt{font-size:var(--fs-translation)}
+.compare-table{display:grid;grid-template-columns:1fr 1fr .9fr;gap:2px;background:#ddd;border-radius:16px;overflow:hidden;max-width:860px;margin:auto}.compare-table>div{background:white;padding:8px 14px;font-size:var(--fs-compare);line-height:1.15}.compare-table .head{background:var(--ink);color:white;font-weight:900}.compare-table .pt-cell{color:var(--muted);font-weight:700}.compare-table small{display:block;margin-top:var(--translation-gap);color:var(--muted);font-size:var(--fs-small)}
+.transform-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:900px;margin:auto}.transform-grid>div{background:white;border-radius:16px;padding:18px;display:flex;justify-content:space-between;font-size:var(--fs-transform);box-shadow:0 8px 22px #0001}.transform-grid b{color:var(--red)}
+.plural-showcase{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.plural-showcase>div{background:white;border-radius:16px;padding:17px;box-shadow:0 8px 22px #0001}
+.plural-showcase small{display:block;color:var(--muted);font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.plural-showcase b,.plural-showcase span{display:block;margin-top:8px;font-size:var(--fs-transform);line-height:1.08}
+.plural-showcase b{color:var(--red)}
+.exercise-call{display:block;margin:14px auto;max-width:800px;border-left:7px solid var(--blue);text-decoration:none;color:inherit;transition:transform .16s ease}.exercise-call:hover{transform:translateY(-1px)}.workbook-links{grid-template-columns:repeat(3,minmax(0,1fr))}.workbook-links .exercise-call{display:flex;flex-direction:column;gap:var(--term-gap);margin:0;max-width:none;padding:12px 14px}.workbook-links .exercise-number{font-size:calc(var(--fs-exercise-number) * .72)}.workbook-links h3{font-size:calc(var(--fs-h3) * .78);margin:3px 0}.workbook-links p{font-size:var(--fs-small);line-height:1.2}.exercise-number{font-size:var(--fs-exercise-number);font-weight:900;letter-spacing:.12em;color:var(--blue)}.exercise-call h3{margin:7px 0}.exercise-call p{margin:0;color:var(--muted)}
+.concordance{display:grid;gap:15px;max-width:760px;margin:auto}.concordance>div{display:grid;grid-template-columns:.6fr 1fr 1fr;gap:10px}.concordance b{background:white;border-radius:14px;padding:20px;text-align:center;font-size:var(--fs-concordance);box-shadow:0 8px 22px #0001}.concordance b:first-child{color:var(--red)}
+.pairs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.pairs>div{display:contents}.pairs span{background:white;border-radius:14px;padding:9px 13px;font-size:var(--fs-pairs);box-shadow:0 5px 15px #0001;display:flex;flex-direction:column;gap:var(--translation-gap);line-height:1.12}
+.pairs.big-phrases span{font-size:calc(var(--fs-pairs) * 1.25)}
+.pairs.big-phrases .pt{font-size:var(--fs-translation)}
+.color-cloud,.adjective-cloud{display:grid;gap:var(--cloud-gap);justify-content:stretch}.color-cloud{grid-template-columns:repeat(4,minmax(0,1fr))}.adjective-cloud{grid-template-columns:repeat(6,minmax(0,1fr))}
+.color-cloud span,.adjective-cloud span{background:white;border-radius:14px;padding:8px 10px;box-shadow:0 5px 15px #0001;display:flex;flex-direction:column;align-items:center;gap:var(--translation-gap);text-align:center;line-height:1.05}.adjective-cloud span{padding:6px 8px}.color-cloud b{font-size:var(--fs-color)}.adjective-cloud b{font-size:var(--fs-adjective)}
+.color-cloud.big-words b,.adjective-cloud.big-words b{font-size:calc(var(--fs-color) * 1.25)}
+.pronoun-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}.pronoun-grid>div{background:white;border-radius:14px;padding:14px 16px;box-shadow:0 5px 15px #0001}.pronoun-grid b{display:block;color:var(--red);font-size:var(--fs-pronoun-b)}.pronoun-grid span{display:block;color:var(--muted);font-size:var(--fs-pronoun-span);margin-top:var(--translation-gap)}
+.pronoun-grid.grouped{grid-template-columns:repeat(4,1fr);align-items:stretch}.pronoun-grid.grouped>div{display:flex;flex-direction:column;gap:10px}.pronoun-grid.grouped small{color:var(--muted);font-weight:900;letter-spacing:.08em;text-transform:uppercase}.pronoun-grid .pronoun-item{display:block}.pronoun-grid .pronoun-item b{display:block}.pronoun-grid .pronoun-item span{display:block}
+.verb-table{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:900px;margin:16px auto}.verb-table>div{background:white;border-radius:16px;padding:12px 16px;display:grid;grid-template-columns:auto 1fr;column-gap:12px;row-gap:var(--translation-gap);align-items:center;font-size:var(--fs-verb);box-shadow:0 8px 22px #0001}.verb-table span{color:var(--red);font-weight:900;justify-self:end}.verb-table small{grid-column:1 / -1;font-size:var(--fs-verb-translation)}
+.verb-table mark{background:rgba(241,191,0,.26);border-radius:6px;color:var(--red);padding:0 .16em}
+.contrast{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}.contrast small{display:block;color:var(--muted);font-weight:900;letter-spacing:.1em;margin-bottom:7px}
+.ser-estar{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:900px;margin:auto}.ser-estar section{background:white;border-radius:22px;padding:24px;box-shadow:0 10px 28px #0001}.ser-estar h3{text-align:center;font-size:var(--fs-ser-estar-h3);color:var(--red)}.ser-estar p{display:inline-flex;flex-direction:column;gap:var(--translation-gap);background:var(--soft);border-radius:14px;padding:8px 11px;margin:4px;font-size:var(--fs-ser-estar-p);line-height:1.1}.ser-estar p b{font-size:inherit}
+.summary-map{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center}.summary-map div{background:white;border-radius:15px;padding:15px 18px;font-size:var(--fs-summary);font-weight:900;box-shadow:0 6px 18px #0001}.summary-map span{color:var(--red);font-size:var(--fs-summary-span)}.final-sentences{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:26px}.final-sentences p{background:white;border-radius:15px;padding:17px;text-align:center;font-size:var(--fs-final);margin:0}
+.workbook{display:grid;grid-template-columns:150px 1fr;gap:28px;align-items:center;max-width:900px;margin:70px auto}.workbook-icon{font-size:var(--fs-workbook-icon);text-align:center;color:var(--green)}.workbook h3{font-size:var(--fs-workbook-h3);margin:0 0 10px}.workbook p{font-size:var(--fs-workbook-p);line-height:1.5;margin:0 0 14px}
+.closing{text-align:center;padding-top:70px}.huge{font-size:var(--fs-huge);font-weight:900;color:var(--red)}.closing p{font-size:var(--fs-closing-p)}.closing .sentence{font-size:var(--fs-closing-sentence)}
+.pt{display:block;margin-top:var(--translation-gap);color:var(--muted);font-size:var(--fs-translation);font-weight:600;line-height:1.2}
+.article-table .head .pt{color:#d7dde8}.article-table .article .pt{font-size:var(--fs-article-pt)}.article-table .label .pt{font-size:var(--fs-small)}
+.title-translation{margin:-5px 0 12px;color:var(--muted);font-size:var(--fs-title-translation);font-weight:700;line-height:1.25}.title-translation b{color:var(--red)}.title-translation span{font-weight:500}
+.concept-row{display:flex;flex-wrap:wrap;gap:var(--grid-gap-small);margin:0 0 16px}.concept-row>div{background:white;border-radius:13px;padding:10px 14px;box-shadow:0 5px 15px #0001}.concept-row b{display:block;color:var(--red);font-size:var(--fs-vocab-list)}
+.progress{position:fixed;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--red),var(--gold));z-index:20;transition:.3s}
+.font-controls{position:fixed;right:18px;top:58px;z-index:30;display:flex;gap:4px;background:rgba(255,255,255,.86);border:1px solid rgba(23,32,51,.14);border-radius:12px;padding:5px;box-shadow:0 8px 22px #0002;backdrop-filter:blur(8px)}
+.font-controls button{width:34px;height:32px;border:0;border-radius:8px;background:transparent;color:var(--ink);font-size:var(--fs-controls);font-weight:900;cursor:pointer}
+.font-controls button:hover,.font-controls button.active{background:var(--soft);color:var(--red)}
+.font-controls button:focus-visible{outline:3px solid rgba(45,94,168,.38);outline-offset:2px}
+@media(max-width:900px){
+  .slide{padding:var(--slide-pad-y-mobile) var(--slide-pad-x-mobile) var(--slide-pad-bottom-mobile)}.foot{left:var(--foot-x-mobile);right:var(--foot-x-mobile)}.cover-grid,.split,.ser-estar{grid-template-columns:1fr}
+  .cover-visual{display:none}.word-columns,.pronoun-grid{grid-template-columns:repeat(2,1fr)}.word-columns.dense{grid-template-columns:repeat(4,1fr)}
+  .color-cloud{grid-template-columns:repeat(3,1fr)}.adjective-cloud{grid-template-columns:repeat(4,1fr)}
+  .sentence-builder{grid-template-columns:repeat(4,1fr);gap:6px;margin-top:14px}.sentence-builder>div:not(.arrow){padding:10px 6px}.sentence-builder span{width:24px;height:24px}.sentence-builder small{font-size:min(var(--fs-builder-small),15px)}.sentence-builder b{font-size:12px}.arrow{display:none}
+  .cards.two{grid-template-columns:1fr}.cards.three,.cards.four,.vocab-grid.four{grid-template-columns:repeat(2,1fr)}
+  .cards>div,.examples>div,.exercise-call,.rule-box,.note,.teacher-question,.workbook,.contrast>div{padding:12px 14px}.cards.compact>div{gap:5px}
+  h1{font-size:var(--fs-h1-mobile)}h2{font-size:min(var(--fs-h2),32px)}h3{font-size:min(var(--fs-h3),18px)}
+  .examples{gap:8px}.examples.big>div{font-size:min(var(--fs-example-big),17px)}.examples.compact{grid-template-columns:repeat(2,1fr)}.examples.compact>div{font-size:min(var(--fs-example-compact),14px)}
+  .ending-grid{grid-template-columns:repeat(2,1fr);gap:10px}.ending-grid>div{padding:14px}.ending-grid b{font-size:min(var(--fs-ending-b),22px);margin-bottom:8px}.ending-grid p{font-size:min(var(--fs-ending-span),13px)}
+  .compare-table{grid-template-columns:1fr 1fr .75fr}.compare-table>div{padding:6px;font-size:min(var(--fs-compare),12px)}
+  .transform-grid{grid-template-columns:1fr;gap:8px}.transform-grid>div{padding:10px 12px;font-size:min(var(--fs-transform),17px)}
+  .word-columns.dense>div{padding:6px 7px;font-size:min(var(--fs-word-dense),12px)}.word-columns.dense small{font-size:min(var(--fs-small-dense),10px)}
+  .concept-row{gap:6px;margin-bottom:10px}.concept-row>div{padding:7px 10px}.growth{gap:8px;margin-top:14px}.growth p{font-size:min(var(--fs-growth),17px);padding:10px 12px}
+  .contrast{grid-template-columns:1fr;gap:10px;margin-top:12px}
+  .concordance{gap:8px}.concordance b{padding:10px 8px;font-size:min(var(--fs-concordance),16px)}
+  .pairs{gap:6px}.pairs span{padding:7px 9px;font-size:min(var(--fs-pairs),12px)}.adjective-cloud{gap:5px}.adjective-cloud span{padding:4px}.adjective-cloud b{font-size:min(var(--fs-adjective),11px)}.adjective-cloud .pt{font-size:min(var(--fs-translation),9px)}
+  .color-cloud span{padding:6px}.color-cloud b{font-size:min(var(--fs-color),13px)}
+  .verb-table{grid-template-columns:1fr;gap:6px;margin:10px auto}.verb-table>div{padding:7px 10px;font-size:min(var(--fs-verb),15px)}.verb-table small{font-size:min(var(--fs-verb-translation),11px)}
+  .title-translation{font-size:min(var(--fs-title-translation),13px);margin:-4px 0 8px}.split{gap:14px}.note{margin-top:10px}
+  .lexicon-sections{grid-template-columns:1fr;gap:12px}.plural-showcase{grid-template-columns:1fr;gap:10px}.workbook-links{grid-template-columns:repeat(2,minmax(0,1fr))}.audio-card{grid-template-columns:1fr;gap:8px}
+  .ser-estar{gap:10px}.ser-estar section{padding:14px}.ser-estar h3{font-size:min(var(--fs-ser-estar-h3),24px);margin-bottom:8px}.ser-estar p{font-size:min(var(--fs-ser-estar-p),12px);padding:5px 7px}
+  .summary-map{gap:7px}.summary-map div{padding:9px 10px;font-size:min(var(--fs-summary),14px)}.summary-map span{font-size:min(var(--fs-summary-span),17px)}.final-sentences{gap:8px;margin-top:14px}.final-sentences p{font-size:min(var(--fs-final),15px);padding:10px}
+  .workbook{grid-template-columns:1fr;gap:12px;margin:20px auto}.workbook-icon{font-size:min(var(--fs-workbook-icon),52px)}.workbook h3{font-size:min(var(--fs-workbook-h3),21px)}.workbook p{font-size:min(var(--fs-workbook-p),15px)}
+  .font-controls{right:10px;top:50px}
+}
+@media(max-width:520px){
+  .examples,.examples.compact,.word-columns,.word-columns.two,.word-columns.dense,.lexicon-section .word-columns,.lexicon-section .word-columns.dense,.vocab-grid.four,.ending-grid,.color-cloud,.adjective-cloud,.pronoun-grid,.pairs,.cards.two,.cards.three,.cards.four,.workbook-links{grid-template-columns:1fr}
+  .pairs.big-phrases span{font-size:min(calc(var(--fs-pairs) * 1.25),24px);overflow-wrap:anywhere}
+}
+</style>
+</head>
+<body>
+
+<section class="slide cover" data-index="1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">01 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Primeros pasos</div>
+    <h1>Lección 1</h1>
+    <div class="body">
+    <div class="cover-grid">
+      <div>
+        <div class="eyebrow">CURSO DE ESPAÑOL · NIVEL INICIAL</div>
+        <h2>Construimos el idioma<br>desde sus piezas básicas.</h2>
+        <p class="lead">Artículos, sustantivos, adjetivos, pronombres y los verbos <b>ser</b> y <b>estar</b>: las piezas básicas para empezar a construir en español.</p>
+        <div class="badge">🇪🇸 Español de España</div>
+      </div>
+      <div class="cover-visual">
+        <div class="stack">
+          <span>el</span><span>libro</span><span>azul</span><span>es</span>
+        </div>
+        <div class="sentence">El libro es azul.</div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="2">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">02 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Hoy construiremos rápidamente las piezas fundamentales.</div>
+    <h1>Objetivos de la lección</h1>
+    <div class="body">
+    <div class="cards compact lesson-objectives-map">
+      <div>
+        <small>APRENDE</small>
+        <b>Estructuras para usar desde hoy</b>
+        <ul>
+          <li>artículos básicos;</li>
+          <li>género y número;</li>
+          <li>plural;</li>
+          <li>concordancia simple;</li>
+          <li>pronombres personales;</li>
+          <li>formas básicas de ser y estar;</li>
+          <li>diferencia central entre ser y estar.</li>
+        </ul>
+      </div>
+      <div>
+        <small>RECONOCE</small>
+        <b>Elementos que verás sin dominarlos por completo</b>
+        <ul>
+          <li>excepciones frecuentes de género;</li>
+          <li>adjetivos que no cambian de género;</li>
+          <li>vocabulario descriptivo;</li>
+          <li>algunos usos adicionales de ser y estar.</li>
+        </ul>
+      </div>
+      <div>
+        <small>VOLVEREMOS A ESTO</small>
+        <b>Ideas que se reciclarán en contexto</b>
+        <ul>
+          <li>usos más específicos de ser y estar;</li>
+          <li>posesión;</li>
+          <li>material;</li>
+          <li>lugar de eventos;</li>
+          <li>comida y apariencia;</li>
+          <li>estructuras que se reciclarán en situaciones reales.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="final-sentences lesson-objectives-message">
+      <p><b>No necesitas memorizar todo hoy.</b></p>
+      <p>Las próximas lecciones reutilizarán estas estructuras en contexto.</p>
+    </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="3">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">03 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">¿Cuánto español ya entiendes?</div>
+    <h1>Calentamiento</h1>
+    <div class="body">
+    <div class="cards two compact">
+      <div><small>PALABRAS TRANSPARENTES</small><b>animal · hospital · problema · artista</b><b>inteligente · interesante · excelente · fantástico</b></div>
+      <div><small>PALABRAS QUE NECESITAMOS APRENDER</small><b>perro · sillón · mujer · ventana · coche · niño</b></div>
+      <div><small>PREGUNTA 1</small><b>¿Qué palabras entiendes inmediatamente?</b></div>
+      <div><small>PREGUNTA 2</small><b>¿Cuáles son muy parecidas al portugués?</b></div>
+      <div><small>PREGUNTA 3</small><b>¿Cuáles necesitas aprender con ayuda?</b></div>
+      <div><small>CUIDADO</small><b>Parecido no significa siempre igual.</b></div>
+    </div>
+    <div class="audio-card">
+      <div><small>Audio</small><b>Escucha el audio de calentamiento</b></div>
+      <audio controls preload="metadata" aria-label="Audio de calentamiento">
+        <source src="assets/leccion-01/Audio1Espanhol.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+    <div class="teacher-question">El español y el portugués son lenguas próximas. <b>Vamos a aprovechar esa ventaja.</b></div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="4">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">04 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Una oración se construye con piezas.</div>
+    <h1>Los bloques de una oración</h1>
+    <div class="body">
+    <div class="sentence-builder">
+      <div><span>1</span><b>Artículo</b><small>el</small></div>
+      <div class="arrow">→</div>
+      <div><span>2</span><b>Sustantivo</b><small>libro</small></div>
+      <div class="arrow">→</div>
+      <div><span>3</span><b>Verbo</b><small>es</small></div>
+      <div class="arrow">→</div>
+      <div><span>4</span><b>Adjetivo</b><small>azul</small></div>
+    </div>
+    <div class="growth">
+      <p>el libro</p>
+      <p>el libro azul</p>
+      <p><b>El libro es azul.</b></p>
+    </div>
+    <div class="note">No necesitas conocer todas las reglas todavía. <b>Primero vamos a reconocer las piezas.</b></div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="5">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">05 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Indican el género y el número del sustantivo.</div>
+    <h1>Los artículos definidos</h1>
+    <div class="body">
+    <div class="badge">APRENDE</div>
+    <div class="article-table">
+      <div class="head"></div><div class="head"><span>Singular</span></div><div class="head"><span>Plural</span></div>
+      <div class="label"><span>Masculino</span></div><div class="article"><span>el</span><small class="pt">o</small></div><div class="article"><span>los</span><small class="pt">os</small></div>
+      <div class="label"><span>Femenino</span></div><div class="article"><span>la</span><small class="pt">a</small></div><div class="article"><span>las</span><small class="pt">as</small></div>
+    </div>
+    <div class="micro-summary">el libro · la casa · los libros · las casas</div>
+    <div class="teacher-question">Pregunta oral: <b>¿Masculino o femenino? ¿Singular o plural?</b><br>los libros · la casa · el hotel · las ventanas</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="6">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">06 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Muchas palabras siguen un patrón fácil de reconocer.</div>
+    <h1>Género: el patrón principal</h1>
+    <div class="body">
+    <div class="badge">APRENDE</div>
+    <div class="lexicon-sections">
+      <section class="lexicon-section">
+        <h3>MASCULINO</h3>
+        <div class="word-columns two">
+          <div>el libro</div>
+          <div>el amigo</div>
+          <div>el banco</div>
+          <div>el gato</div>
+        </div>
+      </section>
+      <section class="lexicon-section">
+        <h3>FEMENINO</h3>
+        <div class="word-columns two">
+          <div>la casa</div>
+          <div>la mesa</div>
+          <div>la ventana</div>
+          <div>la silla</div>
+        </div>
+      </section>
+    </div>
+    <div class="rule-box">Muchos sustantivos terminados en <b>-o</b> son masculinos. Muchos sustantivos terminados en <b>-a</b> son femeninos.</div>
+    <div class="note">Es una tendencia, no una regla absoluta.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="7">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">07 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">No siempre podemos saber el género por la última letra.</div>
+    <h1>Género: cuando la terminación engaña</h1>
+    <div class="body">
+    <div class="badge">RECONOCE</div>
+    <div class="lexicon-sections">
+      <section class="lexicon-section">
+        <h3>MASCULINOS QUE NO SIGUEN EL PATRÓN MÁS OBVIO</h3>
+        <div class="word-columns two">
+          <div>el hotel <small>o hotel</small></div>
+          <div>el animal <small>o animal</small></div>
+          <div>el tren <small>o trem</small></div>
+          <div>el problema <small>o problema</small></div>
+          <div>el día <small>o dia</small></div>
+        </div>
+      </section>
+      <section class="lexicon-section">
+        <h3>FEMENINOS QUE NO SIGUEN EL PATRÓN MÁS OBVIO</h3>
+        <div class="word-columns two">
+          <div>la flor <small>a flor</small></div>
+          <div>la mujer <small>a mulher</small></div>
+          <div>la luz <small>a luz</small></div>
+          <div>la mano <small>a mão</small></div>
+          <div>la foto <small>a foto</small></div>
+        </div>
+      </section>
+    </div>
+    <div class="note">No memorices una lista de excepciones. Aprende cada palabra con su artículo.</div>
+    <div class="teacher-question">Contraste rápido: <b>el libro</b> → patrón frecuente · <b>el problema</b> → excepción visual · <b>la casa</b> → patrón frecuente · <b>la mano</b> → excepción visual</div>
+    <details class="note"><summary><b>Para consultar</b>: más ejemplos que volverán en el material.</summary><p>el clima · el mapa · el programa · el sistema · la clase · la suerte · la piel · la radio</p></details>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="8">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">08 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Cuando veas estas formas, tendrás pistas para reconocer el género.</div>
+    <h1>Patrones útiles y género común</h1>
+    <div class="body">
+    <div class="badge">RECONOCE</div>
+    <div class="lexicon-sections">
+      <section class="lexicon-section">
+        <h3>TERMINACIONES ÚTILES</h3>
+        <div class="ending-grid">
+          <div><b>-ción</b><p>la canción</p></div>
+          <div><b>-sión</b><p>la televisión</p></div>
+          <div><b>-dad</b><p>la ciudad</p></div>
+          <div><b>-tud</b><p>la actitud</p></div>
+        </div>
+        <div class="note">Estas terminaciones suelen ser femeninas.</div>
+      </section>
+      <section class="lexicon-section">
+        <h3>GÉNERO COMÚN</h3>
+        <div class="examples compact">
+          <div>el artista / la artista</div>
+          <div>el estudiante / la estudiante</div>
+          <div>el dentista / la dentista</div>
+        </div>
+        <div class="note">Algunas palabras no cambian de forma. El artículo marca el género.</div>
+      </section>
+    </div>
+    <div class="teacher-question"><b>El artículo</b> es una pista muy importante para reconocer el género.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="9">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">09 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Dos patrones básicos para empezar.</div>
+    <h1>El plural</h1>
+    <div class="body">
+    <div class="badge">APRENDE</div>
+    <div class="lexicon-sections">
+      <section class="lexicon-section">
+        <h3>VOCAL + S</h3>
+        <div class="plural-showcase">
+          <div><small>singular</small><span>el libro</span><small>plural</small><b>los libros</b></div>
+          <div><small>singular</small><span>la casa</span><small>plural</small><b>las casas</b></div>
+        </div>
+        <div class="note">Si termina en vocal, normalmente añadimos <b>-s</b>.</div>
+      </section>
+      <section class="lexicon-section">
+        <h3>CONSONANTE + ES</h3>
+        <div class="plural-showcase">
+          <div><small>singular</small><span>el hotel</span><small>plural</small><b>los hoteles</b></div>
+          <div><small>singular</small><span>la mujer</span><small>plural</small><b>las mujeres</b></div>
+        </div>
+        <div class="note">Si termina en consonante, normalmente añadimos <b>-es</b>.</div>
+      </section>
+    </div>
+    <div class="teacher-question">Ahora tú: <b>el tren → ?</b> · <b>la ventana → ?</b></div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="10">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">10 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Utilizamos un, una, unos y unas cuando presentamos algo de forma no específica.</div>
+    <h1>Los artículos indefinidos</h1>
+    <div class="body">
+    <div class="badge">APRENDE</div>
+    <div class="article-table">
+      <div class="head"></div><div class="head"><span>Singular</span></div><div class="head"><span>Plural</span></div>
+      <div class="label"><span>Masculino</span></div><div class="article"><span>un</span><small class="pt">um</small></div><div class="article"><span>unos</span><small class="pt">uns</small></div>
+      <div class="label"><span>Femenino</span></div><div class="article"><span>una</span><small class="pt">uma</small></div><div class="article"><span>unas</span><small class="pt">umas</small></div>
+    </div>
+    <div class="micro-summary">un libro · una casa · unos libros · unas casas</div>
+    <div class="teacher-question">Contraste rápido: <b>el libro → un libro</b> · <b>la casa → una casa</b><br>¿Qué artículo necesitas? ___ hotel · ___ ciudad · ___ libros · ___ ventanas</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="11">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">11 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Las palabras de la frase trabajan juntas.</div>
+    <h1>Adjetivos y concordancia</h1>
+    <div class="body">
+    <div class="badge">APRENDE</div>
+    <div class="growth">
+      <p>el libro</p>
+      <p>el libro <b>blanco</b></p>
+      <p>la casa</p>
+      <p>la casa <b>blanca</b></p>
+    </div>
+    <div class="concept-row">
+      <div><b>ARTÍCULO</b></div>
+      <div><b>SUSTANTIVO</b></div>
+      <div><b>ADJETIVO</b></div>
+    </div>
+    <div class="concordance">
+      <div><b>el</b><b>libro</b><b>blanco</b></div>
+      <div><b>la</b><b>casa</b><b>blanca</b></div>
+      <div><b>los</b><b>libros</b><b>blancos</b></div>
+      <div><b>las</b><b>casas</b><b>blancas</b></div>
+    </div>
+    <div class="rule-box">Muchos adjetivos terminados en <b>-o</b> cambian a <b>-a</b> en femenino.<br>El artículo, el sustantivo y el adjetivo deben concordar.</div>
+    <div class="teacher-question">Ahora tú: <b>el coche rojo → los ______ ______</b> · <b>la casa bonita → las ______ ______</b></div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="12">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">12 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Algunos adjetivos mantienen la misma forma con sustantivos masculinos y femeninos.</div>
+    <h1>Adjetivos que no cambian de género</h1>
+    <div class="body">
+    <div class="badge">RECONOCE</div>
+    <div class="pairs big-phrases">
+      <div><span>el libro excelente<small class="pt">excelente</small></span><span>la comida excelente<small class="pt">excelente</small></span></div>
+      <div><span>el banco azul<small class="pt">azul</small></span><span>la mesa azul<small class="pt">azul</small></span></div>
+      <div><span>el tema interesante<small class="pt">interessante</small></span><span>la idea interesante<small class="pt">interessante</small></span></div>
+      <div><span>el hombre fuerte<small class="pt">forte</small></span><span>la mujer fuerte<small class="pt">forte</small></span></div>
+    </div>
+    <div class="note">La forma puede mantenerse en masculino y femenino, pero el plural sí puede cambiar: <b>el libro azul</b> → <b>los libros azules</b>.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="13">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">13 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Palabras útiles para empezar a describir.</div>
+    <h1>Vocabulario para describir</h1>
+    <div class="body">
+    <div class="badge">RECONOCE</div>
+    <div class="cards three compact">
+      <div><small>COLORES</small><b>rojo · azul · blanco · negro · verde · gris</b></div>
+      <div><small>DESCRIPCIÓN</small><b>grande · pequeño · bonito · guapo · bueno · interesante</b></div>
+      <div><small>ESTADO</small><b>bien · cansado · contento · feliz · enfermo</b></div>
+    </div>
+    <div class="note">No necesitas memorizar toda la lista. En España, <b>guapo</b> se usa mucho para describir personas.</div>
+    <details class="note"><summary><b>Más vocabulario</b> para consultar.</summary><p>amarillo · anaranjado · marrón · morado · rosa / rosado · moreno · agradable · alegre · barato · caro · débil · delgado · delicioso · difícil · enfadado / enojado · estupendo · excelente · fácil · fantástico · feo · flaco · frágil · fuerte · gordo · hermoso · horrible · inteligente · joven · maravilloso · pobre · rico · sabroso · simpático · sincero · tacaño · típico · triste · viejo</p><p><b>Primer contacto:</b> rico puede hablar de dinero o de comida; enfadado se usa más en España y enojado más en América Latina; moreno suele describir cabello, piel o una persona.</p></details>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="14">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">14 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Los pronombres indican quién realiza o experimenta una acción o un estado.</div>
+    <h1>Los pronombres personales</h1>
+    <div class="body">
+    <div class="badge">APRENDE</div>
+    <div class="pronoun-grid grouped">
+      <div>
+        <small>1ª PERSONA</small>
+        <span class="pronoun-item"><b>yo</b><span>eu</span></span>
+        <span class="pronoun-item"><b>nosotros / nosotras</b><span>nós</span></span>
+      </div>
+      <div>
+        <small>2ª PERSONA</small>
+        <span class="pronoun-item"><b>tú</b><span>você / tu, informal</span></span>
+        <span class="pronoun-item"><b>vosotros / vosotras</b><span>vocês, informal na Espanha</span></span>
+      </div>
+      <div>
+        <small>TRATAMIENTO FORMAL</small>
+        <span class="pronoun-item"><b>usted</b><span>o senhor / a senhora, formal</span></span>
+        <span class="pronoun-item"><b>ustedes</b><span>vocês, formal na Espanha</span></span>
+      </div>
+      <div>
+        <small>3ª PERSONA</small>
+        <span class="pronoun-item"><b>él / ella</b><span>ele / ela</span></span>
+        <span class="pronoun-item"><b>ellos / ellas</b><span>eles / elas</span></span>
+      </div>
+    </div>
+    <div class="note">En España, <b>vosotros/vosotras</b> es la forma informal para hablar con un grupo. <b>Usted/ustedes</b> se utilizan para tratamiento formal.</div>
+    <div class="teacher-question">Verificación oral: <b>Ana y yo → ?</b> · <b>Carlos y Pedro → ?</b> · <b>Un grupo de compañeros en España → ?</b></div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="15">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">15 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Presente de indicativo.</div>
+    <h1>El verbo estar</h1>
+    <div class="body">
+    <div class="badge">APRENDE</div>
+    <div class="verb-table">
+      <div><b>yo</b><span>estoy</span><small class="pt">eu estou</small></div>
+      <div><b>tú</b><span><mark>estás</mark></span><small class="pt">você está / tu estás</small></div>
+      <div><b>él / ella / usted</b><span><mark>está</mark></span><small class="pt">ele / ela / o senhor / a senhora está</small></div>
+      <div><b>nosotros / nosotras</b><span>estamos</span><small class="pt">nós estamos</small></div>
+      <div><b>vosotros / vosotras</b><span><mark>estáis</mark></span><small class="pt">vocês estão, informal na Espanha</small></div>
+      <div><b>ellos / ellas / ustedes</b><span><mark>están</mark></span><small class="pt">eles / elas / vocês estão</small></div>
+    </div>
+    <div class="teacher-question">Respuesta rápida: <b>yo → estoy</b> · <b>vosotros → ?</b> · <b>ellas → ?</b> · <b>nosotros → ?</b></div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="16">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">16 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">ESTAR → ubicación</div>
+    <h1>Estar: ubicación</h1>
+    <div class="body">
+    <div class="title-translation"><b>ubicación</b></div>
+    <div class="badge">APRENDE</div>
+    <div class="examples big">
+      <div>Yo estoy en la clase.</div>
+      <div>El libro está aquí.</div>
+      <div>El restaurante está en la ciudad.</div>
+      <div>Ellas están en el baño.</div>
+    </div>
+    <div class="rule-box">Utilizamos <b>estar</b> para decir dónde está una persona, un animal o una cosa.</div>
+    <div class="teacher-question">Ahora tú: <b>¿Dónde estás?</b> · <b>¿Dónde está el libro?</b></div>
+    <div class="note">Volveremos a utilizar <b>estar</b> para localizar objetos en la Lección 2.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="17">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">17 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">ESTAR → estado o condición</div>
+    <h1>Estar: estado, salud y condición</h1>
+    <div class="body">
+    <div class="title-translation"><b>salud</b> · <b>estado de ánimo</b> · <b>condición</b></div>
+    <div class="badge">APRENDE</div>
+    <div class="lexicon-sections">
+      <section class="lexicon-section">
+        <h3>SALUD / CONDICIÓN</h3>
+        <div class="examples big">
+          <div>Estoy bien.</div>
+          <div>Ella está enferma.</div>
+          <div>Estoy cansado.</div>
+        </div>
+      </section>
+      <section class="lexicon-section">
+        <h3>ESTADO DE ÁNIMO</h3>
+        <div class="examples big">
+          <div>Está contenta.</div>
+          <div>Estamos alegres.</div>
+        </div>
+      </section>
+    </div>
+    <div class="rule-box">Utilizamos <b>estar</b> para hablar de estados y condiciones.</div>
+    <div class="teacher-question">Concordancia rápida: <b>El hombre está cansado.</b> · <b>La mujer está cansada.</b><br>Micropráctica: <b>¿Cómo estás hoy?</b> ¿Bien, cansado, contento...?</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="18">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">18 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">También usamos estar en algunos contextos de valoración.</div>
+    <h1>Otros usos de estar</h1>
+    <div class="body">
+    <div class="title-translation"><b>primer contacto</b></div>
+    <div class="badge">RECONOCE</div>
+    <div class="split">
+      <section>
+        <h3>COMIDA</h3>
+        <div class="examples">
+          <div>La sopa está buena.</div>
+          <div>El pescado está delicioso.</div>
+        </div>
+      </section>
+      <section>
+        <h3>APARIENCIA</h3>
+        <div class="examples">
+          <div>Hoy estás muy guapo.</div>
+        </div>
+      </section>
+    </div>
+    <div class="note">No necesitas dominar estos usos ahora. Volveremos a estos usos en situaciones de comida, apariencia y descripción.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="19">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">19 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Presente de indicativo.</div>
+    <h1>El verbo ser</h1>
+    <div class="body">
+    <div class="badge">APRENDE</div>
+    <div class="verb-table">
+      <div><b>yo</b><span><mark>soy</mark></span><small class="pt">eu sou</small></div>
+      <div><b>tú</b><span><mark>eres</mark></span><small class="pt">você é / tu és</small></div>
+      <div><b>él / ella / usted</b><span><mark>es</mark></span><small class="pt">ele / ela / o senhor / a senhora é</small></div>
+      <div><b>nosotros / nosotras</b><span><mark>somos</mark></span><small class="pt">nós somos</small></div>
+      <div><b>vosotros / vosotras</b><span><mark>sois</mark></span><small class="pt">vocês são, informal na Espanha</small></div>
+      <div><b>ellos / ellas / ustedes</b><span><mark>son</mark></span><small class="pt">eles / elas / vocês são</small></div>
+    </div>
+    <div class="teacher-question">Respuesta rápida: <b>yo → soy</b> · <b>nosotros → ?</b> · <b>vosotros → ?</b> · <b>ellas → ?</b></div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="20">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">20 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">SER → qué es / cómo es</div>
+    <h1>Ser: descripción e identificación</h1>
+    <div class="body">
+    <div class="badge">APRENDE</div>
+    <div class="split">
+      <section>
+        <h3>DESCRIPCIÓN</h3>
+        <div class="examples big">
+          <div>La casa es grande.</div>
+          <div>El libro es azul.</div>
+          <div>Somos simpáticos.</div>
+        </div>
+      </section>
+      <section>
+        <h3>IDENTIFICACIÓN</h3>
+        <div class="examples big">
+          <div>Somos amigos.</div>
+          <div>José y Eduardo son hermanos.</div>
+          <div>Ella es católica.</div>
+        </div>
+      </section>
+    </div>
+    <div class="rule-box"><b>Ser</b> puede describir cómo es algo. También puede decir qué o quién es alguien.</div>
+    <div class="teacher-question">Micropráctica: <b>¿Cómo es la casa?</b> · <b>¿Quién es Ana?</b></div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="21">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">21 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">SER → profesión · SER + DE → origen</div>
+    <h1>Ser: profesión y origen</h1>
+    <div class="body">
+    <div class="badge">APRENDE</div>
+    <div class="split">
+      <section>
+        <h3>PROFESIÓN</h3>
+        <div class="examples big">
+          <div>Soy estudiante.</div>
+          <div>Él es arquitecto.</div>
+          <div>Somos doctores.</div>
+          <div>¿Eres ingeniero?</div>
+        </div>
+      </section>
+      <section>
+        <h3>ORIGEN</h3>
+        <div class="examples big">
+          <div>Soy de Brasil.</div>
+          <div>Somos de Italia.</div>
+          <div>El café es de Brasil.</div>
+          <div>¿De dónde eres?</div>
+        </div>
+      </section>
+    </div>
+    <div class="rule-box">Normalmente no usamos artículo cuando simplemente indicamos la profesión: <b>Soy estudiante.</b> Usamos <b>ser + de</b> para indicar origen.</div>
+    <div class="teacher-question">Micropráctica: <b>Soy ______.</b> · <b>Soy de ______.</b></div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="22">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">22 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Primer contacto con usos adicionales.</div>
+    <h1>Otros usos de ser</h1>
+    <div class="body">
+    <div class="badge">PRIMER CONTACTO</div>
+    <div class="cards three compact">
+      <div><small>MATERIAL</small><b>La mesa es de madera.</b></div>
+      <div><small>POSESIÓN</small><b>El libro es de Ana.</b><b>El coche es del profesor.</b><small>de + el = del</small></div>
+      <div><small>EVENTO</small><b>La fiesta es en la casa.</b></div>
+    </div>
+    <div class="contrast">
+      <div><small>PERSONA</small><b>José está en la casa.</b></div>
+      <div><small>EVENTO</small><b>La fiesta es en la casa.</b></div>
+    </div>
+    <div class="note">No necesitas dominar estos usos ahora. Volveremos a ellos en contextos específicos.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="23">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">23 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">El contraste central.</div>
+    <h1>Ser o estar</h1>
+    <div class="body">
+    <div class="badge">APRENDE</div>
+    <div class="ser-estar">
+      <section>
+        <h3>SER</h3>
+        <p><b>qué es</b></p>
+        <p><b>cómo es</b></p>
+        <p><b>Identidad / descripción</b></p>
+        <p><b>La casa es grande.</b></p>
+        <p><b>Somos estudiantes.</b></p>
+      </section>
+      <section>
+        <h3>ESTAR</h3>
+        <p><b>dónde está</b></p>
+        <p><b>cómo está</b></p>
+        <p><b>Ubicación / estado</b></p>
+        <p><b>La casa está aquí.</b></p>
+        <p><b>Estamos cansados.</b></p>
+      </section>
+    </div>
+    <div class="cards three compact">
+      <div><small>CONTRASTE 1</small><b>La casa es grande.</b><b>La casa está limpia.</b></div>
+      <div><small>CONTRASTE 2</small><b>Ana es simpática.</b><b>Ana está cansada.</b></div>
+      <div><small>CONTRASTE 3</small><b>El libro es azul.</b><b>El libro está aquí.</b></div>
+    </div>
+    <div class="note">No preguntes primero si algo es permanente o temporal. Pregúntate qué tipo de información expresas. Otros usos aparecerán poco a poco durante el curso.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="24">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">24 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">PIEZAS → FRASE</div>
+    <h1>Construimos frases</h1>
+    <div class="body">
+    <div class="badge">APRENDE · INTEGRA</div>
+    <div class="sentence-builder">
+      <div><span>1</span><b>ARTÍCULO</b><small>el · la · los · las</small></div>
+      <div class="arrow">→</div>
+      <div><span>2</span><b>SUSTANTIVO</b><small>libro · casa · ventanas</small></div>
+      <div class="arrow">→</div>
+      <div><span>3</span><b>VERBO</b><small>ser · estar</small></div>
+      <div class="arrow">→</div>
+      <div><span>4</span><b>INFORMACIÓN</b><small>azul · aquí · cansados</small></div>
+    </div>
+    <div class="examples compact">
+      <div>El libro es azul.</div>
+      <div>La casa es grande.</div>
+      <div>Los libros están aquí.</div>
+      <div>Yo soy estudiante.</div>
+      <div>Nosotros estamos cansados.</div>
+      <div>Las ventanas son blancas.</div>
+    </div>
+    <div class="teacher-question">Producción guiada:<br><b>la casa / blanco → ______________________</b><br><b>los libros / aquí → ______________________</b><br><b>nosotros / estudiantes → ______________________</b></div>
+    <div class="note">Ya puedes construir frases completas con las piezas de la lección.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="25">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">25 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Estas son las estructuras que ya debes reconocer y empezar a usar.</div>
+    <h1>Lo que ya debes saber</h1>
+    <div class="body">
+    <div class="badge">ESTO SÍ DEBES SABER</div>
+    <div class="cards compact lesson-objectives-map">
+      <div><small>ARTÍCULOS</small><b>el / la / los / las</b><b>un / una / unos / unas</b></div>
+      <div><small>GÉNERO Y PLURAL</small><b>reconocer masculino / femenino</b><b>formar plurales básicos con -s y -es</b></div>
+      <div><small>CONCORDANCIA</small><b>la casa blanca</b><b>los libros blancos</b></div>
+      <div><small>PRONOMBRES + VERBOS</small><b>yo, tú, él/ella, nosotros, vosotros, ellos/ellas</b><b>ser · estar</b></div>
+      <div><small>CONTRASTE CENTRAL</small><b>ser → qué es / cómo es</b><b>estar → dónde está / cómo está</b></div>
+    </div>
+    <div class="final-sentences">
+      <p>Soy brasileño.</p>
+      <p>Somos estudiantes.</p>
+      <p>La casa es grande.</p>
+      <p>Los libros están aquí.</p>
+    </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="26">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">26 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Ya has tenido un primer contacto. Ahora iremos consolidando.</div>
+    <h1>Lo que volveremos a practicar</h1>
+    <div class="body">
+    <div class="badge">VOLVEREMOS A ESTO</div>
+    <div class="cards compact lesson-objectives-map">
+      <div><small>SER Y ESTAR EN CONTEXTO</small><b>Volveremos a distinguirlos en descripciones, lugares y situaciones reales.</b></div>
+      <div><small>OTROS USOS DE SER</small><b>material</b><b>posesión</b><b>lugar de eventos</b></div>
+      <div><small>OTROS USOS DE ESTAR</small><b>comida</b><b>apariencia</b><b>valoraciones ligadas al momento</b></div>
+      <div><small>GÉNERO Y VOCABULARIO</small><b>excepciones</b><b>palabras menos transparentes</b><b>nuevos adjetivos</b></div>
+      <div><small>CONCORDANCIA Y FORMAS VERBALES</small><b>seguiremos reutilizando artículos, plurales, adjetivos, pronombres, ser y estar.</b></div>
+    </div>
+    <div class="note">Las próximas lecciones reutilizarán estas estructuras en textos, preguntas y situaciones concretas. En la Lección 2 volveremos a usar <b>ser</b> y <b>estar</b> para describir y localizar.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="27">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">27 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Práctica organizada de la Lección 1.</div>
+    <h1>Workbook</h1>
+    <div class="body">
+    <div class="workbook">
+      <div class="workbook-icon">✓</div>
+      <div>
+        <h3>Lección 1 · Ejercicios 1–9</h3>
+        <p>Practica las estructuras centrales y revisa el repaso general al final.</p>
+        <div class="badge">Practicar · Revisar · Integrar</div>
+      </div>
+    </div>
+    <div class="cards compact workbook-links">
+      <a class="exercise-call" href="workbook/leccion-01/ejercicio-01-articulos-definidos.html" target="_blank" rel="noopener"><div class="exercise-number">Ejercicio 1</div><h3>Artículos definidos</h3><p>Selecciona el artículo correcto.</p></a>
+      <a class="exercise-call" href="workbook/leccion-01/ejercicio-02-singular-plural.html" target="_blank" rel="noopener"><div class="exercise-number">Ejercicio 2</div><h3>Singular y plural</h3><p>Transforma las palabras al plural.</p></a>
+      <a class="exercise-call" href="workbook/leccion-01/ejercicio-03-articulos-indefinidos.html" target="_blank" rel="noopener"><div class="exercise-number">Ejercicio 3</div><h3>Un, una, unos o unas</h3><p>Selecciona el artículo indefinido correcto.</p></a>
+      <a class="exercise-call" href="workbook/leccion-01/ejercicio-04-concordancia.html" target="_blank" rel="noopener"><div class="exercise-number">Ejercicio 4</div><h3>Concordancia</h3><p>Completa frases con el adjetivo correcto.</p></a>
+      <a class="exercise-call" href="workbook/leccion-01/ejercicio-05-pronombres-personales.html" target="_blank" rel="noopener"><div class="exercise-number">Ejercicio 5</div><h3>Pronombres personales</h3><p>Relaciona pronombres con personas o grupos.</p></a>
+      <a class="exercise-call" href="workbook/leccion-01/ejercicio-06-verbo-estar.html" target="_blank" rel="noopener"><div class="exercise-number">Ejercicio 6</div><h3>El verbo estar</h3><p>Selecciona la forma correcta y clasifica su uso.</p></a>
+      <a class="exercise-call" href="workbook/leccion-01/ejercicio-07-verbo-ser.html" target="_blank" rel="noopener"><div class="exercise-number">Ejercicio 7</div><h3>El verbo ser</h3><p>Completa frases con la forma correcta.</p></a>
+      <a class="exercise-call" href="workbook/leccion-01/ejercicio-08-ser-o-estar.html" target="_blank" rel="noopener"><div class="exercise-number">Ejercicio 8</div><h3>Ser o estar</h3><p>Elige el verbo adecuado según el contexto.</p></a>
+      <a class="exercise-call" href="workbook/leccion-01/ejercicio-09-repaso-general.html" target="_blank" rel="noopener"><div class="exercise-number">Ejercicio 9</div><h3>Repaso general</h3><p>Integra los contenidos principales.</p></a>
+    </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="28">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">28 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Cierre de la clase presencial.</div>
+    <h1>Cierre</h1>
+    <div class="body">
+    <div class="closing">
+      <div class="huge">¡Muy bien!</div>
+      <p>Hoy has construido las piezas básicas.</p>
+      <p>Ahora empezaremos a utilizarlas en contextos reales.</p>
+      <div class="sentence">El español empieza a tomar forma.</div>
+    </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="29">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">29 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Contenido complementario de autoestudio.</div>
+    <h1>Para explorar por tu cuenta</h1>
+    <div class="body">
+    <div class="badge">AUTOESTUDIO</div>
+    <div class="cards three compact">
+      <div><small>SALUDOS</small><b>Observa los saludos básicos para diferentes momentos del día.</b></div>
+      <div><small>DESPEDIDAS Y CORTESÍA</small><b>Revisa expresiones funcionales para cerrar o mantener una conversación.</b></div>
+      <div><small>PRESENTACIONES</small><b>Lee las estructuras y cambia los nombres.</b></div>
+    </div>
+    <div class="note">Estos contenidos permanecen en la Lección 1 como complemento, pero no forman parte del núcleo presencial.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="30">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">30 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Contenido complementario de autoestudio.</div>
+    <h1>Saludos</h1>
+    <div class="body">
+    <div class="badge">AUTOESTUDIO</div>
+    <div class="vocab-grid four">
+      <div><strong>Hola</strong><small>Olá</small></div>
+      <div><strong>Buenos días</strong><small>Bom dia</small></div>
+      <div><strong>Buenas tardes</strong><small>Boa tarde</small></div>
+      <div><strong>Buenas noches</strong><small>Boa noite</small></div>
+    </div>
+    <div class="teacher-question">Observa: <b>¿qué saludo corresponde a cada momento del día?</b></div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="31">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">31 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Vocabulario funcional de autoestudio.</div>
+    <h1>Despedidas y cortesía</h1>
+    <div class="body">
+    <div class="badge">AUTOESTUDIO</div>
+    <div class="split">
+      <section>
+        <h3>Despedidas</h3>
+        <div class="vocab-list">
+          <div><b>Adiós</b><span>Tchau</span></div>
+          <div><b>Hasta luego</b><span>Até logo</span></div>
+          <div><b>Hasta pronto</b><span>Até breve</span></div>
+        </div>
+      </section>
+      <section>
+        <h3>Cortesía</h3>
+        <div class="vocab-list">
+          <div><b>Gracias</b><span>Obrigado(a)</span></div>
+          <div><b>De nada</b><span>De nada</span></div>
+          <div><b>Por favor</b><span>Por favor</span></div>
+          <div><b>Mucho gusto</b><span>Muito prazer</span></div>
+          <div><b>Encantado / Encantada</b><span>Prazer</span></div>
+        </div>
+      </section>
+    </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="32">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">32 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Contenido complementario de autoestudio.</div>
+    <h1>Presentaciones</h1>
+    <div class="body">
+    <div class="badge">AUTOESTUDIO</div>
+    <div class="examples big">
+      <div><small>INFORMACIÓN</small><b>Me llamo Carlos.</b></div>
+      <div><small>INFORMACIÓN</small><b>Soy Ana.</b></div>
+      <div><small>INFORMAL</small><b>¿Cómo te llamas?</b></div>
+      <div><small>FORMAL</small><b>¿Cómo se llama usted?</b></div>
+    </div>
+    <div class="note"><b>Mucho gusto</b>, <b>encantado</b> y <b>encantada</b> pueden utilizarse después de una presentación.</div>
+    <div class="teacher-question">Lee el diálogo y cambia los nombres.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="33">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">33 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Más vocabulario y ejemplos.</div>
+    <h1>Para consultar</h1>
+    <div class="body">
+    <div class="badge">CONSULTA</div>
+    <div class="cards three compact">
+      <div><small>VOCABULARIO AMPLIADO</small><b>Listas de sustantivos, artículos y palabras útiles.</b></div>
+      <div><small>GÉNERO Y DESCRIPCIÓN</small><b>Ejemplos adicionales, colores, adjetivos y notas léxicas.</b></div>
+      <div><small>PREGUNTAS Y LUGAR</small><b>Palabras interrogativas y adverbios de lugar para revisar.</b></div>
+    </div>
+    <div class="note">Esta sección está disponible como referencia. No es una continuación obligatoria de la clase presencial.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="34">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">34 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Personas y seres.</div>
+    <h1>Vocabulario de la Lección 1</h1>
+    <div class="body">
+    <div class="badge">PARA CONSULTAR</div>
+    <div class="word-columns dense">
+      <div>el amigo<small>o amigo</small></div>
+      <div>la amiga<small>a amiga</small></div>
+      <div>el hermano<small>o irmão</small></div>
+      <div>la hermana<small>a irmã</small></div>
+      <div>el hombre<small>o homem</small></div>
+      <div>la mujer<small>a mulher</small></div>
+      <div>el muchacho<small>o rapaz</small></div>
+      <div>la muchacha<small>a moça</small></div>
+      <div>el niño<small>o menino</small></div>
+      <div>la niña<small>a menina</small></div>
+      <div>la persona<small>a pessoa</small></div>
+      <div>el perro<small>o cachorro</small></div>
+      <div>el gato<small>o gato</small></div>
+      <div>el animal<small>o animal</small></div>
+    </div>
+    <div class="note">No necesitas memorizar toda esta lista ahora. Úsala para revisar la lección y volver a escuchar los audios.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="35">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">35 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Lugares, espacios y origen.</div>
+    <h1>Vocabulario de la Lección 1</h1>
+    <div class="body">
+    <div class="badge">PARA CONSULTAR</div>
+    <div class="word-columns dense">
+      <div>el banco<small>o banco</small></div>
+      <div>el baño<small>o banheiro</small></div>
+      <div>el hospital<small>o hospital</small></div>
+      <div>el hotel<small>o hotel</small></div>
+      <div>el restaurante<small>o restaurante</small></div>
+      <div>el jardín<small>o jardim</small></div>
+      <div>el museo<small>o museu</small></div>
+      <div>el club<small>o clube</small></div>
+      <div>la biblioteca<small>a biblioteca</small></div>
+      <div>la ciudad<small>a cidade</small></div>
+      <div>la clase<small>a aula</small></div>
+      <div>la iglesia<small>a igreja</small></div>
+      <div>la tienda<small>a loja</small></div>
+      <div>la librería<small>a livraria</small></div>
+      <div>la casa<small>a casa</small></div>
+      <div>la capital<small>a capital</small></div>
+    </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="36">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">36 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Objetos y cosas.</div>
+    <h1>Vocabulario de la Lección 1</h1>
+    <div class="body">
+    <div class="badge">PARA CONSULTAR</div>
+    <div class="word-columns dense">
+      <div>el barco<small>o barco</small></div>
+      <div>el billete<small>a passagem / nota</small></div>
+      <div>el bolígrafo<small>a caneta</small></div>
+      <div>el carro<small>o carro</small></div>
+      <div>el espejo<small>o espelho</small></div>
+      <div>el libro<small>o livro</small></div>
+      <div>el sillón<small>a poltrona</small></div>
+      <div>el teléfono<small>o telefone</small></div>
+      <div>el zapato<small>o sapato</small></div>
+      <div>la blusa<small>a blusa</small></div>
+      <div>la bolsa<small>a bolsa</small></div>
+      <div>la cama<small>a cama</small></div>
+      <div>la foto<small>a foto</small></div>
+      <div>la lámpara<small>a lâmpada</small></div>
+      <div>la maleta<small>a mala</small></div>
+      <div>la mano<small>a mão</small></div>
+      <div>la mesa<small>a mesa</small></div>
+      <div>la página<small>a página</small></div>
+      <div>la flor<small>a flor</small></div>
+      <div>la planta<small>a planta</small></div>
+      <div>la pluma<small>a caneta</small></div>
+      <div>la radio<small>o rádio</small></div>
+      <div>la silla<small>a cadeira</small></div>
+      <div>la ventana<small>a janela</small></div>
+      <div>la muñeca<small>a boneca</small></div>
+    </div>
+    <div class="note">En España, normalmente usamos <b>billete</b> en lugar de <b>tiquete</b>.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="37">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">37 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Comida, materiales y eventos.</div>
+    <h1>Vocabulario de la Lección 1</h1>
+    <div class="body">
+    <div class="badge">PARA CONSULTAR</div>
+    <div class="word-columns dense">
+      <div>el café<small>o café</small></div>
+      <div>el pescado<small>o peixe</small></div>
+      <div>el tomate<small>o tomate</small></div>
+      <div>el vino<small>o vinho</small></div>
+      <div>la cerveza<small>a cerveja</small></div>
+      <div>la comida<small>a comida</small></div>
+      <div>la sopa<small>a sopa</small></div>
+      <div>la madera<small>a madeira</small></div>
+      <div>el plástico<small>o plástico</small></div>
+      <div>el cuero<small>o couro</small></div>
+      <div>el vidrio<small>o vidro</small></div>
+      <div>la piedra<small>a pedra</small></div>
+      <div>la fiesta<small>a festa</small></div>
+      <div>el concierto<small>o concerto / show</small></div>
+      <div>la protesta<small>o protesto</small></div>
+    </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="38">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">38 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Profesiones y género común.</div>
+    <h1>Vocabulario de la Lección 1</h1>
+    <div class="body">
+    <div class="badge">PARA CONSULTAR</div>
+    <div class="word-columns dense">
+      <div>el artista / la artista<small>artista</small></div>
+      <div>el dentista / la dentista<small>dentista</small></div>
+      <div>el pianista / la pianista<small>pianista</small></div>
+      <div>el taxista / la taxista<small>taxista</small></div>
+      <div>el cantante / la cantante<small>cantor / cantora</small></div>
+      <div>el estudiante / la estudiante<small>estudante</small></div>
+      <div>el gerente / la gerente<small>gerente</small></div>
+      <div>el presidente / la presidenta<small>presidente</small></div>
+      <div>el doctor<small>o médico</small></div>
+      <div>el arquitecto<small>o arquiteto</small></div>
+      <div>las maestras<small>as professoras</small></div>
+      <div>el abogado<small>o advogado</small></div>
+      <div>el ingeniero<small>o engenheiro</small></div>
+    </div>
+    <div class="note">En España, <b>la presidenta</b> es la forma habitual para una mujer.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="39">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">39 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Colores.</div>
+    <h1>Vocabulario de la Lección 1</h1>
+    <div class="body">
+    <div class="badge">PARA CONSULTAR</div>
+    <div class="color-cloud">
+      <span><b>amarillo</b><small class="pt">amarelo</small></span>
+      <span><b>anaranjado</b><small class="pt">alaranjado</small></span>
+      <span><b>azul</b><small class="pt">azul</small></span>
+      <span><b>blanco</b><small class="pt">branco</small></span>
+      <span><b>gris</b><small class="pt">cinza</small></span>
+      <span><b>marrón</b><small class="pt">marrom</small></span>
+      <span><b>morado</b><small class="pt">roxo</small></span>
+      <span><b>negro</b><small class="pt">preto</small></span>
+      <span><b>rojo</b><small class="pt">vermelho</small></span>
+      <span><b>rosa / rosado</b><small class="pt">rosa</small></span>
+      <span><b>verde</b><small class="pt">verde</small></span>
+      <span><b>moreno</b><small class="pt">moreno</small></span>
+    </div>
+    <div class="note"><b>Moreno</b> suele describir el cabello, la piel o a una persona; no es un color general para cualquier objeto.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="40">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">40 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Adjetivos A-F.</div>
+    <h1>Vocabulario de la Lección 1</h1>
+    <div class="body">
+    <div class="badge">PARA CONSULTAR</div>
+    <div class="adjective-cloud">
+      <span><b>agradable</b><small class="pt">agradável</small></span>
+      <span><b>alegre</b><small class="pt">alegre</small></span>
+      <span><b>barato</b><small class="pt">barato</small></span>
+      <span><b>bonito</b><small class="pt">bonito</small></span>
+      <span><b>bueno</b><small class="pt">bom</small></span>
+      <span><b>cansado</b><small class="pt">cansado</small></span>
+      <span><b>caro</b><small class="pt">caro</small></span>
+      <span><b>contento</b><small class="pt">contente</small></span>
+      <span><b>débil</b><small class="pt">fraco</small></span>
+      <span><b>delgado</b><small class="pt">magro</small></span>
+      <span><b>delicioso</b><small class="pt">delicioso</small></span>
+      <span><b>difícil</b><small class="pt">difícil</small></span>
+      <span><b>enfermo</b><small class="pt">doente</small></span>
+      <span><b>enfadado / enojado</b><small class="pt">zangado / irritado</small></span>
+      <span><b>estupendo</b><small class="pt">ótimo</small></span>
+      <span><b>excelente</b><small class="pt">excelente</small></span>
+      <span><b>fácil</b><small class="pt">fácil</small></span>
+      <span><b>fantástico</b><small class="pt">fantástico</small></span>
+      <span><b>feliz</b><small class="pt">feliz</small></span>
+      <span><b>feo</b><small class="pt">feio</small></span>
+      <span><b>flaco</b><small class="pt">magro</small></span>
+      <span><b>frágil</b><small class="pt">frágil</small></span>
+      <span><b>fuerte</b><small class="pt">forte</small></span>
+    </div>
+    <div class="note"><b>Enfadado</b> se usa más en España; <b>enojado</b> se usa más en América Latina. <b>Débil</b> habla de poca fuerza; <b>flaco</b> y <b>delgado</b> describen complexión física.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="41">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">41 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Adjetivos G-V.</div>
+    <h1>Vocabulario de la Lección 1</h1>
+    <div class="body">
+    <div class="badge">PARA CONSULTAR</div>
+    <div class="adjective-cloud">
+      <span><b>gordo</b><small class="pt">gordo</small></span>
+      <span><b>grande</b><small class="pt">grande</small></span>
+      <span><b>guapo</b><small class="pt">bonito / atraente</small></span>
+      <span><b>hermoso</b><small class="pt">belo</small></span>
+      <span><b>horrible</b><small class="pt">horrível</small></span>
+      <span><b>inteligente</b><small class="pt">inteligente</small></span>
+      <span><b>interesante</b><small class="pt">interessante</small></span>
+      <span><b>joven</b><small class="pt">jovem</small></span>
+      <span><b>lindo</b><small class="pt">lindo</small></span>
+      <span><b>maravilloso</b><small class="pt">maravilhoso</small></span>
+      <span><b>pequeño</b><small class="pt">pequeno</small></span>
+      <span><b>pobre</b><small class="pt">pobre</small></span>
+      <span><b>rico</b><small class="pt">rico</small></span>
+      <span><b>sabroso</b><small class="pt">saboroso</small></span>
+      <span><b>simpático</b><small class="pt">simpático</small></span>
+      <span><b>sincero</b><small class="pt">sincero</small></span>
+      <span><b>tacaño</b><small class="pt">pão-duro / avarento</small></span>
+      <span><b>típico</b><small class="pt">típico</small></span>
+      <span><b>triste</b><small class="pt">triste</small></span>
+      <span><b>viejo</b><small class="pt">velho</small></span>
+    </div>
+    <div class="note"><b>Guapo</b> se usa mucho para personas. <b>Lindo</b> casi no se usa en España; suele usarse más en América Latina. <b>Rico</b> puede hablar de dinero o de comida.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide " data-index="42">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">42 / 42</div></div>
+  <div class="content">
+    <div class="subtitle">Otras palabras útiles.</div>
+    <h1>Vocabulario de la Lección 1</h1>
+    <div class="body">
+    <div class="badge">PARA CONSULTAR</div>
+    <div class="lexicon-sections">
+      <section class="lexicon-section">
+        <h3>Patrones y palabras abstractas</h3>
+        <div class="word-columns dense">
+          <div>el clima<small>o clima</small></div>
+          <div>el día<small>o dia</small></div>
+          <div>el drama<small>o drama</small></div>
+          <div>el idioma<small>o idioma</small></div>
+          <div>el mapa<small>o mapa</small></div>
+          <div>el planeta<small>o planeta</small></div>
+          <div>el poema<small>o poema</small></div>
+          <div>el problema<small>o problema</small></div>
+          <div>el programa<small>o programa</small></div>
+          <div>el sistema<small>o sistema</small></div>
+          <div>la actitud<small>a atitude</small></div>
+          <div>la amistad<small>a amizade</small></div>
+          <div>la canción<small>a canção</small></div>
+          <div>la conversación<small>a conversa</small></div>
+          <div>la idea<small>a ideia</small></div>
+          <div>la ilusión<small>a ilusão</small></div>
+          <div>la invitación<small>o convite</small></div>
+          <div>la lección<small>a lição</small></div>
+          <div>la luz<small>a luz</small></div>
+          <div>la piel<small>a pele</small></div>
+          <div>la suerte<small>a sorte</small></div>
+          <div>la televisión<small>a televisão</small></div>
+          <div>la verdad<small>a verdade</small></div>
+        </div>
+      </section>
+      <section class="lexicon-section">
+        <h3>Preguntas, lugar y origen</h3>
+        <div class="vocab-list">
+          <div><b>¿Cómo?</b><span>Como?</span></div>
+          <div><b>¿Dónde?</b><span>Onde?</span></div>
+          <div><b>¿Quién?</b><span>Quem?</span></div>
+          <div><b>aquí</b><span>aqui</span></div>
+          <div><b>acá</b><span>cá / aqui</span></div>
+          <div><b>allí</b><span>ali</span></div>
+          <div><b>allá</b><span>lá</span></div>
+          <div><b>cubano</b><span>cubano</span></div>
+          <div><b>católico / católica</b><span>católico / católica</span></div>
+          <div><b>Brasil · Italia · México · Portugal</b><span>origen</span></div>
+          <div><b>Nueva York · los Estados Unidos</b><span>origen</span></div>
+        </div>
+      </section>
+    </div>
+    <div class="note">Puedes volver a escuchar los audios y utilizar este vocabulario como referencia.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 1 · Primeros pasos</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<div class="font-controls" aria-label="Tamaño de fuente">
+  <button type="button" data-font-action="decrease" aria-label="Disminuir tamaño de fuente">A−</button>
+  <button type="button" data-font-action="reset" aria-label="Restaurar tamaño de fuente">A</button>
+  <button type="button" data-font-action="increase" aria-label="Aumentar tamaño de fuente">A+</button>
+</div>
+<div id="progress" class="progress"></div>
+<script>
+const FONT_STORAGE_KEY='leccion1FontScale';
+const FONT_MIN=.85;
+const FONT_DEFAULT=1;
+const FONT_MAX=1.7;
+const FONT_STEP=.05;
+const fontBase={
+  '--fs-top':13,'--fs-subtitle':30,'--fs-h1':39,'--fs-h1-mobile':30,'--fs-h2':46,'--fs-h3':24,'--fs-foot':12,
+  '--fs-lead':22,'--fs-badge':14,'--fs-stack':31,'--fs-sentence':30,'--fs-card':20,'--fs-compact-card':18,'--fs-small':13,
+  '--fs-vocab-strong':26,'--fs-vocab-small':15,'--fs-vocab-list':18,'--fs-example-big':24,'--fs-example-compact':17,'--fs-note':17,
+  '--fs-builder-small':26,'--fs-arrow':32,'--fs-growth':25,'--fs-article-cell':23,'--fs-article-head':17,'--fs-article':35,
+  '--fs-article-pt':16,'--fs-micro':25,'--fs-word':19,'--fs-ending-b':30,'--fs-ending-span':18,'--fs-compare':17,
+  '--fs-transform':22,'--fs-exercise-number':13,'--fs-concordance':25,'--fs-pairs':16,'--fs-color':15,'--fs-adjective':13,
+  '--fs-word-dense':17,'--fs-small-dense':12,
+  '--fs-pronoun-b':21,'--fs-pronoun-span':14,'--fs-verb':20,'--fs-verb-translation':13,'--fs-ser-estar-h3':34,'--fs-ser-estar-p':16,
+  '--fs-summary':19,'--fs-summary-span':24,'--fs-final':22,'--fs-workbook-icon':86,'--fs-workbook-h3':30,'--fs-workbook-p':20,
+  '--fs-huge':68,'--fs-closing-p':24,'--fs-closing-sentence':33,'--fs-translation':13,'--fs-title-translation':16,'--fs-controls':14
+};
+const spacingBase={
+  '--slide-pad-y':28,'--slide-pad-x':54,'--slide-pad-bottom':26,
+  '--slide-pad-y-mobile':20,'--slide-pad-x-mobile':28,'--slide-pad-bottom-mobile':26,
+  '--foot-x':54,'--foot-x-mobile':28,'--grid-gap':16,'--grid-gap-small':10,'--cloud-gap':9,'--term-gap':7,'--translation-gap':5
+};
+function normalizeScale(value){
+  if(value===null || value===undefined || value==='')return FONT_DEFAULT;
+  const number=Number(value);
+  const scaled=Number.isFinite(number)?number:FONT_DEFAULT;
+  return Math.round(Math.min(FONT_MAX,Math.max(FONT_MIN,scaled))*100)/100;
+}
+function setPxVar(name,value){
+  document.documentElement.style.setProperty(name,`${Math.round(value*100)/100}px`);
+}
+function readFontScale(){
+  try{return normalizeScale(localStorage.getItem(FONT_STORAGE_KEY));}
+  catch{return FONT_DEFAULT;}
+}
+function saveFontScale(scale){
+  try{localStorage.setItem(FONT_STORAGE_KEY,String(scale));}
+  catch{}
+}
+function updateFontButtons(scale){
+  document.querySelectorAll('[data-font-action]').forEach(button=>{
+    const action=button.dataset.fontAction;
+    button.classList.toggle('active',action==='reset' && scale===FONT_DEFAULT);
+    button.setAttribute('aria-pressed',String(action==='reset' && scale===FONT_DEFAULT));
+  });
+}
+function applyFontScale(value,{persist=true}={}){
+  const scale=normalizeScale(value);
+  const pressure=Math.max(0,scale-FONT_DEFAULT)/(FONT_MAX-FONT_DEFAULT);
+  const spacingFactor=1-(pressure*.34);
+  document.documentElement.style.setProperty('--font-scale',String(scale));
+  Object.entries(fontBase).forEach(([name,base])=>setPxVar(name,base*scale));
+  Object.entries(spacingBase).forEach(([name,base])=>setPxVar(name,base*spacingFactor));
+  if(persist)saveFontScale(scale);
+  updateFontButtons(scale);
+  return scale;
+}
+function changeFontScale(delta){
+  const scale=normalizeScale((Number(document.documentElement.style.getPropertyValue('--font-scale')) || FONT_DEFAULT)+delta);
+  applyFontScale(scale);
+}
+let slides=[...document.querySelectorAll('.slide')];
+let current=0;
+function refreshSlideMetadata(){
+  slides=[...document.querySelectorAll('.slide')];
+  const total=String(slides.length).padStart(2,'0');
+  slides.forEach((slide,index)=>{
+    slide.dataset.index=String(index+1);
+    const count=slide.querySelector('.count');
+    if(count)count.textContent=`${String(index+1).padStart(2,'0')} / ${total}`;
+  });
+}
+function slideIndexFromHash(){
+  const h=Number.parseInt(location.hash.slice(1),10);
+  return Number.isFinite(h)?h-1:0;
+}
+function syncHash(){
+  const next=String(current+1);
+  if(location.hash.slice(1)!==next)location.hash=next;
+}
+function show(n,{updateHash=true}={}){
+  current=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,i)=>s.classList.toggle('active',i===current));
+  document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';
+  if(updateHash)syncHash();
+}
+document.addEventListener('keydown',e=>{
+  if(e.target instanceof Element && e.target.closest('audio') && [' ','Enter','ArrowRight','PageDown','ArrowLeft','PageUp','Home','End'].includes(e.key))return;
+  if(e.target instanceof Element && e.target.closest('.font-controls') && [' ','Enter'].includes(e.key))return;
+  if(e.ctrlKey || e.metaKey){
+    if(['+','='].includes(e.key)){e.preventDefault();changeFontScale(FONT_STEP);return;}
+    if(['-','_'].includes(e.key)){e.preventDefault();changeFontScale(-FONT_STEP);return;}
+    if(e.key==='0'){e.preventDefault();applyFontScale(FONT_DEFAULT);return;}
+  }
+  if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1);}
+  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1);}
+  if(e.key==='Home')show(0);
+  if(e.key==='End')show(slides.length-1);
+  if(e.key.toLowerCase()==='f'){
+    const request=document.documentElement.requestFullscreen?.();
+    request?.catch?.(()=>{});
+  }
+});
+document.addEventListener('click',e=>{
+  if(e.target instanceof Element && e.target.closest('.font-controls,a,button,audio,.audio-card,details,summary'))return;
+  if(e.clientX>innerWidth*.68)show(current+1);
+  else if(e.clientX<innerWidth*.32)show(current-1);
+});
+document.querySelector('.font-controls')?.addEventListener('click',e=>{
+  e.stopPropagation();
+  if(!(e.target instanceof Element))return;
+  const button=e.target.closest('[data-font-action]');
+  if(!button)return;
+  const action=button.dataset.fontAction;
+  if(action==='decrease')changeFontScale(-FONT_STEP);
+  if(action==='increase')changeFontScale(FONT_STEP);
+  if(action==='reset')applyFontScale(FONT_DEFAULT);
+});
+window.addEventListener('hashchange',()=>show(slideIndexFromHash(),{updateHash:false}));
+refreshSlideMetadata();
+applyFontScale(readFontScale(),{persist:false});
+show(slideIndexFromHash());
+</script>
+</body>
+</html>

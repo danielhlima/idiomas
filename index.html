@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portal do curso de Ingl&ecirc;s.">
+  <meta name="description" content="Portal dos cursos de Ingl&ecirc;s e Espanhol.">
   <title>Cursos de Idiomas</title>
   <style>
     :root {
@@ -86,10 +86,6 @@
       text-decoration: none;
     }
 
-    .course-card--inactive {
-      box-shadow: none;
-    }
-
     .course-top {
       display: flex;
       align-items: flex-start;
@@ -167,16 +163,6 @@
       font-weight: 400;
     }
 
-    .lesson-link--disabled {
-      color: var(--muted);
-      cursor: default;
-      background: #eef1f5;
-    }
-
-    .lesson-link--disabled:hover {
-      border-color: var(--line);
-    }
-
     .lesson-link:hover {
       border-color: currentColor;
     }
@@ -218,7 +204,8 @@
       <p class="eyebrow">Portal de estudos</p>
       <h1 id="page-title">Cursos de Idiomas</h1>
       <p class="summary">
-        Acesse o material liberado para estudo pelo celular, tablet ou computador.
+        Acesse as aulas e materiais pelo celular, tablet ou computador. Escolha o curso
+        abaixo para continuar.
       </p>
     </section>
 
@@ -229,7 +216,7 @@
             <h2 class="language">Curso de Ingl&ecirc;s</h2>
             <span class="tag english">English</span>
           </div>
-          <p>Aula, exerc&iacute;cios e &aacute;udios da primeira li&ccedil;&atilde;o do curso de Ingl&ecirc;s.</p>
+          <p>Aulas, exerc&iacute;cios e &aacute;udios do curso de Ingl&ecirc;s.</p>
           <div class="course-image">
             <img src="english-course-template/Lesson01/assets/images/lesson-1-introductions-cover.png" alt="Capa da Li&ccedil;&atilde;o 1 de Ingl&ecirc;s">
           </div>
@@ -238,21 +225,30 @@
           <a class="lesson-link" href="english-course-template/Lesson01/index.html">
             Li&ccedil;&atilde;o 1 <span>Abrir</span>
           </a>
+          <a class="lesson-link" href="english-course-template/Lesson02/index.html">
+            Li&ccedil;&atilde;o 2 <span>Abrir</span>
+          </a>
         </nav>
       </article>
 
-      <article class="course-card course-card--inactive">
+      <article class="course-card">
         <div>
           <div class="course-top">
             <h2 class="language">Curso de Espanhol</h2>
             <span class="tag spanish">Espa&ntilde;ol</span>
           </div>
-          <p>Material reservado para uma pr&oacute;xima publica&ccedil;&atilde;o.</p>
+          <p>Aulas, guias e atividades do curso de Espanhol.</p>
+          <div class="course-image">
+            <img src="Curso%20de%20Espanhol/assets/leccion-02/casa-slide-04.png" alt="Ilustra&ccedil;&atilde;o de casa na aula de Espanhol">
+          </div>
         </div>
-        <nav class="actions" aria-label="Curso de Espanhol">
-          <span class="lesson-link lesson-link--disabled" aria-disabled="true">
-            Curso de Espanhol <span>Em breve</span>
-          </span>
+        <nav class="actions" aria-label="Aulas de Espanhol">
+          <a class="lesson-link" href="Curso%20de%20Espanhol/leccion_1_material_v01.html">
+            Lecci&oacute;n 1 <span>Abrir</span>
+          </a>
+          <a class="lesson-link" href="Curso%20de%20Espanhol/leccion_2_material_v01.html">
+            Lecci&oacute;n 2 <span>Abrir</span>
+          </a>
         </nav>
       </article>
     </section>

@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Workbook · Lección 1 · Ejercicio 1</title>
+<style>
+:root{
+  --red:#aa151b;
+  --gold:#f1bf00;
+  --ink:#172033;
+  --muted:#667085;
+  --paper:#fffdf8;
+  --blue:#2d5ea8;
+  --green:#2d7a5b;
+  --soft:#f4efe4;
+  --danger:#b42318;
+  --danger-soft:#fff1f0;
+  --success-soft:#ecfdf3;
+  --focus:rgba(45,94,168,.38);
+  --font-scale:1;
+}
+*{box-sizing:border-box}
+html{font-size:calc(16px * var(--font-scale))}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 92% 10%,rgba(241,191,0,.22),transparent 28%),
+    linear-gradient(135deg,#fff,#f7f1e5);
+}
+button,a{font:inherit}
+button:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.page{width:min(100%,980px);margin:0 auto;padding:30px 22px 24px}
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  border-bottom:2px solid rgba(170,21,27,.18);
+  padding-bottom:10px;
+  color:var(--muted);
+  font-size:.82rem;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+.course{font-weight:900;color:var(--red)}
+.font-controls{
+  position:fixed;
+  right:18px;
+  top:18px;
+  z-index:10;
+  display:flex;
+  gap:4px;
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(23,32,51,.14);
+  border-radius:12px;
+  padding:5px;
+  box-shadow:0 8px 22px #0002;
+  backdrop-filter:blur(8px);
+}
+.font-controls button{
+  width:34px;
+  height:32px;
+  border:0;
+  border-radius:8px;
+  background:transparent;
+  color:var(--ink);
+  font-size:.88rem;
+  font-weight:900;
+  cursor:pointer;
+}
+.font-controls button:hover,.font-controls button.active{background:var(--soft);color:var(--red)}
+.hero{margin:30px 0 20px}
+.eyebrow{font-size:.82rem;font-weight:900;letter-spacing:.14em;color:var(--red);text-transform:uppercase}
+h1{margin:8px 0 4px;font-size:clamp(2rem,5vw,3.1rem);line-height:1.04}
+.subtitle{margin:0;color:var(--muted);font-size:1.05rem}
+.shell{
+  background:rgba(255,255,255,.82);
+  border:1px solid rgba(23,32,51,.08);
+  border-radius:18px;
+  box-shadow:0 22px 60px #0002;
+  overflow:hidden;
+}
+.status{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:rgba(23,32,51,.1);
+}
+.status>div{background:white;padding:15px 18px}
+.status small{
+  display:block;
+  margin-bottom:5px;
+  color:var(--muted);
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.status strong{font-size:1.15rem}
+.progress-track{height:8px;background:#e6e1d7}
+.progress-bar{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--red),var(--gold));
+  transition:width .25s ease;
+}
+.exercise{padding:30px}
+.question-title{
+  margin:0;
+  font-size:clamp(2.35rem,9vw,4.5rem);
+  line-height:1;
+  letter-spacing:0;
+}
+.blank{color:var(--muted)}
+.options{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:28px 0 18px;
+}
+.answer{
+  min-height:62px;
+  border:2px solid rgba(23,32,51,.12);
+  border-radius:14px;
+  background:white;
+  color:var(--ink);
+  font-size:1.28rem;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 8px 22px #0001;
+  transition:transform .16s ease,border-color .16s ease,background .16s ease;
+}
+.answer:hover:not(:disabled){transform:translateY(-1px);border-color:rgba(45,94,168,.45)}
+.answer:disabled{cursor:default}
+.answer.correct{
+  border-color:var(--green);
+  background:var(--success-soft);
+  color:#067647;
+}
+.answer.incorrect{
+  border-color:var(--danger);
+  background:var(--danger-soft);
+  color:var(--danger);
+}
+.answer .mark{display:inline-block;min-width:1.25em;font-weight:900}
+.feedback{
+  min-height:88px;
+  border-radius:16px;
+  border:1px solid rgba(23,32,51,.1);
+  background:#fffdf8;
+  padding:16px 18px;
+}
+.feedback strong{display:block;margin-bottom:5px;font-size:1.08rem}
+.feedback.correct{border-left:7px solid var(--green)}
+.feedback.incorrect{border-left:7px solid var(--danger)}
+.feedback p{margin:0;color:var(--muted);line-height:1.45}
+.actions{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:12px;
+  margin-top:20px;
+}
+.primary,.secondary{
+  min-height:48px;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:900;
+  text-decoration:none;
+  cursor:pointer;
+}
+.primary{
+  border:0;
+  background:var(--red);
+  color:white;
+}
+.primary:disabled{
+  background:#c9c3b8;
+  color:#6b6258;
+  cursor:not-allowed;
+}
+.secondary{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(23,32,51,.16);
+  background:white;
+  color:var(--ink);
+}
+.result{
+  display:none;
+  padding:34px 30px;
+}
+.result.active{display:block}
+.result h2{margin:0 0 10px;font-size:clamp(2rem,6vw,3.2rem)}
+.score-line{margin:0;color:var(--muted);font-size:1.15rem}
+.score-card{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:24px 0;
+}
+.score-card div{
+  background:white;
+  border-radius:14px;
+  padding:18px;
+  box-shadow:0 8px 22px #0001;
+}
+.score-card small{
+  display:block;
+  color:var(--muted);
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.score-card strong{display:block;margin-top:6px;font-size:1.55rem;color:var(--red)}
+.message{
+  margin:0 0 24px;
+  border-left:7px solid var(--gold);
+  background:white;
+  border-radius:14px;
+  padding:18px;
+  font-size:1.12rem;
+  font-weight:800;
+}
+.result-actions{display:flex;flex-wrap:wrap;gap:12px}
+.is-hidden{display:none}
+@media(max-width:720px){
+  .page{padding:22px 14px 18px}
+  .top{align-items:flex-start;flex-direction:column;padding-right:112px}
+  .font-controls{right:12px;top:12px}
+  .hero{margin:24px 0 16px}
+  .status{grid-template-columns:1fr}
+  .status>div{padding:12px 14px}
+  .exercise,.result{padding:22px 16px}
+  .options{grid-template-columns:repeat(2,1fr);gap:10px;margin-top:22px}
+  .answer{min-height:56px}
+  .score-card{grid-template-columns:1fr}
+  .actions{justify-content:stretch}
+  .primary,.secondary{width:100%}
+  .result-actions{flex-direction:column}
+}
+@media(max-width:420px){
+  .options{grid-template-columns:1fr}
+  .question-title{font-size:2.45rem}
+}
+</style>
+</head>
+<body>
+<div class="font-controls" aria-label="Tamaño de fuente">
+  <button type="button" data-font-action="decrease" aria-label="Disminuir tamaño de fuente">A−</button>
+  <button type="button" data-font-action="reset" aria-label="Restaurar tamaño de fuente">A</button>
+  <button type="button" data-font-action="increase" aria-label="Aumentar tamaño de fuente">A+</button>
+</div>
+
+<main class="page">
+  <header class="top">
+    <div class="course">CURSO DE ESPAÑOL · WORKBOOK</div>
+    <div>Lección 1 · Artículos definidos</div>
+  </header>
+
+  <section class="hero" aria-labelledby="exercise-heading">
+    <div class="eyebrow">EJERCICIO 1</div>
+    <h1 id="exercise-heading">Artículos definidos</h1>
+    <p class="subtitle">Selecciona el artículo correcto.</p>
+  </section>
+
+  <section id="exercise-shell" class="shell" aria-label="Ejercicio interactivo">
+    <div class="status" aria-label="Estado del ejercicio">
+      <div>
+        <small>Pregunta</small>
+        <strong id="question-count">1 / 20</strong>
+      </div>
+      <div>
+        <small>Puntuación</small>
+        <strong id="score-count">0</strong>
+      </div>
+      <div>
+        <small>Mejor resultado</small>
+        <strong id="best-score">-</strong>
+      </div>
+    </div>
+    <div class="progress-track" aria-hidden="true">
+      <div id="progress-bar" class="progress-bar"></div>
+    </div>
+
+    <div id="exercise-panel" class="exercise">
+      <h2 id="question-title" class="question-title" tabindex="-1"></h2>
+      <div id="options" class="options" role="group" aria-label="Opciones de respuesta"></div>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+      <div class="actions">
+        <button id="next-button" class="primary" type="button" disabled>Siguiente</button>
+      </div>
+    </div>
+
+    <div id="result-panel" class="result" tabindex="-1" aria-labelledby="result-title">
+      <h2 id="result-title">Resultado</h2>
+      <p id="result-summary" class="score-line"></p>
+      <div class="score-card" aria-label="Resumen de puntuación">
+        <div><small>Correctas</small><strong id="result-correct"></strong></div>
+        <div><small>Total</small><strong id="result-total"></strong></div>
+        <div><small>Porcentaje</small><strong id="result-percent"></strong></div>
+      </div>
+      <p id="result-message" class="message"></p>
+      <p id="previous-best" class="score-line"></p>
+      <div class="result-actions">
+        <button id="restart-button" class="primary" type="button">Repetir ejercicio</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+const questions = [
+  { noun: "libro", answer: "el", gender: "masculino", number: "singular" },
+  { noun: "casa", answer: "la", gender: "femenino", number: "singular" },
+  { noun: "perros", answer: "los", gender: "masculino", number: "plural" },
+  { noun: "ventanas", answer: "las", gender: "femenino", number: "plural" },
+  { noun: "problema", answer: "el", gender: "masculino", number: "singular" },
+  { noun: "ciudad", answer: "la", gender: "femenino", number: "singular" },
+  { noun: "hoteles", answer: "los", gender: "masculino", number: "plural" },
+  { noun: "flores", answer: "las", gender: "femenino", number: "plural" },
+  { noun: "día", answer: "el", gender: "masculino", number: "singular" },
+  { noun: "mano", answer: "la", gender: "femenino", number: "singular" },
+  { noun: "estudiantes", answer: "los", gender: "masculino", number: "plural" },
+  { noun: "canciones", answer: "las", gender: "femenino", number: "plural" },
+  { noun: "mapa", answer: "el", gender: "masculino", number: "singular" },
+  { noun: "mujer", answer: "la", gender: "femenino", number: "singular" },
+  { noun: "animales", answer: "los", gender: "masculino", number: "plural" },
+  { noun: "lámparas", answer: "las", gender: "femenino", number: "plural" },
+  { noun: "idioma", answer: "el", gender: "masculino", number: "singular" },
+  { noun: "televisión", answer: "la", gender: "femenino", number: "singular" },
+  { noun: "trenes", answer: "los", gender: "masculino", number: "plural" },
+  { noun: "tiendas", answer: "las", gender: "femenino", number: "plural" }
+];
+
+const OPTIONS = ["el", "la", "los", "las"];
+const BEST_SCORE_KEY = "leccion1Ejercicio1BestScore";
+const FONT_STORAGE_KEY = "leccion1FontScale";
+const FONT_MIN = 0.85;
+const FONT_DEFAULT = 1;
+const FONT_MAX = 1.2;
+const FONT_STEP = 0.05;
+
+let currentIndex = 0;
+let score = 0;
+let answered = false;
+let selectedAnswer = "";
+
+const exercisePanel = document.getElementById("exercise-panel");
+const resultPanel = document.getElementById("result-panel");
+const questionCount = document.getElementById("question-count");
+const scoreCount = document.getElementById("score-count");
+const bestScore = document.getElementById("best-score");
+const progressBar = document.getElementById("progress-bar");
+const questionTitle = document.getElementById("question-title");
+const optionsContainer = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const nextButton = document.getElementById("next-button");
+const restartButton = document.getElementById("restart-button");
+
+function readStorage(key){
+  try{
+    return localStorage.getItem(key);
+  }catch{
+    return null;
+  }
+}
+
+function writeStorage(key, value){
+  try{
+    localStorage.setItem(key, String(value));
+  }catch{}
+}
+
+function capitalize(value){
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+function getBestScore(){
+  const rawScore = readStorage(BEST_SCORE_KEY);
+  if(rawScore === null)return null;
+  const stored = Number(rawScore);
+  return Number.isFinite(stored) ? stored : null;
+}
+
+function updateBestScoreLabel(){
+  const best = getBestScore();
+  bestScore.textContent = best === null ? "-" : `${best}/${questions.length}`;
+}
+
+function explanationFor(question){
+  return `"${capitalize(question.noun)}" es ${question.gender} ${question.number}.`;
+}
+
+function updateProgress(){
+  questionCount.textContent = `${currentIndex + 1} / ${questions.length}`;
+  scoreCount.textContent = String(score);
+  progressBar.style.width = `${((currentIndex + 1) / questions.length) * 100}%`;
+  updateBestScoreLabel();
+}
+
+function renderQuestion(){
+  const question = questions[currentIndex];
+  answered = false;
+  selectedAnswer = "";
+
+  exercisePanel.classList.remove("is-hidden");
+  resultPanel.classList.remove("active");
+  questionTitle.innerHTML = `<span class="blank">___</span> ${question.noun}`;
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+  nextButton.disabled = true;
+  nextButton.textContent = currentIndex === questions.length - 1 ? "Ver resultado" : "Siguiente";
+  optionsContainer.innerHTML = "";
+
+  OPTIONS.forEach(option => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "answer";
+    button.textContent = option;
+    button.setAttribute("aria-label", `Seleccionar ${option}`);
+    button.addEventListener("click", () => selectAnswer(option));
+    optionsContainer.appendChild(button);
+  });
+
+  updateProgress();
+}
+
+function showFeedback(isCorrect, question){
+  feedback.className = `feedback ${isCorrect ? "correct" : "incorrect"}`;
+  if(isCorrect){
+    feedback.innerHTML = `<strong>¡Correcto!</strong><p>${explanationFor(question)}</p>`;
+    return;
+  }
+  feedback.innerHTML = `<strong>Incorrecto.</strong><p>La respuesta correcta es "${question.answer}".<br>${explanationFor(question)}</p>`;
+}
+
+function selectAnswer(option){
+  if(answered)return;
+
+  const question = questions[currentIndex];
+  const isCorrect = option === question.answer;
+  answered = true;
+  selectedAnswer = option;
+
+  if(isCorrect)score += 1;
+
+  [...optionsContainer.querySelectorAll(".answer")].forEach(button => {
+    const value = button.textContent.trim();
+    button.disabled = true;
+    button.innerHTML = `<span class="mark"></span>${value}`;
+
+    if(value === question.answer){
+      button.classList.add("correct");
+      button.querySelector(".mark").textContent = "✓";
+      button.setAttribute("aria-label", `${value}, respuesta correcta`);
+    }
+
+    if(value === selectedAnswer && !isCorrect){
+      button.classList.add("incorrect");
+      button.querySelector(".mark").textContent = "✕";
+      button.setAttribute("aria-label", `${value}, respuesta incorrecta`);
+    }
+  });
+
+  showFeedback(isCorrect, question);
+  scoreCount.textContent = String(score);
+  nextButton.disabled = false;
+}
+
+function nextQuestion(){
+  if(!answered)return;
+
+  if(currentIndex === questions.length - 1){
+    showResult();
+    return;
+  }
+
+  currentIndex += 1;
+  renderQuestion();
+  questionTitle.focus();
+}
+
+function resultMessage(percent){
+  if(percent >= 90)return "¡Excelente trabajo!";
+  if(percent >= 70)return "¡Muy bien! Repasa solo algunos casos.";
+  if(percent >= 50)return "Vas por buen camino. Conviene revisar género y plural.";
+  return "Repasa los artículos definidos y vuelve a intentarlo.";
+}
+
+function showResult(){
+  const previousBest = getBestScore();
+  const percent = Math.round((score / questions.length) * 100);
+  const newBest = previousBest === null ? score : Math.max(previousBest, score);
+
+  writeStorage(BEST_SCORE_KEY, newBest);
+  updateBestScoreLabel();
+  progressBar.style.width = "100%";
+
+  document.getElementById("result-summary").textContent = `Has completado el ejercicio.`;
+  document.getElementById("result-correct").textContent = String(score);
+  document.getElementById("result-total").textContent = String(questions.length);
+  document.getElementById("result-percent").textContent = `${percent}%`;
+  document.getElementById("result-message").textContent = resultMessage(percent);
+  document.getElementById("previous-best").textContent = previousBest === null ? "" : `Mejor resultado: ${previousBest}/${questions.length}`;
+
+  exercisePanel.classList.add("is-hidden");
+  resultPanel.classList.add("active");
+  resultPanel.focus();
+}
+
+function restartExercise(){
+  currentIndex = 0;
+  score = 0;
+  answered = false;
+  selectedAnswer = "";
+  renderQuestion();
+  questionTitle.focus();
+}
+
+function normalizeScale(value){
+  if(value === null || value === undefined || value === "")return FONT_DEFAULT;
+  const number = Number(value);
+  const scaled = Number.isFinite(number) ? number : FONT_DEFAULT;
+  return Math.round(Math.min(FONT_MAX, Math.max(FONT_MIN, scaled)) * 100) / 100;
+}
+
+function readFontScale(){
+  return normalizeScale(readStorage(FONT_STORAGE_KEY));
+}
+
+function updateFontButtons(scale){
+  document.querySelectorAll("[data-font-action]").forEach(button => {
+    const active = button.dataset.fontAction === "reset" && scale === FONT_DEFAULT;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+}
+
+function applyFontScale(value){
+  const scale = normalizeScale(value);
+  document.documentElement.style.setProperty("--font-scale", String(scale));
+  writeStorage(FONT_STORAGE_KEY, scale);
+  updateFontButtons(scale);
+  return scale;
+}
+
+function changeFontScale(delta){
+  const current = Number(getComputedStyle(document.documentElement).getPropertyValue("--font-scale")) || FONT_DEFAULT;
+  applyFontScale(current + delta);
+}
+
+nextButton.addEventListener("click", nextQuestion);
+restartButton.addEventListener("click", restartExercise);
+
+document.querySelector(".font-controls").addEventListener("click", event => {
+  event.stopPropagation();
+  const button = event.target.closest("[data-font-action]");
+  if(!button)return;
+
+  if(button.dataset.fontAction === "decrease")changeFontScale(-FONT_STEP);
+  if(button.dataset.fontAction === "increase")changeFontScale(FONT_STEP);
+  if(button.dataset.fontAction === "reset")applyFontScale(FONT_DEFAULT);
+});
+
+document.addEventListener("keydown", event => {
+  if(!(event.ctrlKey || event.metaKey))return;
+  if(["+","="].includes(event.key)){
+    event.preventDefault();
+    changeFontScale(FONT_STEP);
+  }
+  if(["-","_"].includes(event.key)){
+    event.preventDefault();
+    changeFontScale(-FONT_STEP);
+  }
+  if(event.key === "0"){
+    event.preventDefault();
+    applyFontScale(FONT_DEFAULT);
+  }
+});
+
+applyFontScale(readFontScale());
+renderQuestion();
+</script>
+</body>
+</html>
