@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Home direta do Curso de Inglês.">
+  <title>Curso de Ingl&ecirc;s</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --text: #172033;
+      --muted: #627085;
+      --line: #d8dde8;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --shadow: 0 18px 45px rgba(23, 32, 51, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    main {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 36px;
+    }
+
+    .top-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      color: var(--accent-dark);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .intro {
+      padding: 24px 0 30px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent-dark);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(2.4rem, 10vw, 5.7rem);
+      line-height: 0.95;
+    }
+
+    .summary {
+      margin: 18px 0 0;
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.55;
+    }
+
+    .lesson-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .lesson-card {
+      display: flex;
+      min-height: 440px;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      color: inherit;
+      text-decoration: none;
+      box-shadow: var(--shadow);
+    }
+
+    .lesson-card:hover {
+      border-color: var(--accent);
+    }
+
+    .lesson-card:focus-visible {
+      border-color: var(--accent);
+      outline: 3px solid rgba(37, 99, 235, 0.28);
+      outline-offset: 4px;
+    }
+
+    .lesson-image {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: #edf2fa;
+    }
+
+    .lesson-image img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .lesson-body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .lesson-number {
+      margin: 0 0 12px;
+      color: var(--accent-dark);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.55rem;
+      line-height: 1.08;
+    }
+
+    .lesson-card p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .open-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      min-height: 48px;
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
+    @media (max-width: 920px) {
+      .lesson-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      main {
+        width: min(100% - 24px, 560px);
+        padding: 20px 0 28px;
+      }
+
+      .lesson-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lesson-card {
+        min-height: 390px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="top-link" href="../index.html">Portal de idiomas</a>
+
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">English</p>
+      <h1 id="page-title">Curso de Ingl&ecirc;s</h1>
+      <p class="summary">
+        Aulas dispon&iacute;veis para estudo direto, com apresenta&ccedil;&otilde;es,
+        &aacute;udios, atividades e materiais de apoio.
+      </p>
+    </section>
+
+    <section class="lesson-grid" aria-label="Li&ccedil;&otilde;es de Ingl&ecirc;s">
+      <a class="lesson-card" href="../english-course-template/Lesson01/index.html">
+        <div class="lesson-image">
+          <img src="../english-course-template/Lesson01/assets/images/lesson-1-introductions-cover.png" alt="Capa da Lesson 1 do curso de Ingl&ecirc;s">
+        </div>
+        <div class="lesson-body">
+          <div>
+            <p class="lesson-number">Lesson 1</p>
+            <h2>Introductions</h2>
+            <p>Greetings, names, introductions and first conversations.</p>
+          </div>
+          <span class="open-label">Abrir aula <span aria-hidden="true">-&gt;</span></span>
+        </div>
+      </a>
+
+      <a class="lesson-card" href="../english-course-template/Lesson02/index.html">
+        <div class="lesson-image">
+          <img src="../english-course-template/Lesson02/assets/images/lesson2-slide-01.png" alt="Capa da Lesson 2 do curso de Ingl&ecirc;s">
+        </div>
+        <div class="lesson-body">
+          <div>
+            <p class="lesson-number">Lesson 2</p>
+            <h2>Things Around You</h2>
+            <p>Objects, instructions, colours, feelings and prepositions of place.</p>
+          </div>
+          <span class="open-label">Abrir aula <span aria-hidden="true">-&gt;</span></span>
+        </div>
+      </a>
+
+      <a class="lesson-card" href="../english-course-template/Lesson03/index.html">
+        <div class="lesson-image">
+          <img src="../english-course-template/Lesson03/assets/images/lesson-3-cover.jpeg" alt="Capa da Lesson 3 do curso de Ingl&ecirc;s">
+        </div>
+        <div class="lesson-body">
+          <div>
+            <p class="lesson-number">Lesson 3</p>
+            <h2>Consolidation</h2>
+            <p>Review, listening practice, numbers, places and object vocabulary.</p>
+          </div>
+          <span class="open-label">Abrir aula <span aria-hidden="true">-&gt;</span></span>
+        </div>
+      </a>
+    </section>
+  </main>
+</body>
+</html>

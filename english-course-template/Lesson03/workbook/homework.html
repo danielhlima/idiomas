@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lesson 3 homework review for English Course.">
+  <title>Lesson 3 - Homework</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      background: #f5f7fa;
+      color: #161616;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.08rem;
+      line-height: 1.5;
+      margin: 0;
+      min-height: 100%;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.62;
+    }
+
+    :root {
+      --surface: #ffffff;
+      --surface-soft: #f0f4f7;
+      --ink: #161616;
+      --muted: #5b6470;
+      --line: #d7dde4;
+      --accent: #007c78;
+      --accent-strong: #005f5c;
+      --accent-soft: #d8f1ee;
+      --warm: #c8562f;
+      --warm-soft: #ffe3d6;
+      --focus: #f7b801;
+      --shadow: 0 16px 45px rgba(20, 28, 38, 0.12);
+      --radius: 8px;
+      --font-scale: 1;
+    }
+
+    body[data-font-size="small"] {
+      --font-scale: 0.9;
+    }
+
+    body[data-font-size="large"] {
+      --font-scale: 1.14;
+    }
+
+    .font-controls {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: inline-flex;
+      gap: 0.25rem;
+      padding: 0.25rem;
+      position: fixed;
+      right: 1rem;
+      top: 1rem;
+      z-index: 20;
+    }
+
+    .font-controls button {
+      background: transparent;
+      border: 0;
+      border-radius: 6px;
+      color: var(--muted);
+      font-weight: 900;
+      min-height: 2.35rem;
+      min-width: 2.75rem;
+    }
+
+    .font-controls button[aria-pressed="true"] {
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+    }
+
+    .homework-page {
+      display: grid;
+      gap: 1.5rem;
+      margin: 0 auto;
+      max-width: 1180px;
+      min-height: 100vh;
+      padding: 5.5rem 1rem 2rem;
+    }
+
+    .topbar {
+      align-items: center;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      font-size: calc(0.95rem * var(--font-scale));
+      font-weight: 800;
+      gap: 0.75rem;
+      justify-content: space-between;
+    }
+
+    .course-label {
+      color: var(--accent-strong);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero,
+    .status div,
+    .section-nav,
+    .audio-card,
+    .section-card,
+    .result-card,
+    .transcript-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(216, 241, 238, 0.9), transparent 42%),
+        var(--surface);
+      display: grid;
+      gap: 0.85rem;
+      padding: clamp(1.4rem, 4vw, 2.5rem);
+    }
+
+    .kicker,
+    .section-range,
+    .exercise-number,
+    .audio-label {
+      color: var(--accent-strong);
+      font-size: calc(0.86rem * var(--font-scale));
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.06;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 7vw, 4.6rem);
+    }
+
+    h2 {
+      font-size: calc(2.05rem * var(--font-scale));
+    }
+
+    h3 {
+      font-size: calc(1.28rem * var(--font-scale));
+    }
+
+    .hero p,
+    .section-card > p,
+    .result-card p,
+    .audio-card p,
+    .transcript-card p {
+      color: var(--muted);
+      font-size: calc(1.02rem * var(--font-scale));
+      font-weight: 800;
+      margin: 0;
+      max-width: 74ch;
+    }
+
+    .hero-actions,
+    .actions,
+    .section-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .primary,
+    .secondary,
+    .nav-link {
+      border: 0;
+      border-radius: var(--radius);
+      font-weight: 900;
+      min-height: 3rem;
+      padding: 0.7rem 1.1rem;
+    }
+
+    .primary {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .secondary,
+    .nav-link {
+      background: var(--surface-soft);
+      color: var(--accent-strong);
+    }
+
+    .nav-link {
+      align-items: center;
+      display: inline-flex;
+      font-size: calc(0.82rem * var(--font-scale));
+      min-height: 2.5rem;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .primary:hover,
+    .primary:focus-visible {
+      background: var(--accent-strong);
+    }
+
+    .secondary:hover,
+    .secondary:focus-visible,
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      outline: 3px solid rgba(247, 184, 1, 0.35);
+      outline-offset: 2px;
+    }
+
+    .status {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .status div {
+      padding: 0.85rem;
+    }
+
+    .status small {
+      color: var(--muted);
+      display: block;
+      font-size: calc(0.76rem * var(--font-scale));
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .status strong {
+      color: var(--ink);
+      display: block;
+      font-size: calc(1.28rem * var(--font-scale));
+      line-height: 1.1;
+      margin-top: 0.25rem;
+    }
+
+    .progress-track {
+      background: var(--surface-soft);
+      border-radius: 999px;
+      height: 0.85rem;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      background: linear-gradient(90deg, var(--accent), var(--warm));
+      height: 100%;
+      transition: width 220ms ease;
+      width: 0;
+    }
+
+    .section-nav {
+      padding: 1rem;
+    }
+
+    .audio-card,
+    .section-card,
+    .result-card,
+    .transcript-card {
+      display: grid;
+      gap: 1rem;
+      padding: clamp(1.1rem, 3vw, 1.6rem);
+    }
+
+    .audio-panel {
+      background: var(--accent-soft);
+      border: 1px solid rgba(0, 124, 120, 0.28);
+      border-radius: var(--radius);
+      display: grid;
+      gap: 0.65rem;
+      padding: 1rem;
+    }
+
+    audio {
+      width: 100%;
+    }
+
+    .sections {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .exercise-list {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .exercise {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      display: grid;
+      gap: 0.8rem;
+      padding: 1rem;
+    }
+
+    .exercise-header {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: space-between;
+    }
+
+    .exercise-instruction {
+      color: var(--muted);
+      font-size: calc(0.95rem * var(--font-scale));
+      font-weight: 850;
+      margin: 0;
+    }
+
+    .exercise-prompt {
+      color: var(--ink);
+      font-size: calc(1.02rem * var(--font-scale));
+      font-weight: 850;
+      margin: 0;
+      max-width: 85ch;
+    }
+
+    .answer-label,
+    .field-row label,
+    .choice-label {
+      color: var(--ink);
+      font-size: calc(0.96rem * var(--font-scale));
+      font-weight: 800;
+    }
+
+    .answer-input,
+    .answer-textarea {
+      background: var(--surface);
+      border: 2px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--ink);
+      font-weight: 760;
+      padding: 0.7rem 0.8rem;
+      width: 100%;
+    }
+
+    .answer-input:focus,
+    .answer-textarea:focus {
+      border-color: var(--accent);
+      outline: 3px solid rgba(247, 184, 1, 0.35);
+      outline-offset: 1px;
+    }
+
+    .answer-textarea {
+      min-height: 5.25rem;
+      resize: vertical;
+    }
+
+    .field-grid {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .field-row {
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .choice-list {
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .choice-label {
+      align-items: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      display: flex;
+      gap: 0.65rem;
+      padding: 0.7rem 0.8rem;
+    }
+
+    .feedback {
+      border-radius: var(--radius);
+      font-size: calc(0.86rem * var(--font-scale));
+      font-weight: 900;
+      padding: 0.45rem 0.7rem;
+    }
+
+    .feedback.correct {
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+    }
+
+    .feedback.incorrect {
+      background: var(--warm-soft);
+      color: var(--warm);
+    }
+
+    .result-card {
+      border-left: 4px solid var(--accent);
+    }
+
+    .result-grid {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .result-grid div {
+      background: var(--surface-soft);
+      border-radius: var(--radius);
+      padding: 0.85rem;
+    }
+
+    .result-grid small {
+      color: var(--muted);
+      display: block;
+      font-size: calc(0.75rem * var(--font-scale));
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .result-grid strong {
+      color: var(--ink);
+      display: block;
+      font-size: calc(1.22rem * var(--font-scale));
+      margin-top: 0.25rem;
+    }
+
+    .transcript-card {
+      border-left: 4px solid var(--warm);
+    }
+
+    .transcript {
+      background: var(--surface-soft);
+      border-radius: var(--radius);
+      display: grid;
+      gap: 0.55rem;
+      padding: 1rem;
+    }
+
+    .transcript p {
+      color: var(--ink);
+      font-weight: 760;
+      margin: 0;
+      max-width: none;
+    }
+
+    .transcript strong {
+      color: var(--accent-strong);
+    }
+
+    @media (max-width: 860px) {
+      .status,
+      .result-grid,
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="font-controls" role="group" aria-label="Font size">
+    <button type="button" data-font-size="small" aria-pressed="false">-A</button>
+    <button type="button" data-font-size="normal" aria-pressed="true">A</button>
+    <button type="button" data-font-size="large" aria-pressed="false">A+</button>
+  </div>
+
+  <main class="homework-page">
+    <div class="topbar">
+      <span class="course-label">Lesson 3 Homework</span>
+      <span>Your answers are saved in this browser.</span>
+    </div>
+
+    <section class="hero" aria-labelledby="homework-title">
+      <p class="kicker">50 exercises</p>
+      <h1 id="homework-title">Review &amp; Practice</h1>
+      <p>Grammar, vocabulary, and listening practice for Lesson 3. Work carefully and check your answers when you finish each section.</p>
+      <div class="hero-actions">
+        <button id="check-all" class="primary" type="button">Check Homework</button>
+        <button id="reset-homework" class="secondary" type="button">Reset</button>
+      </div>
+    </section>
+
+    <section class="status" aria-label="Homework status">
+      <div><small>Answered</small><strong id="answered-count">0 / 50</strong></div>
+      <div><small>Correct</small><strong id="score-count">0 / 50</strong></div>
+      <div><small>Sections</small><strong id="section-count">0 / 10</strong></div>
+      <div>
+        <small>Progress</small>
+        <strong id="progress-label">0%</strong>
+        <div class="progress-track" aria-hidden="true"><div id="progress-bar" class="progress-bar"></div></div>
+      </div>
+    </section>
+
+    <nav class="section-nav" aria-label="Homework sections">
+      <a class="nav-link" href="#section-verb-to-be">To Be</a>
+      <a class="nav-link" href="#section-negative">Negative</a>
+      <a class="nav-link" href="#section-questions">Questions</a>
+      <a class="nav-link" href="#section-possessive">Possessives</a>
+      <a class="nav-link" href="#section-nouns-adjectives">Nouns &amp; Adjectives</a>
+      <a class="nav-link" href="#section-place-imperatives">Place &amp; Imperatives</a>
+      <a class="nav-link" href="#section-mixed">Mixed Review</a>
+      <a class="nav-link" href="#section-listening">Listening</a>
+    </nav>
+
+    <section id="result" class="result-card" tabindex="-1" aria-labelledby="result-title" hidden>
+      <h2 id="result-title">Homework check</h2>
+      <p id="result-summary"></p>
+      <div class="result-grid">
+        <div><small>Score</small><strong id="result-score">0 / 50</strong></div>
+        <div><small>Answered</small><strong id="result-answered">0 / 50</strong></div>
+        <div><small>Sections</small><strong id="result-sections">0 / 10</strong></div>
+      </div>
+      <p id="result-advice"></p>
+    </section>
+
+    <div id="sections" class="sections"></div>
+
+    <section class="transcript-card" aria-labelledby="transcript-title">
+      <p class="audio-label">Final review tool</p>
+      <h2 id="transcript-title">Transcript</h2>
+      <p id="transcript-note">Complete all 50 exercises to unlock the transcript for final review.</p>
+      <button id="toggle-transcript" class="secondary" type="button" disabled aria-expanded="false">Show Transcript</button>
+      <div id="transcript" class="transcript" hidden></div>
+    </section>
+  </main>
+
+  <script>
+    (function homework(window, document) {
+      "use strict";
+
+      var storageKey = "lesson-3-homework";
+      var fontStorageKey = "lesson-3-homework-font-size";
+
+      var transcript = [
+        ["Rachel", "Ben, can you come here for a minute? We have a problem."],
+        ["Ben", "Sure. What's wrong?"],
+        ["Rachel", "Look at these boxes. They're not for our department."],
+        ["Ben", "Hmm... you're right. This big brown box is for Marketing. Look at the label."],
+        ["Rachel", "And what about the small white one behind it?"],
+        ["Ben", "Let me see... It says “Finance — Third Floor.”"],
+        ["Rachel", "OK. Put it next to the door, please. We can take it upstairs later."],
+        ["Ben", "All right. And these two boxes? There isn't a department name on them."],
+        ["Rachel", "Don't open them. Let's check the labels first."],
+        ["Ben", "Good idea. Oh, wait. There's a name here: “Julia Martins.”"],
+        ["Rachel", "Julia? She's in Human Resources. Her office is on the second floor."],
+        ["Ben", "Great. So this package is probably hers."],
+        ["Rachel", "Yes. Keep it here for now. What's in that open box?"],
+        ["Ben", "Let's see... There's an umbrella, a pair of glasses, some magazines and a charger."],
+        ["Rachel", "That's strange. Are they new?"],
+        ["Ben", "The charger is new, but the magazines are old. And this umbrella is really dirty."],
+        ["Rachel", "Maybe these aren't part of the delivery. Look under the box."],
+        ["Ben", "Oh! There are some keys under it."],
+        ["Rachel", "Show me the keys."],
+        ["Ben", "Here. There's an ID badge with them."],
+        ["Rachel", "Perfect! What's the name on the badge?"],
+        ["Ben", "It's Julia Martins again."],
+        ["Rachel", "Ah, now I understand. These are her things. Maybe she left them here this morning."],
+        ["Ben", "So the package and the personal things are all hers?"],
+        ["Rachel", "It looks like it. But don't put the keys in the box. Keep them with the ID badge."],
+        ["Ben", "OK. And what do we do with the Marketing and Finance boxes?"],
+        ["Rachel", "Let's call Reception and ask them to collect everything."],
+        ["Ben", "Good plan. I'm really busy today, and now I'm a little tired too."],
+        ["Rachel", "Me too. But at least the problem is easy now."],
+        ["Ben", "Yes. I was nervous when I saw all these boxes!"],
+        ["Rachel", "Don't worry. It's fine now. Put Julia's things on that table, and let's call Reception."],
+        ["Ben", "Done. Where's the phone?"],
+        ["Rachel", "It's in front of you, Ben."],
+        ["Ben", "Oh... right. Maybe I'm more tired than I thought."],
+        ["Rachel", "[laughs] Just make the call."]
+      ];
+
+      var sections = [
+        {
+          id: "section-verb-to-be",
+          range: "Exercises 1-5",
+          title: "Verb To Be - Conjugation",
+          intro: "Review affirmative forms, contractions, and short classroom-style exchanges.",
+          exercises: [
+            { id: 1, type: "fields", instruction: "Complete each sentence with the correct form of be.", prompt: "Use am, are, or is.", fields: [
+              { label: "I ___ from Brazil.", answer: "am" },
+              { label: "You ___ in the right room.", answer: "are" },
+              { label: "He ___ tired today.", answer: "is" },
+              { label: "We ___ ready.", answer: "are" },
+              { label: "They ___ from Canada.", answer: "are" }
+            ], feedback: "Remember: I am, you/we/they are, he/she/it is." },
+            { id: 2, type: "choice", instruction: "Choose the correct sentence.", prompt: "Which sentence is grammatically correct?", options: ["She are from Argentina.", "She's from Argentina.", "She am from Argentina."], answer: "She's from Argentina.", feedback: "Use is with she: she is / she's." },
+            { id: 3, type: "fields", instruction: "Complete the mini-dialogue.", prompt: "Use be and one contraction.", fields: [
+              { label: "A: ___ you Ben?", answer: "Are" },
+              { label: "B: Yes, I ___.", answer: "am" },
+              { label: "A: ___ Rachel here?", answer: "Is" },
+              { label: "B: No, she ___.", answer: ["isn't", "is not"] }
+            ], feedback: "Questions with be start with Am, Are, or Is." },
+            { id: 4, type: "textarea", instruction: "Correct the mistakes.", prompt: "They is from Canada. He are tired.", answer: ["They are from Canada. He is tired.", "They are from Canada. He is tired"], feedback: "They uses are. He uses is." },
+            { id: 5, type: "fields", instruction: "Write the contractions.", prompt: "Use the contracted form.", fields: [
+              { label: "I am →", answer: ["I'm", "Im"] },
+              { label: "you are →", answer: ["you're", "youre"] },
+              { label: "it is →", answer: ["it's", "its"] },
+              { label: "we are →", answer: ["we're", "were"] },
+              { label: "they are →", answer: ["they're", "theyre"] }
+            ], feedback: "Check the subject before you write the contraction." }
+          ]
+        },
+        {
+          id: "section-negative",
+          range: "Exercises 6-10",
+          title: "Affirmative and Negative",
+          intro: "Practise am not, isn't, and aren't in context.",
+          exercises: [
+            { id: 6, type: "text", instruction: "Change the sentence to negative using Brazil.", prompt: "Laura is from Spain. → Laura ___ from Brazil.", answer: ["Laura isn't from Brazil.", "Laura is not from Brazil"], feedback: "Use isn't / is not with Laura." },
+            { id: 7, type: "fields", instruction: "Complete the negative sentences.", prompt: "Use am not, isn't, or aren't.", fields: [
+              { label: "I ___ tired.", answer: ["am not", "I'm not", "Im not"] },
+              { label: "The keys ___ on the table.", answer: ["aren't", "are not"] },
+              { label: "Omar ___ from China.", answer: ["isn't", "is not"] },
+              { label: "We ___ late.", answer: ["aren't", "are not"] }
+            ], feedback: "Plural nouns and we/they use aren't." },
+            { id: 8, type: "choice", instruction: "Choose the best negative sentence.", prompt: "The boxes are for Marketing, not Finance.", options: ["The boxes aren't for Finance.", "The boxes isn't for Finance.", "The boxes am not for Finance."], answer: "The boxes aren't for Finance.", feedback: "Boxes is plural, so use aren't." },
+            { id: 9, type: "text", instruction: "Change the negative sentence to affirmative using new.", prompt: "The charger isn't old. → The charger ___.", answer: ["The charger is new.", "The charger is new"], feedback: "Use is with the singular noun charger." },
+            { id: 10, type: "fields", instruction: "Complete each sentence.", prompt: "Use the correct affirmative or negative form.", fields: [
+              { label: "I ___ nervous. (-)", answer: ["am not", "I'm not", "Im not"] },
+              { label: "She ___ busy. (+)", answer: ["is", "'s", "s"] },
+              { label: "They ___ here. (-)", answer: ["aren't", "are not"] },
+              { label: "It ___ expensive. (-)", answer: ["isn't", "is not"] }
+            ], feedback: "Read the plus or minus sign before choosing the form." }
+          ]
+        },
+        {
+          id: "section-questions",
+          range: "Exercises 11-15",
+          title: "Questions + Short Answers",
+          intro: "Build Yes/No questions with be and answer them clearly.",
+          exercises: [
+            { id: 11, type: "text", instruction: "Build the question.", prompt: "Thomas / German?", answer: ["Is Thomas German?", "Is Thomas German"], feedback: "Start with Is for one man: Is Thomas...?" },
+            { id: 12, type: "fields", instruction: "Write the question and short answer.", prompt: "Anna / from Italy? (yes)", fields: [
+              { label: "Question", answer: ["Is Anna from Italy?", "Is Anna from Italy"] },
+              { label: "Short answer", answer: ["Yes, she is.", "Yes she is"] }
+            ], feedback: "Anna is she, so the short answer is Yes, she is." },
+            { id: 13, type: "choice", instruction: "Choose the correct short answer.", prompt: "Are the magazines new?", options: ["No, it isn't.", "No, they aren't.", "No, she isn't."], answer: "No, they aren't.", feedback: "Magazines is plural: they aren't." },
+            { id: 14, type: "fields", instruction: "Build two questions.", prompt: "Use the words in brackets.", fields: [
+              { label: "you / tired?", answer: ["Are you tired?", "Are you tired"] },
+              { label: "it / on the desk?", answer: ["Is it on the desk?", "Is it on the desk"] }
+            ], feedback: "Use Are you...? and Is it...?" },
+            { id: 15, type: "fields", instruction: "Complete the mini-dialogue.", prompt: "Use questions and short answers.", fields: [
+              { label: "A: ___ we in Room 30?", answer: "Are" },
+              { label: "B: No, we ___.", answer: ["aren't", "are not"] },
+              { label: "A: ___ they ready?", answer: "Are" },
+              { label: "B: Yes, they ___.", answer: "are" }
+            ], feedback: "Use the same subject in the short answer." }
+          ]
+        },
+        {
+          id: "section-possessive",
+          range: "Exercises 16-20",
+          title: "Possessive Adjectives",
+          intro: "Look at the owner before you choose my, your, his, her, its, our, or their.",
+          exercises: [
+            { id: 16, type: "fields", instruction: "Complete the sentences.", prompt: "Use possessive adjectives.", fields: [
+              { label: "Emma is British. ___ office is in London.", answer: "Her" },
+              { label: "Daniel and Lucas are developers. ___ project is interesting.", answer: "Their" },
+              { label: "We work in Finance. ___ office is on the third floor.", answer: "Our" },
+              { label: "You are in Room 18. ___ chair is next to the window.", answer: "Your" },
+              { label: "The company is old. ___ building is beautiful.", answer: "Its" }
+            ], feedback: "Find the owner first, then choose the adjective." },
+            { id: 17, type: "choice", instruction: "Choose the correct possessive adjective.", prompt: "Rachel has an ID badge. ___ badge is on the table.", options: ["His", "Her", "Their"], answer: "Her", feedback: "Rachel is she, so use her." },
+            { id: 18, type: "text", instruction: "Rewrite using a possessive adjective.", prompt: "Julia has an office. Julia's office is on the second floor.", answer: ["Her office is on the second floor.", "Her office is on the second floor"], feedback: "Julia is she, so use her." },
+            { id: 19, type: "fields", instruction: "Correct the possessive adjective mistakes.", prompt: "Write only the corrected possessive adjective.", fields: [
+              { label: "She laptop is new. →", answer: "Her" },
+              { label: "They meeting is on Monday. →", answer: "Their" },
+              { label: "We office is small. →", answer: "Our" },
+              { label: "Ben phone is in front of him. →", answer: "His" }
+            ], feedback: "Subject pronouns and possessive adjectives are different." },
+            { id: 20, type: "fields", instruction: "Complete the dialogue.", prompt: "Use my, your, his, her, or their.", fields: [
+              { label: "A: Is this ___ charger?", answer: "your" },
+              { label: "B: No, it isn't. ___ charger is black.", answer: "My" },
+              { label: "A: Maybe it's Julia's. ___ charger is white.", answer: "Her" },
+              { label: "B: The students are here. ___ bags are under the table.", answer: "Their" }
+            ], feedback: "Use the context around each owner." }
+          ]
+        },
+        {
+          id: "section-nouns-adjectives",
+          range: "Exercises 21-26",
+          title: "Singular / Plural + Adjectives",
+          intro: "Notice noun number, adjective position, colours, and feelings.",
+          exercises: [
+            { id: 21, type: "fields", instruction: "Complete with is or are.", prompt: "Look at the noun before the gap.", fields: [
+              { label: "The glasses ___ on the table.", answer: "are" },
+              { label: "The passport ___ in the bag.", answer: "is" },
+              { label: "The scissors ___ next to the file.", answer: "are" },
+              { label: "The boxes ___ behind the chair.", answer: "are" },
+              { label: "The charger ___ new.", answer: "is" }
+            ], feedback: "Plural things use are; one thing uses is." },
+            { id: 22, type: "choice", instruction: "Choose the correct sentence.", prompt: "Which sentence is correct?", options: ["The headphones is under the desk.", "The headphones are under the desk.", "The headphone are under the desk."], answer: "The headphones are under the desk.", feedback: "Headphones is usually plural." },
+            { id: 23, type: "textarea", instruction: "Correct the mistakes.", prompt: "The keys is under the chair. The magazines is old.", answer: ["The keys are under the chair. The magazines are old.", "The keys are under the chair The magazines are old"], feedback: "Keys and magazines are plural, so use are." },
+            { id: 24, type: "fields", instruction: "Put the adjective before the noun.", prompt: "Write the phrase.", fields: [
+              { label: "umbrella / dirty", answer: "dirty umbrella" },
+              { label: "phone / new", answer: "new phone" },
+              { label: "chair / old", answer: "old chair" },
+              { label: "file / blue", answer: "blue file" }
+            ], feedback: "In English, the adjective usually comes before the noun." },
+            { id: 25, type: "choice", instruction: "Choose the best feeling adjective.", prompt: "Ben has many boxes and a lot of work. He says he is really ___.", options: ["hungry", "busy", "cheap"], answer: "busy", feedback: "Busy describes a person with a lot to do." },
+            { id: 26, type: "fields", instruction: "Complete with an adjective.", prompt: "Use the clue in brackets.", fields: [
+              { label: "The magazines are ___. (not new)", answer: "old" },
+              { label: "The problem is ___. (not difficult)", answer: "easy" },
+              { label: "The desk is ___. (not dirty)", answer: "clean" },
+              { label: "Rachel is ___. (not nervous)", answer: "relaxed" }
+            ], feedback: "Use one adjective, not a comparative form." }
+          ]
+        },
+        {
+          id: "section-place-imperatives",
+          range: "Exercises 27-32",
+          title: "Prepositions + Imperatives",
+          intro: "Review place words and instructions from workplace situations.",
+          exercises: [
+            { id: 27, type: "fields", instruction: "Complete with a preposition of place.", prompt: "Use on, in, under, behind, next to, between, or in front of.", fields: [
+              { label: "The phone is ___ the laptop and the notebook.", answer: "between" },
+              { label: "The keys are ___ the box.", answer: "under" },
+              { label: "The chair is ___ the desk.", answer: ["behind", "next to"] },
+              { label: "The badge is ___ the table.", answer: "on" },
+              { label: "The phone is ___ you.", answer: ["in front of", "in front"] }
+            ], feedback: "Check the position in the sentence." },
+            { id: 28, type: "choice", instruction: "Choose the sentence that matches the meaning.", prompt: "The bag is after the chair, not beside it.", options: ["The bag is next to the chair.", "The bag is behind the chair.", "The bag is between the chairs."], answer: "The bag is behind the chair.", feedback: "Behind means at the back of something." },
+            { id: 29, type: "text", instruction: "Build a sentence.", prompt: "keys / under / box", answer: ["The keys are under the box.", "The keys are under the box"], feedback: "Keys is plural: The keys are..." },
+            { id: 30, type: "fields", instruction: "Complete the imperatives.", prompt: "Use verbs from the course.", fields: [
+              { label: "___ the file.", answer: "Open" },
+              { label: "___ to the audio.", answer: "Listen" },
+              { label: "___ the door, please.", answer: "Close" },
+              { label: "___ at the label.", answer: "Look" }
+            ], feedback: "Imperatives start with the base verb." },
+            { id: 31, type: "fields", instruction: "Write negative imperatives.", prompt: "Use Don't + verb.", fields: [
+              { label: "___ open the box.", answer: ["Don't", "Do not"] },
+              { label: "___ show your screen.", answer: ["Don't", "Do not"] },
+              { label: "___ put the keys in the box.", answer: ["Don't", "Do not"] }
+            ], feedback: "Negative imperatives use Don't + base verb." },
+            { id: 32, type: "text", instruction: "Construct the complete imperative.", prompt: "Ask someone to put the package next to the door.", answer: ["Put the package next to the door, please.", "Put the package next to the door please", "Put the package next to the door."], feedback: "Start with the base verb: Put..." }
+          ]
+        },
+        {
+          id: "section-mixed",
+          range: "Exercises 33-35",
+          title: "Let's + Mixed Review",
+          intro: "Use Let's for a suggestion and mix grammar from the lesson.",
+          exercises: [
+            { id: 33, type: "fields", instruction: "Complete with Let's + base verb.", prompt: "Write the missing verb.", fields: [
+              { label: "Let's ___ the document.", answer: "check" },
+              { label: "Let's ___ Reception.", answer: "call" },
+              { label: "Let's ___ the file.", answer: "open" },
+              { label: "Let's ___ the boxes here.", answer: "put" }
+            ], feedback: "After Let's, use the base form of the verb." },
+            { id: 34, type: "choice", instruction: "Choose the best instruction.", prompt: "You want to make a suggestion to your partner.", options: ["Open the file.", "Let's open the file.", "Don't open the file."], answer: "Let's open the file.", feedback: "Let's means you and I do it together." },
+            { id: 35, type: "fields", instruction: "Complete the mini-dialogue.", prompt: "Use Let's, Are, aren't, and Don't.", fields: [
+              { label: "A: ___ check the labels.", answer: ["Let's", "Let us"] },
+              { label: "B: Good idea. ___ the boxes for Finance?", answer: "Are" },
+              { label: "A: No, they ___.", answer: ["aren't", "are not"] },
+              { label: "A: ___ open them.", answer: ["Don't", "Do not"] },
+              { label: "B: OK. ___ call Reception.", answer: ["Let's", "Let us"] }
+            ], feedback: "Use Let's for a suggestion and Don't for a negative instruction." }
+          ]
+        },
+        {
+          id: "section-listening",
+          range: "Exercises 36-40",
+          title: "Listening - General + Detailed Comprehension",
+          intro: "Listen to The Wrong Delivery and answer the first comprehension questions.",
+          exercises: [
+            { id: 36, type: "choice", instruction: "Listen once and choose the main problem.", prompt: "What is the main problem?", options: ["The phone is broken.", "The boxes are not for their department.", "The meeting room is dirty."], answer: "The boxes are not for their department.", feedback: "Rachel says the boxes are not for their department." },
+            { id: 37, type: "text", instruction: "Write the department.", prompt: "Which department is the big brown box for?", answer: "Marketing", feedback: "Listen for: This big brown box is for..." },
+            { id: 38, type: "text", instruction: "Write the location.", prompt: "Where is the Finance box?", answer: ["Third Floor", "the third floor", "on the third floor", "Finance Third Floor"], feedback: "The label says Finance - Third Floor." },
+            { id: 39, type: "choice", instruction: "Choose the correct information.", prompt: "Who is Julia Martins?", options: ["She is in Human Resources.", "She is in Marketing.", "She is at Reception."], answer: "She is in Human Resources.", feedback: "Rachel says Julia is in Human Resources." },
+            { id: 40, type: "fields", instruction: "Write the personal things they find.", prompt: "Use one word or phrase in each box.", fields: [
+              { label: "1", answer: ["umbrella", "an umbrella"] },
+              { label: "2", answer: ["glasses", "a pair of glasses"] },
+              { label: "3", answer: ["magazines", "some magazines"] },
+              { label: "4", answer: ["charger", "a charger"] },
+              { label: "5", answer: ["keys", "some keys"] },
+              { label: "6", answer: ["ID badge", "an ID badge", "id badge"] }
+            ], feedback: "Listen for the open box and what Ben finds under it." }
+          ]
+        },
+        {
+          id: "section-listening-details",
+          range: "Exercises 41-45",
+          title: "Listening - Listen for Details",
+          intro: "Listen again and focus on colours, objects, positions, and instructions.",
+          exercises: [
+            { id: 41, type: "fields", instruction: "Complete the details from the audio.", prompt: "Use one word in each box.", fields: [
+              { label: "The big box is ___.", answer: "brown" },
+              { label: "The small box is ___.", answer: "white" },
+              { label: "The charger is ___.", answer: "new" },
+              { label: "The magazines are ___.", answer: "old" },
+              { label: "The umbrella is ___.", answer: "dirty" }
+            ], feedback: "Listen for colour and adjective words." },
+            { id: 42, type: "text", instruction: "Write the position.", prompt: "Where are the keys?", answer: ["under the box", "They are under the box.", "The keys are under the box."], feedback: "Rachel tells Ben to look under the box." },
+            { id: 43, type: "choice", instruction: "Choose the correct owner.", prompt: "Who do the package and personal things belong to?", options: ["Rachel", "Ben", "Julia Martins"], answer: "Julia Martins", feedback: "The badge has Julia's name." },
+            { id: 44, type: "text", instruction: "Put the events in order.", prompt: "Type the letters in order: A Ben finds Julia's name. B Rachel says, 'Don't open them.' C Ben finds keys. D They decide to call Reception.", answer: ["B-A-C-D", "B A C D", "BACD"], feedback: "First Rachel says don't open them; then Ben finds Julia's name." },
+            { id: 45, type: "fields", instruction: "Complete Rachel's instructions.", prompt: "Use words from the audio.", fields: [
+              { label: "___ it next to the door, please.", answer: "Put" },
+              { label: "___ open them.", answer: ["Don't", "Do not"] },
+              { label: "___ me the keys.", answer: "Show" },
+              { label: "___ Julia's things on that table.", answer: "Put" }
+            ], feedback: "Imperatives in the audio start with the base verb." }
+          ]
+        },
+        {
+          id: "section-audio-grammar",
+          range: "Exercises 46-50",
+          title: "Grammar from the Audio",
+          intro: "Use real sentences from The Wrong Delivery to notice grammar from Lessons 1-3.",
+          exercises: [
+            { id: 46, type: "text", instruction: "Complete the negative sentence from the audio.", prompt: "Look at these boxes. They ___ for our department.", answer: ["aren't", "are not", "'re not", "re not"], feedback: "Use the plural negative form: they aren't / they are not." },
+            { id: 47, type: "text", instruction: "Write the imperative from the audio.", prompt: "Complete the instruction: ___ at the label.", answer: ["Look", "Look at the label.", "Look at the label"], feedback: "The imperative starts with Look." },
+            { id: 48, type: "text", instruction: "Complete the negative imperative.", prompt: "___ open them.", answer: ["Don't", "Do not"], feedback: "Negative imperatives use Don't + verb." },
+            { id: 49, type: "text", instruction: "Complete the Let's sentence from the audio.", prompt: "___ check the labels first.", answer: ["Let's", "Let us", "Let's check the labels first.", "Let us check the labels first"], feedback: "After Let's, use the base verb: check." },
+            { id: 50, type: "fields", instruction: "Analyse the possessive adjective from the audio.", prompt: "Her office is on the second floor.", fields: [
+              { label: "Julia = subject pronoun", answer: "she" },
+              { label: "Julia = possessive adjective", answer: "her" }
+            ], feedback: "Julia is she, so the possessive adjective is her." }
+          ]
+        }
+      ];
+
+      var elements = {
+        sections: document.getElementById("sections"),
+        answeredCount: document.getElementById("answered-count"),
+        scoreCount: document.getElementById("score-count"),
+        sectionCount: document.getElementById("section-count"),
+        progressLabel: document.getElementById("progress-label"),
+        progressBar: document.getElementById("progress-bar"),
+        checkAll: document.getElementById("check-all"),
+        reset: document.getElementById("reset-homework"),
+        result: document.getElementById("result"),
+        resultSummary: document.getElementById("result-summary"),
+        resultScore: document.getElementById("result-score"),
+        resultAnswered: document.getElementById("result-answered"),
+        resultSections: document.getElementById("result-sections"),
+        resultAdvice: document.getElementById("result-advice"),
+        transcript: document.getElementById("transcript"),
+        transcriptToggle: document.getElementById("toggle-transcript"),
+        transcriptNote: document.getElementById("transcript-note")
+      };
+
+      function normalize(value) {
+        return String(value || "")
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/[’‘]/g, "'")
+          .replace(/[“”]/g, "\"")
+          .replace(/[^a-z0-9']+/g, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+      }
+
+      function createElement(tag, className, text) {
+        var element = document.createElement(tag);
+
+        if (className) {
+          element.className = className;
+        }
+
+        if (text !== undefined) {
+          element.textContent = text;
+        }
+
+        return element;
+      }
+
+      function loadState() {
+        try {
+          return JSON.parse(window.localStorage.getItem(storageKey) || "{}");
+        } catch (error) {
+          return {};
+        }
+      }
+
+      var answers = loadState();
+
+      function saveState() {
+        try {
+          window.localStorage.setItem(storageKey, JSON.stringify(answers));
+        } catch (error) {
+          return;
+        }
+      }
+
+      function getExercises() {
+        return sections.reduce(function flatten(all, section) {
+          return all.concat(section.exercises);
+        }, []);
+      }
+
+      function answerKey(id) {
+        return "exercise-" + id;
+      }
+
+      function fieldKey(id, fieldIndex) {
+        return "exercise-" + id + "-field-" + fieldIndex;
+      }
+
+      function getStoredAnswer(id) {
+        return answers[answerKey(id)] || "";
+      }
+
+      function setStoredAnswer(id, value) {
+        answers[answerKey(id)] = value;
+        saveState();
+        updateStatus();
+      }
+
+      function getStoredFieldAnswer(id, fieldIndex) {
+        return answers[fieldKey(id, fieldIndex)] || "";
+      }
+
+      function setStoredFieldAnswer(id, fieldIndex, value) {
+        answers[fieldKey(id, fieldIndex)] = value;
+        saveState();
+        updateStatus();
+      }
+
+      function accepts(expected, value) {
+        var accepted = Array.isArray(expected) ? expected : [expected];
+        var normalizedValue = normalize(value);
+
+        return accepted.some(function compare(answer) {
+          return normalize(answer) === normalizedValue;
+        });
+      }
+
+      function isAnswered(exercise) {
+        if (exercise.type === "fields") {
+          return exercise.fields.every(function fieldAnswered(field, index) {
+            return normalize(getStoredFieldAnswer(exercise.id, index)) !== "";
+          });
+        }
+
+        return normalize(getStoredAnswer(exercise.id)) !== "";
+      }
+
+      function isCorrect(exercise) {
+        if (exercise.type === "fields") {
+          return exercise.fields.every(function fieldCorrect(field, index) {
+            return accepts(field.answer, getStoredFieldAnswer(exercise.id, index));
+          });
+        }
+
+        return accepts(exercise.answer, getStoredAnswer(exercise.id));
+      }
+
+      function renderTranscript() {
+        transcript.forEach(function addLine(line) {
+          var paragraph = document.createElement("p");
+          var speaker = document.createElement("strong");
+
+          speaker.textContent = line[0] + ": ";
+          paragraph.appendChild(speaker);
+          paragraph.append(line[1]);
+          elements.transcript.appendChild(paragraph);
+        });
+      }
+
+      function renderChoiceExercise(exercise, wrapper) {
+        var choiceList = createElement("div", "choice-list");
+
+        exercise.options.forEach(function addOption(option, optionIndex) {
+          var label = createElement("label", "choice-label");
+          var input = document.createElement("input");
+
+          input.type = "radio";
+          input.name = "exercise-" + exercise.id;
+          input.value = option;
+          input.checked = getStoredAnswer(exercise.id) === option;
+          input.addEventListener("change", function onChange() {
+            setStoredAnswer(exercise.id, option);
+          });
+
+          label.appendChild(input);
+          label.append(option);
+          choiceList.appendChild(label);
+        });
+
+        wrapper.appendChild(choiceList);
+      }
+
+      function renderTextExercise(exercise, wrapper) {
+        var label = createElement("label", "answer-label", "Your answer");
+        var input = exercise.type === "textarea" ? document.createElement("textarea") : document.createElement("input");
+
+        input.className = exercise.type === "textarea" ? "answer-textarea" : "answer-input";
+        input.id = "exercise-" + exercise.id + "-answer";
+        input.value = getStoredAnswer(exercise.id);
+        input.setAttribute("autocomplete", "off");
+        input.setAttribute("spellcheck", "false");
+        input.addEventListener("input", function onInput() {
+          setStoredAnswer(exercise.id, input.value);
+        });
+
+        if (exercise.type !== "textarea") {
+          input.type = "text";
+        }
+
+        label.setAttribute("for", input.id);
+        wrapper.append(label, input);
+      }
+
+      function renderFieldsExercise(exercise, wrapper) {
+        var grid = createElement("div", "field-grid");
+
+        exercise.fields.forEach(function addField(field, index) {
+          var row = createElement("div", "field-row");
+          var label = document.createElement("label");
+          var input = document.createElement("input");
+
+          input.className = "answer-input";
+          input.id = "exercise-" + exercise.id + "-field-" + index;
+          input.type = "text";
+          input.value = getStoredFieldAnswer(exercise.id, index);
+          input.setAttribute("autocomplete", "off");
+          input.setAttribute("spellcheck", "false");
+          input.addEventListener("input", function onInput() {
+            setStoredFieldAnswer(exercise.id, index, input.value);
+          });
+
+          label.setAttribute("for", input.id);
+          label.textContent = field.label;
+          row.append(label, input);
+          grid.appendChild(row);
+        });
+
+        wrapper.appendChild(grid);
+      }
+
+      function checkExercise(exercise, feedback) {
+        var answered = isAnswered(exercise);
+        var right = answered && isCorrect(exercise);
+
+        feedback.hidden = false;
+        feedback.className = "feedback " + (right ? "correct" : "incorrect");
+        feedback.textContent = right ? "Correct." : (answered ? exercise.feedback : "No answer yet.");
+
+        return right;
+      }
+
+      function renderExercise(exercise) {
+        var wrapper = createElement("article", "exercise");
+        var header = createElement("div", "exercise-header");
+        var feedback = createElement("div", "feedback");
+        var actions = createElement("div", "actions");
+        var checkButton = createElement("button", "secondary", "Check");
+
+        wrapper.dataset.exerciseId = String(exercise.id);
+        feedback.hidden = true;
+        header.appendChild(createElement("p", "exercise-number", "Exercise " + exercise.id));
+        header.appendChild(feedback);
+        wrapper.appendChild(header);
+        wrapper.appendChild(createElement("p", "exercise-instruction", exercise.instruction));
+        wrapper.appendChild(createElement("p", "exercise-prompt", exercise.prompt));
+
+        if (exercise.type === "choice") {
+          renderChoiceExercise(exercise, wrapper);
+        } else if (exercise.type === "fields") {
+          renderFieldsExercise(exercise, wrapper);
+        } else {
+          renderTextExercise(exercise, wrapper);
+        }
+
+        checkButton.type = "button";
+        checkButton.addEventListener("click", function onCheck() {
+          checkExercise(exercise, feedback);
+        });
+        actions.appendChild(checkButton);
+        wrapper.appendChild(actions);
+
+        return wrapper;
+      }
+
+      function createListeningAudioCard() {
+        var audioCard = createElement("section", "audio-card");
+        var audioPanel = createElement("div", "audio-panel");
+        var audio = document.createElement("audio");
+
+        audioCard.setAttribute("aria-labelledby", "audio-title");
+        audioCard.appendChild(createElement("p", "audio-label", "Listening audio"));
+        audioCard.appendChild(createElement("h2", "", "The Wrong Delivery"));
+        audioCard.querySelector("h2").id = "audio-title";
+        audioCard.appendChild(createElement("p", "", "Use this audio for Exercises 36-50. Play, pause, and replay as needed."));
+
+        audio.controls = true;
+        audio.preload = "metadata";
+        audio.src = "../assets/audio/lesson-3-homework-wrong-delivery.mp3";
+        audio.setAttribute("aria-label", "The Wrong Delivery audio");
+        audio.textContent = "Your browser does not support the audio element.";
+        audioPanel.appendChild(audio);
+        audioCard.appendChild(audioPanel);
+
+        return audioCard;
+      }
+
+      function renderSections() {
+        sections.forEach(function addSection(section) {
+          var sectionElement = createElement("section", "section-card");
+          var list = createElement("div", "exercise-list");
+
+          if (section.id === "section-listening") {
+            elements.sections.appendChild(createListeningAudioCard());
+          }
+
+          sectionElement.id = section.id;
+          sectionElement.appendChild(createElement("p", "section-range", section.range));
+          sectionElement.appendChild(createElement("h2", "", section.title));
+          sectionElement.appendChild(createElement("p", "", section.intro));
+
+          section.exercises.forEach(function addExercise(exercise) {
+            list.appendChild(renderExercise(exercise));
+          });
+
+          sectionElement.appendChild(list);
+          elements.sections.appendChild(sectionElement);
+        });
+      }
+
+      function updateStatus() {
+        var exercises = getExercises();
+        var answered = exercises.filter(isAnswered).length;
+        var correct = exercises.filter(isCorrect).length;
+        var completedSections = sections.filter(function sectionComplete(section) {
+          return section.exercises.every(isAnswered);
+        }).length;
+        var percent = Math.round((answered / exercises.length) * 100);
+        var transcriptUnlocked = answered === exercises.length;
+
+        elements.answeredCount.textContent = answered + " / " + exercises.length;
+        elements.scoreCount.textContent = correct + " / " + exercises.length;
+        elements.sectionCount.textContent = completedSections + " / " + sections.length;
+        elements.progressLabel.textContent = percent + "%";
+        elements.progressBar.style.width = percent + "%";
+        elements.transcriptToggle.disabled = !transcriptUnlocked;
+        elements.transcriptNote.textContent = transcriptUnlocked ?
+          "Transcript unlocked. Use it for final review after listening." :
+          "Complete all 50 exercises to unlock the transcript for final review.";
+      }
+
+      function showFeedback() {
+        var exercises = getExercises();
+        var correct = 0;
+        var answered = 0;
+        var completedSections = sections.filter(function sectionComplete(section) {
+          return section.exercises.every(isAnswered);
+        }).length;
+
+        exercises.forEach(function markExercise(exercise) {
+          var wrapper = document.querySelector("[data-exercise-id='" + exercise.id + "']");
+          var feedback = wrapper.querySelector(".feedback");
+
+          if (isAnswered(exercise)) {
+            answered += 1;
+          }
+
+          if (checkExercise(exercise, feedback)) {
+            correct += 1;
+          }
+        });
+
+        elements.result.hidden = false;
+        elements.resultSummary.textContent = "You completed the Lesson 3 homework check.";
+        elements.resultScore.textContent = correct + " / " + exercises.length;
+        elements.resultAnswered.textContent = answered + " / " + exercises.length;
+        elements.resultSections.textContent = completedSections + " / " + sections.length;
+        elements.resultAdvice.textContent = correct === exercises.length ?
+          "Excellent. Review the transcript and practise saying the listening dialogue aloud." :
+          "Good practice. Review the highlighted exercises, listen again, and check one more time.";
+        elements.result.focus();
+        updateStatus();
+      }
+
+      function resetHomework() {
+        if (!window.confirm("Reset all answers for this homework?")) {
+          return;
+        }
+
+        answers = {};
+        saveState();
+        document.querySelectorAll("input").forEach(function resetInput(input) {
+          if (input.type === "radio") {
+            input.checked = false;
+          } else {
+            input.value = "";
+          }
+        });
+        document.querySelectorAll("textarea").forEach(function resetTextarea(textarea) {
+          textarea.value = "";
+        });
+        document.querySelectorAll(".feedback").forEach(function hideFeedback(feedback) {
+          feedback.hidden = true;
+          feedback.className = "feedback";
+          feedback.textContent = "";
+        });
+        elements.result.hidden = true;
+        elements.transcript.hidden = true;
+        elements.transcriptToggle.textContent = "Show Transcript";
+        elements.transcriptToggle.setAttribute("aria-expanded", "false");
+        updateStatus();
+      }
+
+      function applyFontSize(size) {
+        var selected = ["small", "normal", "large"].indexOf(size) === -1 ? "normal" : size;
+
+        document.body.dataset.fontSize = selected;
+        document.querySelectorAll("[data-font-size]").forEach(function updateButton(button) {
+          button.setAttribute("aria-pressed", String(button.dataset.fontSize === selected));
+        });
+
+        try {
+          window.localStorage.setItem(fontStorageKey, selected);
+        } catch (error) {
+          return;
+        }
+      }
+
+      document.querySelectorAll("[data-font-size]").forEach(function addFontControl(button) {
+        button.addEventListener("click", function onFontClick() {
+          applyFontSize(button.dataset.fontSize);
+        });
+      });
+
+      elements.checkAll.addEventListener("click", showFeedback);
+      elements.reset.addEventListener("click", resetHomework);
+      elements.transcriptToggle.addEventListener("click", function toggleTranscript() {
+        var isHidden = elements.transcript.hidden;
+
+        elements.transcript.hidden = !isHidden;
+        elements.transcriptToggle.textContent = isHidden ? "Hide Transcript" : "Show Transcript";
+        elements.transcriptToggle.setAttribute("aria-expanded", String(isHidden));
+      });
+
+      renderSections();
+      renderTranscript();
+      updateStatus();
+      applyFontSize((function getSavedFontSize() {
+        try {
+          return window.localStorage.getItem(fontStorageKey) || "normal";
+        } catch (error) {
+          return "normal";
+        }
+      })());
+    })(window, document);
+  </script>
+</body>
+</html>
