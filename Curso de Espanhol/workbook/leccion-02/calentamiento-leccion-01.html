@@ -1,0 +1,1303 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workbook · Lección 2 · Calentamiento</title>
+<style>
+:root{
+  --red:#b91c1c;
+  --gold:#f2b441;
+  --ink:#172033;
+  --muted:#667085;
+  --blue:#2563eb;
+  --green:#16803c;
+  --soft:#fff7e6;
+  --paper:#ffffff;
+  --line:#e7e0d2;
+  --danger:#b42318;
+  --font-scale:1;
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html{min-height:100%;font-size:calc(16px * var(--font-scale))}
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--ink);
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  background:
+    linear-gradient(135deg,#fffaf0 0%,#f4f8ff 54%,#fff5f5 100%);
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.page{
+  width:min(1060px,calc(100% - 32px));
+  margin:0 auto;
+  padding:34px 0 42px;
+}
+.topbar{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:18px;
+}
+.course{
+  color:var(--red);
+  font-size:.82rem;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.font-controls{
+  position:sticky;
+  top:12px;
+  z-index:10;
+  display:flex;
+  gap:8px;
+  padding:8px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(255,255,255,.88);
+  box-shadow:0 10px 26px rgba(23,32,51,.1);
+  backdrop-filter:blur(12px);
+}
+.font-controls button{
+  min-width:42px;
+  min-height:36px;
+  border:0;
+  border-radius:999px;
+  background:transparent;
+  color:var(--ink);
+  font-weight:900;
+}
+.font-controls button:hover,.font-controls button.active{background:var(--soft)}
+.hero{
+  display:grid;
+  gap:12px;
+  margin-bottom:20px;
+}
+.kicker{
+  width:max-content;
+  max-width:100%;
+  padding:7px 11px;
+  border-radius:999px;
+  color:#7a2e0e;
+  background:#fff1c2;
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+h1{
+  margin:0;
+  font-size:2.5rem;
+  line-height:1.04;
+  letter-spacing:0;
+}
+.subtitle{
+  margin:0;
+  max-width:760px;
+  color:var(--muted);
+  font-size:1.08rem;
+  line-height:1.5;
+}
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:4px;
+}
+.tags span{
+  display:inline-flex;
+  align-items:center;
+  min-height:30px;
+  padding:5px 10px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:#fff;
+  color:var(--muted);
+  font-size:.86rem;
+  font-weight:800;
+}
+.panel{
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:rgba(255,255,255,.94);
+  box-shadow:0 18px 48px rgba(23,32,51,.12);
+}
+.status{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-bottom:1px solid var(--line);
+}
+.status div{
+  padding:14px 16px;
+  border-right:1px solid var(--line);
+}
+.status div:last-child{border-right:0}
+.status small{
+  display:block;
+  margin-bottom:6px;
+  color:var(--muted);
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.status strong{
+  display:block;
+  font-size:1.04rem;
+}
+.progress-track{
+  height:10px;
+  background:#f1eee7;
+}
+.progress-bar{
+  width:5%;
+  height:100%;
+  background:linear-gradient(90deg,var(--gold),var(--green));
+  transition:width .25s ease;
+}
+.exercise{
+  display:grid;
+  gap:18px;
+  padding:24px;
+}
+.exercise.is-hidden{display:none}
+.question-meta{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:10px;
+}
+.block-pill,.kind-pill{
+  display:inline-flex;
+  align-items:center;
+  min-height:30px;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:.78rem;
+  font-weight:900;
+}
+.block-pill{background:#eef4ff;color:#1d4ed8}
+.kind-pill{background:#ecfdf3;color:#027a48}
+.prompt{
+  margin:0;
+  color:var(--muted);
+  line-height:1.5;
+}
+.question-title{
+  margin:0;
+  font-size:1.62rem;
+  line-height:1.28;
+  letter-spacing:0;
+}
+.blank{
+  display:inline-block;
+  min-width:4ch;
+  color:var(--blue);
+  font-weight:900;
+}
+.answers{
+  display:grid;
+  gap:12px;
+}
+.choice-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.answer-button{
+  min-height:52px;
+  padding:12px 14px;
+  border:2px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+  color:var(--ink);
+  font-weight:850;
+  text-align:left;
+  transition:background .15s ease,border-color .15s ease,transform .15s ease;
+}
+.answer-button:hover:not(:disabled){
+  border-color:#b6c9ff;
+  transform:translateY(-1px);
+}
+.answer-button.selected{border-color:var(--blue);background:#eff6ff}
+.answer-button.correct{border-color:#74c69d;background:#edfff4}
+.answer-button.incorrect{border-color:#f2a29a;background:#fff1f0}
+.text-field{
+  width:100%;
+  min-height:52px;
+  padding:12px 14px;
+  border:2px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+  color:var(--ink);
+}
+.text-field:focus,.select-field:focus,.answer-button:focus-visible,.action-row button:focus-visible,.font-controls button:focus-visible{
+  outline:3px solid rgba(37,99,235,.22);
+  outline-offset:2px;
+}
+.multi-grid{
+  display:grid;
+  gap:12px;
+}
+.multi-item{
+  display:grid;
+  gap:8px;
+}
+.multi-item label{
+  color:var(--muted);
+  font-size:.86rem;
+  font-weight:900;
+}
+.match-grid{
+  display:grid;
+  gap:10px;
+}
+.match-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(190px,.72fr);
+  gap:10px;
+  align-items:center;
+}
+.match-left{
+  min-height:52px;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fffaf0;
+  font-weight:850;
+}
+.select-field{
+  min-height:52px;
+  width:100%;
+  padding:11px 12px;
+  border:2px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+  color:var(--ink);
+}
+.feedback{
+  display:none;
+  padding:14px 16px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  line-height:1.48;
+}
+.feedback.active{display:block}
+.feedback strong{
+  display:block;
+  margin-bottom:7px;
+}
+.feedback p{margin:0}
+.feedback.correct{border-color:#9ad9b4;background:#f0fff5}
+.feedback.incorrect{border-color:#f2a29a;background:#fff3f1}
+.feedback.partial{border-color:#f5d073;background:#fff9e8}
+.action-row{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+}
+.action-row button,.result-panel button{
+  min-height:46px;
+  padding:10px 16px;
+  border:0;
+  border-radius:12px;
+  font-weight:900;
+}
+.check-button{background:var(--blue);color:white}
+.next-button{background:var(--ink);color:white}
+.action-row button:disabled{
+  cursor:not-allowed;
+  opacity:.42;
+}
+.result-panel{
+  display:none;
+  gap:18px;
+  padding:24px;
+}
+.result-panel.active{display:grid}
+.result-panel h2{
+  margin:0;
+  font-size:2rem;
+  letter-spacing:0;
+}
+.result-summary{
+  margin:0;
+  color:var(--muted);
+  line-height:1.5;
+}
+.result-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.result-box{
+  min-height:104px;
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fff;
+}
+.result-box small{
+  display:block;
+  margin-bottom:8px;
+  color:var(--muted);
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.result-box strong{
+  display:block;
+  font-size:1.6rem;
+}
+.block-results{
+  display:grid;
+  gap:8px;
+}
+.block-result{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:10px;
+  align-items:center;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+}
+.result-panel button{
+  justify-self:start;
+  background:var(--blue);
+  color:#fff;
+}
+@media (max-width:760px){
+  .page{width:min(100% - 20px,1060px);padding-top:18px}
+  .topbar{align-items:stretch;flex-direction:column}
+  .font-controls{align-self:flex-start}
+  h1{font-size:2rem}
+  .status,.result-grid{grid-template-columns:1fr}
+  .status div{border-right:0;border-bottom:1px solid var(--line)}
+  .status div:last-child{border-bottom:0}
+  .choice-grid{grid-template-columns:1fr}
+  .match-row{grid-template-columns:1fr}
+  .exercise,.result-panel{padding:16px}
+  .action-row{flex-direction:column}
+  .action-row button{width:100%}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <div>
+      <div class="course">CURSO DE ESPAÑOL</div>
+    </div>
+    <div class="font-controls" aria-label="Controles de tamaño de fuente">
+      <button type="button" data-font-action="decrease" aria-label="Disminuir tamaño de fuente">A−</button>
+      <button type="button" data-font-action="reset" aria-label="Restaurar tamaño de fuente">A</button>
+      <button type="button" data-font-action="increase" aria-label="Aumentar tamaño de fuente">A+</button>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="kicker">Calentamiento</div>
+    <h1>Antes de empezar la Lección 2</h1>
+    <p class="subtitle">Vamos a recordar algunas estructuras de la Lección 1.</p>
+    <div class="tags" aria-label="Contenidos">
+      <span>Artículos</span>
+      <span>Ser</span>
+      <span>Estar</span>
+      <span>Concordancia</span>
+      <span>Usted y ustedes</span>
+    </div>
+  </header>
+
+  <main class="panel">
+    <section class="status" aria-label="Progreso del calentamiento">
+      <div><small>Pregunta</small><strong id="question-count">1 / 30</strong></div>
+      <div><small>Puntuación</small><strong id="score-count">0 / 30</strong></div>
+      <div><small>Mejor resultado</small><strong id="best-score">-</strong></div>
+    </section>
+    <div class="progress-track" aria-hidden="true"><div id="progress-bar" class="progress-bar"></div></div>
+
+    <section id="exercise-panel" class="exercise" aria-labelledby="question-title">
+      <div class="question-meta">
+        <span id="block-pill" class="block-pill"></span>
+        <span id="kind-pill" class="kind-pill"></span>
+      </div>
+      <p id="question-prompt" class="prompt"></p>
+      <h2 id="question-title" class="question-title" tabindex="-1"></h2>
+      <div id="answers" class="answers"></div>
+      <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+      <div class="action-row">
+        <button id="check-button" class="check-button" type="button">Comprobar</button>
+        <button id="next-button" class="next-button" type="button" disabled>Siguiente</button>
+      </div>
+    </section>
+
+    <section id="result-panel" class="result-panel" tabindex="-1" aria-labelledby="result-title">
+      <h2 id="result-title">Resultado</h2>
+      <p id="result-summary" class="result-summary"></p>
+      <div class="result-grid">
+        <div class="result-box"><small>Aciertos</small><strong><span id="result-correct">0</span>/<span id="result-total">30</span></strong></div>
+        <div class="result-box"><small>Porcentaje</small><strong id="result-percent">0%</strong></div>
+        <div class="result-box"><small>Mejor resultado</small><strong id="result-best">-</strong></div>
+      </div>
+      <div id="block-results" class="block-results" aria-label="Resultado por bloque"></div>
+      <p id="result-message" class="result-summary"></p>
+      <button id="restart-button" type="button">Repetir ejercicio</button>
+    </section>
+  </main>
+</div>
+
+<script>
+const blocks = [
+  "Artículos",
+  "Estar",
+  "Ser",
+  "Integración",
+  "Usted y ustedes"
+];
+
+const questions = [
+  {
+    id: 1,
+    block: "Artículos",
+    category: "Artículo definido",
+    responseKind: "written",
+    type: "text",
+    prompt: "Escribe el artículo definido correcto.",
+    title: "______ libro",
+    acceptedAnswers: ["el"],
+    correctText: "el libro",
+    explanation: "“Libro” es masculino singular, por eso usamos “el”."
+  },
+  {
+    id: 2,
+    block: "Artículos",
+    category: "Artículo definido",
+    responseKind: "varied",
+    type: "choice",
+    prompt: "Selecciona el artículo definido correcto.",
+    title: "______ casas",
+    options: ["Las", "Los", "La", "El"],
+    acceptedAnswers: ["Las"],
+    explanation: "“Casas” es femenino plural, por eso usamos “las”."
+  },
+  {
+    id: 3,
+    block: "Artículos",
+    category: "Artículo indefinido",
+    responseKind: "written",
+    type: "text",
+    prompt: "Escribe el artículo indefinido correcto.",
+    title: "______ mujer",
+    acceptedAnswers: ["una"],
+    correctText: "una mujer",
+    explanation: "“Mujer” es femenino singular, por eso usamos “una”."
+  },
+  {
+    id: 4,
+    block: "Artículos",
+    category: "Artículo indefinido",
+    responseKind: "written",
+    type: "multi-text",
+    prompt: "Completa con artículos indefinidos.",
+    title: "______ hotel y ______ ventanas",
+    labels: ["Primer espacio", "Segundo espacio"],
+    acceptedAnswers: [["un"], ["unas"]],
+    correctText: "un hotel y unas ventanas",
+    explanation: "“Hotel” es masculino singular: “un”. “Ventanas” es femenino plural: “unas”."
+  },
+  {
+    id: 5,
+    block: "Artículos",
+    category: "Plural y concordancia",
+    responseKind: "written",
+    type: "text",
+    prompt: "Transforma la expresión al plural.",
+    title: "el libro blanco",
+    acceptedAnswers: ["los libros blancos"],
+    correctText: "los libros blancos",
+    explanation: "En plural cambiamos el artículo, el sustantivo y el adjetivo: “los libros blancos”."
+  },
+  {
+    id: 6,
+    block: "Estar",
+    category: "Conjugación",
+    responseKind: "written",
+    type: "multi-text",
+    prompt: "Completa con la forma correcta de “estar”.",
+    title: "Yo ______ bien y tú ______ cansado.",
+    labels: ["Yo", "Tú"],
+    acceptedAnswers: [["estoy"], ["estás"]],
+    correctText: "Yo estoy bien y tú estás cansado.",
+    explanation: "Con “yo” usamos “estoy”. Con “tú” usamos “estás”."
+  },
+  {
+    id: 7,
+    block: "Estar",
+    category: "Ubicación",
+    responseKind: "varied",
+    type: "choice",
+    prompt: "Selecciona la forma correcta.",
+    title: "El libro ______ aquí.",
+    options: ["está", "estoy", "estás", "están"],
+    acceptedAnswers: ["está"],
+    explanation: "“El libro” corresponde a la tercera persona del singular. Para ubicación usamos “estar”: “está”."
+  },
+  {
+    id: 8,
+    block: "Estar",
+    category: "Ubicación",
+    responseKind: "written",
+    type: "text",
+    prompt: "Completa con la forma correcta de “estar”.",
+    title: "Nosotros ______ en clase.",
+    acceptedAnswers: ["estamos"],
+    correctText: "Nosotros estamos en clase.",
+    explanation: "Con “nosotros” usamos “estamos”. La frase indica ubicación."
+  },
+  {
+    id: 9,
+    block: "Estar",
+    category: "Estado",
+    responseKind: "written",
+    type: "text",
+    prompt: "Completa con la forma correcta de “estar”.",
+    title: "Vosotras ______ contentas.",
+    acceptedAnswers: ["estáis"],
+    correctText: "Vosotras estáis contentas.",
+    explanation: "Con “vosotras” usamos “estáis”. “Contentas” expresa un estado."
+  },
+  {
+    id: 10,
+    block: "Estar",
+    category: "Ubicación",
+    responseKind: "varied",
+    type: "choice",
+    prompt: "Selecciona la forma correcta.",
+    title: "Ellas ______ en la ciudad.",
+    options: ["están", "está", "estamos", "estáis"],
+    acceptedAnswers: ["están"],
+    explanation: "Con “ellas” usamos “están”. La frase indica dónde están."
+  },
+  {
+    id: 11,
+    block: "Ser",
+    category: "Conjugación",
+    responseKind: "written",
+    type: "multi-text",
+    prompt: "Completa con la forma correcta de “ser”.",
+    title: "Yo ______ estudiante y tú ______ de Brasil.",
+    labels: ["Yo", "Tú"],
+    acceptedAnswers: [["soy"], ["eres"]],
+    correctText: "Yo soy estudiante y tú eres de Brasil.",
+    explanation: "Con “yo” usamos “soy”. Con “tú” usamos “eres”."
+  },
+  {
+    id: 12,
+    block: "Ser",
+    category: "Descripción",
+    responseKind: "written",
+    type: "text",
+    prompt: "Completa con la forma correcta de “ser”.",
+    title: "La casa ______ grande.",
+    acceptedAnswers: ["es"],
+    correctText: "La casa es grande.",
+    explanation: "“La casa” es tercera persona del singular. Usamos “ser” para describir cómo es."
+  },
+  {
+    id: 13,
+    block: "Ser",
+    category: "Identificación",
+    responseKind: "varied",
+    type: "choice",
+    prompt: "Selecciona la forma correcta.",
+    title: "Nosotras ______ amigas.",
+    options: ["somos", "son", "sois", "eres"],
+    acceptedAnswers: ["somos"],
+    explanation: "Con “nosotras” usamos “somos”. La frase identifica al grupo."
+  },
+  {
+    id: 14,
+    block: "Ser",
+    category: "Identificación",
+    responseKind: "written",
+    type: "text",
+    prompt: "Completa con la forma correcta de “ser”.",
+    title: "Vosotros ______ amigos.",
+    acceptedAnswers: ["sois"],
+    correctText: "Vosotros sois amigos.",
+    explanation: "Con “vosotros” usamos “sois”."
+  },
+  {
+    id: 15,
+    block: "Ser",
+    category: "Profesión",
+    responseKind: "varied",
+    type: "choice",
+    prompt: "Selecciona la forma correcta.",
+    title: "Ellos ______ profesores.",
+    options: ["son", "es", "somos", "sois"],
+    acceptedAnswers: ["son"],
+    explanation: "Con “ellos” usamos “son”. La frase habla de profesión."
+  },
+  {
+    id: 16,
+    block: "Integración",
+    category: "Concordancia",
+    responseKind: "written",
+    type: "multi-text",
+    prompt: "Completa la expresión en plural.",
+    title: "la casa blanca → ______ ______ ______",
+    labels: ["Artículo", "Sustantivo", "Adjetivo"],
+    acceptedAnswers: [["las"], ["casas"], ["blancas"]],
+    correctText: "las casas blancas",
+    explanation: "El artículo, el sustantivo y el adjetivo pasan al femenino plural: “las casas blancas”."
+  },
+  {
+    id: 17,
+    block: "Integración",
+    category: "Pronombres",
+    responseKind: "varied",
+    type: "matching",
+    prompt: "Relaciona cada grupo con el pronombre adecuado.",
+    title: "Selecciona el pronombre correcto.",
+    pairs: [
+      { left: "Ana y yo (habla una mujer)", right: "nosotras" },
+      { left: "Carlos y Pedro", right: "ellos" },
+      { left: "Tú y Carlos en España", right: "vosotros" },
+      { left: "El profesor", right: "él" }
+    ],
+    options: ["nosotras", "ellos", "vosotros", "él"],
+    explanation: "Los pronombres sustituyen a personas o grupos. “Ana y yo”, cuando habla una mujer, puede corresponder a “nosotras”."
+  },
+  {
+    id: 18,
+    block: "Integración",
+    category: "Ser y concordancia",
+    responseKind: "written",
+    type: "text",
+    prompt: "Completa la frase.",
+    title: "Las ventanas ______ blancas.",
+    acceptedAnswers: ["son"],
+    correctText: "Las ventanas son blancas.",
+    explanation: "“Las ventanas” es plural, por eso usamos “son”. “Blancas” concuerda con “ventanas”."
+  },
+  {
+    id: 19,
+    block: "Integración",
+    category: "Corrección",
+    responseKind: "written",
+    type: "text",
+    prompt: "Corrige la frase completa.",
+    title: "Los libro son blanco.",
+    acceptedAnswers: ["los libros son blancos"],
+    correctText: "Los libros son blancos.",
+    explanation: "En plural, el sustantivo y el adjetivo también cambian: “libros blancos”."
+  },
+  {
+    id: 20,
+    block: "Integración",
+    category: "Producción guiada",
+    responseKind: "written",
+    type: "text",
+    prompt: "Escribe una frase completa con estos elementos: yo / estar / en clase.",
+    title: "Construye la frase.",
+    acceptedAnswers: ["yo estoy en clase", "estoy en clase"],
+    correctText: "Yo estoy en clase.",
+    explanation: "Con “yo” usamos “estoy”. La expresión “en clase” indica ubicación."
+  },
+  {
+    id: 21,
+    block: "Usted y ustedes",
+    category: "Tratamiento formal",
+    responseKind: "varied",
+    type: "matching",
+    prompt: "Relaciona cada situación con el pronombre adecuado.",
+    title: "Selecciona el pronombre correcto.",
+    pairs: [
+      { left: "El profesor", right: "usted" },
+      { left: "La profesora", right: "usted" },
+      { left: "Los profesores", right: "ustedes" },
+      { left: "Las profesoras", right: "ustedes" }
+    ],
+    options: ["usted", "ustedes"],
+    explanation: "“Usted” se usa para una persona. “Ustedes” se usa para varias personas."
+  },
+  {
+    id: 22,
+    block: "Usted y ustedes",
+    category: "Ser",
+    responseKind: "written",
+    type: "text",
+    prompt: "Completa con la forma correcta de “ser”.",
+    title: "Usted ______ profesor.",
+    acceptedAnswers: ["es"],
+    correctText: "Usted es profesor.",
+    explanation: "“Usted” se conjuga como tercera persona del singular: “es”."
+  },
+  {
+    id: 23,
+    block: "Usted y ustedes",
+    category: "Estar",
+    responseKind: "written",
+    type: "text",
+    prompt: "Completa con la forma correcta de “estar”.",
+    title: "Usted ______ en clase.",
+    acceptedAnswers: ["está"],
+    correctText: "Usted está en clase.",
+    explanation: "“Usted” se conjuga como tercera persona del singular: “está”. La frase indica ubicación."
+  },
+  {
+    id: 24,
+    block: "Usted y ustedes",
+    category: "Ser",
+    responseKind: "varied",
+    type: "choice",
+    prompt: "Selecciona la forma correcta.",
+    title: "Ustedes ______ estudiantes.",
+    options: ["son", "sois", "somos", "es"],
+    acceptedAnswers: ["son"],
+    explanation: "“Ustedes” se conjuga como tercera persona del plural: “son”."
+  },
+  {
+    id: 25,
+    block: "Usted y ustedes",
+    category: "Estar",
+    responseKind: "written",
+    type: "text",
+    prompt: "Completa con la forma correcta de “estar”.",
+    title: "Ustedes ______ bien.",
+    acceptedAnswers: ["están"],
+    correctText: "Ustedes están bien.",
+    explanation: "“Ustedes” se conjuga como tercera persona del plural: “están”."
+  },
+  {
+    id: 26,
+    block: "Usted y ustedes",
+    category: "Ser y estar",
+    responseKind: "written",
+    type: "multi-text",
+    prompt: "Completa con “ser” o “estar” en la forma correcta.",
+    title: "Usted ______ de Brasil y ______ en la ciudad.",
+    labels: ["Primer espacio", "Segundo espacio"],
+    acceptedAnswers: [["es"], ["está"]],
+    correctText: "Usted es de Brasil y está en la ciudad.",
+    explanation: "Usamos “ser + de” para origen y “estar” para ubicación. Con “usted”: “es” y “está”."
+  },
+  {
+    id: 27,
+    block: "Usted y ustedes",
+    category: "Ser y concordancia",
+    responseKind: "written",
+    type: "multi-text",
+    prompt: "Completa con la forma de “ser” y el adjetivo correcto.",
+    title: "Ustedes ______ muy ______.",
+    labels: ["Verbo", "Adjetivo"],
+    acceptedAnswers: [["son"], ["simpáticos", "simpáticas"]],
+    correctText: "Ustedes son muy simpáticos.",
+    explanation: "Con “ustedes” usamos “son”. El adjetivo debe concordar con el grupo: “simpáticos” o “simpáticas”."
+  },
+  {
+    id: 28,
+    block: "Usted y ustedes",
+    category: "Estar y concordancia",
+    responseKind: "varied",
+    type: "choice",
+    prompt: "Selecciona la frase correcta.",
+    title: "Tratamiento formal para varias mujeres:",
+    options: [
+      "Ustedes están contentas.",
+      "Ustedes está contentas.",
+      "Usted están contentas.",
+      "Ustedes están contentos."
+    ],
+    acceptedAnswers: ["Ustedes están contentas."],
+    explanation: "Para varias personas usamos “ustedes” con “están”. “Contentas” concuerda con un grupo femenino."
+  },
+  {
+    id: 29,
+    block: "Usted y ustedes",
+    category: "Corrección",
+    responseKind: "written",
+    type: "text",
+    prompt: "Corrige la frase completa.",
+    title: "Usted son estudiante.",
+    acceptedAnswers: ["usted es estudiante"],
+    correctText: "Usted es estudiante.",
+    explanation: "“Usted” es singular y usa la forma “es”."
+  },
+  {
+    id: 30,
+    block: "Usted y ustedes",
+    category: "Producción guiada",
+    responseKind: "written",
+    type: "text",
+    prompt: "Escribe una frase completa con estos elementos: ustedes / estar / en clase.",
+    title: "Construye la frase.",
+    acceptedAnswers: ["ustedes están en clase"],
+    correctText: "Ustedes están en clase.",
+    explanation: "Con “ustedes” usamos “están”. La expresión “en clase” indica ubicación."
+  }
+];
+
+const BEST_SCORE_KEY = "workbook-leccion-02-calentamiento-leccion-01-best-score";
+const FONT_STORAGE_KEY = "leccion2FontScale";
+const FONT_MIN = 0.85;
+const FONT_DEFAULT = 1;
+const FONT_MAX = 1.2;
+const FONT_STEP = 0.05;
+const MAX_SCORE = questions.length;
+
+let currentIndex = 0;
+let score = 0;
+let correctAnswers = 0;
+let incorrectAnswers = 0;
+let questionClosed = false;
+let selectedAnswer = "";
+let multiAnswers = [];
+let matchingAnswers = [];
+let questionResults = [];
+let shuffledOptions = questions.map(question => question.options ? shuffle(question.options) : []);
+
+const exercisePanel = document.getElementById("exercise-panel");
+const resultPanel = document.getElementById("result-panel");
+const questionCount = document.getElementById("question-count");
+const scoreCount = document.getElementById("score-count");
+const bestScore = document.getElementById("best-score");
+const progressBar = document.getElementById("progress-bar");
+const blockPill = document.getElementById("block-pill");
+const kindPill = document.getElementById("kind-pill");
+const questionPrompt = document.getElementById("question-prompt");
+const questionTitle = document.getElementById("question-title");
+const answers = document.getElementById("answers");
+const feedback = document.getElementById("feedback");
+const checkButton = document.getElementById("check-button");
+const nextButton = document.getElementById("next-button");
+const restartButton = document.getElementById("restart-button");
+
+function readStorage(key){
+  try{
+    return localStorage.getItem(key);
+  }catch{
+    return null;
+  }
+}
+
+function writeStorage(key,value){
+  try{
+    localStorage.setItem(key,String(value));
+  }catch{}
+}
+
+function shuffle(items){
+  const copy = [...items];
+  for(let index = copy.length - 1; index > 0; index -= 1){
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [copy[index], copy[randomIndex]] = [copy[randomIndex], copy[index]];
+  }
+  return copy;
+}
+
+function formatScore(value){
+  return Number.isInteger(value) ? String(value) : String(value).replace(".",",");
+}
+
+function getBestScore(){
+  const rawScore = readStorage(BEST_SCORE_KEY);
+  if(rawScore === null)return null;
+  const stored = Number(rawScore);
+  return Number.isFinite(stored) ? stored : null;
+}
+
+function updateBestScoreLabel(){
+  const best = getBestScore();
+  bestScore.textContent = best === null ? "-" : `${formatScore(best)} / ${MAX_SCORE}`;
+}
+
+function normalizeAnswer(value){
+  return value
+    .trim()
+    .toLocaleLowerCase("es")
+    .replace(/[.¡!¿?]+$/g,"")
+    .replace(/\s+/g," ");
+}
+
+function isAccepted(value,acceptedAnswers){
+  const normalized = normalizeAnswer(value);
+  return acceptedAnswers.some(answer => normalizeAnswer(answer) === normalized);
+}
+
+function updateProgress(){
+  questionCount.textContent = `${currentIndex + 1} / ${questions.length}`;
+  scoreCount.textContent = `${formatScore(score)} / ${MAX_SCORE}`;
+  progressBar.style.width = `${((currentIndex + 1) / questions.length) * 100}%`;
+  updateBestScoreLabel();
+}
+
+function responseKindLabel(kind){
+  if(kind === "written")return "Escritura";
+  if(kind === "varied")return "Reconocimiento";
+  return "Práctica";
+}
+
+function displayTitle(title){
+  return title.replaceAll("______",'<span class="blank">______</span>');
+}
+
+function renderChoice(question){
+  const wrapper = document.createElement("div");
+  wrapper.className = "choice-grid";
+  shuffledOptions[currentIndex].forEach(option => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "answer-button";
+    button.textContent = option;
+    button.dataset.value = option;
+    button.setAttribute("aria-pressed",String(selectedAnswer === option));
+    if(selectedAnswer === option)button.classList.add("selected");
+    button.addEventListener("click",() => {
+      if(questionClosed)return;
+      selectedAnswer = option;
+      renderAnswers(question);
+    });
+    wrapper.appendChild(button);
+  });
+  answers.appendChild(wrapper);
+}
+
+function renderText(question){
+  const input = document.createElement("input");
+  input.className = "text-field";
+  input.type = "text";
+  input.autocomplete = "off";
+  input.spellcheck = false;
+  input.id = "answer-input";
+  input.setAttribute("aria-label","Respuesta");
+  input.disabled = questionClosed;
+  input.value = selectedAnswer;
+  input.addEventListener("input",() => {
+    selectedAnswer = input.value;
+  });
+  input.addEventListener("keydown",event => {
+    if(event.key === "Enter"){
+      event.preventDefault();
+      checkAnswer();
+    }
+  });
+  answers.appendChild(input);
+}
+
+function renderMultiText(question){
+  const wrapper = document.createElement("div");
+  wrapper.className = "multi-grid";
+  question.labels.forEach((label,index) => {
+    const item = document.createElement("div");
+    item.className = "multi-item";
+    const fieldLabel = document.createElement("label");
+    fieldLabel.setAttribute("for",`answer-input-${index}`);
+    fieldLabel.textContent = label;
+    const input = document.createElement("input");
+    input.className = "text-field";
+    input.type = "text";
+    input.autocomplete = "off";
+    input.spellcheck = false;
+    input.id = `answer-input-${index}`;
+    input.disabled = questionClosed;
+    input.value = multiAnswers[index] || "";
+    input.addEventListener("input",() => {
+      multiAnswers[index] = input.value;
+    });
+    input.addEventListener("keydown",event => {
+      if(event.key === "Enter"){
+        event.preventDefault();
+        checkAnswer();
+      }
+    });
+    item.append(fieldLabel,input);
+    wrapper.appendChild(item);
+  });
+  answers.appendChild(wrapper);
+}
+
+function renderMatching(question){
+  const wrapper = document.createElement("div");
+  wrapper.className = "match-grid";
+  question.pairs.forEach((pair,index) => {
+    const row = document.createElement("div");
+    row.className = "match-row";
+    const left = document.createElement("div");
+    left.className = "match-left";
+    left.textContent = pair.left;
+    const select = document.createElement("select");
+    select.className = "select-field";
+    select.disabled = questionClosed;
+    select.setAttribute("aria-label",`Pronombre para ${pair.left}`);
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Selecciona";
+    select.appendChild(placeholder);
+    shuffledOptions[currentIndex].forEach(option => {
+      const item = document.createElement("option");
+      item.value = option;
+      item.textContent = option;
+      select.appendChild(item);
+    });
+    select.value = matchingAnswers[index] || "";
+    select.addEventListener("change",() => {
+      matchingAnswers[index] = select.value;
+    });
+    row.append(left,select);
+    wrapper.appendChild(row);
+  });
+  answers.appendChild(wrapper);
+}
+
+function renderAnswers(question){
+  answers.innerHTML = "";
+  if(question.type === "choice")renderChoice(question);
+  if(question.type === "text")renderText(question);
+  if(question.type === "multi-text")renderMultiText(question);
+  if(question.type === "matching")renderMatching(question);
+}
+
+function renderQuestion(){
+  const question = questions[currentIndex];
+  questionClosed = false;
+  selectedAnswer = "";
+  multiAnswers = Array.isArray(question.labels) ? question.labels.map(() => "") : [];
+  matchingAnswers = Array.isArray(question.pairs) ? question.pairs.map(() => "") : [];
+
+  exercisePanel.classList.remove("is-hidden");
+  resultPanel.classList.remove("active");
+  blockPill.textContent = question.block;
+  kindPill.textContent = responseKindLabel(question.responseKind);
+  questionPrompt.textContent = question.prompt || "";
+  questionTitle.innerHTML = displayTitle(question.title);
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+  checkButton.disabled = false;
+  nextButton.disabled = true;
+  nextButton.textContent = currentIndex === questions.length - 1 ? "Ver resultado" : "Siguiente";
+  renderAnswers(question);
+  updateProgress();
+}
+
+function getAnswerResult(question){
+  if(question.type === "choice"){
+    if(!selectedAnswer)return { ready:false, correct:false };
+    return { ready:true, correct:isAccepted(selectedAnswer,question.acceptedAnswers) };
+  }
+  if(question.type === "text"){
+    if(!selectedAnswer.trim())return { ready:false, correct:false };
+    return { ready:true, correct:isAccepted(selectedAnswer,question.acceptedAnswers) };
+  }
+  if(question.type === "multi-text"){
+    const ready = multiAnswers.every(answer => answer && answer.trim());
+    const correct = ready && question.acceptedAnswers.every((accepted,index) => isAccepted(multiAnswers[index],accepted));
+    return { ready, correct };
+  }
+  if(question.type === "matching"){
+    const ready = matchingAnswers.every(Boolean);
+    const correct = ready && question.pairs.every((pair,index) => normalizeAnswer(matchingAnswers[index]) === normalizeAnswer(pair.right));
+    return { ready, correct };
+  }
+  return { ready:false, correct:false };
+}
+
+function correctResponseText(question){
+  if(question.correctText)return question.correctText;
+  if(question.type === "choice")return question.acceptedAnswers[0];
+  if(question.type === "matching"){
+    return question.pairs.map(pair => `${pair.left}: ${pair.right}`).join("; ");
+  }
+  return question.acceptedAnswers[0];
+}
+
+function markChoice(question,result){
+  answers.querySelectorAll(".answer-button").forEach(button => {
+    const value = button.dataset.value;
+    button.disabled = true;
+    button.classList.toggle("correct",isAccepted(value,question.acceptedAnswers));
+    button.classList.toggle("incorrect",value === selectedAnswer && !result.correct);
+  });
+}
+
+function closeFields(){
+  answers.querySelectorAll("input,select,button").forEach(element => {
+    element.disabled = true;
+  });
+}
+
+function showFeedback(question,result){
+  feedback.classList.add("active");
+  if(result.correct){
+    feedback.classList.add("correct");
+    feedback.innerHTML = `<strong>¡Bien!</strong><p>${question.explanation}</p>`;
+    return;
+  }
+  feedback.classList.add("incorrect");
+  feedback.innerHTML = `<strong>Vamos a revisar.</strong><p>Respuesta esperada: ${correctResponseText(question)}</p><p>${question.explanation}</p>`;
+}
+
+function checkAnswer(){
+  if(questionClosed)return;
+  const question = questions[currentIndex];
+  const result = getAnswerResult(question);
+  if(!result.ready){
+    feedback.className = "feedback active partial";
+    feedback.innerHTML = "<strong>Completa la respuesta antes de comprobar.</strong>";
+    return;
+  }
+  questionClosed = true;
+  if(result.correct){
+    score += 1;
+    correctAnswers += 1;
+  }else{
+    incorrectAnswers += 1;
+  }
+  questionResults[currentIndex] = result.correct;
+  if(question.type === "choice")markChoice(question,result);
+  closeFields();
+  showFeedback(question,result);
+  scoreCount.textContent = `${formatScore(score)} / ${MAX_SCORE}`;
+  checkButton.disabled = true;
+  nextButton.disabled = false;
+}
+
+function nextQuestion(){
+  if(!questionClosed)return;
+  if(currentIndex === questions.length - 1){
+    showResult();
+    return;
+  }
+  currentIndex += 1;
+  renderQuestion();
+  questionTitle.focus();
+}
+
+function resultMessage(percent){
+  if(percent >= 90)return "Llegas a la Lección 2 con las estructuras muy activas.";
+  if(percent >= 70)return "Buen calentamiento. Revisa solo los puntos marcados por el feedback.";
+  if(percent >= 50)return "Ya recuperaste varias piezas. Conviene repetir una vez más con calma.";
+  return "Vuelve a intentarlo: esta actividad es para recordar, no para correr.";
+}
+
+function showResult(){
+  const previousBest = getBestScore();
+  const percent = Math.round((score / MAX_SCORE) * 100);
+  const newBest = previousBest === null ? score : Math.max(previousBest,score);
+  writeStorage(BEST_SCORE_KEY,newBest);
+  updateBestScoreLabel();
+  progressBar.style.width = "100%";
+
+  document.getElementById("result-summary").textContent = "Has terminado el calentamiento.";
+  document.getElementById("result-correct").textContent = formatScore(score);
+  document.getElementById("result-total").textContent = String(MAX_SCORE);
+  document.getElementById("result-percent").textContent = `${percent}%`;
+  document.getElementById("result-best").textContent = `${formatScore(newBest)} / ${MAX_SCORE}`;
+  document.getElementById("result-message").textContent = resultMessage(percent);
+
+  const blockResults = document.getElementById("block-results");
+  blockResults.innerHTML = "";
+  blocks.forEach(block => {
+    const blockQuestions = questions.filter(question => question.block === block);
+    const blockCorrect = blockQuestions.reduce((total,question) => {
+      const questionIndex = questions.findIndex(item => item.id === question.id);
+      return total + (questionResults[questionIndex] ? 1 : 0);
+    },0);
+    const row = document.createElement("div");
+    row.className = "block-result";
+    row.innerHTML = `<span>${block}</span><strong>${blockCorrect}/${blockQuestions.length}</strong>`;
+    blockResults.appendChild(row);
+  });
+
+  exercisePanel.classList.add("is-hidden");
+  resultPanel.classList.add("active");
+  resultPanel.focus();
+}
+
+function restartExercise(){
+  currentIndex = 0;
+  score = 0;
+  correctAnswers = 0;
+  incorrectAnswers = 0;
+  questionClosed = false;
+  selectedAnswer = "";
+  multiAnswers = [];
+  matchingAnswers = [];
+  questionResults = [];
+  shuffledOptions = questions.map(question => question.options ? shuffle(question.options) : []);
+  renderQuestion();
+  questionTitle.focus();
+}
+
+function normalizeScale(value){
+  if(value === null || value === undefined || value === "")return FONT_DEFAULT;
+  const number = Number(value);
+  const scaled = Number.isFinite(number) ? number : FONT_DEFAULT;
+  return Math.round(Math.min(FONT_MAX,Math.max(FONT_MIN,scaled)) * 100) / 100;
+}
+
+function updateFontButtons(scale){
+  document.querySelectorAll("[data-font-action]").forEach(button => {
+    const active = button.dataset.fontAction === "reset" && scale === FONT_DEFAULT;
+    button.classList.toggle("active",active);
+    button.setAttribute("aria-pressed",String(active));
+  });
+}
+
+function applyFontScale(value){
+  const scale = normalizeScale(value);
+  document.documentElement.style.setProperty("--font-scale",String(scale));
+  writeStorage(FONT_STORAGE_KEY,scale);
+  updateFontButtons(scale);
+  return scale;
+}
+
+function changeFontScale(delta){
+  const current = Number(getComputedStyle(document.documentElement).getPropertyValue("--font-scale")) || FONT_DEFAULT;
+  applyFontScale(current + delta);
+}
+
+checkButton.addEventListener("click",checkAnswer);
+nextButton.addEventListener("click",nextQuestion);
+restartButton.addEventListener("click",restartExercise);
+
+document.querySelector(".font-controls").addEventListener("click",event => {
+  event.stopPropagation();
+  const button = event.target.closest("[data-font-action]");
+  if(!button)return;
+  if(button.dataset.fontAction === "decrease")changeFontScale(-FONT_STEP);
+  if(button.dataset.fontAction === "increase")changeFontScale(FONT_STEP);
+  if(button.dataset.fontAction === "reset")applyFontScale(FONT_DEFAULT);
+});
+
+document.addEventListener("keydown",event => {
+  if(!(event.ctrlKey || event.metaKey))return;
+  if(["+","="].includes(event.key)){
+    event.preventDefault();
+    changeFontScale(FONT_STEP);
+  }
+  if(["-","_"].includes(event.key)){
+    event.preventDefault();
+    changeFontScale(-FONT_STEP);
+  }
+  if(event.key === "0"){
+    event.preventDefault();
+    applyFontScale(FONT_DEFAULT);
+  }
+});
+
+applyFontScale(readStorage(FONT_STORAGE_KEY));
+renderQuestion();
+</script>
+</body>
+</html>
