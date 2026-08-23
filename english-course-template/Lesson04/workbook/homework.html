@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lesson 4 homework: cumulative grammar and vocabulary practice.">
+  <title>Lesson 4 - Homework</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { min-height: 100%; text-size-adjust: 100%; scroll-behavior: smooth; }
+    body { background: #f5f7fa; color: #161616; font-family: Arial, Helvetica, sans-serif; font-size: calc(1.08rem * var(--font-scale, 1)); line-height: 1.5; margin: 0; min-height: 100%; }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+    button:disabled { cursor: not-allowed; opacity: 0.62; }
+    :root { --surface:#ffffff; --surface-soft:#f0f4f7; --ink:#161616; --muted:#5b6470; --line:#d7dde4; --accent:#007c78; --accent-strong:#005f5c; --accent-soft:#d8f1ee; --warm:#c8562f; --warm-soft:#ffe3d6; --focus:#f7b801; --shadow:0 16px 45px rgba(20,28,38,.12); --radius:8px; --font-scale:1; }
+    body[data-font-size="small"] { --font-scale:.9; }
+    body[data-font-size="large"] { --font-scale:1.14; }
+    .font-controls { align-items:center; background:rgba(255,255,255,.94); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); display:inline-flex; gap:.25rem; padding:.25rem; position:fixed; right:1rem; top:1rem; z-index:20; }
+    .font-controls button { background:transparent; border:0; border-radius:6px; color:var(--muted); font-weight:900; min-height:2.35rem; min-width:2.75rem; }
+    .font-controls button[aria-pressed="true"] { background:var(--accent-soft); color:var(--accent-strong); }
+    .homework-page { display:grid; gap:1.5rem; margin:0 auto; max-width:1180px; min-height:100vh; padding:5.5rem 1rem 2rem; }
+    .topbar { align-items:center; color:var(--muted); display:flex; flex-wrap:wrap; font-size:calc(.95rem * var(--font-scale)); font-weight:800; gap:.75rem; justify-content:space-between; }
+    .course-label { color:var(--accent-strong); letter-spacing:.08em; text-transform:uppercase; }
+    .hero, .status div, .section-nav, .section-card, .result-card, .answer-key-card { background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); }
+    .hero { background:linear-gradient(135deg, rgba(216,241,238,.9), transparent 42%), var(--surface); display:grid; gap:.85rem; padding:clamp(1.4rem,4vw,2.5rem); }
+    .kicker, .section-range, .exercise-number { color:var(--accent-strong); font-size:calc(.86rem * var(--font-scale)); font-weight:900; letter-spacing:.08em; line-height:1.2; margin:0; text-transform:uppercase; }
+    h1, h2, h3 { color:var(--ink); font-family:Georgia, "Times New Roman", serif; line-height:1.06; margin:0; }
+    h1 { font-size:clamp(2.5rem,7vw,4.6rem); }
+    h2 { font-size:calc(2.05rem * var(--font-scale)); }
+    h3 { font-size:calc(1.28rem * var(--font-scale)); }
+    .hero p, .section-card > p, .result-card p, .answer-key-card p { color:var(--muted); font-size:calc(1.02rem * var(--font-scale)); font-weight:800; margin:0; max-width:78ch; }
+    .hero-actions, .actions, .section-nav { display:flex; flex-wrap:wrap; gap:.75rem; }
+    .primary, .secondary, .nav-link { border:0; border-radius:var(--radius); font-weight:900; min-height:3rem; padding:.7rem 1.1rem; }
+    .primary { background:var(--accent); color:#fff; }
+    .secondary, .nav-link { background:var(--surface-soft); color:var(--accent-strong); }
+    .nav-link { align-items:center; display:inline-flex; font-size:calc(.82rem * var(--font-scale)); min-height:2.5rem; text-decoration:none; text-transform:uppercase; }
+    .primary:hover, .primary:focus-visible { background:var(--accent-strong); }
+    .secondary:hover, .secondary:focus-visible, .nav-link:hover, .nav-link:focus-visible, .font-controls button:hover, .font-controls button:focus-visible { outline:3px solid rgba(247,184,1,.35); outline-offset:2px; }
+    .status { display:grid; gap:.75rem; grid-template-columns:repeat(4,minmax(0,1fr)); }
+    .status div { padding:.85rem; }
+    .status small { color:var(--muted); display:block; font-size:calc(.76rem * var(--font-scale)); font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+    .status strong { color:var(--ink); display:block; font-size:calc(1.28rem * var(--font-scale)); line-height:1.1; margin-top:.25rem; }
+    .progress-track { background:var(--surface-soft); border-radius:999px; height:.85rem; overflow:hidden; }
+    .progress-bar { background:linear-gradient(90deg,var(--accent),var(--warm)); height:100%; transition:width 220ms ease; width:0; }
+    .section-nav, .section-card, .result-card, .answer-key-card { padding:clamp(1.1rem,3vw,1.6rem); }
+    .sections, .exercise-list, .section-card, .answer-key-card { display:grid; gap:1rem; }
+    .exercise-list { gap:.9rem; }
+    .exercise { background:var(--surface-soft); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:var(--radius); display:grid; gap:.8rem; padding:1rem; }
+    .exercise.is-correct { border-left-color:var(--accent-strong); }
+    .exercise.is-incorrect { border-left-color:var(--warm); }
+    .exercise-header { align-items:center; display:flex; flex-wrap:wrap; gap:.75rem; justify-content:space-between; }
+    .exercise-instruction { color:var(--muted); font-size:calc(.95rem * var(--font-scale)); font-weight:850; margin:0; }
+    .exercise-prompt { color:var(--ink); font-size:calc(1.02rem * var(--font-scale)); font-weight:850; margin:0; max-width:88ch; }
+    .context-box { background:#fff; border:1px solid var(--line); border-radius:var(--radius); display:grid; gap:.35rem; padding:.8rem; }
+    .context-box p { color:var(--ink); font-weight:760; margin:0; max-width:95ch; }
+    .answer-label, .field-row label, .choice-label, .select-row label { color:var(--ink); font-size:calc(.96rem * var(--font-scale)); font-weight:800; }
+    .answer-input, .answer-textarea, .answer-select { background:var(--surface); border:2px solid var(--line); border-radius:var(--radius); color:var(--ink); font-weight:760; padding:.7rem .8rem; width:100%; }
+    .answer-input:focus, .answer-textarea:focus, .answer-select:focus { border-color:var(--accent); outline:3px solid rgba(247,184,1,.35); outline-offset:1px; }
+    .answer-textarea { min-height:5.25rem; resize:vertical; }
+    .field-grid, .select-grid { display:grid; gap:.75rem; grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .field-row, .select-row { display:grid; gap:.35rem; }
+    .choice-list { display:grid; gap:.55rem; }
+    .choice-label { align-items:flex-start; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); display:flex; gap:.65rem; padding:.7rem .8rem; }
+    .field-row, .select-row { border:2px solid transparent; border-radius:var(--radius); padding:.35rem; }
+    .field-row.is-correct, .select-row.is-correct, .choice-label.is-correct, .answer-input.is-correct, .answer-textarea.is-correct { background:var(--accent-soft); border-color:rgba(0,124,120,.58); }
+    .field-row.is-incorrect, .select-row.is-incorrect, .choice-label.is-incorrect, .answer-input.is-incorrect, .answer-textarea.is-incorrect { background:var(--warm-soft); border-color:rgba(200,86,47,.62); }
+    .field-row.is-correct .answer-input, .select-row.is-correct .answer-select { border-color:rgba(0,124,120,.7); }
+    .field-row.is-incorrect .answer-input, .select-row.is-incorrect .answer-select { border-color:rgba(200,86,47,.72); }
+    .feedback { border-radius:var(--radius); font-size:calc(.86rem * var(--font-scale)); font-weight:900; padding:.45rem .7rem; }
+    .feedback.correct { background:var(--accent-soft); color:var(--accent-strong); }
+    .feedback.incorrect { background:var(--warm-soft); color:var(--warm); }
+    .result-card { border-left:4px solid var(--accent); display:grid; gap:1rem; }
+    .result-grid { display:grid; gap:.75rem; grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .result-grid div { background:var(--surface-soft); border-radius:var(--radius); padding:.85rem; }
+    .result-grid small { color:var(--muted); display:block; font-size:calc(.75rem * var(--font-scale)); font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+    .result-grid strong { color:var(--ink); display:block; font-size:calc(1.22rem * var(--font-scale)); margin-top:.25rem; }
+    .answer-key-card { border-left:4px solid var(--warm); }
+    .answer-key-list { display:grid; gap:.7rem; }
+    .answer-key-item { background:var(--surface-soft); border-radius:var(--radius); color:var(--ink); font-weight:760; padding:.8rem; }
+    .answer-key-item strong { color:var(--accent-strong); display:block; margin-bottom:.25rem; }
+    @media (max-width: 860px) { .status, .result-grid, .field-grid, .select-grid { grid-template-columns:1fr; } .homework-page { padding-top:6rem; } }
+  </style>
+</head>
+<body>
+  <div class="font-controls" role="group" aria-label="Font size">
+    <button type="button" data-font-size="small" aria-pressed="false">-A</button>
+    <button type="button" data-font-size="normal" aria-pressed="true">A</button>
+    <button type="button" data-font-size="large" aria-pressed="false">A+</button>
+  </div>
+
+  <main class="homework-page">
+    <div class="topbar">
+      <span class="course-label">Lesson 4 Homework</span>
+      <span>Your answers are saved in this browser.</span>
+    </div>
+
+    <section class="hero" aria-labelledby="homework-title">
+      <p class="kicker">60 exercises</p>
+      <h1 id="homework-title">Present Simple Review</h1>
+      <p>Cumulative grammar and vocabulary practice for Lessons 1-4, with a strong focus on Lesson 4: work, jobs, daily routines, do/does questions, negatives and short answers.</p>
+      <div class="hero-actions">
+        <button id="check-all" class="primary" type="button">Check Homework</button>
+        <button id="reset-homework" class="secondary" type="button">Reset</button>
+        <button id="toggle-key" class="secondary" type="button" aria-expanded="false">Show Answer Key</button>
+      </div>
+    </section>
+
+    <section class="status" aria-label="Homework status">
+      <div><small>Answered</small><strong id="answered-count">0 / 60</strong></div>
+      <div><small>Correct</small><strong id="score-count">0 / 60</strong></div>
+      <div><small>Sections</small><strong id="section-count">0 / 10</strong></div>
+      <div><small>Progress</small><strong id="progress-label">0%</strong><div class="progress-track" aria-hidden="true"><div id="progress-bar" class="progress-bar"></div></div></div>
+    </section>
+
+    <nav id="section-nav" class="section-nav" aria-label="Homework sections"></nav>
+
+    <section id="result" class="result-card" tabindex="-1" aria-labelledby="result-title" hidden>
+      <h2 id="result-title">Homework check</h2>
+      <p id="result-summary"></p>
+      <div class="result-grid">
+        <div><small>Score</small><strong id="result-score">0 / 60</strong></div>
+        <div><small>Answered</small><strong id="result-answered">0 / 60</strong></div>
+        <div><small>Sections</small><strong id="result-sections">0 / 10</strong></div>
+      </div>
+      <p id="result-advice"></p>
+    </section>
+
+    <div id="sections" class="sections"></div>
+
+    <section id="answer-key-card" class="answer-key-card" aria-labelledby="answer-key-title" hidden>
+      <p class="section-range">Answer key</p>
+      <h2 id="answer-key-title">Check and Review</h2>
+      <p>Use the answer key after you try the exercises. Some production items show a model answer.</p>
+      <div id="answer-key" class="answer-key-list"></div>
+    </section>
+  </main>
+
+  <script>
+    (function homework(window, document) {
+      "use strict";
+
+      var sections = [{"id": "section-a-affirmative", "range": "Exercises 1-6", "title": "A. Present Simple Affirmative", "intro": "Use the base verb with I, you, we and they. Add -s or -es with he, she and it.", "exercises": [{"id": 1, "type": "fields", "instruction": "Complete Thomas's morning routine.", "context": ["Thomas is an engineer. He lives in Manchester and studies English at night."], "prompt": "Use the verbs in brackets.", "fields": [{"label": "Every morning, he ___ coffee at 8:00. (drink)", "answer": ["drinks"]}, {"label": "He ___ to class by car. (drive)", "answer": ["drives"]}, {"label": "He ___ vegetables at lunch. (eat)", "answer": ["eats"]}, {"label": "On Saturday, he ___ glasses for reading. (wear)", "answer": ["wears"]}], "feedback": "Remember: he -> verb + s/es. Have becomes has."}, {"id": 2, "type": "selects", "instruction": "Choose the correct verb form.", "prompt": "Look carefully at the subject.", "options": ["live", "lives", "study", "studies", "listen", "listens", "watch", "watches"], "rows": [{"label": "I ___ in a flat.", "answer": "live"}, {"label": "Laura ___ English on Tuesday.", "answer": "studies"}, {"label": "My colleagues ___ to music after class.", "answer": "listen"}, {"label": "Carl ___ TV in the evening.", "answer": "watches"}], "feedback": "He, she and it need the third-person form."}, {"id": 3, "type": "fields", "instruction": "Rewrite each sentence with the new subject.", "prompt": "Make the verb agree with the subject.", "fields": [{"label": "I say sorry. -> She ___ sorry.", "answer": ["says"]}, {"label": "They need a new phone. -> He ___ a new phone.", "answer": ["needs"]}, {"label": "We take an umbrella. -> Carla ___ an umbrella.", "answer": ["takes"]}, {"label": "You like animals. -> My father ___ animals.", "answer": ["likes"]}], "feedback": "Change only the verb. Study becomes studies."}, {"id": 4, "type": "fields", "instruction": "Complete Mei's short profile.", "context": ["Mei is Chinese. She is a project manager in a technology company."], "prompt": "Use Present Simple affirmative.", "fields": [{"label": "Mei ___ in Shanghai. (live)", "answer": ["lives", "Mei lives in Shanghai"]}, {"label": "She ___ glasses in class. (wear)", "answer": ["wears", "She wears glasses in class"]}, {"label": "She ___ English and Chinese. (speak)", "answer": ["speaks", "She speaks English and Chinese"]}, {"label": "She ___ coffee in the morning. (drink)", "answer": ["drinks", "She drinks coffee in the morning"]}, {"label": "She ___ books on Sunday. (read)", "answer": ["reads", "She reads books on Sunday"]}], "feedback": "Mei = she, so add -s to regular verbs."}, {"id": 5, "type": "choice", "instruction": "Choose the correct sentence.", "prompt": "Which sentence is correct?", "options": ["A chef cook dinner.", "A chef cooks dinner.", "A chef cooking dinner."], "answer": "A chef cooks dinner.", "feedback": "A chef = she/he, so use cooks."}, {"id": 6, "type": "fields", "instruction": "Complete the mini-dialogue.", "context": ["Two new classmates meet before class."], "prompt": "Use the correct affirmative verb.", "fields": [{"label": "A: Where do you live? B: I ___ in Recife.", "answer": ["live"]}, {"label": "A: What does your sister do? B: She ___ a teacher.", "answer": ["is"]}, {"label": "A: Does she play the guitar? B: Yes. She ___ the guitar every day.", "answer": ["plays"]}, {"label": "A: What do you do after class? B: We ___ to the cinema.", "answer": ["go"]}], "feedback": "I/we/you/they use the base verb. She uses the third-person form."}]}, {"id": "section-b-negative", "range": "Exercises 7-12", "title": "B. Present Simple Negative", "intro": "Use don't + base verb or doesn't + base verb. After doesn't, never add -s to the main verb.", "exercises": [{"id": 7, "type": "fields", "instruction": "Make the sentences negative.", "prompt": "Write the complete negative sentence.", "fields": [{"label": "I want a coffee.", "answer": ["I don't want a coffee", "I do not want a coffee"]}, {"label": "She likes animals.", "answer": ["She doesn't like animals", "She does not like animals"]}, {"label": "They watch TV on Monday.", "answer": ["They don't watch TV on Monday", "They do not watch TV on Monday"]}, {"label": "He takes an umbrella.", "answer": ["He doesn't take an umbrella", "He does not take an umbrella"]}], "feedback": "After don't/doesn't, use the base verb: speak, watch, have."}, {"id": 8, "type": "selects", "instruction": "Choose don't or doesn't.", "prompt": "Read the subject first.", "options": ["don't", "doesn't"], "rows": [{"label": "My parents ___ live in a flat.", "answer": "don't"}, {"label": "Laura ___ drive a car.", "answer": "doesn't"}, {"label": "I ___ drink mineral water at lunch.", "answer": "don't"}, {"label": "The child ___ eat vegetables.", "answer": "doesn't"}, {"label": "We ___ play tennis after class.", "answer": "don't"}], "feedback": "Use doesn't with he, she, it or one person."}, {"id": 9, "type": "fields", "instruction": "Correct the false information.", "context": ["Profile: Daniel is a software developer. He doesn't wear glasses. He speaks Portuguese and English. He doesn't drive a car every day."], "prompt": "Complete the corrections.", "fields": [{"label": "Daniel wears glasses. -> Daniel ___ glasses.", "answer": ["doesn't wear", "does not wear"]}, {"label": "Daniel speaks German. -> Daniel ___ German.", "answer": ["doesn't speak", "does not speak"]}, {"label": "Daniel drives a car every day. -> Daniel ___ a car every day.", "answer": ["doesn't drive", "does not drive"]}], "feedback": "Use doesn't + base verb for Daniel."}, {"id": 10, "type": "fields", "instruction": "Complete with the correct verb form after doesn't.", "prompt": "Do not add -s after doesn't.", "fields": [{"label": "She doesn't ___ coffee. (drinks/drink)", "answer": ["drink"]}, {"label": "He doesn't ___ homework on Friday. (does/do)", "answer": ["do"]}, {"label": "The manager doesn't ___ a new phone. (needs/need)", "answer": ["need"]}, {"label": "My brother doesn't ___ vegetables. (eats/eat)", "answer": ["eat"]}], "feedback": "Doesn't already has the -s idea. The main verb is base form."}, {"id": 11, "type": "fields", "instruction": "Complete the negative dialogue.", "context": ["At a simple job interview."], "prompt": "Use don't, doesn't and base verbs.", "fields": [{"label": "A: Do you play tennis? B: No, I ___ tennis.", "answer": ["don't play", "do not play"]}, {"label": "A: Does your brother live in a flat? B: No, he ___ in a flat.", "answer": ["doesn't live", "does not live"]}, {"label": "A: Do they listen to music? B: No, they ___ to music.", "answer": ["don't listen", "do not listen"]}, {"label": "A: Does Ana want a car? B: No, she ___ a car.", "answer": ["doesn't want", "does not want"]}], "feedback": "Use the same auxiliary as the question."}, {"id": 12, "type": "choice", "instruction": "Choose the correct negative sentence.", "prompt": "Which sentence is correct?", "options": ["He doesn't wears glasses.", "He don't wear glasses.", "He doesn't wear glasses."], "answer": "He doesn't wear glasses.", "feedback": "He -> doesn't, and the main verb stays wear."}]}, {"id": "section-c-aff-neg", "range": "Exercises 13-18", "title": "C. Affirmative + Negative", "intro": "Correct false information with one negative sentence and one true affirmative sentence.", "exercises": [{"id": 13, "type": "fields", "instruction": "Correct the false statement about Emma.", "context": ["Emma: doctor, Bristol, likes music, speaks English and Spanish, goes by bus."], "prompt": "Statement: Emma likes animals.", "fields": [{"label": "Negative sentence", "answer": ["Emma doesn't like animals", "Emma does not like animals"]}, {"label": "Correct affirmative sentence", "answer": ["She likes music", "Emma likes music"]}], "feedback": "Use doesn't like, then give the true preference."}, {"id": 14, "type": "fields", "instruction": "Correct the false statement about Rafael.", "context": ["Rafael: waiter, Lisbon, eats dinner at 7:00, has lunch at 3:00, plays the guitar."], "prompt": "Statement: Rafael eats dinner at 12:00.", "fields": [{"label": "Negative sentence", "answer": ["Rafael doesn't eat dinner at 12:00", "Rafael does not eat dinner at 12:00"]}, {"label": "Correct affirmative sentence", "answer": ["He eats dinner at 7:00", "Rafael eats dinner at 7:00"]}], "feedback": "After doesn't, write have. The true sentence uses has."}, {"id": 15, "type": "fields", "instruction": "Correct the false statement about Sofia and Lucas.", "context": ["Sofia and Lucas: engineers, live in Sao Paulo, read books every night, watch TV on Friday."], "prompt": "Statement: Sofia and Lucas watch TV every night.", "fields": [{"label": "Negative sentence", "answer": ["Sofia and Lucas don't watch TV every night", "Sofia and Lucas do not watch TV every night"]}, {"label": "Correct affirmative sentence", "answer": ["They read books every night", "Sofia and Lucas read books every night"]}], "feedback": "Two people = they, so use don't and the base verb."}, {"id": 16, "type": "fields", "instruction": "Correct the false statement about Claire.", "context": ["Claire: business analyst, French, lives in Paris, speaks French and English, doesn't drive to work."], "prompt": "Statement: Claire lives in Madrid.", "fields": [{"label": "Negative sentence", "answer": ["Claire doesn't live in Madrid", "Claire does not live in Madrid"]}, {"label": "Correct affirmative sentence", "answer": ["She lives in Paris", "Claire lives in Paris"]}], "feedback": "Claire = she. Use doesn't live, then lives."}, {"id": 17, "type": "fields", "instruction": "Correct the false information about Kenji.", "context": ["Kenji: Japanese, chef, works in a hotel, cooks dinner at work, studies English on Thursday."], "prompt": "For each false statement, write the negative sentence and the true affirmative sentence.", "fields": [{"label": "Kenji is Chinese. -> Negative sentence", "answer": ["Kenji is not Chinese", "Kenji isn't Chinese", "He isn't Chinese", "He is not Chinese"]}, {"label": "Kenji is Chinese. -> True sentence", "answer": ["Kenji is Japanese", "He is Japanese"]}, {"label": "Kenji works in an office. -> Negative sentence", "answer": ["Kenji doesn't work in an office", "Kenji does not work in an office", "He doesn't work in an office", "He does not work in an office"]}, {"label": "Kenji works in an office. -> True sentence", "answer": ["Kenji works in a hotel", "He works in a hotel"]}], "feedback": "Write the negative correction first, then the true sentence from the profile."}, {"id": 18, "type": "fields", "instruction": "Complete the contrast sentences.", "context": ["Marta is a receptionist. She takes the bus to class. She doesn't drive a car. She speaks Spanish and English."], "prompt": "Use the profile.", "fields": [{"label": "Marta ___ a car.", "answer": ["doesn't drive", "does not drive"]}, {"label": "She ___ the bus to class.", "answer": ["takes"]}, {"label": "She ___ German.", "answer": ["doesn't speak", "does not speak"]}, {"label": "She ___ Spanish and English.", "answer": ["speaks"]}], "feedback": "Negative: doesn't + base verb. Affirmative: she + verb + s."}]}, {"id": "section-d-questions", "range": "Exercises 19-24", "title": "D. Questions with Do / Does", "intro": "Build Yes/No questions with Do or Does + subject + base verb.", "exercises": [{"id": 19, "type": "selects", "instruction": "Choose Do or Does.", "prompt": "Complete each question.", "options": ["Do", "Does"], "rows": [{"label": "___ you want a coffee?", "answer": "Do"}, {"label": "___ Laura say sorry?", "answer": "Does"}, {"label": "___ the students listen to music?", "answer": "Do"}, {"label": "___ Thomas have lunch at home?", "answer": "Does"}, {"label": "___ your colleagues play tennis?", "answer": "Do"}], "feedback": "Use Does for one person: he, she, it."}, {"id": 20, "type": "fields", "instruction": "Put the words in order.", "prompt": "Write complete questions.", "fields": [{"label": "you / say / sorry / do ?", "answer": ["Do you say sorry"]}, {"label": "does / she / take / the bus ?", "answer": ["Does she take the bus"]}, {"label": "they / do / read a book / on Friday ?", "answer": ["Do they read a book on Friday"]}, {"label": "he / does / need / a new phone ?", "answer": ["Does he need a new phone"]}], "feedback": "Question order: Do/Does + subject + base verb."}, {"id": 21, "type": "fields", "instruction": "Change statements into questions.", "prompt": "Use Do or Does.", "fields": [{"label": "Laura eats vegetables.", "answer": ["Does Laura eat vegetables"]}, {"label": "My colleagues drink coffee.", "answer": ["Do my colleagues drink coffee"]}, {"label": "He studies English.", "answer": ["Does he study English"]}, {"label": "They want a coffee.", "answer": ["Do they want a coffee"]}], "feedback": "After Does, use eat and study - not eats/studies. With they, use Do + base verb."}, {"id": 22, "type": "choice", "instruction": "Choose the correct question.", "prompt": "Ask about Carl and glasses.", "options": ["Does Carl wears glasses?", "Does Carl wear glasses?", "Do Carl wear glasses?"], "answer": "Does Carl wear glasses?", "feedback": "Carl = he, so use Does + wear."}, {"id": 23, "type": "fields", "instruction": "Correct the questions.", "prompt": "Write the correct question.", "fields": [{"label": "Does Laura needs a new phone?", "answer": ["Does Laura need a new phone"]}, {"label": "Does he has a new phone?", "answer": ["Does he have a new phone"]}, {"label": "Do she play the guitar?", "answer": ["Does she play the guitar"]}, {"label": "Does they take the bus?", "answer": ["Do they take the bus"]}], "feedback": "Check both the auxiliary and the base verb."}, {"id": 24, "type": "fields", "instruction": "Complete the mini-conversations.", "prompt": "Use Do or Does and a base verb. Write the two missing words separated by a comma. Example: Does, like.", "fields": [{"label": "A: ___ your manager ___ a new phone? B: Yes, he does.", "answer": ["Does, need", "Does need", "Does your manager need a new phone"]}, {"label": "A: ___ you ___ to class by bus? B: No, I don't.", "answer": ["Do, go", "Do go", "Do you go to class by bus"]}, {"label": "A: ___ Ana ___ books on Sunday? B: Yes, she does.", "answer": ["Does, read", "Does read", "Does Ana read books on Sunday"]}], "feedback": "Write the auxiliary and the base verb separated by a comma, for example: Does, like."}]}, {"id": "section-e-short-answers", "range": "Exercises 25-30", "title": "E. Short Answers", "intro": "Answer with do, don't, does, doesn't, am, is or are. Do not repeat the whole sentence.", "exercises": [{"id": 25, "type": "fields", "instruction": "Answer about Claire.", "context": ["Claire is French. She is a business analyst. She lives in Paris. She speaks French and English."], "prompt": "Write short answers.", "fields": [{"label": "Is Claire French?", "answer": ["Yes, she is"]}, {"label": "Does Claire live in Madrid?", "answer": ["No, she doesn't", "No, she does not"]}, {"label": "Does Claire speak English?", "answer": ["Yes, she does"]}, {"label": "Is Claire a teacher?", "answer": ["No, she isn't", "No, she is not"]}], "feedback": "Use be for Is questions and does for Does questions."}, {"id": 26, "type": "fields", "instruction": "Answer about Ben and Julia.", "context": ["Ben and Julia are British. They work in a school. They don't work on Sunday. They play tennis on Saturday."], "prompt": "Write short answers.", "fields": [{"label": "Are Ben and Julia British?", "answer": ["Yes, they are"]}, {"label": "Do they watch TV on Sunday?", "answer": ["No, they don't", "No, they do not"]}, {"label": "Do they drive to class?", "answer": ["No, they don't", "No, they do not"]}, {"label": "Do they play tennis?", "answer": ["Yes, they do"]}], "feedback": "They questions use are or do."}, {"id": 27, "type": "selects", "instruction": "Choose the correct short answer.", "prompt": "Use the information in the question.", "options": ["Yes, I do.", "No, I don't.", "Yes, he does.", "No, he doesn't.", "Yes, she is.", "No, she isn't.", "Yes, she does."], "rows": [{"label": "Do you study English? (yes)", "answer": "Yes, I do."}, {"label": "Does Kenji drive to class? (no)", "answer": "No, he doesn't."}, {"label": "Is Marta a receptionist? (yes)", "answer": "Yes, she is."}, {"label": "Does Laura drink coffee? (yes)", "answer": "Yes, she does."}], "feedback": "Match the subject and the first word of the question."}, {"id": 28, "type": "fields", "instruction": "Complete the short answers.", "prompt": "Use contractions where possible.", "fields": [{"label": "Does your sister take the bus? No, she ___.", "answer": ["doesn't", "does not"]}, {"label": "Do your colleagues listen to music? Yes, they ___.", "answer": ["do"]}, {"label": "Is the manager German? No, he ___.", "answer": ["isn't", "is not"]}, {"label": "Are the offices clean? Yes, they ___.", "answer": ["are"]}], "feedback": "The short answer repeats the auxiliary from the question."}, {"id": 29, "type": "fields", "instruction": "Answer from the profile.", "context": ["Noah is American. He is a designer. He works from home on Monday. He doesn't have a car. He likes animals."], "prompt": "Write short answers.", "fields": [{"label": "Is Noah American?", "answer": ["Yes, he is"]}, {"label": "Does Noah wear glasses?", "answer": ["Yes, he does"]}, {"label": "Does Noah have a car?", "answer": ["No, he doesn't", "No, he does not"]}, {"label": "Does Noah like animals?", "answer": ["Yes, he does"]}], "feedback": "Use he for Noah."}, {"id": 30, "type": "choice", "instruction": "Choose the best answer.", "prompt": "Does your teacher speak Portuguese?", "options": ["Yes, she is.", "Yes, she does.", "Yes, she speak."], "answer": "Yes, she does.", "feedback": "A Does question needs a does answer."}]}, {"id": "section-f-be-or-do", "range": "Exercises 31-36", "title": "F. Be or Do?", "intro": "Use be for identity, nationality, age and adjectives. Use do/does with action verbs.", "exercises": [{"id": 31, "type": "selects", "instruction": "Choose the first word.", "prompt": "Use Am, Is, Are, Do or Does.", "options": ["Am", "Is", "Are", "Do", "Does"], "rows": [{"label": "___ Laura Spanish?", "answer": "Is"}, {"label": "___ Laura say sorry?", "answer": "Does"}, {"label": "___ Thomas an engineer?", "answer": "Is"}, {"label": "___ Thomas take the bus?", "answer": "Does"}, {"label": "___ they Brazilian?", "answer": "Are"}, {"label": "___ they live in Brazil?", "answer": "Do"}], "feedback": "Be asks about identity. Do/Does asks about actions."}, {"id": 32, "type": "fields", "instruction": "Build complete questions.", "prompt": "Use the correct auxiliary.", "fields": [{"label": "Laura / Spanish?", "answer": ["Is Laura Spanish"]}, {"label": "Laura / say sorry?", "answer": ["Does Laura say sorry"]}, {"label": "your colleagues / in the office?", "answer": ["Are your colleagues in the office"]}, {"label": "your colleagues / read books on Friday?", "answer": ["Do your colleagues read books on Friday"]}], "feedback": "Use be before place/adjective/noun. Use do/does before a verb."}, {"id": 33, "type": "fields", "instruction": "Correct the mistakes.", "prompt": "Write the correct question.", "fields": [{"label": "Does Laura is Spanish?", "answer": ["Is Laura Spanish"]}, {"label": "Is Thomas take the bus?", "answer": ["Does Thomas take the bus"]}, {"label": "Do they are Brazilian?", "answer": ["Are they Brazilian"]}, {"label": "Is she say sorry?", "answer": ["Does she say sorry"]}], "feedback": "Do not mix be and does in one simple question."}, {"id": 34, "type": "fields", "instruction": "Complete the dialogue.", "context": ["At an international company."], "prompt": "Use be or do/does.", "fields": [{"label": "A: ___ you from Portugal? B: Yes, I am.", "answer": ["Are"]}, {"label": "A: ___ you want a coffee? B: Yes, I do.", "answer": ["Do"]}, {"label": "A: ___ your manager Portuguese? B: No, she isn't.", "answer": ["Is"]}, {"label": "A: ___ she speak English? B: Yes, she does.", "answer": ["Does"]}], "feedback": "Short answers help you choose the question word."}, {"id": 35, "type": "choice", "instruction": "Choose the correct pair.", "prompt": "Ask about occupation and a free-time activity.", "options": ["What is he do? / What is he play?", "What does he do? / What does he play?", "What does he is? / What does he plays?"], "answer": "What does he do? / What does he play?", "feedback": "Use does + subject + base verb for information questions with actions."}, {"id": 36, "type": "selects", "instruction": "Choose the correct short answer.", "prompt": "Be questions need be answers. Do/Does questions need do/does answers.", "options": ["Yes, she is.", "Yes, she does.", "No, they aren't.", "No, they don't.", "Yes, I am.", "Yes, I do."], "rows": [{"label": "Is she a nurse?", "answer": "Yes, she is."}, {"label": "Does she take an umbrella?", "answer": "Yes, she does."}, {"label": "Are they in the office?", "answer": "No, they aren't."}, {"label": "Do they need a new phone?", "answer": "No, they don't."}], "feedback": "Match the short answer to the first word of the question."}]}, {"id": "section-g-info-questions", "range": "Exercises 37-42", "title": "G. Asking for Information", "intro": "Use question word + do/does + subject + base verb.", "exercises": [{"id": 37, "type": "selects", "instruction": "Choose the question word.", "prompt": "Use What, Where, When, Who or How.", "options": ["What", "Where", "When", "Who", "How"], "rows": [{"label": "___ do you live? In a flat.", "answer": "Where"}, {"label": "___ does she do? She's a nurse.", "answer": "What"}, {"label": "___ does Thomas go to class? By train.", "answer": "How"}, {"label": "___ do they study English? On Monday.", "answer": "When"}, {"label": "___ do you say sorry to? I say sorry to my sister.", "answer": "Who"}], "feedback": "The answer tells you the question word."}, {"id": 38, "type": "fields", "instruction": "Build questions from answers.", "prompt": "Write the complete question.", "fields": [{"label": "Answer: I live in Sao Paulo.", "answer": ["Where do you live"]}, {"label": "Answer: Thomas takes the bus to class.", "answer": ["How does Thomas go to class"]}, {"label": "Answer: Laura studies English on Monday.", "answer": ["When does Laura study English"]}, {"label": "Answer: She's a nurse.", "answer": ["What does she do"]}], "feedback": "After does, use go, study and do."}, {"id": 39, "type": "fields", "instruction": "Put the words in order.", "prompt": "Use the correct question structure.", "fields": [{"label": "where / live / do / your colleagues ?", "answer": ["Where do your colleagues live"]}, {"label": "what / does / Carl / do ?", "answer": ["What does Carl do"]}, {"label": "when / she / does / study English ?", "answer": ["When does she study English"]}, {"label": "who / you / do / play tennis with ?", "answer": ["Who do you play tennis with"]}], "feedback": "Question word first, then do/does, then subject."}, {"id": 40, "type": "fields", "instruction": "Complete the interview.", "context": ["A simple job interview."], "prompt": "Write one question word in each gap.", "fields": [{"label": "___ do you do? I'm a shop assistant.", "answer": ["What"]}, {"label": "___ do you live? In a small flat.", "answer": ["Where"]}, {"label": "___ do you listen to music? At 7:00.", "answer": ["When"]}, {"label": "___ do you go to class? By bus.", "answer": ["How"]}], "feedback": "Use what for job, where for place, when for time and how for transport."}, {"id": 41, "type": "fields", "instruction": "Correct the information questions.", "prompt": "Write the correct question.", "fields": [{"label": "Where does Claire lives?", "answer": ["Where does Claire live"]}, {"label": "What do he do?", "answer": ["What does he do"]}, {"label": "How does they go to class?", "answer": ["How do they go to class"]}, {"label": "When does Laura studies English?", "answer": ["When does Laura study English"]}], "feedback": "Check does/do and the base verb."}, {"id": 42, "type": "fields", "instruction": "Ask about the professional profile.", "context": ["Profile: Ana is Brazilian. She lives in Sao Paulo. She is a business analyst. She speaks Portuguese and English. She takes an English class on Thursday."], "prompt": "Write questions for the answers.", "fields": [{"label": "Sao Paulo", "answer": ["Where does Ana live"]}, {"label": "A business analyst", "answer": ["What does Ana do"]}, {"label": "Portuguese and English", "answer": ["What languages does Ana speak", "Which languages does Ana speak"]}, {"label": "On Thursday", "answer": ["When does Ana take an English class"]}], "feedback": "Use does + Ana + base verb."}]}, {"id": "section-h-jobs-life", "range": "Exercises 43-48", "title": "H. Jobs & Everyday Life", "intro": "Recycle Lesson 4 jobs, verb phrases and everyday professional contexts.", "exercises": [{"id": 43, "type": "selects", "instruction": "Match the short profiles to jobs.", "prompt": "Choose the best job.", "options": ["a nurse", "a receptionist", "a chef", "a taxi driver", "a teacher", "a software developer"], "rows": [{"label": "I help doctors and patients.", "answer": "a nurse"}, {"label": "I speak to guests and answer the phone.", "answer": "a receptionist"}, {"label": "I cook dinner in a restaurant.", "answer": "a chef"}, {"label": "I drive people around the city.", "answer": "a taxi driver"}, {"label": "I play music for people.", "answer": "a musician"}], "feedback": "Use the job clues: hospital, hotel, restaurant, drive, computers."}, {"id": 44, "type": "fields", "instruction": "Identify the profession.", "prompt": "Write a job from Lesson 4.", "fields": [{"label": "I like animals. I help sick animals.", "answer": ["a vet", "vet"]}, {"label": "I study with students and teach lessons.", "answer": ["a teacher", "teacher"]}, {"label": "I help people with teeth.", "answer": ["a dentist", "dentist"]}, {"label": "I play music for people.", "answer": ["a musician", "musician"]}, {"label": "I fly planes.", "answer": ["a pilot", "pilot"]}], "feedback": "Use a/an with singular job words when you write the full phrase."}, {"id": 45, "type": "fields", "instruction": "Complete the everyday conversation.", "context": ["Two colleagues meet at a hotel reception desk."], "prompt": "Use words from the box: live, drives, plays, doesn't, do, does.", "fields": [{"label": "A: Where do you ___? B: I live in a flat.", "answer": ["live"]}, {"label": "A: ___ your manager drive to class? B: Yes, she does.", "answer": ["Does"]}, {"label": "A: What does she do after class? B: She ___ tennis.", "answer": ["plays"]}, {"label": "A: Does she eat meat? B: No, she ___.", "answer": ["doesn't", "does not"]}], "feedback": "Look at question forms and third-person forms."}, {"id": 46, "type": "fields", "instruction": "Read the weekly routine and answer.", "context": ["Marco is an Italian engineer in London. He drinks coffee on Monday, studies English on Tuesday, meets clients on Thursday, and plays tennis on Saturday."], "prompt": "Write short answers or information answers.", "fields": [{"label": "Does Marco drink coffee on Monday?", "answer": ["Yes, he does"]}, {"label": "When does Marco study English?", "answer": ["On Tuesday", "He studies English on Tuesday"]}, {"label": "Who does Marco meet on Thursday?", "answer": ["clients", "He meets clients", "He meets clients on Thursday"]}, {"label": "What does Marco do on Saturday?", "answer": ["He plays tennis", "plays tennis"]}], "feedback": "Use the routine to find the exact day or activity."}, {"id": 47, "type": "fields", "instruction": "Compare two professionals.", "context": ["Nina is a designer. She plays tennis on Saturday and speaks English. Omar is a police officer. He doesn't play tennis on Saturday. He speaks Arabic and English."], "prompt": "Complete the comparison.", "fields": [{"label": "Nina ___ tennis on Saturday.", "answer": ["plays"]}, {"label": "Omar ___ tennis on Saturday.", "answer": ["doesn't play", "does not play"]}, {"label": "They ___ English.", "answer": ["speak"]}, {"label": "Omar ___ Arabic.", "answer": ["speaks"]}], "feedback": "They speak, but Omar speaks."}, {"id": 48, "type": "fields", "instruction": "Complete a text about an international team.", "context": ["A small technology company has people from Brazil, Germany, Japan and Spain."], "prompt": "Use be, live, read, drive or have.", "fields": [{"label": "Rafa is Brazilian. He ___ in Sao Paulo.", "answer": ["lives"]}, {"label": "Lena is German. She ___ books in English.", "answer": ["reads"]}, {"label": "Kenji and Aiko ___ Japanese.", "answer": ["are"]}, {"label": "They ___ to the office every day.", "answer": ["drive"]}, {"label": "The team ___ lunch together on Friday.", "answer": ["has"]}], "feedback": "The team is one group, so it has lunch."}]}, {"id": "section-i-corrections", "range": "Exercises 49-54", "title": "I. Find and Correct the Mistakes", "intro": "Find realistic Elementary mistakes and write the corrected sentences.", "exercises": [{"id": 49, "type": "fields", "instruction": "Correct the Present Simple mistakes.", "prompt": "Write the full corrected sentence.", "fields": [{"label": "She wear glasses.", "answer": ["She wears glasses"]}, {"label": "He don't speak English.", "answer": ["He doesn't speak English", "He does not speak English"]}, {"label": "Laura doesn't watches TV on Monday.", "answer": ["Laura doesn't watch TV on Monday", "Laura does not watch TV on Monday"]}, {"label": "He have lunch at 12:00.", "answer": ["He has lunch at 12:00"]}], "feedback": "Check third-person -s and doesn't + base verb."}, {"id": 50, "type": "fields", "instruction": "Correct the question mistakes.", "prompt": "Write the full corrected question.", "fields": [{"label": "Does Thomas plays tennis?", "answer": ["Does Thomas play tennis"]}, {"label": "Where does Claire lives?", "answer": ["Where does Claire live"]}, {"label": "Do they are engineers?", "answer": ["Are they engineers"]}, {"label": "Does Laura is Spanish?", "answer": ["Is Laura Spanish"]}], "feedback": "Use be for identity and does + base verb for actions."}, {"id": 51, "type": "fields", "instruction": "Correct the be and possessive mistakes.", "prompt": "Write the full corrected sentence.", "fields": [{"label": "Their manager are German.", "answer": ["Their manager is German"]}, {"label": "Her colleagues is in the office.", "answer": ["Her colleagues are in the office"]}, {"label": "He sister is a nurse.", "answer": ["His sister is a nurse"]}, {"label": "They office is small.", "answer": ["Their office is small"]}], "feedback": "Manager is singular, colleagues are plural. Use possessive adjectives."}, {"id": 52, "type": "fields", "instruction": "Correct the mixed everyday sentences.", "prompt": "Each sentence has one error.", "fields": [{"label": "My brother doesn't has a car.", "answer": ["My brother doesn't have a car", "My brother does not have a car"]}, {"label": "The doctors eats lunch at 1:00.", "answer": ["The doctors eat lunch at 1:00"]}, {"label": "Is your father drive a taxi?", "answer": ["Does your father drive a taxi"]}, {"label": "Where do she live?", "answer": ["Where does she live"]}], "feedback": "After doesn't/does, the main verb is base form."}, {"id": 53, "type": "fields", "instruction": "Correct the short answers.", "prompt": "Write the correct short answer only.", "fields": [{"label": "Does Ana speak English? Yes, she is.", "answer": ["Yes, she does"]}, {"label": "Is Carl a police officer? No, he doesn't.", "answer": ["No, he isn't", "No, he is not"]}, {"label": "Do they play tennis? Yes, they are.", "answer": ["Yes, they do"]}, {"label": "Are you Brazilian? Yes, I do.", "answer": ["Yes, I am"]}], "feedback": "Match the short answer to the auxiliary in the question."}, {"id": 54, "type": "fields", "instruction": "Correct the message.", "context": ["Message: Hi Carla. I is at reception. The new manager work in Room 14. He don't have a badge. Can you help?"], "prompt": "Correct each part.", "fields": [{"label": "I is at reception.", "answer": ["I am at reception", "I'm at reception"]}, {"label": "The new manager drive a car.", "answer": ["The new manager drives a car"]}, {"label": "He don't have a badge.", "answer": ["He doesn't have a badge", "He does not have a badge"]}], "feedback": "This mixes be, third-person -s and doesn't + base verb."}]}, {"id": "section-j-mixed", "range": "Exercises 55-60", "title": "J. Mixed Challenge", "intro": "Now choose the grammar yourself. The exercise does not tell you which rule to use.", "exercises": [{"id": 55, "type": "fields", "instruction": "Employee profile challenge.", "context": ["Profile: Priya is 29. She is Indian and lives in London. She speaks Hindi and English. She studies English on Friday. She wants a new phone, likes music, and reads the news every morning."], "prompt": "Answer the questions.", "fields": [{"label": "Where is Priya from?", "answer": ["She is from India", "India"]}, {"label": "What languages does Priya speak?", "answer": ["Hindi and English", "She speaks Hindi and English"]}, {"label": "Does she want a new phone?", "answer": ["Yes, she does"]}, {"label": "When does she study English?", "answer": ["On Friday", "She studies English on Friday"]}, {"label": "What does she read every morning?", "answer": ["the news", "She reads the news"]}], "feedback": "This exercise mixes be, does questions and information questions."}, {"id": 56, "type": "fields", "instruction": "A day routine.", "context": ["Sara is a nurse in Bristol. She starts at 7:00. She meets doctors and patients every morning. She has lunch at 1:00, but she doesn't drink coffee. She goes home by bus. On Friday evening, she listens to music and watches TV with her family."], "prompt": "Complete the tasks.", "fields": [{"label": "Where does Sara live?", "answer": ["She lives in Bristol", "In Bristol", "Bristol"]}, {"label": "Write one negative sentence about Sara.", "answer": ["She doesn't drink coffee", "Sara doesn't drink coffee", "She does not drink coffee"]}, {"label": "Make a Yes/No question about lunch.", "answer": ["Does Sara have lunch at 1:00", "Does she have lunch at 1:00"]}, {"label": "Make an information question for: by bus.", "answer": ["How does Sara go home", "How does she go home"]}, {"label": "Write one verb phrase from the text.", "answer": ["starts at 7:00", "meets doctors and patients", "has lunch", "drink coffee", "goes home", "listens to music", "watches TV"]}], "feedback": "Use the text. Some answers are exact; one asks for any verb phrase from the text."}, {"id": 57, "type": "fields", "instruction": "Complete the conversation.", "context": ["Two colleagues meet during onboarding."], "prompt": "Use be, do, does, don't, doesn't or a question word.", "fields": [{"label": "A: Hi. ___ you new here? B: Yes, I am.", "answer": ["Are"]}, {"label": "A: Where ___ you live? B: I live near the school.", "answer": ["do"]}, {"label": "A: What ___ your manager do? B: She's a project manager.", "answer": ["does"]}, {"label": "A: ___ she speak English? B: Yes, she does.", "answer": ["Does"]}, {"label": "A: Do you drive to class? B: No, I ___.", "answer": ["don't", "do not"]}, {"label": "A: ___ do you go to class? B: By train.", "answer": ["How"]}], "feedback": "Let the answer guide the question form."}, {"id": 58, "type": "selects", "instruction": "Who is it?", "context": ["A. Mia is Italian. She is a chef in a restaurant. She cooks dinner at night. B. Leo is German. He is an engineer. He drives to the office and plays tennis. C. Julia is Portuguese. She is a receptionist. She lives near the hotel and speaks English."], "prompt": "Choose Mia, Leo or Julia.", "options": ["Mia", "Leo", "Julia"], "rows": [{"label": "Who cooks dinner?", "answer": "Mia"}, {"label": "Who drives to the office?", "answer": "Leo"}, {"label": "Who lives near the hotel?", "answer": "Julia"}, {"label": "Who is German?", "answer": "Leo"}, {"label": "Who speaks English at reception?", "answer": "Julia"}], "feedback": "Use job, country and routine clues."}, {"id": 59, "type": "fields", "instruction": "Edit the workplace message.", "context": ["Original message: Hello Anna. I am in a new office. My manager are British and she wear glasses on Monday. She don't speaks Spanish, but her watches TV. We has a meeting in Room 20. Do you are free?"], "prompt": "Correct the mistakes.", "fields": [{"label": "My manager are British.", "answer": ["My manager is British"]}, {"label": "She wear glasses on Monday.", "answer": ["She wears glasses on Monday"]}, {"label": "She don't speaks Spanish.", "answer": ["She doesn't speak Spanish", "She does not speak Spanish"]}, {"label": "her watches TV.", "answer": ["she watches TV"]}, {"label": "We has a meeting in Room 20.", "answer": ["We have a meeting in Room 20"]}, {"label": "Do you are free?", "answer": ["Are you free"]}], "feedback": "This message mixes be, present simple, possessives and question forms."}, {"id": 60, "type": "fields", "instruction": "Final synthesis.", "context": ["Profile: Alex is 34. He is British. He is a software developer in Manchester. He wears glasses. He doesn't drive a car. He speaks English and Spanish. He lives in a flat. On Saturday, he plays the guitar."], "prompt": "Write the requested sentences and questions.", "fields": [{"label": "1 affirmative sentence", "answer": ["Alex wears glasses", "He wears glasses"]}, {"label": "1 negative sentence", "answer": ["Alex doesn't drive a car", "He doesn't drive a car", "Alex does not drive a car"]}, {"label": "1 Yes/No question with Does", "answer": ["Does Alex speak Spanish", "Does he speak Spanish"]}, {"label": "1 short answer for that question", "answer": ["Yes, he does"]}, {"label": "1 question with BE", "answer": ["Is Alex British", "Is he British", "Is Alex a software developer", "Is he a software developer"]}, {"label": "1 WHERE question", "answer": ["Where does Alex live", "Where does he live"]}, {"label": "1 WHAT question", "answer": ["What does Alex do", "What does he do"]}, {"label": "1 WHEN question", "answer": ["When does Alex play the guitar", "When does he play the guitar"]}, {"label": "1 sentence with a possessive adjective", "answer": ["His job is software developer", "His job is a software developer", "His city is Manchester"]}, {"label": "1 sentence about his weekly routine", "answer": ["He plays the guitar on Saturday", "Alex plays the guitar on Saturday"]}], "feedback": "Use the profile and keep each answer in the requested form."}]}];
+      var storageKey = "lesson-4-homework-v1";
+      var fontStorageKey = "lesson-4-homework-font-size";
+
+      var elements = {
+        sections: document.getElementById("sections"),
+        sectionNav: document.getElementById("section-nav"),
+        answeredCount: document.getElementById("answered-count"),
+        scoreCount: document.getElementById("score-count"),
+        sectionCount: document.getElementById("section-count"),
+        progressLabel: document.getElementById("progress-label"),
+        progressBar: document.getElementById("progress-bar"),
+        checkAll: document.getElementById("check-all"),
+        reset: document.getElementById("reset-homework"),
+        toggleKey: document.getElementById("toggle-key"),
+        result: document.getElementById("result"),
+        resultSummary: document.getElementById("result-summary"),
+        resultScore: document.getElementById("result-score"),
+        resultAnswered: document.getElementById("result-answered"),
+        resultSections: document.getElementById("result-sections"),
+        resultAdvice: document.getElementById("result-advice"),
+        answerKeyCard: document.getElementById("answer-key-card"),
+        answerKey: document.getElementById("answer-key")
+      };
+
+      function normalize(value) {
+        return String(value || "")
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[̀-ͯ]/g, "")
+          .replace(/[’‘]/g, "'")
+          .replace(/[“”]/g, '"')
+          .replace(/\bdo not\b/g, "don't")
+          .replace(/\bdoes not\b/g, "doesn't")
+          .replace(/\bis not\b/g, "isn't")
+          .replace(/\bare not\b/g, "aren't")
+          .replace(/[^a-z0-9']+/g, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+      }
+
+      function createElement(tag, className, text) {
+        var element = document.createElement(tag);
+        if (className) element.className = className;
+        if (text !== undefined) element.textContent = text;
+        return element;
+      }
+
+      function loadState() {
+        try { return JSON.parse(window.localStorage.getItem(storageKey) || "{}"); } catch (error) { return {}; }
+      }
+
+      var answers = loadState();
+
+      function saveState() {
+        try { window.localStorage.setItem(storageKey, JSON.stringify(answers)); } catch (error) { return; }
+      }
+
+      function getExercises() {
+        return sections.reduce(function flatten(all, section) { return all.concat(section.exercises); }, []);
+      }
+
+      function answerKey(id) { return "exercise-" + id; }
+      function fieldKey(id, index) { return "exercise-" + id + "-field-" + index; }
+      function getStoredAnswer(id) { return answers[answerKey(id)] || ""; }
+      function setStoredAnswer(id, value) { answers[answerKey(id)] = value; saveState(); updateStatus(); }
+      function getStoredFieldAnswer(id, index) { return answers[fieldKey(id, index)] || ""; }
+      function setStoredFieldAnswer(id, index, value) { answers[fieldKey(id, index)] = value; saveState(); updateStatus(); }
+
+      function accepts(expected, value) {
+        var accepted = Array.isArray(expected) ? expected : [expected];
+        var normalizedValue = normalize(value);
+        return accepted.some(function compare(answer) { return normalize(answer) === normalizedValue; });
+      }
+
+      function isAnswered(exercise) {
+        if (exercise.type === "fields") {
+          return exercise.fields.every(function fieldAnswered(field, index) { return normalize(getStoredFieldAnswer(exercise.id, index)) !== ""; });
+        }
+        if (exercise.type === "selects") {
+          return exercise.rows.every(function rowAnswered(row, index) { return normalize(getStoredFieldAnswer(exercise.id, index)) !== ""; });
+        }
+        return normalize(getStoredAnswer(exercise.id)) !== "";
+      }
+
+      function isCorrect(exercise) {
+        if (exercise.type === "fields") {
+          return exercise.fields.every(function fieldCorrect(field, index) { return accepts(field.answer, getStoredFieldAnswer(exercise.id, index)); });
+        }
+        if (exercise.type === "selects") {
+          return exercise.rows.every(function rowCorrect(row, index) { return accepts(row.answer, getStoredFieldAnswer(exercise.id, index)); });
+        }
+        return accepts(exercise.answer, getStoredAnswer(exercise.id));
+      }
+
+      function answerToText(answer) {
+        var accepted = Array.isArray(answer) ? answer : [answer];
+        return accepted[0];
+      }
+
+      function exerciseAnswers(exercise) {
+        if (exercise.type === "fields") {
+          return exercise.fields.map(function fieldAnswer(field, index) { return (index + 1) + ". " + answerToText(field.answer); }).join(" | ");
+        }
+        if (exercise.type === "selects") {
+          return exercise.rows.map(function rowAnswer(row, index) { return (index + 1) + ". " + answerToText(row.answer); }).join(" | ");
+        }
+        return answerToText(exercise.answer);
+      }
+
+      function renderContext(exercise, wrapper) {
+        if (!exercise.context || !exercise.context.length) return;
+        var box = createElement("div", "context-box");
+        exercise.context.forEach(function addLine(line) { box.appendChild(createElement("p", "", line)); });
+        wrapper.appendChild(box);
+      }
+
+      function renderChoiceExercise(exercise, wrapper) {
+        var choiceList = createElement("div", "choice-list");
+        exercise.options.forEach(function addOption(option) {
+          var label = createElement("label", "choice-label");
+          var input = document.createElement("input");
+          input.type = "radio";
+          input.name = "exercise-" + exercise.id;
+          input.value = option;
+          input.checked = getStoredAnswer(exercise.id) === option;
+          input.addEventListener("change", function onChange() {
+            var list = label.closest(".choice-list");
+            if (list) {
+              list.querySelectorAll(".choice-label").forEach(function clearChoice(item) {
+                item.classList.remove("is-correct", "is-incorrect");
+              });
+            }
+            setStoredAnswer(exercise.id, option);
+          });
+          label.appendChild(input);
+          label.append(option);
+          choiceList.appendChild(label);
+        });
+        wrapper.appendChild(choiceList);
+      }
+
+      function renderTextExercise(exercise, wrapper) {
+        var label = createElement("label", "answer-label", "Your answer");
+        var input = exercise.type === "textarea" ? document.createElement("textarea") : document.createElement("input");
+        input.className = exercise.type === "textarea" ? "answer-textarea" : "answer-input";
+        input.id = "exercise-" + exercise.id + "-answer";
+        input.value = getStoredAnswer(exercise.id);
+        input.setAttribute("autocomplete", "off");
+        input.setAttribute("spellcheck", "false");
+        if (exercise.type !== "textarea") input.type = "text";
+        input.addEventListener("input", function onInput() {
+          input.classList.remove("is-correct", "is-incorrect");
+          setStoredAnswer(exercise.id, input.value);
+        });
+        label.setAttribute("for", input.id);
+        wrapper.append(label, input);
+      }
+
+      function renderFieldsExercise(exercise, wrapper) {
+        var grid = createElement("div", "field-grid");
+        exercise.fields.forEach(function addField(field, index) {
+          var row = createElement("div", "field-row");
+          var label = document.createElement("label");
+          var input = document.createElement("input");
+          input.className = "answer-input";
+          input.id = "exercise-" + exercise.id + "-field-" + index;
+          input.type = "text";
+          input.value = getStoredFieldAnswer(exercise.id, index);
+          input.setAttribute("autocomplete", "off");
+          input.setAttribute("spellcheck", "false");
+          input.addEventListener("input", function onInput() {
+            row.classList.remove("is-correct", "is-incorrect");
+            setStoredFieldAnswer(exercise.id, index, input.value);
+          });
+          label.setAttribute("for", input.id);
+          label.textContent = field.label;
+          row.append(label, input);
+          grid.appendChild(row);
+        });
+        wrapper.appendChild(grid);
+      }
+
+      function renderSelectsExercise(exercise, wrapper) {
+        var grid = createElement("div", "select-grid");
+        exercise.rows.forEach(function addRow(row, index) {
+          var item = createElement("div", "select-row");
+          var label = document.createElement("label");
+          var select = document.createElement("select");
+          select.className = "answer-select";
+          select.id = "exercise-" + exercise.id + "-select-" + index;
+          label.setAttribute("for", select.id);
+          label.textContent = row.label;
+          var placeholder = document.createElement("option");
+          placeholder.value = "";
+          placeholder.textContent = "Choose...";
+          select.appendChild(placeholder);
+          exercise.options.forEach(function addOption(option) {
+            var opt = document.createElement("option");
+            opt.value = option;
+            opt.textContent = option;
+            select.appendChild(opt);
+          });
+          select.value = getStoredFieldAnswer(exercise.id, index);
+          select.addEventListener("change", function onChange() {
+            item.classList.remove("is-correct", "is-incorrect");
+            setStoredFieldAnswer(exercise.id, index, select.value);
+          });
+          item.append(label, select);
+          grid.appendChild(item);
+        });
+        wrapper.appendChild(grid);
+      }
+
+      function clearItemHighlights(wrapper) {
+        if (!wrapper) return;
+        wrapper.querySelectorAll(".field-row, .select-row, .choice-label, .answer-input, .answer-textarea").forEach(function clearItem(item) {
+          item.classList.remove("is-correct", "is-incorrect");
+        });
+      }
+
+      function markItem(element, answered, correct) {
+        if (!element) return;
+        element.classList.toggle("is-correct", answered && correct);
+        element.classList.toggle("is-incorrect", answered && !correct);
+      }
+
+      function markSubAnswers(exercise, wrapper) {
+        clearItemHighlights(wrapper);
+        if (!wrapper) return;
+
+        if (exercise.type === "fields") {
+          wrapper.querySelectorAll(".field-row").forEach(function markField(row, index) {
+            var value = getStoredFieldAnswer(exercise.id, index);
+            markItem(row, normalize(value) !== "", accepts(exercise.fields[index].answer, value));
+          });
+          return;
+        }
+
+        if (exercise.type === "selects") {
+          wrapper.querySelectorAll(".select-row").forEach(function markSelect(row, index) {
+            var value = getStoredFieldAnswer(exercise.id, index);
+            markItem(row, normalize(value) !== "", accepts(exercise.rows[index].answer, value));
+          });
+          return;
+        }
+
+        if (exercise.type === "choice") {
+          var selected = getStoredAnswer(exercise.id);
+          var answered = normalize(selected) !== "";
+          wrapper.querySelectorAll(".choice-label").forEach(function markChoice(label) {
+            var input = label.querySelector("input");
+            var isCorrectOption = input && accepts(exercise.answer, input.value);
+            var isSelected = input && input.checked;
+            label.classList.toggle("is-correct", answered && isCorrectOption);
+            label.classList.toggle("is-incorrect", answered && isSelected && !isCorrectOption);
+          });
+          return;
+        }
+
+        var answerInput = wrapper.querySelector(".answer-input, .answer-textarea");
+        var value = getStoredAnswer(exercise.id);
+        markItem(answerInput, normalize(value) !== "", accepts(exercise.answer, value));
+      }
+
+      function checkExercise(exercise, feedback) {
+        var answered = isAnswered(exercise);
+        var right = answered && isCorrect(exercise);
+        var wrapper = document.querySelector("[data-exercise-id='" + exercise.id + "']");
+        feedback.hidden = false;
+        feedback.className = "feedback " + (right ? "correct" : "incorrect");
+        feedback.textContent = right ? "Correct." : (answered ? exercise.feedback : "No answer yet.");
+        if (wrapper) {
+          wrapper.classList.toggle("is-correct", right);
+          wrapper.classList.toggle("is-incorrect", !right);
+          markSubAnswers(exercise, wrapper);
+        }
+        return right;
+      }
+
+      function renderExercise(exercise) {
+        var wrapper = createElement("article", "exercise");
+        var header = createElement("div", "exercise-header");
+        var feedback = createElement("div", "feedback");
+        var actions = createElement("div", "actions");
+        var checkButton = createElement("button", "secondary", "Check");
+        wrapper.dataset.exerciseId = String(exercise.id);
+        feedback.hidden = true;
+        header.appendChild(createElement("p", "exercise-number", "Exercise " + exercise.id));
+        header.appendChild(feedback);
+        wrapper.appendChild(header);
+        wrapper.appendChild(createElement("p", "exercise-instruction", exercise.instruction));
+        renderContext(exercise, wrapper);
+        wrapper.appendChild(createElement("p", "exercise-prompt", exercise.prompt));
+        if (exercise.type === "choice") renderChoiceExercise(exercise, wrapper);
+        else if (exercise.type === "fields") renderFieldsExercise(exercise, wrapper);
+        else if (exercise.type === "selects") renderSelectsExercise(exercise, wrapper);
+        else renderTextExercise(exercise, wrapper);
+        checkButton.type = "button";
+        checkButton.addEventListener("click", function onCheck() { checkExercise(exercise, feedback); });
+        actions.appendChild(checkButton);
+        wrapper.appendChild(actions);
+        return wrapper;
+      }
+
+      function renderSections() {
+        sections.forEach(function addSection(section) {
+          var navLink = createElement("a", "nav-link", section.title.replace(/^[A-J]\. /, ""));
+          var sectionElement = createElement("section", "section-card");
+          var list = createElement("div", "exercise-list");
+          navLink.href = "#" + section.id;
+          elements.sectionNav.appendChild(navLink);
+          sectionElement.id = section.id;
+          sectionElement.appendChild(createElement("p", "section-range", section.range));
+          sectionElement.appendChild(createElement("h2", "", section.title));
+          sectionElement.appendChild(createElement("p", "", section.intro));
+          section.exercises.forEach(function addExercise(exercise) { list.appendChild(renderExercise(exercise)); });
+          sectionElement.appendChild(list);
+          elements.sections.appendChild(sectionElement);
+        });
+      }
+
+      function renderAnswerKey() {
+        getExercises().forEach(function addAnswer(exercise) {
+          var item = createElement("div", "answer-key-item");
+          item.appendChild(createElement("strong", "", "Exercise " + exercise.id));
+          item.append(exerciseAnswers(exercise));
+          elements.answerKey.appendChild(item);
+        });
+      }
+
+      function updateStatus() {
+        var exercises = getExercises();
+        var answered = exercises.filter(isAnswered).length;
+        var correct = exercises.filter(isCorrect).length;
+        var completedSections = sections.filter(function sectionComplete(section) { return section.exercises.every(isAnswered); }).length;
+        var percent = Math.round((answered / exercises.length) * 100);
+        elements.answeredCount.textContent = answered + " / " + exercises.length;
+        elements.scoreCount.textContent = correct + " / " + exercises.length;
+        elements.sectionCount.textContent = completedSections + " / " + sections.length;
+        elements.progressLabel.textContent = percent + "%";
+        elements.progressBar.style.width = percent + "%";
+      }
+
+      function showFeedback() {
+        var exercises = getExercises();
+        var correct = 0;
+        var answered = 0;
+        var completedSections = sections.filter(function sectionComplete(section) { return section.exercises.every(isAnswered); }).length;
+        exercises.forEach(function markExercise(exercise) {
+          var wrapper = document.querySelector("[data-exercise-id='" + exercise.id + "']");
+          var feedback = wrapper.querySelector(".feedback");
+          if (isAnswered(exercise)) answered += 1;
+          if (checkExercise(exercise, feedback)) correct += 1;
+        });
+        elements.result.hidden = false;
+        elements.resultSummary.textContent = "You completed the Lesson 4 homework check.";
+        elements.resultScore.textContent = correct + " / " + exercises.length;
+        elements.resultAnswered.textContent = answered + " / " + exercises.length;
+        elements.resultSections.textContent = completedSections + " / " + sections.length;
+        elements.resultAdvice.textContent = correct === exercises.length ?
+          "Excellent. Review the answer key once, then practise saying your final profile answers aloud." :
+          "Good practice. Review the highlighted exercises and check the useful feedback before trying again.";
+        elements.result.focus();
+        updateStatus();
+      }
+
+      function resetHomework() {
+        if (!window.confirm("Reset all answers for this homework?")) return;
+        answers = {};
+        saveState();
+        document.querySelectorAll("input").forEach(function resetInput(input) {
+          if (input.type === "radio") input.checked = false;
+          else input.value = "";
+        });
+        document.querySelectorAll("select").forEach(function resetSelect(select) { select.value = ""; });
+        document.querySelectorAll("textarea").forEach(function resetTextarea(textarea) { textarea.value = ""; });
+        document.querySelectorAll(".feedback").forEach(function hideFeedback(feedback) { feedback.hidden = true; feedback.className = "feedback"; feedback.textContent = ""; });
+        document.querySelectorAll(".exercise").forEach(function clearExercise(exercise) {
+          exercise.classList.remove("is-correct", "is-incorrect");
+          clearItemHighlights(exercise);
+        });
+        elements.result.hidden = true;
+        updateStatus();
+      }
+
+      function toggleAnswerKey() {
+        var hidden = elements.answerKeyCard.hidden;
+        elements.answerKeyCard.hidden = !hidden;
+        elements.toggleKey.textContent = hidden ? "Hide Answer Key" : "Show Answer Key";
+        elements.toggleKey.setAttribute("aria-expanded", String(hidden));
+        if (hidden) elements.answerKeyCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function applyFontSize(size) {
+        var selected = ["small", "normal", "large"].indexOf(size) === -1 ? "normal" : size;
+        document.body.dataset.fontSize = selected;
+        document.querySelectorAll("[data-font-size]").forEach(function updateButton(button) { button.setAttribute("aria-pressed", String(button.dataset.fontSize === selected)); });
+        try { window.localStorage.setItem(fontStorageKey, selected); } catch (error) { return; }
+      }
+
+      document.querySelectorAll("[data-font-size]").forEach(function addFontControl(button) {
+        button.addEventListener("click", function onFontClick() { applyFontSize(button.dataset.fontSize); });
+      });
+
+      elements.checkAll.addEventListener("click", showFeedback);
+      elements.reset.addEventListener("click", resetHomework);
+      elements.toggleKey.addEventListener("click", toggleAnswerKey);
+
+      renderSections();
+      renderAnswerKey();
+      applyFontSize(window.localStorage.getItem(fontStorageKey) || "normal");
+      updateStatus();
+    })(window, document);
+  </script>
+</body>
+</html>
