@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calentamiento · Lección 3 · Dos apartamentos</title>
+<style>
+:root{
+  --red:#aa151b;
+  --gold:#f1bf00;
+  --ink:#172033;
+  --muted:#667085;
+  --blue:#2d5ea8;
+  --green:#2d7a5b;
+  --soft:#f4efe4;
+  --paper:#fffdf8;
+  --line:rgba(23,32,51,.12);
+  --focus:rgba(45,94,168,.38);
+  --font-scale:1;
+}
+*{box-sizing:border-box}
+html{font-size:calc(16px * var(--font-scale))}
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--ink);
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 92% 10%,rgba(241,191,0,.22),transparent 28%),
+    linear-gradient(135deg,#fff,#f7f1e5);
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.page{width:min(1120px,calc(100% - 32px));margin:0 auto;padding:30px 0 44px}
+.topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;border-bottom:2px solid rgba(170,21,27,.18);padding-bottom:10px;margin-bottom:24px}
+.course{color:var(--red);font-size:.82rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.font-controls{position:sticky;top:12px;z-index:10;display:flex;gap:4px;padding:5px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.88);box-shadow:0 8px 22px #0002;backdrop-filter:blur(8px)}
+.font-controls button{width:34px;height:32px;border:0;border-radius:8px;background:transparent;color:var(--ink);font-size:.88rem;font-weight:900}
+.font-controls button:hover,.font-controls button.active{background:var(--soft);color:var(--red)}
+.hero{display:grid;gap:10px;margin-bottom:20px}
+.kicker{width:max-content;max-width:100%;padding:7px 11px;border-radius:999px;background:var(--soft);color:var(--red);font-size:.78rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+h1{margin:0;font-size:clamp(2rem,5vw,3.1rem);line-height:1.04;letter-spacing:0}
+h2{margin:0;font-size:clamp(1.45rem,3vw,2.1rem);line-height:1.12;letter-spacing:0}
+h3{margin:0;font-size:1.08rem}
+p{line-height:1.45}
+.subtitle{margin:0;max-width:780px;color:var(--muted);font-size:1.08rem;line-height:1.45}
+.panel{overflow:hidden;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.9);box-shadow:0 22px 58px #0002}
+.panel-body{padding:24px}
+.start-grid{display:grid;grid-template-columns:1fr .9fr;gap:22px;align-items:start}
+.instructions{display:grid;gap:14px}
+.instructions strong{color:var(--red)}
+ol{margin:0;padding-left:22px;line-height:1.55;font-weight:750}
+.selector-card{display:grid;gap:18px;border-left:7px solid var(--blue);border-radius:18px;background:white;padding:20px;box-shadow:0 8px 22px #0001}
+label{display:grid;gap:7px;color:var(--muted);font-size:.76rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+select,input{width:100%;min-height:46px;border:1px solid var(--line);border-radius:12px;background:white;color:var(--ink);padding:10px 12px}
+.role-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.role-button,.primary-button,.secondary-button{min-height:48px;border:0;border-radius:12px;padding:12px 14px;font-weight:900}
+.role-button{background:var(--ink);color:white;letter-spacing:.08em}
+.primary-button{background:var(--red);color:white}
+.secondary-button{background:var(--soft);color:var(--red)}
+.teacher-entry{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;border-top:1px solid var(--line);padding-top:16px}
+.teacher-entry button{min-height:46px}
+.message{min-height:1.35em;color:var(--red);font-weight:850}
+.hidden{display:none!important}
+.activity-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:18px}
+.identity{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;min-height:34px;border-radius:999px;padding:7px 11px;background:var(--soft);color:var(--red);font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.pill.dark{background:var(--ink);color:white}
+.warning{border-left:7px solid var(--red);border-radius:16px;background:#fffdf8;padding:14px 16px;color:var(--red);font-size:1.08rem;font-weight:900}
+.main-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px;align-items:start}
+.apartment-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.single-apartment-grid{grid-template-columns:1fr}
+.apartment-card{display:grid;gap:12px;border-radius:18px;background:white;padding:18px;box-shadow:0 8px 22px #0001}
+.apartment-card h3{display:flex;align-items:center;gap:8px;color:var(--red)}
+.apartment-card h3::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px rgba(241,191,0,.18)}
+.fact-list{display:grid;gap:9px;margin:0;padding:0;list-style:none}
+.fact-list li{border-radius:12px;background:#fffdf8;padding:10px 12px;line-height:1.32;font-weight:750}
+.support-column{display:grid;gap:14px;position:sticky;top:78px}
+.support-card{border-radius:18px;background:white;padding:16px;box-shadow:0 8px 22px #0001}
+.support-card h3{margin-bottom:10px;color:var(--red)}
+.support-card ul{display:grid;gap:7px;margin:0;padding-left:18px;line-height:1.28}
+.support-card li{padding-left:2px}
+.model-list li{font-weight:750}
+.difference-box,.decision-box,.closing-box{margin-top:16px;border-radius:18px;background:white;padding:18px;box-shadow:0 8px 22px #0001}
+.difference-box h3,.decision-box h3,.closing-box h3{color:var(--red);margin-bottom:12px}
+.difference-grid{display:grid;gap:10px}
+.difference-row{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;color:var(--ink);font-size:1rem;font-weight:400;letter-spacing:0;text-transform:none}
+.difference-row span{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--soft);color:var(--red);font-weight:900}
+textarea{width:100%;min-height:44px;resize:vertical;border:1px solid var(--line);border-radius:12px;background:white;color:var(--ink);padding:10px 12px}
+.model-phrases{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.model-phrases span{display:inline-flex;border-radius:999px;background:var(--soft);color:var(--ink);padding:7px 10px;font-weight:800}
+.answers-action{display:flex;justify-content:flex-end;margin-top:16px}
+.answers-panel{margin-top:14px;border:1px solid var(--line);border-radius:16px;background:#fffdf8;padding:16px}
+.answers-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.answers-grid h4{margin:0 0 10px;color:var(--red);font-size:.86rem;letter-spacing:.1em;text-transform:uppercase}
+.answers-grid ul{display:grid;gap:7px;margin:0;padding-left:18px;line-height:1.32;font-weight:750}
+.teacher-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:16px}
+.teacher-tools label{min-width:210px}
+.teacher-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.teacher-panel{display:grid;gap:14px}
+.teacher-differences{margin-top:16px;border-left:7px solid var(--green);border-radius:18px;background:white;padding:18px;box-shadow:0 8px 22px #0001}
+.teacher-differences ol{display:grid;gap:7px}
+@media(max-width:900px){
+  .start-grid,.main-grid,.teacher-grid{grid-template-columns:1fr}
+  .support-column{position:static}
+  .apartment-grid{grid-template-columns:1fr}
+  .answers-grid{grid-template-columns:1fr}
+  .teacher-entry{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .page{width:min(100% - 22px,1120px);padding-top:22px}
+  .panel-body{padding:16px}
+  .role-grid{grid-template-columns:1fr}
+  .activity-head{display:grid}
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="topbar">
+    <div class="course">CURSO DE ESPAÑOL</div>
+    <div class="font-controls" aria-label="Tamaño de fuente">
+      <button type="button" data-font-action="decrease" aria-label="Disminuir tamaño de fuente">A−</button>
+      <button type="button" data-font-action="reset" aria-label="Restaurar tamaño de fuente">A</button>
+      <button type="button" data-font-action="increase" aria-label="Aumentar tamaño de fuente">A+</button>
+    </div>
+  </div>
+
+  <section id="start-screen">
+    <div class="hero">
+      <div class="kicker">CALENTAMIENTO</div>
+      <h1>Dos apartamentos</h1>
+      <p class="subtitle">Lección 3 · Actividad oral en parejas</p>
+    </div>
+    <div class="panel">
+      <div class="panel-body start-grid">
+        <div class="instructions">
+          <h2>Trabajad en parejas.</h2>
+          <ol>
+            <li>Elegid el mismo número de pareja.</li>
+            <li>Una persona elige <strong>ALUMNO A</strong> y ve un apartamento.</li>
+            <li>La otra persona elige <strong>ALUMNO B</strong> y ve otro apartamento.</li>
+            <li>No enseñéis vuestra pantalla.</li>
+            <li>Hablad en español.</li>
+            <li>Comparad qué es igual y qué es diferente.</li>
+            <li>Descubrid por lo menos cinco diferencias.</li>
+          </ol>
+        </div>
+        <div class="selector-card">
+          <label for="pair-select">NÚMERO DE PAREJA
+            <select id="pair-select">
+              <option value="">Seleccionad una pareja</option>
+            </select>
+          </label>
+          <div>
+            <h3>¿Quién eres?</h3>
+            <div class="role-grid" style="margin-top:10px">
+              <button class="role-button" type="button" data-role="A">ALUMNO A</button>
+              <button class="role-button" type="button" data-role="B">ALUMNO B</button>
+            </div>
+          </div>
+          <div class="teacher-entry">
+            <label for="teacher-code">Código
+              <input id="teacher-code" type="password" inputmode="numeric">
+            </label>
+            <button id="teacher-button" class="secondary-button" type="button">Abrir</button>
+          </div>
+          <div id="start-message" class="message" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="activity-screen" class="hidden">
+    <div class="activity-head">
+      <div>
+        <div class="identity">
+          <span id="student-pair" class="pill"></span>
+          <span id="student-role" class="pill dark"></span>
+        </div>
+        <h1 style="margin-top:10px">Dos apartamentos</h1>
+      </div>
+      <button id="change-button" class="secondary-button" type="button">Cambiar pareja o alumno</button>
+    </div>
+    <div class="warning">NO ENSEÑES TU PANTALLA.</div>
+    <div class="main-grid" style="margin-top:16px">
+      <div>
+        <div id="student-cards" class="apartment-grid single-apartment-grid"></div>
+        <section class="difference-box">
+          <h3>NUESTRAS COMPARACIONES</h3>
+          <p><strong>LO QUE ES IGUAL</strong></p>
+          <div class="difference-grid" style="margin-bottom:14px">
+            <label class="difference-row"><span>1</span><textarea aria-label="Coincidencia 1"></textarea></label>
+            <label class="difference-row"><span>2</span><textarea aria-label="Coincidencia 2"></textarea></label>
+          </div>
+          <p><strong>LO QUE ES DIFERENTE</strong></p>
+          <div class="difference-grid">
+            <label class="difference-row"><span>1</span><textarea aria-label="Diferencia 1"></textarea></label>
+            <label class="difference-row"><span>2</span><textarea aria-label="Diferencia 2"></textarea></label>
+            <label class="difference-row"><span>3</span><textarea aria-label="Diferencia 3"></textarea></label>
+            <label class="difference-row"><span>4</span><textarea aria-label="Diferencia 4"></textarea></label>
+            <label class="difference-row"><span>5</span><textarea aria-label="Diferencia 5"></textarea></label>
+          </div>
+          <div class="answers-action">
+            <button id="answers-button" class="primary-button" type="button">VER RESPUESTAS</button>
+          </div>
+          <div id="answers-panel" class="answers-panel hidden" aria-live="polite"></div>
+        </section>
+        <section class="decision-box">
+          <h3>AHORA DECIDID</h3>
+          <p>¿Qué apartamento preferís? ¿Por qué?</p>
+          <div class="model-phrases">
+            <span>Preferimos el apartamento ___ porque...</span>
+            <span>Es más bonito / grande / cómodo...</span>
+            <span>Hay...</span>
+            <span>Está...</span>
+          </div>
+        </section>
+        <section class="closing-box">
+          <h3>¿Habéis encontrado cinco diferencias?</h3>
+          <p>Comparad vuestras conclusiones con la clase.</p>
+        </section>
+      </div>
+      <aside class="support-column" aria-label="Apoyo para hablar">
+        <section class="support-card">
+          <h3>PREGUNTAS ÚTILES</h3>
+          <ul>
+            <li>¿Cuántas habitaciones hay?</li>
+            <li>¿Cuántos baños hay?</li>
+            <li>¿Cuántas ventanas hay?</li>
+            <li>¿Hay...?</li>
+            <li>¿En tu apartamento también hay...?</li>
+            <li>¿Dónde está...?</li>
+            <li>¿Dónde están...?</li>
+            <li>¿De qué color es...?</li>
+            <li>¿De qué color son...?</li>
+            <li>¿Cómo es...?</li>
+            <li>¿Cómo son...?</li>
+            <li>¿Y en tu apartamento?</li>
+          </ul>
+        </section>
+        <section class="support-card">
+          <h3>RESPUESTAS MODELO</h3>
+          <ul class="model-list">
+            <li>Hay tres habitaciones.</li>
+            <li>Hay dos baños.</li>
+            <li>La alfombra es roja.</li>
+            <li>Los sillones son grises.</li>
+            <li>El piano está en la sala.</li>
+            <li>Los libros están en el estudio.</li>
+            <li>En mi apartamento también hay...</li>
+          </ul>
+        </section>
+        <section class="support-card">
+          <h3>VOCABULARIO DE APOYO</h3>
+          <ul>
+            <li>el balcón · varanda</li>
+            <li>la terraza · terraço</li>
+            <li>el pasillo · corredor</li>
+            <li>la ducha · chuveiro</li>
+            <li>el escritorio · mesa de escritório</li>
+            <li>el armario · armário</li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </section>
+
+  <section id="teacher-screen" class="hidden">
+    <div class="activity-head">
+      <div>
+        <div class="kicker">MODO PROFESOR</div>
+        <h1 style="margin-top:10px">Dos apartamentos</h1>
+      </div>
+      <button id="teacher-exit" class="secondary-button" type="button">Salir</button>
+    </div>
+    <div class="teacher-tools">
+      <label for="teacher-pair-select">NÚMERO DE PAREJA
+        <select id="teacher-pair-select"></select>
+      </label>
+    </div>
+    <div id="teacher-content"></div>
+  </section>
+</main>
+
+<script>
+const cases=[
+  {
+    id:1,
+    names:["Apartamento Sol","Apartamento Azul"],
+    cards:{
+      A:[
+        {name:"Apartamento Sol",facts:["Hay 3 habitaciones.","Hay 6 ventanas.","La cocina es blanca.","En la sala hay una alfombra roja.","El piano está en la sala.","Hay 4 sillas en el comedor."]},
+        {name:"Apartamento Azul",facts:["Hay 2 habitaciones.","Hay 5 ventanas.","La cocina es gris.","En la sala hay una alfombra azul.","El piano está en el estudio.","Hay 6 sillas en el comedor."]}
+      ],
+      B:[
+        {name:"Apartamento Sol",facts:["Hay 2 baños.","La habitación principal es azul y blanca.","Hay 2 sillones grises en la sala.","Los libros están en el estudio.","Hay una mesa de madera en el comedor.","El patio es pequeño."]},
+        {name:"Apartamento Azul",facts:["Hay 1 baño.","La habitación principal es verde y blanca.","Hay 3 sillones negros en la sala.","Los libros están en la sala.","Hay dos mesas pequeñas en el comedor.","No hay patio."]}
+      ]
+    },
+    similarities:["En los dos apartamentos hay una cocina.","En los dos apartamentos hay una alfombra en la sala.","En los dos apartamentos hay un piano.","En los dos apartamentos hay sillas en el comedor.","En los dos apartamentos hay libros."],
+    differences:["3 habitaciones / 2 habitaciones","2 baños / 1 baño","6 ventanas / 5 ventanas","cocina blanca / cocina gris","alfombra roja / alfombra azul","piano en la sala / piano en el estudio","4 sillas / 6 sillas","patio pequeño / no hay patio"]
+  },
+  {
+    id:2,
+    names:["Apartamento Mar","Apartamento Jardín"],
+    cards:{
+      A:[
+        {name:"Apartamento Mar",facts:["Hay 4 habitaciones.","Hay 2 baños.","La sala es amplia.","Hay 8 ventanas.","La cocina es azul.","La mesa del comedor es redonda."]},
+        {name:"Apartamento Jardín",facts:["Hay 3 habitaciones.","Hay 2 baños.","La sala es pequeña.","Hay 10 ventanas.","La cocina es amarilla.","La mesa del comedor es rectangular."]}
+      ],
+      B:[
+        {name:"Apartamento Mar",facts:["Hay un balcón grande.","Los sillones son blancos.","La alfombra está en el comedor.","Hay 12 libros en el estudio.","El baño principal es gris.","No hay flores en el patio."]},
+        {name:"Apartamento Jardín",facts:["No hay balcón.","Los sillones son verdes.","La alfombra está en la sala.","Hay 9 libros en el estudio.","El baño principal es blanco.","Hay flores en el patio."]}
+      ]
+    },
+    similarities:["En los dos apartamentos hay 2 baños.","En los dos apartamentos hay una sala.","En los dos apartamentos hay una cocina.","En los dos apartamentos hay sillones.","En los dos apartamentos hay libros en el estudio.","En los dos apartamentos hay un baño principal."],
+    differences:["4 habitaciones / 3 habitaciones","sala amplia / sala pequeña","8 ventanas / 10 ventanas","cocina azul / cocina amarilla","mesa redonda / mesa rectangular","balcón grande / no hay balcón","sillones blancos / sillones verdes","alfombra en el comedor / alfombra en la sala"]
+  },
+  {
+    id:3,
+    names:["Apartamento Centro","Apartamento Norte"],
+    cards:{
+      A:[
+        {name:"Apartamento Centro",facts:["Hay 2 habitaciones.","Hay 1 baño.","Hay 7 ventanas.","La cocina es moderna.","En la sala hay 2 sillones rojos.","El espejo está en el vestíbulo."]},
+        {name:"Apartamento Norte",facts:["Hay 3 habitaciones.","Hay 2 baños.","Hay 6 ventanas.","La cocina es sencilla.","En la sala hay 1 sillón gris.","El espejo está en el baño."]}
+      ],
+      B:[
+        {name:"Apartamento Centro",facts:["Hay un estudio pequeño.","Los cuadernos están en la mesa.","La alfombra es azul marino.","Hay 4 sillas blancas.","La pared de la sala es gris.","No hay terraza."]},
+        {name:"Apartamento Norte",facts:["No hay estudio.","Los cuadernos están en el armario.","La alfombra es verde.","Hay 5 sillas negras.","La pared de la sala es blanca.","Hay una terraza pequeña."]}
+      ]
+    },
+    similarities:["En los dos apartamentos hay habitaciones, baños y ventanas.","En los dos apartamentos hay una cocina.","En los dos apartamentos hay sillones en la sala.","En los dos apartamentos hay un espejo.","En los dos apartamentos hay cuadernos.","En los dos apartamentos hay una alfombra."],
+    differences:["2 habitaciones / 3 habitaciones","1 baño / 2 baños","7 ventanas / 6 ventanas","cocina moderna / cocina sencilla","2 sillones rojos / 1 sillón gris","espejo en el vestíbulo / espejo en el baño","hay estudio / no hay estudio","no hay terraza / hay terraza"]
+  },
+  {
+    id:4,
+    names:["Apartamento Verde","Apartamento Blanco"],
+    cards:{
+      A:[
+        {name:"Apartamento Verde",facts:["Hay 5 habitaciones.","Hay 3 baños.","Hay 11 ventanas.","La cocina es verde y blanca.","El comedor es grande.","Hay 8 sillas en el comedor."]},
+        {name:"Apartamento Blanco",facts:["Hay 4 habitaciones.","Hay 2 baños.","Hay 9 ventanas.","La cocina es blanca y gris.","El comedor es pequeño.","Hay 4 sillas en el comedor."]}
+      ],
+      B:[
+        {name:"Apartamento Verde",facts:["Hay 2 mesas de madera.","Los sillones son cómodos.","El piano está en el comedor.","La alfombra de la sala es amarilla.","Los lápices están en el estudio.","Hay un patio con flores."]},
+        {name:"Apartamento Blanco",facts:["Hay 1 mesa de metal.","Los sillones son antiguos.","El piano está en la sala.","La alfombra de la sala es roja.","Los lápices están en la cocina.","No hay patio."]}
+      ]
+    },
+    similarities:["En los dos apartamentos hay habitaciones y baños.","En los dos apartamentos hay una cocina con blanco.","En los dos apartamentos hay sillas en el comedor.","En los dos apartamentos hay mesas.","En los dos apartamentos hay sillones.","En los dos apartamentos hay un piano."],
+    differences:["5 habitaciones / 4 habitaciones","3 baños / 2 baños","11 ventanas / 9 ventanas","cocina verde y blanca / cocina blanca y gris","comedor grande / comedor pequeño","8 sillas / 4 sillas","2 mesas de madera / 1 mesa de metal","piano en el comedor / piano en la sala"]
+  },
+  {
+    id:5,
+    names:["Apartamento Río","Apartamento Luz"],
+    cards:{
+      A:[
+        {name:"Apartamento Río",facts:["Hay 3 habitaciones.","Hay 1 baño.","Hay 4 ventanas grandes.","La sala es luminosa.","Hay una mesa negra en la cocina.","El horno está limpio."]},
+        {name:"Apartamento Luz",facts:["Hay 3 habitaciones.","Hay 2 baños.","Hay 7 ventanas grandes.","La sala es oscura.","Hay una mesa blanca en la cocina.","El horno está sucio."]}
+      ],
+      B:[
+        {name:"Apartamento Río",facts:["Hay una terraza pequeña.","Los libros están en la habitación.","Hay 2 alfombras azules.","El estudio es ordenado.","Hay 6 vasos en la cocina.","El pasillo es estrecho."]},
+        {name:"Apartamento Luz",facts:["No hay terraza.","Los libros están en el estudio.","Hay 1 alfombra roja.","El estudio es desordenado.","Hay 10 vasos en la cocina.","El pasillo es amplio."]}
+      ]
+    },
+    similarities:["En los dos apartamentos hay 3 habitaciones.","En los dos apartamentos hay ventanas grandes.","En los dos apartamentos hay una mesa en la cocina.","En los dos apartamentos hay un horno.","En los dos apartamentos hay libros.","En los dos apartamentos hay un estudio."],
+    differences:["1 baño / 2 baños","4 ventanas / 7 ventanas","sala luminosa / sala oscura","mesa negra / mesa blanca","horno limpio / horno sucio","terraza pequeña / no hay terraza","libros en la habitación / libros en el estudio","2 alfombras azules / 1 alfombra roja"]
+  },
+  {
+    id:6,
+    names:["Apartamento Plaza","Apartamento Puerta"],
+    cards:{
+      A:[
+        {name:"Apartamento Plaza",facts:["Hay 2 habitaciones.","Hay 2 baños.","Hay 5 ventanas.","La cocina es roja.","En la sala hay 3 sillones.","La puerta principal es azul."]},
+        {name:"Apartamento Puerta",facts:["Hay 4 habitaciones.","Hay 1 baño.","Hay 8 ventanas.","La cocina es blanca.","En la sala hay 2 sillones.","La puerta principal es verde."]}
+      ],
+      B:[
+        {name:"Apartamento Plaza",facts:["Hay un balcón pequeño.","La mesa está en la sala.","Hay 5 sillas negras.","El baño es moderno.","Los bolígrafos están en el estudio.","La habitación pequeña es amarilla."]},
+        {name:"Apartamento Puerta",facts:["Hay un patio pequeño.","La mesa está en el comedor.","Hay 4 sillas blancas.","El baño es antiguo.","Los bolígrafos están en la cocina.","La habitación pequeña es azul."]}
+      ]
+    },
+    similarities:["En los dos apartamentos hay habitaciones, baños y ventanas.","En los dos apartamentos hay una cocina.","En los dos apartamentos hay una sala.","En los dos apartamentos hay sillones.","En los dos apartamentos hay una puerta principal.","En los dos apartamentos hay sillas."],
+    differences:["2 habitaciones / 4 habitaciones","2 baños / 1 baño","5 ventanas / 8 ventanas","cocina roja / cocina blanca","3 sillones / 2 sillones","puerta azul / puerta verde","balcón pequeño / patio pequeño","mesa en la sala / mesa en el comedor"]
+  },
+  {
+    id:7,
+    names:["Apartamento Luna","Apartamento Sur"],
+    cards:{
+      A:[
+        {name:"Apartamento Luna",facts:["Hay 1 habitación.","Hay 1 baño.","Hay 3 ventanas.","La sala es pequeña y bonita.","Hay una alfombra blanca.","La cocina es estrecha."]},
+        {name:"Apartamento Sur",facts:["Hay 2 habitaciones.","Hay 1 baño.","Hay 6 ventanas.","La sala es grande y sencilla.","Hay una alfombra negra.","La cocina es amplia."]}
+      ],
+      B:[
+        {name:"Apartamento Luna",facts:["No hay estudio.","Hay 2 sillas en el comedor.","El espejo está en la sala.","Los cuadernos están en la mesa.","Hay 1 sillón verde.","La pared exterior es gris."]},
+        {name:"Apartamento Sur",facts:["Hay un estudio.","Hay 6 sillas en el comedor.","El espejo está en el vestíbulo.","Los cuadernos están en el estudio.","Hay 2 sillones verdes.","La pared exterior es blanca."]}
+      ]
+    },
+    similarities:["En los dos apartamentos hay 1 baño.","En los dos apartamentos hay una sala.","En los dos apartamentos hay una alfombra.","En los dos apartamentos hay una cocina.","En los dos apartamentos hay sillas en el comedor.","En los dos apartamentos hay cuadernos."],
+    differences:["1 habitación / 2 habitaciones","3 ventanas / 6 ventanas","sala pequeña y bonita / sala grande y sencilla","alfombra blanca / alfombra negra","cocina estrecha / cocina amplia","no hay estudio / hay estudio","2 sillas / 6 sillas","espejo en la sala / espejo en el vestíbulo"]
+  },
+  {
+    id:8,
+    names:["Apartamento Cielo","Apartamento Estudio"],
+    cards:{
+      A:[
+        {name:"Apartamento Cielo",facts:["Hay 4 habitaciones.","Hay 2 baños.","Hay 12 ventanas.","La cocina es azul claro.","El comedor es luminoso.","Hay 7 sillas en el comedor."]},
+        {name:"Apartamento Estudio",facts:["Hay 2 habitaciones.","Hay 1 baño.","Hay 4 ventanas.","La cocina es gris.","El comedor es oscuro.","Hay 3 sillas en el comedor."]}
+      ],
+      B:[
+        {name:"Apartamento Cielo",facts:["Hay una terraza grande.","Los libros están en el estudio.","La alfombra de la sala es verde.","Hay 2 mesas pequeñas.","El baño privado es blanco.","Los sillones son azules."]},
+        {name:"Apartamento Estudio",facts:["No hay terraza.","Los libros están en la sala.","La alfombra de la sala es amarilla.","Hay 1 mesa grande.","El baño es gris.","Los sillones son marrones."]}
+      ]
+    },
+    similarities:["En los dos apartamentos hay habitaciones, baños y ventanas.","En los dos apartamentos hay una cocina.","En los dos apartamentos hay un comedor.","En los dos apartamentos hay sillas en el comedor.","En los dos apartamentos hay libros.","En los dos apartamentos hay sillones."],
+    differences:["4 habitaciones / 2 habitaciones","2 baños / 1 baño","12 ventanas / 4 ventanas","cocina azul claro / cocina gris","comedor luminoso / comedor oscuro","7 sillas / 3 sillas","terraza grande / no hay terraza","libros en el estudio / libros en la sala"]
+  }
+];
+
+const FONT_STORAGE_KEY="calentamiento-dos-apartamentos-font-scale";
+const FONT_MIN=.85;
+const FONT_DEFAULT=1;
+const FONT_MAX=1.55;
+const FONT_STEP=.05;
+let selectedPair="";
+
+const pairSelect=document.getElementById("pair-select");
+const teacherPairSelect=document.getElementById("teacher-pair-select");
+const startScreen=document.getElementById("start-screen");
+const activityScreen=document.getElementById("activity-screen");
+const teacherScreen=document.getElementById("teacher-screen");
+const startMessage=document.getElementById("start-message");
+
+function fillPairSelects(){
+  cases.forEach(item=>{
+    const option=document.createElement("option");
+    option.value=String(item.id);
+    option.textContent=`Pareja ${item.id}`;
+    pairSelect.append(option);
+    teacherPairSelect.append(option.cloneNode(true));
+  });
+}
+function findCase(id){
+  return cases.find(item=>String(item.id)===String(id));
+}
+function apartmentCard(apartment){
+  return `
+    <article class="apartment-card">
+      <h3>${apartment.name}</h3>
+      <ul class="fact-list">
+        ${apartment.facts.map(fact=>`<li>${fact}</li>`).join("")}
+      </ul>
+    </article>`;
+}
+function roleApartments(item,role){
+  const apartmentIndex=role==="A"?0:1;
+  const firstBlock=item.cards.A[apartmentIndex];
+  const secondBlock=item.cards.B[apartmentIndex];
+  return [{
+    name:firstBlock.name,
+    facts:[...firstBlock.facts,...secondBlock.facts]
+  }];
+}
+function comparisonAnswers(item){
+  return `
+    <div class="answers-grid">
+      <div>
+        <h4>LO QUE ES IGUAL</h4>
+        <ul>
+          ${item.similarities.map(answer=>`<li>${answer}</li>`).join("")}
+        </ul>
+      </div>
+      <div>
+        <h4>LO QUE ES DIFERENTE</h4>
+        <ul>
+          ${item.differences.map(answer=>`<li>${answer}</li>`).join("")}
+        </ul>
+      </div>
+    </div>`;
+}
+function showStart(){
+  startScreen.classList.remove("hidden");
+  activityScreen.classList.add("hidden");
+  teacherScreen.classList.add("hidden");
+  startMessage.textContent="";
+}
+function showStudent(pairId,role){
+  const item=findCase(pairId);
+  if(!item){
+    startMessage.textContent="Seleccionad un número de pareja.";
+    return;
+  }
+  selectedPair=String(pairId);
+  document.getElementById("student-pair").textContent=`PAREJA ${item.id}`;
+  document.getElementById("student-role").textContent=`ALUMNO ${role}`;
+  document.getElementById("student-cards").innerHTML=roleApartments(item,role).map(apartmentCard).join("");
+  document.getElementById("answers-panel").classList.add("hidden");
+  document.getElementById("answers-panel").innerHTML="";
+  document.getElementById("answers-button").textContent="VER RESPUESTAS";
+  startScreen.classList.add("hidden");
+  teacherScreen.classList.add("hidden");
+  activityScreen.classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function teacherStudentPanel(item,role){
+  return `
+    <section class="teacher-panel">
+      <div class="identity">
+        <span class="pill">PAREJA ${item.id}</span>
+        <span class="pill dark">ALUMNO ${role}</span>
+      </div>
+      <div class="apartment-grid single-apartment-grid">
+        ${roleApartments(item,role).map(apartmentCard).join("")}
+      </div>
+    </section>`;
+}
+function renderTeacher(pairId){
+  const item=findCase(pairId) || cases[0];
+  teacherPairSelect.value=String(item.id);
+  document.getElementById("teacher-content").innerHTML=`
+    <div class="teacher-grid">
+      ${teacherStudentPanel(item,"A")}
+      ${teacherStudentPanel(item,"B")}
+    </div>
+    <section class="teacher-differences">
+      <h3>COMPARACIONES PARA ORIENTAR</h3>
+      ${comparisonAnswers(item)}
+    </section>`;
+}
+function showTeacher(){
+  const pairId=pairSelect.value || selectedPair || "1";
+  startScreen.classList.add("hidden");
+  activityScreen.classList.add("hidden");
+  teacherScreen.classList.remove("hidden");
+  renderTeacher(pairId);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function normalizeScale(value){
+  const number=Number(value);
+  const scale=Number.isFinite(number)?number:FONT_DEFAULT;
+  return Math.round(Math.min(FONT_MAX,Math.max(FONT_MIN,scale))*100)/100;
+}
+function readFontScale(){
+  try{return normalizeScale(localStorage.getItem(FONT_STORAGE_KEY));}
+  catch{return FONT_DEFAULT;}
+}
+function saveFontScale(scale){
+  try{localStorage.setItem(FONT_STORAGE_KEY,String(scale));}
+  catch{}
+}
+function updateFontButtons(scale){
+  document.querySelectorAll("[data-font-action]").forEach(button=>{
+    const action=button.dataset.fontAction;
+    button.classList.toggle("active",action==="reset" && scale===FONT_DEFAULT);
+    button.setAttribute("aria-pressed",String(action==="reset" && scale===FONT_DEFAULT));
+  });
+}
+function applyFontScale(value,{persist=true}={}){
+  const scale=normalizeScale(value);
+  document.documentElement.style.setProperty("--font-scale",String(scale));
+  if(persist)saveFontScale(scale);
+  updateFontButtons(scale);
+}
+function changeFontScale(delta){
+  const current=Number(document.documentElement.style.getPropertyValue("--font-scale")) || FONT_DEFAULT;
+  applyFontScale(current+delta);
+}
+
+document.querySelectorAll("[data-role]").forEach(button=>{
+  button.addEventListener("click",()=>showStudent(pairSelect.value,button.dataset.role));
+});
+document.getElementById("teacher-button").addEventListener("click",()=>{
+  const code=document.getElementById("teacher-code").value.trim();
+  if(code==="555")showTeacher();
+  else startMessage.textContent="Código no válido.";
+});
+document.getElementById("teacher-code").addEventListener("keydown",event=>{
+  if(event.key==="Enter"){
+    event.preventDefault();
+    document.getElementById("teacher-button").click();
+  }
+});
+document.getElementById("change-button").addEventListener("click",showStart);
+document.getElementById("teacher-exit").addEventListener("click",showStart);
+document.getElementById("answers-button").addEventListener("click",()=>{
+  const item=findCase(selectedPair);
+  if(!item)return;
+  const panel=document.getElementById("answers-panel");
+  const button=document.getElementById("answers-button");
+  const isHidden=panel.classList.contains("hidden");
+  if(isHidden){
+    panel.innerHTML=comparisonAnswers(item);
+    panel.classList.remove("hidden");
+    button.textContent="OCULTAR RESPUESTAS";
+  }else{
+    panel.classList.add("hidden");
+    button.textContent="VER RESPUESTAS";
+  }
+});
+teacherPairSelect.addEventListener("change",()=>renderTeacher(teacherPairSelect.value));
+document.querySelector(".font-controls").addEventListener("click",event=>{
+  const button=event.target.closest("[data-font-action]");
+  if(!button)return;
+  const action=button.dataset.fontAction;
+  if(action==="decrease")changeFontScale(-FONT_STEP);
+  if(action==="increase")changeFontScale(FONT_STEP);
+  if(action==="reset")applyFontScale(FONT_DEFAULT);
+});
+
+fillPairSelects();
+applyFontScale(readFontScale(),{persist:false});
+</script>
+</body>
+</html>
