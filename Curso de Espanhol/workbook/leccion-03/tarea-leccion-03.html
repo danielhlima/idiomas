@@ -1,0 +1,1542 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Workbook · Lección 3 · Tarea de casa</title>
+<style>
+:root{
+  --red:#aa151b;
+  --gold:#f1bf00;
+  --ink:#172033;
+  --muted:#667085;
+  --paper:#fffdf8;
+  --blue:#2d5ea8;
+  --green:#2d7a5b;
+  --soft:#f4efe4;
+  --danger:#b42318;
+  --danger-soft:#fff1f0;
+  --success-soft:#ecfdf3;
+  --focus:rgba(45,94,168,.38);
+  --font-scale:1;
+}
+*{box-sizing:border-box}
+html{font-size:calc(16px * var(--font-scale))}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 92% 10%,rgba(241,191,0,.22),transparent 28%),
+    linear-gradient(135deg,#fff,#f7f1e5);
+}
+button,a,input,select{font:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.page{width:min(100%,1080px);margin:0 auto;padding:30px 22px 24px}
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  border-bottom:2px solid rgba(170,21,27,.18);
+  padding-bottom:10px;
+  color:var(--muted);
+  font-size:.82rem;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+.course{font-weight:900;color:var(--red)}
+.font-controls{
+  position:fixed;
+  right:18px;
+  top:18px;
+  z-index:10;
+  display:flex;
+  gap:4px;
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(23,32,51,.14);
+  border-radius:12px;
+  padding:5px;
+  box-shadow:0 8px 22px #0002;
+  backdrop-filter:blur(8px);
+}
+.font-controls button{
+  width:34px;
+  height:32px;
+  border:0;
+  border-radius:8px;
+  background:transparent;
+  color:var(--ink);
+  font-size:.88rem;
+  font-weight:900;
+  cursor:pointer;
+}
+.font-controls button:hover,.font-controls button.active{background:var(--soft);color:var(--red)}
+.hero{margin:30px 0 20px}
+.eyebrow{font-size:.82rem;font-weight:900;letter-spacing:.14em;color:var(--red);text-transform:uppercase}
+h1{margin:8px 0 4px;font-size:clamp(2rem,5vw,3.1rem);line-height:1.04}
+.subtitle{margin:0;color:var(--muted);font-size:1.05rem}
+.activity-tag{
+  display:inline-flex;
+  margin-top:12px;
+  border-radius:999px;
+  background:var(--soft);
+  color:var(--red);
+  padding:7px 11px;
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.shell{
+  background:rgba(255,255,255,.82);
+  border:1px solid rgba(23,32,51,.08);
+  border-radius:18px;
+  box-shadow:0 22px 60px #0002;
+  overflow:hidden;
+}
+.status{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:rgba(23,32,51,.1);
+}
+.status>div{background:white;padding:15px 18px}
+.status small{
+  display:block;
+  margin-bottom:5px;
+  color:var(--muted);
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.status strong{font-size:1.15rem}
+.progress-track{height:8px;background:#e6e1d7}
+.progress-bar{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--red),var(--gold));
+  transition:width .25s ease;
+}
+.exercise{padding:30px}
+.block-status{
+  display:grid;
+  gap:4px;
+  margin:0 0 18px;
+  border-left:7px solid var(--gold);
+  border-radius:14px;
+  background:#fffdf8;
+  padding:14px 16px;
+}
+.block-status small{
+  color:var(--muted);
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.block-status strong{font-size:1.12rem}
+.prompt{
+  margin:0 0 12px;
+  color:var(--muted);
+  font-size:1rem;
+  font-weight:800;
+  line-height:1.45;
+  white-space:pre-line;
+}
+.question-title{
+  margin:0 0 22px;
+  font-size:clamp(1.55rem,4.8vw,2.75rem);
+  line-height:1.15;
+  letter-spacing:0;
+  white-space:pre-line;
+}
+.base-words{
+  display:inline-flex;
+  margin:-6px 0 18px;
+  border-radius:999px;
+  background:var(--soft);
+  color:var(--red);
+  padding:8px 12px;
+  font-size:.86rem;
+  font-weight:900;
+}
+.answer-area{display:grid;gap:14px}
+.options{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+fieldset{
+  min-width:0;
+  margin:0;
+  border:1px solid rgba(23,32,51,.12);
+  border-radius:16px;
+  background:#fffdf8;
+  padding:16px;
+}
+legend{
+  padding:0 8px;
+  color:var(--red);
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.option-button{
+  min-height:58px;
+  border:2px solid rgba(23,32,51,.12);
+  border-radius:14px;
+  background:white;
+  color:var(--ink);
+  padding:10px 12px;
+  font-size:1.02rem;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 8px 22px #0001;
+  transition:transform .16s ease,border-color .16s ease,background .16s ease;
+  white-space:pre-line;
+  text-align:left;
+}
+.option-button:hover:not(:disabled){transform:translateY(-1px);border-color:rgba(45,94,168,.45)}
+.option-button:disabled{cursor:default}
+.option-button.selected{border-color:var(--blue);background:#eef4ff}
+.option-button.correct{border-color:var(--green);background:var(--success-soft);color:#067647}
+.option-button.incorrect{border-color:var(--danger);background:var(--danger-soft);color:var(--danger)}
+.option-button .mark{display:inline-block;min-width:1.25em;font-weight:900}
+.answer-form{display:grid;gap:14px}
+.text-fields{display:grid;gap:14px}
+.field-label{
+  color:var(--muted);
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.answer-input{
+  width:100%;
+  min-height:62px;
+  border:2px solid rgba(23,32,51,.14);
+  border-radius:14px;
+  background:white;
+  color:var(--ink);
+  padding:14px 16px;
+  font-size:1.32rem;
+  font-weight:800;
+  box-shadow:0 8px 22px #0001;
+}
+.answer-input:disabled{background:#f2efe7;color:#625b50}
+.answer-input.correct{border-color:var(--green);background:var(--success-soft);color:#067647}
+.answer-input.incorrect{border-color:var(--danger);background:var(--danger-soft);color:var(--danger)}
+.feedback{
+  min-height:106px;
+  margin-top:18px;
+  border-radius:16px;
+  border:1px solid rgba(23,32,51,.1);
+  background:#fffdf8;
+  padding:16px 18px;
+}
+.feedback strong{display:block;margin-bottom:6px;font-size:1.08rem}
+.feedback.correct{border-left:7px solid var(--green);background:var(--success-soft)}
+.feedback.incorrect{border-left:7px solid var(--danger);background:var(--danger-soft)}
+.feedback p{margin:0 0 8px;color:var(--muted);line-height:1.45}
+.feedback p:last-child{margin-bottom:0}
+.actions{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:12px;
+  margin-top:20px;
+}
+.primary{
+  min-height:48px;
+  border:0;
+  border-radius:12px;
+  background:var(--red);
+  color:white;
+  padding:12px 18px;
+  font-weight:900;
+  cursor:pointer;
+}
+.primary:disabled{background:#c9c3b8;color:#6b6258;cursor:not-allowed}
+.result{
+  display:none;
+  padding:34px 30px;
+}
+.result.active{display:block}
+.result h2{margin:0 0 10px;font-size:clamp(2rem,6vw,3.2rem)}
+.score-line{margin:0;color:var(--muted);font-size:1.15rem}
+.score-card{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:24px 0;
+}
+.score-card div,.competency-results div{
+  background:white;
+  border-radius:14px;
+  padding:18px;
+  box-shadow:0 8px 22px #0001;
+}
+.score-card small,.competency-results small{
+  display:block;
+  color:var(--muted);
+  font-size:.76rem;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.score-card strong,.competency-results strong{display:block;margin-top:6px;font-size:1.45rem;color:var(--red)}
+.message{
+  margin:0 0 24px;
+  border-left:7px solid var(--gold);
+  background:white;
+  border-radius:14px;
+  padding:18px;
+  font-size:1.12rem;
+  font-weight:800;
+}
+.competency-results{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:0 0 24px;
+}
+.result-actions{display:flex;flex-wrap:wrap;gap:12px}
+.is-hidden{display:none}
+@media(max-width:760px){
+  .page{padding:22px 14px 18px}
+  .top{align-items:flex-start;flex-direction:column;padding-right:112px}
+  .font-controls{right:12px;top:12px}
+  .hero{margin:24px 0 16px}
+  .status,.score-card,.competency-results{grid-template-columns:1fr}
+  .status>div{padding:12px 14px}
+  .exercise,.result{padding:22px 16px}
+  .options{grid-template-columns:1fr}
+  .actions{justify-content:stretch;flex-direction:column}
+  .primary{width:100%}
+  .result-actions{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="font-controls" aria-label="Tamaño de fuente">
+  <button type="button" data-font-action="decrease" aria-label="Disminuir tamaño de fuente">A−</button>
+  <button type="button" data-font-action="reset" aria-label="Restaurar tamaño de fuente">A</button>
+  <button type="button" data-font-action="increase" aria-label="Aumentar tamaño de fuente">A+</button>
+</div>
+
+<main class="page">
+  <header class="top">
+    <div class="course">CURSO DE ESPAÑOL · WORKBOOK</div>
+    <div>Lección 3 · Tarea de casa</div>
+  </header>
+
+  <section class="hero" aria-labelledby="exercise-heading">
+    <div class="eyebrow">TAREA DE CASA</div>
+    <h1 id="exercise-heading">Repaso de la Lección 3</h1>
+    <p class="subtitle">Una lista de 40 ejercicios para consolidar números, horas y estructuras conocidas.</p>
+    <span class="activity-tag">Lecciones 1, 2 y 3</span>
+  </section>
+
+  <section id="exercise-shell" class="shell" aria-label="Ejercicio interactivo">
+    <div class="status" aria-label="Estado del ejercicio">
+      <div>
+        <small>Pregunta</small>
+        <strong id="question-count">1 / 40</strong>
+      </div>
+      <div>
+        <small>Puntuación</small>
+        <strong id="score-count">0 / 40</strong>
+      </div>
+      <div>
+        <small>Mejor resultado</small>
+        <strong id="best-score">-</strong>
+      </div>
+    </div>
+    <div class="progress-track" aria-hidden="true">
+      <div id="progress-bar" class="progress-bar"></div>
+    </div>
+
+    <div id="exercise-panel" class="exercise">
+      <div id="block-status" class="block-status" aria-live="polite"></div>
+      <p id="question-prompt" class="prompt"></p>
+      <h2 id="question-title" class="question-title" tabindex="-1"></h2>
+      <div id="base-words" class="base-words is-hidden"></div>
+      <form id="answer-form" class="answer-form">
+        <div id="answer-area" class="answer-area"></div>
+        <div class="actions">
+          <button id="check-button" class="primary" type="submit">Comprobar</button>
+          <button id="next-button" class="primary" type="button" disabled>Siguiente</button>
+        </div>
+      </form>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </div>
+
+    <div id="result-panel" class="result" tabindex="-1" aria-labelledby="result-title">
+      <h2 id="result-title">Resultado</h2>
+      <p id="result-summary" class="score-line"></p>
+      <div class="score-card" aria-label="Resumen de puntuación">
+        <div><small>Puntuación obtenida</small><strong id="result-score"></strong></div>
+        <div><small>Puntuación máxima</small><strong id="result-max"></strong></div>
+        <div><small>Porcentaje</small><strong id="result-percent"></strong></div>
+        <div><small>Correctas</small><strong id="result-correct"></strong></div>
+        <div><small>Incorrectas</small><strong id="result-incorrect"></strong></div>
+        <div><small>Producción escrita</small><strong id="result-written"></strong></div>
+        <div><small>Reconocimiento</small><strong id="result-varied"></strong></div>
+        <div><small>Mejor resultado</small><strong id="result-best"></strong></div>
+      </div>
+      <p id="result-message" class="message"></p>
+      <div id="competency-results" class="competency-results" aria-label="Resultado por competencia"></div>
+      <div class="result-actions">
+        <button id="restart-button" class="primary" type="button">Repetir ejercicio</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+const blocks = [
+  "Artículos y vocabulario",
+  "Plural y concordancia",
+  "Hay, ser y estar",
+  "Números y cantidades",
+  "La hora e integración"
+];
+
+const questions = [
+  {
+    id: 1,
+    block: "Artículos y vocabulario",
+    category: "Artículos definidos",
+    responseKind: "written",
+    type: "multi-text",
+    format: "completion",
+    prompt: "Completa con el artículo definido:",
+    title: "______ hotel\n______ universidad\n______ problema\n______ mano",
+    labels: ["hotel", "universidad", "problema", "mano"],
+    acceptedAnswers: [["el"], ["la"], ["el"], ["la"]],
+    fullCorrectSentence: "el hotel · la universidad · el problema · la mano",
+    explanation: "Algunas palabras no siguen el patrón visual: decimos “el problema” y “la mano”."
+  },
+  {
+    id: 2,
+    block: "Artículos y vocabulario",
+    category: "Artículos indefinidos",
+    responseKind: "written",
+    type: "multi-text",
+    format: "completion",
+    prompt: "Completa con un, una, unos o unas:",
+    title: "______ bolígrafo\n______ lámparas\n______ casas\n______ amigos",
+    labels: ["bolígrafo", "lámparas", "casas", "amigos"],
+    acceptedAnswers: [["un"], ["unas"], ["unas"], ["unos"]],
+    fullCorrectSentence: "un bolígrafo · unas lámparas · unas casas · unos amigos",
+    explanation: "El artículo concuerda con género y número."
+  },
+  {
+    id: 3,
+    block: "Artículos y vocabulario",
+    category: "Plural",
+    responseKind: "varied",
+    type: "choice",
+    format: "transformation",
+    prompt: "Selecciona el plural correcto:",
+    title: "el lápiz rojo",
+    options: [
+      "los lápices rojos",
+      "las lápices rojas",
+      "los lápiz rojos",
+      "el lápices rojo"
+    ],
+    acceptedAnswers: ["los lápices rojos"],
+    explanation: "“Lápiz” cambia a “lápices” y el adjetivo pasa a plural."
+  },
+  {
+    id: 4,
+    block: "Artículos y vocabulario",
+    category: "Artículo y género",
+    responseKind: "varied",
+    type: "choice",
+    format: "completion",
+    prompt: "Selecciona la forma correcta:",
+    title: "______ alfombra roja está en el comedor.",
+    options: ["La", "El", "Los", "Unos"],
+    acceptedAnswers: ["La"],
+    explanation: "“Alfombra” es femenino singular: la alfombra."
+  },
+  {
+    id: 5,
+    block: "Artículos y vocabulario",
+    category: "Plural y adjetivo",
+    responseKind: "written",
+    type: "text",
+    format: "transformation",
+    prompt: "Transforma al plural:",
+    title: "la pared blanca",
+    acceptedAnswers: ["las paredes blancas", "las paredes blancas."],
+    correctText: "las paredes blancas",
+    explanation: "El artículo, el sustantivo y el adjetivo pasan al plural."
+  },
+  {
+    id: 6,
+    block: "Artículos y vocabulario",
+    category: "Personas y lugares",
+    responseKind: "varied",
+    type: "choice",
+    format: "completion",
+    prompt: "Selecciona la frase correcta:",
+    title: "doctor / hospital",
+    options: [
+      "El doctor está en el hospital.",
+      "La doctor está en la hospital.",
+      "Los doctor está en el hospital.",
+      "Unas doctor está en el hospital."
+    ],
+    acceptedAnswers: ["El doctor está en el hospital."],
+    explanation: "“Doctor” y “hospital” son masculinos: el doctor, el hospital."
+  },
+  {
+    id: 7,
+    block: "Artículos y vocabulario",
+    category: "Mi y mis",
+    responseKind: "written",
+    type: "multi-text",
+    format: "completion",
+    prompt: "Completa con mi o mis:",
+    title: "______ país\n______ compañeros\n______ preguntas\n______ apellido",
+    labels: ["país", "compañeros", "preguntas", "apellido"],
+    acceptedAnswers: [["mi"], ["mis"], ["mis"], ["mi"]],
+    fullCorrectSentence: "mi país · mis compañeros · mis preguntas · mi apellido",
+    explanation: "Usamos “mi” con singular y “mis” con plural."
+  },
+  {
+    id: 8,
+    block: "Artículos y vocabulario",
+    category: "Palabra interrogativa",
+    responseKind: "varied",
+    type: "choice",
+    format: "completion",
+    prompt: "Selecciona la palabra interrogativa:",
+    title: "¿______ está la biblioteca?",
+    options: ["Dónde", "Quién", "Cuánto", "Por qué"],
+    acceptedAnswers: ["Dónde"],
+    explanation: "Usamos “dónde” para preguntar por un lugar."
+  },
+  {
+    id: 9,
+    block: "Plural y concordancia",
+    category: "Adjetivos",
+    responseKind: "written",
+    type: "multi-text",
+    format: "completion",
+    prompt: "Completa con la forma correcta del adjetivo:",
+    title: "La cocina es ______. (amplio)\nLos sillones son ______. (cómodo)",
+    labels: ["cocina", "sillones"],
+    acceptedAnswers: [["amplia"], ["cómodos"]],
+    fullCorrectSentence: "La cocina es amplia. Los sillones son cómodos.",
+    explanation: "El adjetivo concuerda con el sustantivo: cocina amplia, sillones cómodos."
+  },
+  {
+    id: 10,
+    block: "Plural y concordancia",
+    category: "Adjetivos",
+    responseKind: "varied",
+    type: "choice",
+    format: "selection",
+    prompt: "Selecciona la forma correcta:",
+    title: "Las cortinas son ______.",
+    options: ["gruesas", "gruesos", "gruesa", "grueso"],
+    acceptedAnswers: ["gruesas"],
+    explanation: "“Cortinas” es femenino plural, por eso usamos “gruesas”."
+  },
+  {
+    id: 11,
+    block: "Plural y concordancia",
+    category: "Transformación",
+    responseKind: "written",
+    type: "text",
+    format: "transformation",
+    prompt: "Transforma al plural:",
+    title: "El espejo antiguo está en el vestíbulo.",
+    acceptedAnswers: [
+      "los espejos antiguos están en el vestíbulo",
+      "los espejos antiguos están en el vestíbulo."
+    ],
+    correctText: "Los espejos antiguos están en el vestíbulo.",
+    explanation: "En plural cambian artículo, sustantivo, adjetivo y verbo."
+  },
+  {
+    id: 12,
+    block: "Plural y concordancia",
+    category: "Pronombres y verbos",
+    responseKind: "written",
+    type: "multi-text",
+    format: "completion",
+    prompt: "Completa con la forma correcta:",
+    title: "Nosotros ______ estudiantes.\nVosotros ______ en clase.",
+    labels: ["nosotros", "vosotros"],
+    acceptedAnswers: [["somos"], ["estáis"]],
+    fullCorrectSentence: "Nosotros somos estudiantes. Vosotros estáis en clase.",
+    explanation: "“Nosotros” usa “somos”; “vosotros” usa “estáis”."
+  },
+  {
+    id: 13,
+    block: "Plural y concordancia",
+    category: "Ser",
+    responseKind: "varied",
+    type: "choice",
+    format: "completion",
+    prompt: "Selecciona el verbo correcto:",
+    title: "La nevera ______ bastante grande.",
+    options: ["es", "está", "hay", "son"],
+    acceptedAnswers: ["es"],
+    explanation: "Usamos “ser” para describir una característica."
+  },
+  {
+    id: 14,
+    block: "Plural y concordancia",
+    category: "Estar",
+    responseKind: "written",
+    type: "multi-text",
+    format: "completion",
+    prompt: "Completa con estar:",
+    title: "Las toallas ______ limpias.\nEl pasillo ______ oscuro todavía.",
+    labels: ["toallas", "pasillo"],
+    acceptedAnswers: [["están"], ["está"]],
+    fullCorrectSentence: "Las toallas están limpias. El pasillo está oscuro todavía.",
+    explanation: "Usamos “estar” para estados o condiciones."
+  },
+  {
+    id: 15,
+    block: "Plural y concordancia",
+    category: "Material",
+    responseKind: "varied",
+    type: "choice",
+    format: "completion",
+    prompt: "Selecciona la preposición correcta:",
+    title: "La mesa es ______ madera fina.",
+    options: ["de", "en", "con", "a"],
+    acceptedAnswers: ["de"],
+    explanation: "Usamos “de” para hablar del material."
+  },
+  {
+    id: 16,
+    block: "Plural y concordancia",
+    category: "Todo",
+    responseKind: "written",
+    type: "multi-text",
+    format: "completion",
+    prompt: "Completa con todo, toda, todos o todas:",
+    title: "______ el baño\n______ los cuadros\n______ las mochilas\n______ la habitación",
+    labels: ["baño", "cuadros", "mochilas", "habitación"],
+    acceptedAnswers: [["todo"], ["todos"], ["todas"], ["toda"]],
+    fullCorrectSentence: "todo el baño · todos los cuadros · todas las mochilas · toda la habitación",
+    explanation: "Estas formas concuerdan con el sustantivo que acompañan."
+  },
+  {
+    id: 17,
+    block: "Hay, ser y estar",
+    category: "Existencia",
+    responseKind: "written",
+    type: "text",
+    format: "production",
+    prompt: "Escribe una frase completa con esta información:",
+    title: "3 / camas / dormitorio / hay",
+    acceptedAnswers: [
+      "hay tres camas en el dormitorio",
+      "hay tres camas en el dormitorio.",
+      "en el dormitorio hay tres camas",
+      "en el dormitorio hay tres camas.",
+      "hay 3 camas en el dormitorio",
+      "hay 3 camas en el dormitorio.",
+      "en el dormitorio hay 3 camas",
+      "en el dormitorio hay 3 camas."
+    ],
+    correctText: "Hay tres camas en el dormitorio.",
+    explanation: "“Hay” presenta la existencia de una cantidad en un lugar. Como el enunciado usa 3, también aceptamos el numeral."
+  },
+  {
+    id: 18,
+    block: "Hay, ser y estar",
+    category: "Negación",
+    responseKind: "varied",
+    type: "choice",
+    format: "selection",
+    prompt: "Selecciona la frase negativa correcta:",
+    title: "juguetes / garaje",
+    options: [
+      "No hay juguetes en el garaje.",
+      "No están juguetes en el garaje.",
+      "No hay juguetes en la garaje.",
+      "No son juguetes en el garaje."
+    ],
+    acceptedAnswers: ["No hay juguetes en el garaje."],
+    explanation: "Para negar existencia usamos “no hay”. El enunciado trae “juguetes” en plural."
+  },
+  {
+    id: 19,
+    block: "Hay, ser y estar",
+    category: "Hay y estar",
+    responseKind: "written",
+    type: "multi-text",
+    format: "completion",
+    prompt: "Completa con hay o estar:",
+    title: "En el estudio ______ once diccionarios.\nLos diccionarios ______ en la estantería.",
+    labels: ["existencia", "localización"],
+    acceptedAnswers: [["hay"], ["están"]],
+    fullCorrectSentence: "En el estudio hay once diccionarios. Los diccionarios están en la estantería.",
+    explanation: "“Hay” presenta elementos; “estar” localiza elementos ya identificados."
+  },
+  {
+    id: 20,
+    block: "Hay, ser y estar",
+    category: "Comprensión",
+    responseKind: "varied",
+    type: "choice",
+    format: "selection",
+    prompt: "Selecciona la respuesta adecuada:",
+    title: "¿Qué hay en el restaurante?",
+    options: [
+      "Hay sopa y pescado.",
+      "El restaurante está sopa.",
+      "Es sopa y pescado.",
+      "Hay en el restaurante está pescado."
+    ],
+    acceptedAnswers: ["Hay sopa y pescado."],
+    explanation: "Para responder a “¿qué hay...?” usamos “hay”."
+  },
+  {
+    id: 21,
+    block: "Hay, ser y estar",
+    category: "Preposiciones",
+    responseKind: "written",
+    type: "multi-text",
+    format: "completion",
+    prompt: "Completa con en, de o con:",
+    title: "El reloj está ______ la oficina.\nLa puerta es ______ metal.\nHablo ______ mi madre.",
+    labels: ["lugar", "material", "compañía/instrumento"],
+    acceptedAnswers: [["en"], ["de"], ["con"]],
+    fullCorrectSentence: "El reloj está en la oficina. La puerta es de metal. Hablo con mi madre.",
+    explanation: "Usamos “en” para lugar, “de” para material y “con” para compañía o instrumento."
+  },
+  {
+    id: 22,
+    block: "Hay, ser y estar",
+    category: "Preguntas",
+    responseKind: "written",
+    type: "text",
+    format: "production",
+    prompt: "Escribe una pregunta con estas palabras:",
+    title: "cuántas / flores / hay",
+    acceptedAnswers: [
+      "¿cuántas flores hay?",
+      "¿cuántas flores hay",
+      "cuántas flores hay",
+      "cuántas flores hay?"
+    ],
+    correctText: "¿Cuántas flores hay?",
+    explanation: "En una pregunta con “cuántas”, la palabra interrogativa va al inicio: ¿Cuántas flores hay?"
+  },
+  {
+    id: 23,
+    block: "Hay, ser y estar",
+    category: "Color",
+    responseKind: "varied",
+    type: "choice",
+    format: "selection",
+    prompt: "Selecciona la respuesta adecuada:",
+    title: "¿De qué color son los techos?",
+    options: ["Son grises.", "Están gris.", "Hay grises.", "Es grises."],
+    acceptedAnswers: ["Son grises."],
+    explanation: "Para describir color con plural usamos “son” y el adjetivo en plural."
+  },
+  {
+    id: 24,
+    block: "Hay, ser y estar",
+    category: "Negación",
+    responseKind: "written",
+    type: "text",
+    format: "production",
+    prompt: "Escribe una frase completa con esta información:",
+    title: "no hay / escobas / balcón",
+    acceptedAnswers: [
+      "no hay escobas en el balcón",
+      "no hay escobas en el balcón."
+    ],
+    correctText: "No hay escobas en el balcón.",
+    explanation: "“No hay” niega la existencia."
+  },
+  {
+    id: 25,
+    block: "Números y cantidades",
+    category: "Menos de 100",
+    responseKind: "written",
+    type: "text",
+    format: "transformation",
+    prompt: "Escribe con palabras:",
+    title: "58 llaves",
+    acceptedAnswers: [
+      "cincuenta y ocho llaves",
+      "cincuenta y ocho llaves."
+    ],
+    correctText: "cincuenta y ocho llaves",
+    explanation: "A partir de 30, usamos decena + y + unidad."
+  },
+  {
+    id: 26,
+    block: "Números y cantidades",
+    category: "Veinte",
+    responseKind: "written",
+    type: "multi-text",
+    format: "completion",
+    prompt: "Completa con el número escrito con palabras:",
+    title: "Hay ______ vasos. (22)\nHay ______ platos. (23)\nHay ______ cucharas. (26)",
+    labels: ["22 vasos", "23 platos", "26 cucharas"],
+    acceptedAnswers: [["veintidós"], ["veintitrés"], ["veintiséis"]],
+    fullCorrectSentence: "Hay veintidós vasos. Hay veintitrés platos. Hay veintiséis cucharas.",
+    explanation: "En los 20 escribimos una sola palabra; 22, 23 y 26 llevan tilde."
+  },
+  {
+    id: 27,
+    block: "Números y cantidades",
+    category: "Uno, un o una",
+    responseKind: "varied",
+    type: "choice",
+    format: "selection",
+    prompt: "Selecciona la forma correcta:",
+    title: "31 mapas",
+    options: [
+      "treinta y un mapas",
+      "treinta y uno mapas",
+      "treinta y una mapas",
+      "treinta un mapas"
+    ],
+    acceptedAnswers: ["treinta y un mapas"],
+    explanation: "Delante de un sustantivo masculino plural usamos “un”: treinta y un mapas."
+  },
+  {
+    id: 28,
+    block: "Números y cantidades",
+    category: "Frase con cantidad",
+    responseKind: "written",
+    type: "text",
+    format: "production",
+    prompt: "Escribe una frase completa con esta información:",
+    title: "86 / mensajes / teléfono / hay",
+    acceptedAnswers: [
+      "hay ochenta y seis mensajes en el teléfono",
+      "hay ochenta y seis mensajes en el teléfono.",
+      "en el teléfono hay ochenta y seis mensajes",
+      "en el teléfono hay ochenta y seis mensajes."
+    ],
+    correctText: "Hay ochenta y seis mensajes en el teléfono.",
+    explanation: "La frase integra número, objeto, lugar y “hay”."
+  },
+  {
+    id: 29,
+    block: "Números y cantidades",
+    category: "Cien y ciento",
+    responseKind: "written",
+    type: "multi-text",
+    format: "completion",
+    prompt: "Completa con el número escrito con palabras:",
+    title: "Hay ______ páginas. (100)\nHay ______ carpetas. (125)",
+    labels: ["100 páginas", "125 carpetas"],
+    acceptedAnswers: [["cien"], ["ciento veinticinco"]],
+    fullCorrectSentence: "Hay cien páginas. Hay ciento veinticinco carpetas.",
+    explanation: "100 exacto es “cien”; 125 empieza con “ciento”."
+  },
+  {
+    id: 30,
+    block: "Números y cantidades",
+    category: "Centenas",
+    responseKind: "varied",
+    type: "choice",
+    format: "selection",
+    prompt: "Selecciona la forma correcta:",
+    title: "746 fotografías",
+    options: [
+      "setecientas cuarenta y seis fotografías",
+      "setecientos cuarenta y seis fotografías",
+      "setecientas y cuarenta y seis fotografías",
+      "setecientas cuarenta seis fotografías"
+    ],
+    acceptedAnswers: ["setecientas cuarenta y seis fotografías"],
+    explanation: "“Fotografías” es femenino plural: setecientas. La “y” aparece entre cuarenta y seis."
+  },
+  {
+    id: 31,
+    block: "Números y cantidades",
+    category: "Mil",
+    responseKind: "written",
+    type: "text",
+    format: "transformation",
+    prompt: "Escribe con palabras:",
+    title: "1.245 revistas",
+    acceptedAnswers: [
+      "mil doscientas cuarenta y cinco revistas",
+      "mil doscientas cuarenta y cinco revistas."
+    ],
+    correctText: "mil doscientas cuarenta y cinco revistas",
+    explanation: "Para 1.000 usamos “mil”, no “un mil”; “revistas” pide “doscientas”."
+  },
+  {
+    id: 32,
+    block: "Números y cantidades",
+    category: "Millón",
+    responseKind: "written",
+    type: "multi-text",
+    format: "completion",
+    prompt: "Completa las frases:",
+    title: "Hay ______ de visitantes. (1.000.000)\nHay ______ de documentos. (2.000.000)",
+    labels: ["1.000.000 visitantes", "2.000.000 documentos"],
+    acceptedAnswers: [["un millón"], ["dos millones"]],
+    fullCorrectSentence: "Hay un millón de visitantes. Hay dos millones de documentos.",
+    explanation: "Usamos “un millón” y “dos millones”; la frase ya incluye “de”."
+  },
+  {
+    id: 33,
+    block: "La hora e integración",
+    category: "Hora actual",
+    responseKind: "varied",
+    type: "choice",
+    format: "selection",
+    prompt: "Selecciona la respuesta correcta:",
+    title: "1:00\n¿Qué hora es?",
+    options: ["Es la una.", "Son las una.", "A la una.", "Es las una."],
+    acceptedAnswers: ["Es la una."],
+    explanation: "Para la hora actual con 1:00 usamos “es la una”."
+  },
+  {
+    id: 34,
+    block: "La hora e integración",
+    category: "Hora actual",
+    responseKind: "varied",
+    type: "choice",
+    format: "selection",
+    prompt: "Selecciona la respuesta correcta:",
+    title: "8:30\n¿Qué hora es?",
+    options: [
+      "Son las ocho y media.",
+      "Es la ocho y media.",
+      "A las ocho y media.",
+      "Son las nueve menos media."
+    ],
+    acceptedAnswers: ["Son las ocho y media."],
+    explanation: "Para decir la hora actual usamos “son las”; 8:30 es “ocho y media”."
+  },
+  {
+    id: 35,
+    block: "La hora e integración",
+    category: "Momento de una actividad",
+    responseKind: "written",
+    type: "text",
+    format: "response",
+    prompt: "Lee la información y responde con palabras:",
+    title: "El desayuno es a las 9:15.\n¿A qué hora es el desayuno?",
+    acceptedAnswers: [
+      "a las nueve y cuarto",
+      "a las nueve y cuarto.",
+      "es a las nueve y cuarto",
+      "es a las nueve y cuarto.",
+      "el desayuno es a las nueve y cuarto",
+      "el desayuno es a las nueve y cuarto."
+    ],
+    correctText: "A las nueve y cuarto.",
+    explanation: "Para el momento de una actividad usamos “a las”."
+  },
+  {
+    id: 36,
+    block: "La hora e integración",
+    category: "Horas en palabras",
+    responseKind: "written",
+    type: "multi-text",
+    format: "completion",
+    prompt: "Completa con la hora escrita con palabras:",
+    title: "La reunión es a las ______. (7:30)\nLa cena es a las ______. (7:00 de la noche)",
+    labels: ["7:30", "7:00 de la noche"],
+    acceptedAnswers: [
+      ["siete y media", "siete y treinta"],
+      ["siete de la noche"]
+    ],
+    fullCorrectSentence: "La reunión es a las siete y media. La cena es a las siete de la noche.",
+    explanation: "Usamos “a las” para el horario de una actividad; aquí escribimos solo la hora en palabras."
+  },
+  {
+    id: 37,
+    block: "La hora e integración",
+    category: "Menos",
+    responseKind: "varied",
+    type: "choice",
+    format: "selection",
+    prompt: "Selecciona la respuesta correcta:",
+    title: "10:50\n¿Qué hora es?",
+    options: [
+      "Son las once menos diez.",
+      "Son las diez y cincuenta.",
+      "A las once menos diez.",
+      "Es la once menos diez."
+    ],
+    acceptedAnswers: ["Son las once menos diez.", "Son las diez y cincuenta."],
+    explanation: "10:50 puede expresarse como “son las diez y cincuenta” o “son las once menos diez”."
+  },
+  {
+    id: 38,
+    block: "La hora e integración",
+    category: "Momento de una actividad",
+    responseKind: "written",
+    type: "text",
+    format: "response",
+    prompt: "Lee la información y responde con palabras:",
+    title: "La película es a las 4:20 de la tarde.\n¿A qué hora es la película?",
+    acceptedAnswers: [
+      "a las cuatro y veinte de la tarde",
+      "a las cuatro y veinte de la tarde.",
+      "a las cuatro y veinte",
+      "a las cuatro y veinte.",
+      "es a las cuatro y veinte de la tarde",
+      "es a las cuatro y veinte de la tarde.",
+      "es a las cuatro y veinte",
+      "es a las cuatro y veinte.",
+      "la película es a las cuatro y veinte de la tarde",
+      "la película es a las cuatro y veinte de la tarde.",
+      "la película es a las cuatro y veinte",
+      "la película es a las cuatro y veinte."
+    ],
+    correctText: "A las cuatro y veinte de la tarde.",
+    explanation: "Usamos la forma trabajada en clase: cuatro y veinte de la tarde."
+  },
+  {
+    id: 39,
+    block: "La hora e integración",
+    category: "Comprensión breve",
+    responseKind: "written",
+    type: "text",
+    format: "comprehension",
+    prompt: "Lee el texto y responde con una frase completa:",
+    title: "En otoño, el Apartamento Cielo está limpio. Hay doce plantas. La ventana está abierta.\n¿Cuántas plantas hay?",
+    acceptedAnswers: [
+      "hay doce plantas",
+      "hay doce plantas.",
+      "en el apartamento cielo hay doce plantas",
+      "en el apartamento cielo hay doce plantas."
+    ],
+    correctText: "Hay doce plantas.",
+    explanation: "La respuesta recupera la cantidad del texto."
+  },
+  {
+    id: 40,
+    block: "La hora e integración",
+    category: "Producción final",
+    responseKind: "written",
+    type: "multi-text",
+    format: "production",
+    prompt: "Escribe la cantidad y la hora con palabras:",
+    title: "Ciudad Verde\n731.000 habitantes\nconcierto — 6:30 de la tarde",
+    labels: ["731.000 habitantes", "6:30 de la tarde"],
+    acceptedAnswers: [
+      [
+        "setecientos treinta y un mil",
+        "setecientos treinta y un mil.",
+        "setecientos treinta y un mil habitantes",
+        "setecientos treinta y un mil habitantes.",
+        "en ciudad verde hay setecientos treinta y un mil habitantes",
+        "en ciudad verde hay setecientos treinta y un mil habitantes.",
+        "hay setecientos treinta y un mil habitantes en ciudad verde",
+        "hay setecientos treinta y un mil habitantes en ciudad verde."
+      ],
+      [
+        "a las seis y media de la tarde",
+        "a las seis y media de la tarde.",
+        "a las seis y treinta de la tarde",
+        "a las seis y treinta de la tarde.",
+        "el concierto es a las seis y media de la tarde",
+        "el concierto es a las seis y media de la tarde.",
+        "el concierto es a las seis y treinta de la tarde",
+        "el concierto es a las seis y treinta de la tarde."
+      ]
+    ],
+    fullCorrectSentence: "setecientos treinta y un mil habitantes · a las seis y media de la tarde",
+    explanation: "731.000 se escribe “setecientos treinta y un mil”; 6:30 puede expresarse como “seis y media” o “seis y treinta”."
+  }
+];
+
+const BEST_SCORE_KEY = "workbook-leccion-03-tarea-best-score";
+const FONT_STORAGE_KEY = "leccion3FontScale";
+const FONT_MIN = 0.85;
+const FONT_DEFAULT = 1;
+const FONT_MAX = 1.7;
+const FONT_STEP = 0.05;
+const MAX_SCORE = questions.length;
+
+let currentIndex = 0;
+let score = 0;
+let correctAnswers = 0;
+let incorrectAnswers = 0;
+let questionClosed = false;
+let selectedAnswer = "";
+
+const exercisePanel = document.getElementById("exercise-panel");
+const resultPanel = document.getElementById("result-panel");
+const questionCount = document.getElementById("question-count");
+const scoreCount = document.getElementById("score-count");
+const bestScore = document.getElementById("best-score");
+const progressBar = document.getElementById("progress-bar");
+const blockStatus = document.getElementById("block-status");
+const questionPrompt = document.getElementById("question-prompt");
+const questionTitle = document.getElementById("question-title");
+const baseWords = document.getElementById("base-words");
+const answerForm = document.getElementById("answer-form");
+const answerArea = document.getElementById("answer-area");
+const checkButton = document.getElementById("check-button");
+const nextButton = document.getElementById("next-button");
+const feedback = document.getElementById("feedback");
+const restartButton = document.getElementById("restart-button");
+
+function readStorage(key){
+  try{
+    return localStorage.getItem(key);
+  }catch{
+    return null;
+  }
+}
+
+function writeStorage(key, value){
+  try{
+    localStorage.setItem(key, String(value));
+  }catch{}
+}
+
+function shuffle(items){
+  const result = [...items];
+  for(let index = result.length - 1; index > 0; index -= 1){
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [result[index], result[swapIndex]] = [result[swapIndex], result[index]];
+  }
+  return result;
+}
+
+function prepareQuestions(){
+  questions.forEach(question => {
+    question._correct = false;
+    if(question.type === "choice"){
+      question._options = shuffle(question.options);
+    }
+  });
+}
+
+function normalizeAnswer(value){
+  return value
+    .trim()
+    .toLocaleLowerCase("es")
+    .replace(/[.!?¡¿]+$/g, "")
+    .replace(/\s+/g, " ");
+}
+
+function getBestScore(){
+  const rawScore = readStorage(BEST_SCORE_KEY);
+  if(rawScore === null)return null;
+  const stored = Number(rawScore);
+  return Number.isFinite(stored) ? stored : null;
+}
+
+function updateBestScoreLabel(){
+  const best = getBestScore();
+  bestScore.textContent = best === null ? "-" : `${best} / ${MAX_SCORE}`;
+}
+
+function currentBlockIndex(question){
+  return blocks.indexOf(question.block) + 1;
+}
+
+function updateProgress(){
+  questionCount.textContent = `${currentIndex + 1} / ${MAX_SCORE}`;
+  scoreCount.textContent = `${score} / ${MAX_SCORE}`;
+  progressBar.style.width = `${((currentIndex + 1) / MAX_SCORE) * 100}%`;
+  updateBestScoreLabel();
+}
+
+function renderBlockStatus(question){
+  blockStatus.innerHTML = `
+    <small>Bloque ${currentBlockIndex(question)} de ${blocks.length}</small>
+    <strong>${question.block}</strong>
+  `;
+}
+
+function renderChoice(question){
+  const fieldset = document.createElement("fieldset");
+  fieldset.innerHTML = `<legend>Selecciona una respuesta</legend>`;
+  const options = document.createElement("div");
+  options.className = "options";
+  options.setAttribute("role", "radiogroup");
+  options.setAttribute("aria-label", "Opciones de respuesta");
+
+  question._options.forEach(option => {
+    const isSelected = selectedAnswer === option;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option-button";
+    button.dataset.value = option;
+    button.innerHTML = `<span class="mark">${isSelected ? "•" : ""}</span>${option}`;
+    button.disabled = questionClosed;
+    button.setAttribute("role", "radio");
+    button.setAttribute("aria-checked", String(isSelected));
+    button.setAttribute("aria-label", isSelected ? `${option}, seleccionado` : `Seleccionar ${option}`);
+    if(isSelected)button.classList.add("selected");
+    button.onclick = () => selectAnswer(option);
+    options.appendChild(button);
+  });
+
+  fieldset.appendChild(options);
+  answerArea.appendChild(fieldset);
+}
+
+function renderText(){
+  const wrapper = document.createElement("div");
+  wrapper.className = "text-fields";
+  const label = document.createElement("label");
+  label.className = "field-label";
+  label.setAttribute("for", "answer-input-0");
+  label.textContent = "Escribe tu respuesta.";
+  const input = document.createElement("input");
+  input.id = "answer-input-0";
+  input.className = "answer-input";
+  input.type = "text";
+  input.autocomplete = "off";
+  input.autocapitalize = "off";
+  input.spellcheck = false;
+  wrapper.appendChild(label);
+  wrapper.appendChild(input);
+  answerArea.appendChild(wrapper);
+}
+
+function renderMultiText(question){
+  const wrapper = document.createElement("div");
+  wrapper.className = "text-fields";
+  question.acceptedAnswers.forEach((_, index) => {
+    const label = document.createElement("label");
+    label.className = "field-label";
+    label.setAttribute("for", `answer-input-${index}`);
+    label.textContent = question.labels[index];
+    const input = document.createElement("input");
+    input.id = `answer-input-${index}`;
+    input.className = "answer-input";
+    input.type = "text";
+    input.autocomplete = "off";
+    input.autocapitalize = "off";
+    input.spellcheck = false;
+    wrapper.appendChild(label);
+    wrapper.appendChild(input);
+  });
+  answerArea.appendChild(wrapper);
+}
+
+function renderQuestion(){
+  const question = questions[currentIndex];
+  questionClosed = false;
+  selectedAnswer = "";
+  exercisePanel.classList.remove("is-hidden");
+  resultPanel.classList.remove("active");
+  renderBlockStatus(question);
+  questionPrompt.textContent = question.prompt || "";
+  questionTitle.textContent = question.title;
+  answerArea.innerHTML = "";
+  baseWords.classList.add("is-hidden");
+  baseWords.textContent = "";
+
+  if(question.baseWords){
+    baseWords.textContent = `Palabras base: (${question.baseWords.join(" / ")})`;
+    baseWords.classList.remove("is-hidden");
+  }
+  if(question.type === "choice")renderChoice(question);
+  if(question.type === "text")renderText(question);
+  if(question.type === "multi-text")renderMultiText(question);
+
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+  checkButton.disabled = false;
+  nextButton.disabled = true;
+  nextButton.textContent = currentIndex === MAX_SCORE - 1 ? "Ver resultado" : "Siguiente";
+  updateProgress();
+}
+
+function selectAnswer(option){
+  if(questionClosed)return;
+  selectedAnswer = option;
+  answerArea.querySelectorAll(".option-button").forEach(button => {
+    const selected = button.dataset.value === option;
+    button.classList.toggle("selected", selected);
+    button.querySelector(".mark").textContent = selected ? "•" : "";
+    button.setAttribute("aria-checked", String(selected));
+    button.setAttribute("aria-label", selected ? `${option}, seleccionado` : `Seleccionar ${button.dataset.value}`);
+  });
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+}
+
+function choiceIsCorrect(question){
+  return question.acceptedAnswers.some(answer => normalizeAnswer(answer) === normalizeAnswer(selectedAnswer));
+}
+
+function textIsCorrect(question){
+  const input = document.getElementById("answer-input-0");
+  const value = normalizeAnswer(input.value);
+  if(!value)return null;
+  return question.acceptedAnswers.some(answer => normalizeAnswer(answer) === value);
+}
+
+function multiTextIsCorrect(question){
+  const values = question.acceptedAnswers.map((_, index) => normalizeAnswer(document.getElementById(`answer-input-${index}`).value));
+  if(values.some(value => !value))return null;
+  return values.every((value, index) => question.acceptedAnswers[index].some(answer => normalizeAnswer(answer) === value));
+}
+
+function correctAnswerText(question){
+  if(question.correctText)return question.correctText;
+  if(question.type === "multi-text")return question.fullCorrectSentence;
+  return question.acceptedAnswers[0];
+}
+
+function extraFeedback(question){
+  if(question.type === "multi-text")return `<p>Respuesta completa: “${question.fullCorrectSentence}”.</p>`;
+  if(question.correctText)return `<p>Modelo: “${question.correctText}”.</p>`;
+  return "";
+}
+
+function showFeedback(isCorrect, question){
+  feedback.className = `feedback ${isCorrect ? "correct" : "incorrect"}`;
+  if(isCorrect){
+    feedback.innerHTML = `<strong>✓ ¡Correcto!</strong><p>${question.explanation}</p>${extraFeedback(question)}`;
+    return;
+  }
+  feedback.innerHTML = `<strong>✕ Incorrecto.</strong><p>La respuesta correcta es: “${correctAnswerText(question)}”.</p><p>${question.explanation}</p>${extraFeedback(question)}`;
+}
+
+function lockCurrentAnswer(question, isCorrect){
+  if(question.type === "choice"){
+    [...answerArea.querySelectorAll(".option-button")].forEach(button => {
+      const value = button.dataset.value;
+      button.disabled = true;
+      button.innerHTML = `<span class="mark"></span>${value}`;
+      if(question.acceptedAnswers.some(answer => normalizeAnswer(answer) === normalizeAnswer(value))){
+        button.classList.add("correct");
+        button.querySelector(".mark").textContent = "✓";
+      }
+      if(value === selectedAnswer && !isCorrect){
+        button.classList.add("incorrect");
+        button.querySelector(".mark").textContent = "✕";
+      }
+    });
+    return;
+  }
+
+  [...answerArea.querySelectorAll(".answer-input")].forEach((input, index) => {
+    input.disabled = true;
+    const groups = question.type === "multi-text" ? question.acceptedAnswers[index] : question.acceptedAnswers;
+    const fieldCorrect = groups.some(answer => normalizeAnswer(answer) === normalizeAnswer(input.value));
+    input.classList.add(fieldCorrect ? "correct" : "incorrect");
+  });
+}
+
+function missingMessage(question){
+  if(question.type === "multi-text")return "Completa toda la actividad antes de comprobar.";
+  return "Selecciona, escribe o completa una respuesta antes de comprobar.";
+}
+
+function showMissing(question){
+  feedback.className = "feedback incorrect";
+  feedback.innerHTML = `<strong>${missingMessage(question)}</strong>`;
+}
+
+function checkAnswer(){
+  if(questionClosed)return;
+  const question = questions[currentIndex];
+  let isCorrect = false;
+
+  if(question.type === "choice"){
+    if(!selectedAnswer){
+      showMissing(question);
+      return;
+    }
+    isCorrect = choiceIsCorrect(question);
+  }
+
+  if(question.type === "text"){
+    const result = textIsCorrect(question);
+    if(result === null){
+      showMissing(question);
+      return;
+    }
+    isCorrect = result;
+  }
+
+  if(question.type === "multi-text"){
+    const result = multiTextIsCorrect(question);
+    if(result === null){
+      showMissing(question);
+      return;
+    }
+    isCorrect = result;
+  }
+
+  questionClosed = true;
+  question._correct = isCorrect;
+  if(isCorrect){
+    score += 1;
+    correctAnswers += 1;
+  }else{
+    incorrectAnswers += 1;
+  }
+  lockCurrentAnswer(question, isCorrect);
+  showFeedback(isCorrect, question);
+  checkButton.disabled = true;
+  nextButton.disabled = false;
+  updateProgress();
+}
+
+function nextQuestion(){
+  if(!questionClosed)return;
+  if(currentIndex === MAX_SCORE - 1){
+    showResult();
+    return;
+  }
+  currentIndex += 1;
+  renderQuestion();
+  const focusTarget = answerArea.querySelector(".answer-input") || answerArea.querySelector(".option-button") || questionTitle;
+  focusTarget.focus();
+}
+
+function resultMessage(percent){
+  if(percent >= 90)return "¡Excelente trabajo!";
+  if(percent >= 70)return "¡Muy bien! La tarea muestra una base sólida.";
+  if(percent >= 50)return "Vas por buen camino. Revisa artículos, números, horas y concordancia.";
+  return "Conviene repasar las Lecciones 1, 2 y 3 y repetir la tarea.";
+}
+
+function blockScore(block){
+  const items = questions.filter(question => question.block === block);
+  const blockCorrect = items.reduce((total, question) => total + (question._correct ? 1 : 0), 0);
+  return { correct: blockCorrect, total: items.length };
+}
+
+function responseKindScore(kind){
+  const items = questions.filter(question => question.responseKind === kind);
+  return items.reduce((total, question) => total + (question._correct ? 1 : 0), 0);
+}
+
+function responseKindTotal(kind){
+  return questions.filter(question => question.responseKind === kind).length;
+}
+
+function showResult(){
+  const previousBest = getBestScore();
+  const percent = Math.round((score / MAX_SCORE) * 100);
+  const newBest = previousBest === null ? score : Math.max(previousBest, score);
+  writeStorage(BEST_SCORE_KEY, newBest);
+  updateBestScoreLabel();
+  progressBar.style.width = "100%";
+
+  document.getElementById("result-summary").textContent = "Has completado el ejercicio.";
+  document.getElementById("result-score").textContent = `${score} / ${MAX_SCORE}`;
+  document.getElementById("result-max").textContent = `${MAX_SCORE} puntos`;
+  document.getElementById("result-percent").textContent = `${percent}%`;
+  document.getElementById("result-correct").textContent = String(correctAnswers);
+  document.getElementById("result-incorrect").textContent = String(incorrectAnswers);
+  document.getElementById("result-written").textContent = `${responseKindScore("written")} / ${responseKindTotal("written")}`;
+  document.getElementById("result-varied").textContent = `${responseKindScore("varied")} / ${responseKindTotal("varied")}`;
+  document.getElementById("result-best").textContent = `${newBest} / ${MAX_SCORE}`;
+  document.getElementById("result-message").textContent = resultMessage(percent);
+
+  document.getElementById("competency-results").innerHTML = blocks.map(block => {
+    const result = blockScore(block);
+    return `<div><small>${block}</small><strong>${result.correct} / ${result.total}</strong></div>`;
+  }).join("");
+
+  exercisePanel.classList.add("is-hidden");
+  resultPanel.classList.add("active");
+  resultPanel.focus();
+}
+
+function restartExercise(){
+  currentIndex = 0;
+  score = 0;
+  correctAnswers = 0;
+  incorrectAnswers = 0;
+  questionClosed = false;
+  selectedAnswer = "";
+  prepareQuestions();
+  renderQuestion();
+  const focusTarget = answerArea.querySelector(".answer-input") || answerArea.querySelector(".option-button") || questionTitle;
+  focusTarget.focus();
+}
+
+function normalizeScale(value){
+  if(value === null || value === undefined || value === "")return FONT_DEFAULT;
+  const number = Number(value);
+  const scaled = Number.isFinite(number) ? number : FONT_DEFAULT;
+  return Math.round(Math.min(FONT_MAX, Math.max(FONT_MIN, scaled)) * 100) / 100;
+}
+
+function readFontScale(){
+  return normalizeScale(readStorage(FONT_STORAGE_KEY));
+}
+
+function updateFontButtons(scale){
+  document.querySelectorAll("[data-font-action]").forEach(button => {
+    const active = button.dataset.fontAction === "reset" && scale === FONT_DEFAULT;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+}
+
+function applyFontScale(value){
+  const scale = normalizeScale(value);
+  document.documentElement.style.setProperty("--font-scale", String(scale));
+  writeStorage(FONT_STORAGE_KEY, scale);
+  updateFontButtons(scale);
+  return scale;
+}
+
+function changeFontScale(delta){
+  const current = Number(getComputedStyle(document.documentElement).getPropertyValue("--font-scale")) || FONT_DEFAULT;
+  applyFontScale(current + delta);
+}
+
+answerForm.onsubmit = event => {
+  event.preventDefault();
+  checkAnswer();
+};
+nextButton.onclick = nextQuestion;
+restartButton.onclick = restartExercise;
+
+document.querySelector(".font-controls").onclick = event => {
+  const button = event.target.closest("[data-font-action]");
+  if(!button)return;
+  if(button.dataset.fontAction === "decrease")changeFontScale(-FONT_STEP);
+  if(button.dataset.fontAction === "increase")changeFontScale(FONT_STEP);
+  if(button.dataset.fontAction === "reset")applyFontScale(FONT_DEFAULT);
+};
+
+document.onkeydown = event => {
+  if(!(event.ctrlKey || event.metaKey))return;
+  if(["+","="].includes(event.key)){
+    event.preventDefault();
+    changeFontScale(FONT_STEP);
+  }
+  if(["-","_"].includes(event.key)){
+    event.preventDefault();
+    changeFontScale(-FONT_STEP);
+  }
+  if(event.key === "0"){
+    event.preventDefault();
+    applyFontScale(FONT_DEFAULT);
+  }
+};
+
+applyFontScale(readFontScale());
+restartExercise();
+</script>
+</body>
+</html>
