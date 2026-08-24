@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Actividad oral · Lección 3 · La agenda</title>
+<style>
+:root{
+  --red:#aa151b;
+  --gold:#f1bf00;
+  --ink:#172033;
+  --muted:#667085;
+  --blue:#2d5ea8;
+  --green:#2d7a5b;
+  --soft:#f4efe4;
+  --line:rgba(23,32,51,.12);
+  --danger:#b42318;
+  --danger-soft:#fff1f0;
+  --success:#067647;
+  --success-soft:#ecfdf3;
+  --focus:rgba(45,94,168,.38);
+  --font-scale:1;
+}
+*{box-sizing:border-box}
+html{font-size:calc(16px * var(--font-scale))}
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--ink);
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 92% 10%,rgba(241,191,0,.22),transparent 28%),
+    linear-gradient(135deg,#fff,#f7f1e5);
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.page{width:min(1160px,calc(100% - 32px));margin:0 auto;padding:30px 0 44px}
+.topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;border-bottom:2px solid rgba(170,21,27,.18);padding-bottom:10px;margin-bottom:24px}
+.course{color:var(--red);font-size:.82rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.font-controls{position:sticky;top:12px;z-index:10;display:flex;gap:4px;padding:5px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.88);box-shadow:0 8px 22px #0002;backdrop-filter:blur(8px)}
+.font-controls button{width:34px;height:32px;border:0;border-radius:8px;background:transparent;color:var(--ink);font-size:.88rem;font-weight:900}
+.font-controls button:hover,.font-controls button.active{background:var(--soft);color:var(--red)}
+.hero{display:grid;gap:10px;margin-bottom:20px}
+.kicker{width:max-content;max-width:100%;padding:7px 11px;border-radius:999px;background:var(--soft);color:var(--red);font-size:.78rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+h1{margin:0;font-size:clamp(2rem,5vw,3.1rem);line-height:1.04;letter-spacing:0}
+h2{margin:0;font-size:clamp(1.45rem,3vw,2.1rem);line-height:1.12;letter-spacing:0}
+h3{margin:0;font-size:1.08rem}
+p{line-height:1.45}
+.subtitle{margin:0;max-width:780px;color:var(--muted);font-size:1.08rem;line-height:1.45}
+.panel{overflow:hidden;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.9);box-shadow:0 22px 58px #0002}
+.panel-body{padding:24px}
+.start-grid{display:grid;grid-template-columns:1fr .9fr;gap:22px;align-items:start}
+.instructions{display:grid;gap:14px}
+.instructions strong{color:var(--red)}
+ol{margin:0;padding-left:22px;line-height:1.55;font-weight:750}
+.selector-card{display:grid;gap:18px;border-left:7px solid var(--blue);border-radius:18px;background:white;padding:20px;box-shadow:0 8px 22px #0001}
+label{display:grid;gap:7px;color:var(--muted);font-size:.76rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+select,input{width:100%;min-height:46px;border:1px solid var(--line);border-radius:12px;background:white;color:var(--ink);padding:10px 12px}
+.role-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.role-button,.primary-button,.secondary-button{min-height:48px;border:0;border-radius:12px;padding:12px 14px;font-weight:900}
+.role-button{background:var(--ink);color:white;letter-spacing:.08em}
+.primary-button{background:var(--red);color:white}
+.secondary-button{background:var(--soft);color:var(--red);text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.teacher-entry{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;border-top:1px solid var(--line);padding-top:16px}
+.teacher-entry button{min-height:46px}
+.message{min-height:1.35em;color:var(--red);font-weight:850}
+.hidden{display:none!important}
+.activity-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:18px}
+.identity{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;min-height:34px;border-radius:999px;padding:7px 11px;background:var(--soft);color:var(--red);font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.pill.dark{background:var(--ink);color:white}
+.warning{border-left:7px solid var(--red);border-radius:16px;background:#fffdf8;padding:14px 16px;color:var(--red);font-size:1.08rem;font-weight:900}
+.main-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:start;margin-top:16px}
+.work-stack{display:grid;gap:16px}
+.agenda-card,.support-card,.mission-card,.teacher-card{border-radius:18px;background:white;padding:18px;box-shadow:0 8px 22px #0001}
+.agenda-card h3,.support-card h3,.mission-card h3,.teacher-card h3{color:var(--red);margin-bottom:12px;letter-spacing:.08em;text-transform:uppercase}
+.teacher-note{margin:0 0 12px;color:var(--muted);font-weight:800}
+.agenda-list{display:grid;gap:10px}
+.agenda-row{display:grid;grid-template-columns:minmax(130px,.75fr) minmax(0,1.25fr);gap:12px;align-items:center;border:1px solid var(--line);border-radius:16px;background:#fffdf8;padding:12px}
+.activity-name{color:var(--ink);font-size:1.06rem;font-weight:900}
+.known-time{display:grid;gap:4px;border-radius:12px;background:white;padding:10px 12px}
+.time-number{color:var(--red);font-size:1.5rem;font-weight:900;line-height:1}
+.time-words{color:var(--muted);font-size:.9rem;font-weight:850;line-height:1.25}
+.missing-time{display:grid;gap:7px}
+.time-input{min-height:48px;max-width:150px;border:2px solid rgba(45,94,168,.32);font-size:1.2rem;font-weight:900;text-align:center}
+.field-feedback{min-height:1.2em;color:var(--danger);font-size:.82rem;font-weight:850;line-height:1.2}
+.agenda-row.is-wrong .time-input{border-color:var(--danger);background:var(--danger-soft)}
+.check-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:14px}
+.check-feedback{font-weight:900;line-height:1.35}
+.check-feedback.correct{color:var(--success)}
+.check-feedback.incorrect{color:var(--danger)}
+.support-column{display:grid;gap:14px;position:sticky;top:78px}
+.support-card ul,.mission-card ul{display:grid;gap:7px;margin:0;padding-left:18px;line-height:1.28}
+.questions-card{border-left:7px solid var(--blue)}
+.answers-card{border-left:7px solid var(--green)}
+.vocab-card{border-left:7px solid var(--gold)}
+.mission-card{border-left:7px solid var(--red);background:#fffdf8}
+.classification-grid{display:grid;gap:10px;margin-top:12px}
+.classification-row{display:grid;grid-template-columns:minmax(150px,.8fr) minmax(0,1.2fr);gap:12px;align-items:center;border-radius:14px;background:white;padding:12px;border:1px solid var(--line)}
+.classification-row strong{color:var(--ink)}
+.classification-row select{min-height:44px}
+.classification-row.is-wrong select{border-color:var(--danger);background:var(--danger-soft)}
+.support-strip{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.support-strip span{display:inline-flex;border-radius:999px;background:var(--soft);color:var(--ink);padding:7px 10px;font-weight:900}
+.teacher-controls{display:flex;flex-wrap:wrap;align-items:end;gap:12px;margin:14px 0}
+.teacher-controls label{min-width:220px}
+.teacher-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.teacher-hidden{background:#fff1f0}
+.teacher-hidden .time-words{color:var(--danger)}
+.teacher-complete-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.teacher-mini-card{border-radius:16px;background:#fffdf8;padding:14px;box-shadow:0 8px 22px #0001}
+.teacher-mini-card b{display:block;color:var(--red);font-size:1.3rem}
+.teacher-mini-card span{display:block;margin-top:5px;color:var(--ink);font-weight:850}
+.teacher-question-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.question-list{display:grid;gap:7px;margin:0;padding-left:18px;line-height:1.28;font-weight:800}
+@media(max-width:980px){
+  .start-grid,.main-grid,.teacher-grid,.teacher-question-grid,.teacher-complete-grid{grid-template-columns:1fr}
+  .support-column{position:static}
+  .teacher-entry{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .page{width:min(100% - 22px,1160px);padding-top:22px}
+  .panel-body{padding:16px}
+  .role-grid{grid-template-columns:1fr}
+  .activity-head{display:grid}
+  .agenda-row,.classification-row{grid-template-columns:1fr}
+  .time-input{max-width:none}
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="topbar">
+    <div class="course">CURSO DE ESPAÑOL</div>
+    <div class="font-controls" aria-label="Tamaño de fuente">
+      <button type="button" data-font-action="decrease" aria-label="Disminuir tamaño de fuente">A−</button>
+      <button type="button" data-font-action="reset" aria-label="Restaurar tamaño de fuente">A</button>
+      <button type="button" data-font-action="increase" aria-label="Aumentar tamaño de fuente">A+</button>
+    </div>
+  </div>
+
+  <section id="start-screen">
+    <div class="hero">
+      <div class="kicker">ACTIVIDAD ORAL</div>
+      <h1>La agenda</h1>
+      <p class="subtitle">Lección 3 · La agenda</p>
+    </div>
+    <div class="panel">
+      <div class="panel-body start-grid">
+        <div class="instructions">
+          <h2>Trabajad en parejas.</h2>
+          <ol>
+            <li>Elegid el mismo número de pareja.</li>
+            <li>Una persona elige <strong>ALUMNO A</strong>.</li>
+            <li>La otra persona elige <strong>ALUMNO B</strong>.</li>
+            <li>No enseñéis vuestra pantalla.</li>
+            <li>Preguntad por las horas que faltan.</li>
+            <li>Completad la agenda.</li>
+            <li>Después, clasificad las actividades por momento del día.</li>
+          </ol>
+        </div>
+        <div class="selector-card">
+          <label for="pair-select">NÚMERO DE PAREJA
+            <select id="pair-select">
+              <option value="">Seleccionad una pareja</option>
+            </select>
+          </label>
+          <div>
+            <h3>¿Quién eres?</h3>
+            <div class="role-grid" style="margin-top:10px">
+              <button class="role-button" type="button" data-role="A">ALUMNO A</button>
+              <button class="role-button" type="button" data-role="B">ALUMNO B</button>
+            </div>
+          </div>
+          <div class="teacher-entry">
+            <label for="teacher-code">Código
+              <input id="teacher-code" type="password" inputmode="numeric" autocomplete="off">
+            </label>
+            <button id="teacher-button" class="secondary-button" type="button">Abrir</button>
+          </div>
+          <div id="start-message" class="message" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="student-screen" class="hidden">
+    <div class="activity-head">
+      <div>
+        <div class="identity">
+          <span id="student-pair" class="pill"></span>
+          <span id="student-role" class="pill dark"></span>
+        </div>
+        <h1 style="margin-top:10px">La agenda</h1>
+      </div>
+      <button id="change-button" class="secondary-button" type="button">Cambiar pareja o alumno</button>
+    </div>
+    <div class="warning">NO ENSEÑES TU PANTALLA.</div>
+    <div class="main-grid">
+      <div class="work-stack">
+        <section class="agenda-card">
+          <h3>MI AGENDA</h3>
+          <p class="teacher-note">Pregunta por las horas que faltan. Responde con <strong>Es a...</strong>.</p>
+          <div id="student-agenda" class="agenda-list"></div>
+          <div class="check-row">
+            <button id="check-agenda-button" class="primary-button" type="button">COMPROBAR AGENDA</button>
+            <div id="agenda-feedback" class="check-feedback" aria-live="polite"></div>
+          </div>
+        </section>
+        <section id="classification-mission" class="mission-card hidden" aria-live="polite">
+          <h3>AHORA CLASIFICAD LAS ACTIVIDADES</h3>
+          <p><strong>Mañana, tarde o noche.</strong></p>
+          <div id="classification-grid" class="classification-grid"></div>
+          <div class="check-row">
+            <button id="check-classification-button" class="primary-button" type="button">COMPROBAR CLASIFICACIÓN</button>
+            <div id="classification-feedback" class="check-feedback" aria-live="polite"></div>
+          </div>
+        </section>
+        <section id="talk-mission" class="mission-card hidden" aria-live="polite">
+          <h3>HABLAD CON VUESTRO COMPAÑERO</h3>
+          <ul>
+            <li>¿Qué actividad es más temprano?</li>
+            <li>¿Qué actividad es más tarde?</li>
+            <li>¿Qué actividades son por la mañana?</li>
+            <li>¿Qué actividades son por la tarde?</li>
+            <li>¿Qué actividades son por la noche?</li>
+            <li>¿Qué hora ha sido más difícil de decir?</li>
+          </ul>
+          <div class="support-strip">
+            <span>más temprano</span>
+            <span>más tarde</span>
+          </div>
+        </section>
+      </div>
+      <aside class="support-column" aria-label="Apoyo oral">
+        <section class="support-card questions-card">
+          <h3>PREGUNTAS ÚTILES</h3>
+          <ul>
+            <li>¿A qué hora es el desayuno?</li>
+            <li>¿A qué hora es la clase?</li>
+            <li>¿A qué hora es el almuerzo?</li>
+            <li>¿A qué hora es la reunión?</li>
+            <li>¿A qué hora es la cena?</li>
+            <li>¿Y a qué hora es...?</li>
+            <li>¿Es por la mañana, por la tarde o por la noche?</li>
+          </ul>
+        </section>
+        <section class="support-card answers-card">
+          <h3>RESPUESTAS ÚTILES</h3>
+          <ul>
+            <li>Es a las seis y media.</li>
+            <li>Es a las diez.</li>
+            <li>Es a las dos y diez de la tarde.</li>
+            <li>Es a las siete menos cinco.</li>
+            <li>Es a las ocho y veinte de la noche.</li>
+          </ul>
+        </section>
+        <section class="support-card vocab-card">
+          <h3>VOCABULARIO DE APOYO</h3>
+          <ul>
+            <li>desayuno — café da manhã</li>
+            <li>almuerzo — almoço</li>
+            <li>reunión — reunião</li>
+            <li>cena — jantar</li>
+            <li>pausa — pausa</li>
+            <li>curso — curso</li>
+            <li>presentación — apresentação</li>
+            <li>visita — visita</li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </section>
+
+  <section id="teacher-screen" class="hidden">
+    <div class="activity-head">
+      <div>
+        <div class="identity">
+          <span class="pill dark">MODO PROFESOR</span>
+          <span id="teacher-pair-badge" class="pill"></span>
+        </div>
+        <h1 style="margin-top:10px">La agenda</h1>
+      </div>
+      <button id="teacher-exit" class="secondary-button" type="button">Volver al inicio</button>
+    </div>
+    <div class="teacher-controls">
+      <label for="teacher-pair-select">NÚMERO DE PAREJA
+        <select id="teacher-pair-select"></select>
+      </label>
+    </div>
+    <div id="teacher-content"></div>
+  </section>
+</main>
+
+<script>
+const FONT_STORAGE_KEY="leccion3AgendaFontScale";
+const FONT_MIN=.85;
+const FONT_DEFAULT=1;
+const FONT_MAX=1.7;
+const FONT_STEP=.05;
+const moments=[
+  {key:"mañana",label:"MAÑANA"},
+  {key:"tarde",label:"TARDE"},
+  {key:"noche",label:"NOCHE"}
+];
+const cases=[
+  {id:"1",activities:[
+    {name:"desayuno",time:"7:30",visible:"A"},
+    {name:"clase",time:"9:00",visible:"B"},
+    {name:"almuerzo",time:"13:15",visible:"A"},
+    {name:"reunión",time:"16:45",visible:"B"},
+    {name:"presentación",time:"18:00",visible:"A"},
+    {name:"cena",time:"20:30",visible:"B"}
+  ]},
+  {id:"2",activities:[
+    {name:"curso",time:"8:05",visible:"B"},
+    {name:"pausa",time:"9:15",visible:"A"},
+    {name:"almuerzo",time:"13:00",visible:"B"},
+    {name:"reunión",time:"16:30",visible:"A"},
+    {name:"visita",time:"18:30",visible:"B"},
+    {name:"cena",time:"20:45",visible:"A"}
+  ]},
+  {id:"3",activities:[
+    {name:"desayuno",time:"7:15",visible:"A"},
+    {name:"clase",time:"8:20",visible:"B"},
+    {name:"pausa",time:"9:50",visible:"A"},
+    {name:"almuerzo",time:"12:30",visible:"B"},
+    {name:"reunión",time:"16:20",visible:"A"},
+    {name:"cena",time:"21:00",visible:"B"}
+  ]},
+  {id:"4",activities:[
+    {name:"desayuno",time:"7:45",visible:"B"},
+    {name:"curso",time:"8:30",visible:"A"},
+    {name:"reunión",time:"13:45",visible:"B"},
+    {name:"presentación",time:"16:45",visible:"A"},
+    {name:"visita",time:"18:00",visible:"B"},
+    {name:"cena",time:"21:30",visible:"A"}
+  ]},
+  {id:"5",activities:[
+    {name:"desayuno",time:"7:00",visible:"A"},
+    {name:"clase",time:"8:45",visible:"B"},
+    {name:"pausa",time:"9:10",visible:"A"},
+    {name:"almuerzo",time:"13:30",visible:"B"},
+    {name:"reunión",time:"16:30",visible:"A"},
+    {name:"cena",time:"20:15",visible:"B"}
+  ]},
+  {id:"6",activities:[
+    {name:"desayuno",time:"7:30",visible:"B"},
+    {name:"curso",time:"8:20",visible:"A"},
+    {name:"clase",time:"9:15",visible:"B"},
+    {name:"almuerzo",time:"13:00",visible:"A"},
+    {name:"presentación",time:"16:45",visible:"B"},
+    {name:"cena",time:"20:30",visible:"A"}
+  ]},
+  {id:"7",activities:[
+    {name:"desayuno",time:"7:15",visible:"B"},
+    {name:"clase",time:"8:05",visible:"A"},
+    {name:"reunión",time:"9:55",visible:"B"},
+    {name:"almuerzo",time:"13:15",visible:"A"},
+    {name:"visita",time:"18:30",visible:"B"},
+    {name:"cena",time:"21:00",visible:"A"}
+  ]},
+  {id:"8",activities:[
+    {name:"desayuno",time:"7:45",visible:"A"},
+    {name:"curso",time:"8:30",visible:"B"},
+    {name:"pausa",time:"9:10",visible:"A"},
+    {name:"almuerzo",time:"12:30",visible:"B"},
+    {name:"presentación",time:"16:20",visible:"A"},
+    {name:"cena",time:"20:45",visible:"B"}
+  ]}
+];
+const activityArticles={
+  desayuno:"el",
+  clase:"la",
+  almuerzo:"el",
+  reunión:"la",
+  cena:"la",
+  pausa:"la",
+  curso:"el",
+  presentación:"la",
+  visita:"la"
+};
+const hourWords={1:"una",2:"dos",3:"tres",4:"cuatro",5:"cinco",6:"seis",7:"siete",8:"ocho",9:"nueve",10:"diez",11:"once",12:"doce"};
+const minuteWords={5:"cinco",10:"diez",15:"cuarto",20:"veinte",30:"media",45:"cuarto",50:"diez",55:"cinco"};
+let selectedPair="";
+let selectedRole="";
+const startScreen=document.getElementById("start-screen");
+const studentScreen=document.getElementById("student-screen");
+const teacherScreen=document.getElementById("teacher-screen");
+const pairSelect=document.getElementById("pair-select");
+const teacherPairSelect=document.getElementById("teacher-pair-select");
+const startMessage=document.getElementById("start-message");
+
+function escapeHtml(text){
+  return String(text).replace(/[&<>"']/g,character=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[character]));
+}
+function parseTime(time){
+  const match=String(time).trim().match(/^(\d{1,2})[:.](\d{2})$/);
+  if(!match)return null;
+  const hour=Number(match[1]);
+  const minute=Number(match[2]);
+  if(!Number.isInteger(hour) || !Number.isInteger(minute) || hour<0 || hour>23 || minute<0 || minute>59)return null;
+  return {hour,minute};
+}
+function formatTime(time){
+  const parsed=parseTime(time);
+  return `${parsed.hour}:${String(parsed.minute).padStart(2,"0")}`;
+}
+function periodKey(time){
+  const {hour}=parseTime(time);
+  if(hour<12)return "mañana";
+  if(hour<20)return "tarde";
+  return "noche";
+}
+function periodPhrase(time){
+  return `de la ${periodKey(time)}`;
+}
+function hour12(hour){
+  const normalized=hour%12;
+  return normalized===0?12:normalized;
+}
+function baseHourPhrase(hour){
+  const h=hour12(hour);
+  return h===1?"a la una":`a las ${hourWords[h]}`;
+}
+function timePhrase(time){
+  const {hour,minute}=parseTime(time);
+  if(minute===0)return `${baseHourPhrase(hour)} ${periodPhrase(time)}`;
+  if(minute<=30)return `${baseHourPhrase(hour)} y ${minuteWords[minute]} ${periodPhrase(time)}`;
+  const nextHour=(hour+1)%24;
+  const remaining=60-minute;
+  return `${baseHourPhrase(nextHour)} menos ${minuteWords[remaining]} ${periodPhrase(time)}`;
+}
+function sentenceFor(time){
+  return `Es ${timePhrase(time)}.`;
+}
+function activityWithArticle(name){
+  return `${activityArticles[name] || "la"} ${name}`;
+}
+function findCase(pairId){
+  return cases.find(item=>item.id===String(pairId)) || cases[0];
+}
+function fillPairSelects(){
+  cases.forEach(item=>{
+    const option=document.createElement("option");
+    option.value=item.id;
+    option.textContent=`Pareja ${item.id}`;
+    pairSelect.append(option);
+    teacherPairSelect.append(option.cloneNode(true));
+  });
+}
+function showStart(){
+  startScreen.classList.remove("hidden");
+  studentScreen.classList.add("hidden");
+  teacherScreen.classList.add("hidden");
+  startMessage.textContent="";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function knownTime(activity){
+  return `<div class="known-time"><span class="time-number">${formatTime(activity.time)}</span><span class="time-words">${escapeHtml(sentenceFor(activity.time))}</span></div>`;
+}
+function missingTime(index,activity){
+  return `<div class="missing-time"><input class="time-input" type="text" inputmode="numeric" maxlength="5" autocomplete="off" spellcheck="false" aria-label="Hora de ${escapeHtml(activity.name)}" data-activity-index="${index}"><div class="field-feedback" aria-live="polite"></div></div>`;
+}
+function agendaRow(activity,index,role){
+  const content=activity.visible===role?knownTime(activity):missingTime(index,activity);
+  return `<div class="agenda-row"><div class="activity-name">${escapeHtml(activity.name)}</div>${content}</div>`;
+}
+function renderAgenda(item,role){
+  document.getElementById("student-agenda").innerHTML=item.activities.map((activity,index)=>agendaRow(activity,index,role)).join("");
+}
+function renderClassification(item){
+  const options=moments.map(moment=>`<option value="${moment.key}">${moment.label}</option>`).join("");
+  document.getElementById("classification-grid").innerHTML=item.activities.map((activity,index)=>`
+    <label class="classification-row">
+      <strong>${escapeHtml(activity.name)}</strong>
+      <select data-classification-index="${index}" aria-label="Momento del día: ${escapeHtml(activity.name)}">
+        <option value="">Seleccionad</option>${options}
+      </select>
+    </label>`).join("");
+}
+function resetMissions(){
+  document.getElementById("classification-mission").classList.add("hidden");
+  document.getElementById("talk-mission").classList.add("hidden");
+  document.getElementById("agenda-feedback").textContent="";
+  document.getElementById("agenda-feedback").className="check-feedback";
+  document.getElementById("classification-feedback").textContent="";
+  document.getElementById("classification-feedback").className="check-feedback";
+}
+function showStudent(pairId,role){
+  if(!pairId){
+    startMessage.textContent="Elegid un número de pareja.";
+    return;
+  }
+  selectedPair=String(pairId);
+  selectedRole=role;
+  const item=findCase(selectedPair);
+  document.getElementById("student-pair").textContent=`PAREJA ${selectedPair}`;
+  document.getElementById("student-role").textContent=`ALUMNO ${role}`;
+  renderAgenda(item,role);
+  renderClassification(item);
+  resetMissions();
+  startScreen.classList.add("hidden");
+  teacherScreen.classList.add("hidden");
+  studentScreen.classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function normalizeTimeInput(value){
+  const trimmed=value.trim().replace(".",":");
+  const match=trimmed.match(/^(\d{1,2}):(\d{2})$/);
+  if(!match)return null;
+  const hour=Number(match[1]);
+  const minute=Number(match[2]);
+  if(!Number.isInteger(hour) || !Number.isInteger(minute) || hour<0 || hour>23 || minute<0 || minute>59)return null;
+  return {hour,minute};
+}
+function timeMatches(value,expectedTime){
+  const input=normalizeTimeInput(value);
+  const expected=parseTime(expectedTime);
+  if(!input || !expected)return false;
+  if(input.hour===expected.hour && input.minute===expected.minute)return true;
+  if(expected.hour>12 && input.hour===expected.hour-12 && input.minute===expected.minute)return true;
+  return false;
+}
+function checkAgenda(){
+  const item=findCase(selectedPair);
+  const inputs=[...document.querySelectorAll("[data-activity-index]")];
+  let complete=true;
+  inputs.forEach(input=>{
+    const activity=item.activities[Number(input.dataset.activityIndex)];
+    const row=input.closest(".agenda-row");
+    const feedback=row.querySelector(".field-feedback");
+    if(timeMatches(input.value,activity.time)){
+      row.classList.remove("is-wrong");
+      feedback.textContent="";
+    }else{
+      complete=false;
+      row.classList.add("is-wrong");
+      feedback.textContent="Revisa esta hora con tu compañero.";
+    }
+  });
+  const agendaFeedback=document.getElementById("agenda-feedback");
+  if(complete){
+    agendaFeedback.textContent="Agenda completa. Ahora clasificad las actividades.";
+    agendaFeedback.className="check-feedback correct";
+    document.getElementById("classification-mission").classList.remove("hidden");
+  }else{
+    agendaFeedback.textContent="Revisad las horas marcadas.";
+    agendaFeedback.className="check-feedback incorrect";
+    document.getElementById("classification-mission").classList.add("hidden");
+    document.getElementById("talk-mission").classList.add("hidden");
+  }
+}
+function checkClassification(){
+  const item=findCase(selectedPair);
+  const selects=[...document.querySelectorAll("[data-classification-index]")];
+  let complete=true;
+  selects.forEach(select=>{
+    const activity=item.activities[Number(select.dataset.classificationIndex)];
+    const row=select.closest(".classification-row");
+    if(select.value===periodKey(activity.time)){
+      row.classList.remove("is-wrong");
+    }else{
+      complete=false;
+      row.classList.add("is-wrong");
+    }
+  });
+  const feedback=document.getElementById("classification-feedback");
+  if(complete){
+    feedback.textContent="Clasificación completa. Ahora haced la conversación final.";
+    feedback.className="check-feedback correct";
+    document.getElementById("talk-mission").classList.remove("hidden");
+  }else{
+    feedback.textContent="Revisad la clasificación con vuestro compañero.";
+    feedback.className="check-feedback incorrect";
+    document.getElementById("talk-mission").classList.add("hidden");
+  }
+}
+function teacherAgendaRow(activity,role,index){
+  const known=activity.visible===role;
+  const css=known?"agenda-row":"agenda-row teacher-hidden";
+  const content=known?knownTime(activity):`<div class="known-time"><span class="time-number">OCULTO</span><span class="time-words">${formatTime(activity.time)} · ${escapeHtml(sentenceFor(activity.time))}</span></div>`;
+  return `<div class="${css}"><div class="activity-name">${index+1}. ${escapeHtml(activity.name)}</div>${content}</div>`;
+}
+function teacherRolePanel(item,role){
+  return `<section class="teacher-card">
+    <h3>ALUMNO ${role}</h3>
+    <p class="teacher-note">VISIBLE = aparece en la ficha. OCULTO = debe preguntarlo.</p>
+    <div class="agenda-list">${item.activities.map((activity,index)=>teacherAgendaRow(activity,role,index)).join("")}</div>
+  </section>`;
+}
+function teacherCompleteAgenda(item){
+  return item.activities.map(activity=>`
+    <div class="teacher-mini-card">
+      <b>${formatTime(activity.time)}</b>
+      <span>${escapeHtml(activity.name)} · ${escapeHtml(sentenceFor(activity.time))}</span>
+      <span>${moments.find(moment=>moment.key===periodKey(activity.time)).label}</span>
+    </div>`).join("");
+}
+function teacherQuestions(item,role){
+  return item.activities
+    .filter(activity=>activity.visible!==role)
+    .map(activity=>`¿A qué hora es ${activityWithArticle(activity.name)}? Respuesta: ${sentenceFor(activity.time)}`)
+    .map(question=>`<li>${escapeHtml(question)}</li>`)
+    .join("");
+}
+function renderTeacher(pairId){
+  const item=findCase(pairId);
+  teacherPairSelect.value=item.id;
+  document.getElementById("teacher-pair-badge").textContent=`PAREJA ${item.id}`;
+  document.getElementById("teacher-content").innerHTML=`
+    <div class="teacher-grid">
+      ${teacherRolePanel(item,"A")}
+      ${teacherRolePanel(item,"B")}
+    </div>
+    <section class="teacher-card" style="margin-top:16px">
+      <h3>AGENDA COMPLETA</h3>
+      <div class="teacher-complete-grid">${teacherCompleteAgenda(item)}</div>
+    </section>
+    <section class="teacher-card" style="margin-top:16px">
+      <h3>PREGUNTAS NECESARIAS</h3>
+      <div class="teacher-question-grid">
+        <div><p class="teacher-note">ALUMNO A pregunta</p><ol class="question-list">${teacherQuestions(item,"A")}</ol></div>
+        <div><p class="teacher-note">ALUMNO B pregunta</p><ol class="question-list">${teacherQuestions(item,"B")}</ol></div>
+      </div>
+    </section>`;
+}
+function showTeacher(){
+  const pairId=pairSelect.value || teacherPairSelect.value || selectedPair || "1";
+  startScreen.classList.add("hidden");
+  studentScreen.classList.add("hidden");
+  teacherScreen.classList.remove("hidden");
+  renderTeacher(pairId);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function normalizeScale(value){
+  const number=Number(value);
+  const scale=Number.isFinite(number)?number:FONT_DEFAULT;
+  return Math.round(Math.min(FONT_MAX,Math.max(FONT_MIN,scale))*100)/100;
+}
+function readFontScale(){
+  try{return normalizeScale(localStorage.getItem(FONT_STORAGE_KEY));}
+  catch{return FONT_DEFAULT;}
+}
+function saveFontScale(scale){
+  try{localStorage.setItem(FONT_STORAGE_KEY,String(scale));}
+  catch{}
+}
+function updateFontButtons(scale){
+  document.querySelectorAll("[data-font-action]").forEach(button=>{
+    const action=button.dataset.fontAction;
+    button.classList.toggle("active",action==="reset" && scale===FONT_DEFAULT);
+    button.setAttribute("aria-pressed",String(action==="reset" && scale===FONT_DEFAULT));
+  });
+}
+function applyFontScale(value,{persist=true}={}){
+  const scale=normalizeScale(value);
+  document.documentElement.style.setProperty("--font-scale",String(scale));
+  if(persist)saveFontScale(scale);
+  updateFontButtons(scale);
+}
+function changeFontScale(delta){
+  const current=Number(document.documentElement.style.getPropertyValue("--font-scale")) || FONT_DEFAULT;
+  applyFontScale(current+delta);
+}
+
+document.querySelectorAll("[data-role]").forEach(button=>{
+  button.addEventListener("click",()=>showStudent(pairSelect.value,button.dataset.role));
+});
+document.getElementById("teacher-button").addEventListener("click",()=>{
+  const code=document.getElementById("teacher-code").value.trim();
+  if(code==="555")showTeacher();
+  else startMessage.textContent="Código no válido.";
+});
+document.getElementById("teacher-code").addEventListener("keydown",event=>{
+  if(event.key==="Enter"){
+    event.preventDefault();
+    document.getElementById("teacher-button").click();
+  }
+});
+document.getElementById("student-agenda").addEventListener("input",event=>{
+  const input=event.target.closest("[data-activity-index]");
+  if(!input)return;
+  input.value=input.value.replace(/[^\d:.]/g,"").slice(0,5);
+  const row=input.closest(".agenda-row");
+  row.classList.remove("is-wrong");
+  row.querySelector(".field-feedback").textContent="";
+});
+document.getElementById("classification-grid").addEventListener("change",event=>{
+  const select=event.target.closest("[data-classification-index]");
+  if(!select)return;
+  select.closest(".classification-row").classList.remove("is-wrong");
+  document.getElementById("classification-feedback").textContent="";
+  document.getElementById("classification-feedback").className="check-feedback";
+  document.getElementById("talk-mission").classList.add("hidden");
+});
+document.getElementById("check-agenda-button").addEventListener("click",checkAgenda);
+document.getElementById("check-classification-button").addEventListener("click",checkClassification);
+document.getElementById("change-button").addEventListener("click",showStart);
+document.getElementById("teacher-exit").addEventListener("click",showStart);
+teacherPairSelect.addEventListener("change",()=>renderTeacher(teacherPairSelect.value));
+document.querySelector(".font-controls").addEventListener("click",event=>{
+  const button=event.target.closest("[data-font-action]");
+  if(!button)return;
+  const action=button.dataset.fontAction;
+  if(action==="decrease")changeFontScale(-FONT_STEP);
+  if(action==="increase")changeFontScale(FONT_STEP);
+  if(action==="reset")applyFontScale(FONT_DEFAULT);
+});
+
+fillPairSelects();
+applyFontScale(readFontScale(),{persist:false});
+</script>
+</body>
+</html>

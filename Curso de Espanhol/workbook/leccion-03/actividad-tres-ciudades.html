@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Actividad oral · Lección 3 · Tres ciudades</title>
+<style>
+:root{
+  --red:#aa151b;
+  --gold:#f1bf00;
+  --ink:#172033;
+  --muted:#667085;
+  --blue:#2d5ea8;
+  --green:#2d7a5b;
+  --soft:#f4efe4;
+  --paper:#fffdf8;
+  --line:rgba(23,32,51,.12);
+  --danger:#b42318;
+  --danger-soft:#fff1f0;
+  --success:#067647;
+  --success-soft:#ecfdf3;
+  --focus:rgba(45,94,168,.38);
+  --font-scale:1;
+}
+*{box-sizing:border-box}
+html{font-size:calc(16px * var(--font-scale))}
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--ink);
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 92% 10%,rgba(241,191,0,.22),transparent 28%),
+    linear-gradient(135deg,#fff,#f7f1e5);
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.page{width:min(1160px,calc(100% - 32px));margin:0 auto;padding:30px 0 44px}
+.topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;border-bottom:2px solid rgba(170,21,27,.18);padding-bottom:10px;margin-bottom:24px}
+.course{color:var(--red);font-size:.82rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.font-controls{position:sticky;top:12px;z-index:10;display:flex;gap:4px;padding:5px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.88);box-shadow:0 8px 22px #0002;backdrop-filter:blur(8px)}
+.font-controls button{width:34px;height:32px;border:0;border-radius:8px;background:transparent;color:var(--ink);font-size:.88rem;font-weight:900}
+.font-controls button:hover,.font-controls button.active{background:var(--soft);color:var(--red)}
+.hero{display:grid;gap:10px;margin-bottom:20px}
+.kicker{width:max-content;max-width:100%;padding:7px 11px;border-radius:999px;background:var(--soft);color:var(--red);font-size:.78rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+h1{margin:0;font-size:clamp(2rem,5vw,3.1rem);line-height:1.04;letter-spacing:0}
+h2{margin:0;font-size:clamp(1.45rem,3vw,2.1rem);line-height:1.12;letter-spacing:0}
+h3{margin:0;font-size:1.08rem}
+p{line-height:1.45}
+.subtitle{margin:0;max-width:780px;color:var(--muted);font-size:1.08rem;line-height:1.45}
+.panel{overflow:hidden;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.9);box-shadow:0 22px 58px #0002}
+.panel-body{padding:24px}
+.start-grid{display:grid;grid-template-columns:1fr .9fr;gap:22px;align-items:start}
+.instructions{display:grid;gap:14px}
+.instructions strong{color:var(--red)}
+ol{margin:0;padding-left:22px;line-height:1.55;font-weight:750}
+.selector-card{display:grid;gap:18px;border-left:7px solid var(--blue);border-radius:18px;background:white;padding:20px;box-shadow:0 8px 22px #0001}
+label{display:grid;gap:7px;color:var(--muted);font-size:.76rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+select,input{width:100%;min-height:46px;border:1px solid var(--line);border-radius:12px;background:white;color:var(--ink);padding:10px 12px}
+.role-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.role-button,.primary-button,.secondary-button{min-height:48px;border:0;border-radius:12px;padding:12px 14px;font-weight:900}
+.role-button{background:var(--ink);color:white;letter-spacing:.08em}
+.primary-button{background:var(--red);color:white}
+.secondary-button{background:var(--soft);color:var(--red);text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.teacher-entry{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;border-top:1px solid var(--line);padding-top:16px}
+.teacher-entry button{min-height:46px}
+.message{min-height:1.35em;color:var(--red);font-weight:850}
+.hidden{display:none!important}
+.activity-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:18px}
+.identity{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;min-height:34px;border-radius:999px;padding:7px 11px;background:var(--soft);color:var(--red);font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.pill.dark{background:var(--ink);color:white}
+.warning{border-left:7px solid var(--red);border-radius:16px;background:#fffdf8;padding:14px 16px;color:var(--red);font-size:1.08rem;font-weight:900}
+.main-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:start;margin-top:16px}
+.work-stack{display:grid;gap:16px}
+.city-work-card,.support-card,.mission-card,.teacher-card{border-radius:18px;background:white;padding:18px;box-shadow:0 8px 22px #0001}
+.city-work-card h3,.support-card h3,.mission-card h3,.teacher-card h3{color:var(--red);margin-bottom:12px;letter-spacing:.08em;text-transform:uppercase}
+.teacher-note{margin:0 0 12px;color:var(--muted);font-weight:800}
+.city-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.city-card{display:grid;gap:12px;border:1px solid var(--line);border-radius:18px;background:#fffdf8;padding:16px}
+.city-card h4{display:flex;align-items:center;gap:8px;margin:0;color:var(--red);font-size:1rem}
+.city-card h4::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px rgba(241,191,0,.18)}
+.fact-list{display:grid;gap:9px;margin:0;padding:0;list-style:none}
+.fact-row{display:grid;gap:7px;border-radius:13px;background:white;padding:10px 12px}
+.fact-label{color:var(--muted);font-size:.72rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
+.known-number{color:var(--red);font-size:1.55rem;font-weight:900;line-height:1}
+.known-sentence{color:var(--ink);font-size:.88rem;font-weight:800;line-height:1.25}
+.missing-cell{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center}
+.missing-input{min-height:46px;border:2px solid rgba(45,94,168,.32);font-size:1.08rem;font-weight:900;text-align:center}
+.unit-label{color:var(--ink);font-size:.86rem;font-weight:900;text-transform:none;letter-spacing:0}
+.field-feedback{grid-column:1 / -1;min-height:1.2em;color:var(--danger);font-size:.82rem;font-weight:850;line-height:1.2}
+.fact-row.is-wrong .missing-input{border-color:var(--danger);background:var(--danger-soft)}
+.check-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:14px}
+.check-feedback{font-weight:900;line-height:1.35}
+.check-feedback.correct{color:var(--success)}
+.check-feedback.incorrect{color:var(--danger)}
+.support-column{display:grid;gap:14px;position:sticky;top:78px}
+.support-card ul,.mission-card ul{display:grid;gap:7px;margin:0;padding-left:18px;line-height:1.28}
+.support-card li,.mission-card li{padding-left:2px}
+.questions-card{border-left:7px solid var(--blue)}
+.answers-card{border-left:7px solid var(--green)}
+.expressions-card{border-left:7px solid var(--gold)}
+.mission-card{border-left:7px solid var(--red);background:#fffdf8}
+.order-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+.order-slot{border:1px solid var(--line);border-radius:14px;background:white;padding:12px}
+.order-slot span{display:block;margin-bottom:7px;color:var(--red);font-size:.72rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.support-strip{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.support-strip span{display:inline-flex;border-radius:999px;background:var(--soft);color:var(--ink);padding:7px 10px;font-weight:900}
+.teacher-controls{display:flex;flex-wrap:wrap;align-items:end;gap:12px;margin:14px 0}
+.teacher-controls label{min-width:220px}
+.teacher-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.teacher-hidden{background:#fff1f0}
+.teacher-hidden .fact-label{color:var(--danger)}
+.teacher-full-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.teacher-question-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.question-list{display:grid;gap:7px;margin:0;padding-left:18px;line-height:1.28;font-weight:800}
+.return-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+@media(max-width:980px){
+  .start-grid,.main-grid,.teacher-grid,.teacher-question-grid{grid-template-columns:1fr}
+  .support-column{position:static}
+  .teacher-entry{grid-template-columns:1fr}
+  .city-grid,.teacher-full-grid,.order-grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .page{width:min(100% - 22px,1160px);padding-top:22px}
+  .panel-body{padding:16px}
+  .role-grid{grid-template-columns:1fr}
+  .activity-head{display:grid}
+  .known-number{font-size:1.35rem}
+  .missing-cell{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="topbar">
+    <div class="course">CURSO DE ESPAÑOL</div>
+    <div class="font-controls" aria-label="Tamaño de fuente">
+      <button type="button" data-font-action="decrease" aria-label="Disminuir tamaño de fuente">A−</button>
+      <button type="button" data-font-action="reset" aria-label="Restaurar tamaño de fuente">A</button>
+      <button type="button" data-font-action="increase" aria-label="Aumentar tamaño de fuente">A+</button>
+    </div>
+  </div>
+
+  <section id="start-screen">
+    <div class="hero">
+      <div class="kicker">ACTIVIDAD ORAL</div>
+      <h1>Tres ciudades</h1>
+      <p class="subtitle">Lección 3 · Tres ciudades</p>
+    </div>
+    <div class="panel">
+      <div class="panel-body start-grid">
+        <div class="instructions">
+          <h2>Trabajad en parejas.</h2>
+          <ol>
+            <li>Elegid el mismo número de pareja.</li>
+            <li>Una persona elige <strong>ALUMNO A</strong>.</li>
+            <li>La otra persona elige <strong>ALUMNO B</strong>.</li>
+            <li>No enseñéis vuestra pantalla.</li>
+            <li>Preguntad por la información que falta.</li>
+            <li>Completad los datos de las tres ciudades.</li>
+            <li>Después, ordenadlas de menor a mayor población.</li>
+          </ol>
+        </div>
+        <div class="selector-card">
+          <label for="pair-select">NÚMERO DE PAREJA
+            <select id="pair-select">
+              <option value="">Seleccionad una pareja</option>
+            </select>
+          </label>
+          <div>
+            <h3>¿Quién eres?</h3>
+            <div class="role-grid" style="margin-top:10px">
+              <button class="role-button" type="button" data-role="A">ALUMNO A</button>
+              <button class="role-button" type="button" data-role="B">ALUMNO B</button>
+            </div>
+          </div>
+          <div class="teacher-entry">
+            <label for="teacher-code">Código
+              <input id="teacher-code" type="password" inputmode="numeric" autocomplete="off">
+            </label>
+            <button id="teacher-button" class="secondary-button" type="button">Abrir</button>
+          </div>
+          <div id="start-message" class="message" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="student-screen" class="hidden">
+    <div class="activity-head">
+      <div>
+        <div class="identity">
+          <span id="student-pair" class="pill"></span>
+          <span id="student-role" class="pill dark"></span>
+        </div>
+        <h1 style="margin-top:10px">Tres ciudades</h1>
+      </div>
+      <button id="change-button" class="secondary-button" type="button">Cambiar pareja o alumno</button>
+    </div>
+    <div class="warning">NO ENSEÑES TU PANTALLA.</div>
+    <div class="main-grid">
+      <div class="work-stack">
+        <section class="city-work-card">
+          <h3>MI FICHA</h3>
+          <p class="teacher-note">Pregunta por los datos que faltan. Responde con <strong>Hay...</strong>.</p>
+          <div id="student-cities" class="city-grid"></div>
+          <div class="check-row">
+            <button id="check-data-button" class="primary-button" type="button">COMPROBAR DATOS</button>
+            <div id="data-feedback" class="check-feedback" aria-live="polite"></div>
+          </div>
+        </section>
+        <section id="order-mission" class="mission-card hidden" aria-live="polite">
+          <h3>DESPUÉS</h3>
+          <p><strong>Ordenad las ciudades de menor a mayor población.</strong></p>
+          <div id="order-grid" class="order-grid"></div>
+          <div class="check-row">
+            <button id="check-order-button" class="primary-button" type="button">COMPROBAR ORDEN</button>
+            <div id="order-feedback" class="check-feedback" aria-live="polite"></div>
+          </div>
+        </section>
+        <section id="talk-mission" class="mission-card hidden" aria-live="polite">
+          <h3>HABLAD</h3>
+          <ul id="talk-list"></ul>
+          <div class="return-row">
+            <a class="secondary-button" href="../../leccion_3_material_v01.html#11">VOLVER A LA LECCIÓN</a>
+          </div>
+        </section>
+      </div>
+      <aside class="support-column" aria-label="Apoyo para hablar">
+        <section class="support-card questions-card">
+          <h3>PREGUNTAS ÚTILES</h3>
+          <ul id="questions-list"></ul>
+        </section>
+        <section class="support-card answers-card">
+          <h3>RESPUESTAS ÚTILES</h3>
+          <ul>
+            <li>Hay cuatrocientos diez mil habitantes.</li>
+            <li>Hay sesenta y dos hoteles.</li>
+            <li>Hay veintitrés museos.</li>
+            <li>Hay un millón trescientos mil habitantes.</li>
+          </ul>
+        </section>
+        <section class="support-card expressions-card">
+          <h3>EXPRESIONES DE APOYO</h3>
+          <ul>
+            <li>más = mais</li>
+            <li>menos = menos</li>
+            <li>más habitantes</li>
+            <li>menos hoteles</li>
+            <li>habitantes · habitantes</li>
+            <li>hoteles · hotéis</li>
+            <li>museos · museus</li>
+            <li>parques · parques</li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </section>
+
+  <section id="teacher-screen" class="hidden">
+    <div class="activity-head">
+      <div>
+        <div class="identity">
+          <span class="pill dark">MODO PROFESOR</span>
+          <span id="teacher-pair-badge" class="pill"></span>
+        </div>
+        <h1 style="margin-top:10px">Tres ciudades</h1>
+      </div>
+      <button id="teacher-exit" class="secondary-button" type="button">Volver al inicio</button>
+    </div>
+    <div class="teacher-controls">
+      <label for="teacher-pair-select">NÚMERO DE PAREJA
+        <select id="teacher-pair-select"></select>
+      </label>
+    </div>
+    <div id="teacher-content"></div>
+  </section>
+</main>
+
+<script>
+const FONT_STORAGE_KEY="leccion3TresCiudadesFontScale";
+const FONT_MIN=.85;
+const FONT_DEFAULT=1;
+const FONT_MAX=1.7;
+const FONT_STEP=.05;
+const FIELDS=[
+  {key:"habitantes",label:"habitantes",gender:"m"},
+  {key:"hoteles",label:"hoteles",gender:"m"},
+  {key:"museos",label:"museos",gender:"m"},
+  {key:"parques",label:"parques",gender:"m"}
+];
+const cases=[
+  {id:"1",cities:[
+    {name:"Ciudad Azul",habitantes:125000,hoteles:48,museos:18,parques:12,visible:{habitantes:"A",hoteles:"B",museos:"A",parques:"B"}},
+    {name:"Ciudad Verde",habitantes:680000,hoteles:67,museos:31,parques:24,visible:{habitantes:"B",hoteles:"A",museos:"B",parques:"A"}},
+    {name:"Ciudad Sol",habitantes:1200000,hoteles:85,museos:42,parques:39,visible:{habitantes:"A",hoteles:"B",museos:"B",parques:"A"}}
+  ]},
+  {id:"2",cities:[
+    {name:"Ciudad Luna",habitantes:248000,hoteles:52,museos:22,parques:15,visible:{habitantes:"B",hoteles:"A",museos:"A",parques:"B"}},
+    {name:"Ciudad Norte",habitantes:1000000,hoteles:95,museos:38,parques:28,visible:{habitantes:"A",hoteles:"B",museos:"B",parques:"A"}},
+    {name:"Ciudad Mar",habitantes:480000,hoteles:41,museos:27,parques:19,visible:{habitantes:"B",hoteles:"A",museos:"B",parques:"A"}}
+  ]},
+  {id:"3",cities:[
+    {name:"Ciudad Clara",habitantes:315000,hoteles:36,museos:18,parques:21,visible:{habitantes:"A",hoteles:"B",museos:"A",parques:"B"}},
+    {name:"Ciudad Jardín",habitantes:731000,hoteles:74,museos:31,parques:26,visible:{habitantes:"B",hoteles:"A",museos:"B",parques:"A"}},
+    {name:"Ciudad Blanca",habitantes:1500000,hoteles:88,museos:45,parques:33,visible:{habitantes:"A",hoteles:"B",museos:"B",parques:"A"}}
+  ]},
+  {id:"4",cities:[
+    {name:"Ciudad Río",habitantes:525000,hoteles:58,museos:25,parques:17,visible:{habitantes:"B",hoteles:"A",museos:"A",parques:"B"}},
+    {name:"Ciudad Cielo",habitantes:845000,hoteles:76,museos:34,parques:22,visible:{habitantes:"A",hoteles:"B",museos:"B",parques:"A"}},
+    {name:"Ciudad Lago",habitantes:2000000,hoteles:99,museos:52,parques:44,visible:{habitantes:"B",hoteles:"A",museos:"B",parques:"A"}}
+  ]},
+  {id:"5",cities:[
+    {name:"Ciudad Palma",habitantes:999000,hoteles:83,museos:39,parques:27,visible:{habitantes:"A",hoteles:"B",museos:"A",parques:"B"}},
+    {name:"Ciudad Estrella",habitantes:125000,hoteles:31,museos:18,parques:11,visible:{habitantes:"B",hoteles:"A",museos:"B",parques:"A"}},
+    {name:"Ciudad Brisa",habitantes:680000,hoteles:67,museos:29,parques:20,visible:{habitantes:"A",hoteles:"B",museos:"B",parques:"A"}}
+  ]},
+  {id:"6",cities:[
+    {name:"Ciudad Monte",habitantes:1200000,hoteles:90,museos:47,parques:35,visible:{habitantes:"B",hoteles:"A",museos:"A",parques:"B"}},
+    {name:"Ciudad Playa",habitantes:248000,hoteles:44,museos:21,parques:16,visible:{habitantes:"A",hoteles:"B",museos:"B",parques:"A"}},
+    {name:"Ciudad Valle",habitantes:480000,hoteles:55,museos:28,parques:25,visible:{habitantes:"B",hoteles:"A",museos:"B",parques:"A"}}
+  ]},
+  {id:"7",cities:[
+    {name:"Ciudad Oro",habitantes:2000000,hoteles:95,museos:61,parques:48,visible:{habitantes:"A",hoteles:"B",museos:"A",parques:"B"}},
+    {name:"Ciudad Plata",habitantes:731000,hoteles:72,museos:33,parques:31,visible:{habitantes:"B",hoteles:"A",museos:"B",parques:"A"}},
+    {name:"Ciudad Arena",habitantes:315000,hoteles:38,museos:19,parques:14,visible:{habitantes:"A",hoteles:"B",museos:"B",parques:"A"}}
+  ]},
+  {id:"8",cities:[
+    {name:"Ciudad Bosque",habitantes:1000000,hoteles:86,museos:41,parques:36,visible:{habitantes:"B",hoteles:"A",museos:"A",parques:"B"}},
+    {name:"Ciudad Nube",habitantes:525000,hoteles:57,museos:24,parques:18,visible:{habitantes:"A",hoteles:"B",museos:"B",parques:"A"}},
+    {name:"Ciudad Puerta",habitantes:845000,hoteles:79,museos:37,parques:29,visible:{habitantes:"B",hoteles:"A",museos:"B",parques:"A"}}
+  ]}
+];
+const basicWords={0:"cero",1:"uno",2:"dos",3:"tres",4:"cuatro",5:"cinco",6:"seis",7:"siete",8:"ocho",9:"nueve",10:"diez",11:"once",12:"doce",13:"trece",14:"catorce",15:"quince",16:"dieciséis",17:"diecisiete",18:"dieciocho",19:"diecinueve",20:"veinte"};
+const twentyWords={21:"veintiuno",22:"veintidós",23:"veintitrés",24:"veinticuatro",25:"veinticinco",26:"veintiséis",27:"veintisiete",28:"veintiocho",29:"veintinueve"};
+const tenWords={30:"treinta",40:"cuarenta",50:"cincuenta",60:"sesenta",70:"setenta",80:"ochenta",90:"noventa"};
+const hundredWords={200:"doscientos",300:"trescientos",400:"cuatrocientos",500:"quinientos",600:"seiscientos",700:"setecientos",800:"ochocientos",900:"novecientos"};
+let selectedPair="";
+let selectedRole="";
+const startScreen=document.getElementById("start-screen");
+const studentScreen=document.getElementById("student-screen");
+const teacherScreen=document.getElementById("teacher-screen");
+const pairSelect=document.getElementById("pair-select");
+const teacherPairSelect=document.getElementById("teacher-pair-select");
+const startMessage=document.getElementById("start-message");
+
+function escapeHtml(text){
+  return String(text).replace(/[&<>"']/g,character=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[character]));
+}
+function formatNumber(number){
+  return String(number).replace(/\B(?=(\d{3})+(?!\d))/g,".");
+}
+function findCase(pairId){
+  return cases.find(item=>item.id===String(pairId)) || cases[0];
+}
+function unitWord(unit,gender){
+  if(unit===1)return gender==="f"?"una":"un";
+  return basicWords[unit];
+}
+function numberUnderHundred(number,gender="m"){
+  if(number<=20)return number===1?unitWord(number,gender):basicWords[number];
+  if(number<30){
+    if(number===21)return gender==="f"?"veintiuna":"veintiún";
+    return twentyWords[number];
+  }
+  const ten=Math.floor(number/10)*10;
+  const unit=number%10;
+  if(unit===0)return tenWords[number];
+  return `${tenWords[ten]} y ${unitWord(unit,gender)}`;
+}
+function numberUnderThousand(number){
+  if(number<100)return numberUnderHundred(number);
+  if(number===100)return "cien";
+  const hundred=Math.floor(number/100)*100;
+  const rest=number%100;
+  const prefix=hundred===100?"ciento":hundredWords[hundred];
+  return rest?`${prefix} ${numberUnderHundred(rest)}`:prefix;
+}
+function numberWords(number){
+  if(number<1000)return numberUnderThousand(number);
+  if(number<1000000){
+    const thousands=Math.floor(number/1000);
+    const rest=number%1000;
+    const prefix=thousands===1?"mil":`${numberUnderThousand(thousands)} mil`;
+    return rest?`${prefix} ${numberUnderThousand(rest)}`:prefix;
+  }
+  const millions=Math.floor(number/1000000);
+  const rest=number%1000000;
+  const prefix=millions===1?"un millón":"dos millones";
+  if(rest===0)return `${prefix} de`;
+  return `${prefix} ${numberWords(rest)}`;
+}
+function answerSentence(field,value){
+  return `Hay ${numberWords(value)} ${field.label}.`;
+}
+function questionFor(city,field){
+  return `¿Cuántos ${field.label} hay en ${city.name}?`;
+}
+function fillPairSelects(){
+  cases.forEach(item=>{
+    const option=document.createElement("option");
+    option.value=item.id;
+    option.textContent=`Pareja ${item.id}`;
+    pairSelect.append(option);
+    teacherPairSelect.append(option.cloneNode(true));
+  });
+}
+function showStart(){
+  startScreen.classList.remove("hidden");
+  studentScreen.classList.add("hidden");
+  teacherScreen.classList.add("hidden");
+  startMessage.textContent="";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function knownFact(field,value){
+  return `<div class="fact-row"><span class="fact-label">${escapeHtml(field.label)}</span><span class="known-number">${formatNumber(value)}</span><span class="known-sentence">${escapeHtml(answerSentence(field,value))}</span></div>`;
+}
+function missingFact(cityIndex,field,value){
+  return `<div class="fact-row">
+    <span class="fact-label">${escapeHtml(field.label)}</span>
+    <div class="missing-cell">
+      <input class="missing-input" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" aria-label="${escapeHtml(field.label)} de la ciudad" data-city-index="${cityIndex}" data-field="${field.key}">
+      <span class="unit-label">${escapeHtml(field.label)}</span>
+      <div class="field-feedback" aria-live="polite"></div>
+    </div>
+  </div>`;
+}
+function cityCard(city,cityIndex,role){
+  const facts=FIELDS.map(field=>{
+    const value=city[field.key];
+    return city.visible[field.key]===role?knownFact(field,value):missingFact(cityIndex,field,value);
+  }).join("");
+  return `<article class="city-card"><h4>${escapeHtml(city.name)}</h4><div class="fact-list">${facts}</div></article>`;
+}
+function renderQuestions(item){
+  const names=item.cities.map(city=>city.name);
+  const questions=[
+    `¿Cuántos habitantes hay en ${names[0]}?`,
+    "¿Cuántos hoteles hay?",
+    "¿Cuántos museos hay?",
+    `¿Y en ${names[1]}?`,
+    `¿Y en ${names[2]}?`,
+    "¿En qué ciudad hay más habitantes?",
+    "¿En qué ciudad hay menos habitantes?",
+    "¿Cuál es la ciudad más grande?"
+  ];
+  document.getElementById("questions-list").innerHTML=questions.map(question=>`<li>${escapeHtml(question)}</li>`).join("");
+}
+function renderOrderOptions(item){
+  const options=item.cities.map(city=>`<option value="${escapeHtml(city.name)}">${escapeHtml(city.name)}</option>`).join("");
+  document.getElementById("order-grid").innerHTML=`
+    <label class="order-slot"><span>MENOR POBLACIÓN</span><select data-order-select aria-label="Ciudad con menor población"><option value="">Seleccionad</option>${options}</select></label>
+    <label class="order-slot"><span>POBLACIÓN INTERMEDIA</span><select data-order-select aria-label="Ciudad con población intermedia"><option value="">Seleccionad</option>${options}</select></label>
+    <label class="order-slot"><span>MAYOR POBLACIÓN</span><select data-order-select aria-label="Ciudad con mayor población"><option value="">Seleccionad</option>${options}</select></label>`;
+}
+function correctOrder(item){
+  return [...item.cities].sort((a,b)=>a.habitantes-b.habitantes).map(city=>city.name);
+}
+function renderTalkMission(item){
+  const tasks=[
+    "¿Cuál es la ciudad más grande?",
+    "¿Cuál es la más pequeña?",
+    "¿En qué ciudad hay más hoteles?",
+    "¿En qué ciudad hay menos museos?",
+    "¿Qué número ha sido más difícil de pronunciar?"
+  ];
+  document.getElementById("talk-list").innerHTML=tasks.map(task=>`<li>${escapeHtml(task)}</li>`).join("");
+}
+function resetStudentMissions(){
+  document.getElementById("order-mission").classList.add("hidden");
+  document.getElementById("talk-mission").classList.add("hidden");
+  document.getElementById("data-feedback").textContent="";
+  document.getElementById("data-feedback").className="check-feedback";
+  document.getElementById("order-feedback").textContent="";
+  document.getElementById("order-feedback").className="check-feedback";
+}
+function showStudent(pairId,role){
+  if(!pairId){
+    startMessage.textContent="Elegid un número de pareja.";
+    return;
+  }
+  selectedPair=String(pairId);
+  selectedRole=role;
+  const item=findCase(selectedPair);
+  document.getElementById("student-pair").textContent=`PAREJA ${selectedPair}`;
+  document.getElementById("student-role").textContent=`ALUMNO ${role}`;
+  document.getElementById("student-cities").innerHTML=item.cities.map((city,index)=>cityCard(city,index,role)).join("");
+  renderQuestions(item);
+  renderOrderOptions(item);
+  renderTalkMission(item);
+  resetStudentMissions();
+  startScreen.classList.add("hidden");
+  teacherScreen.classList.add("hidden");
+  studentScreen.classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function normalizeNumberInput(value){
+  return value.replace(/\D/g,"");
+}
+function checkData(){
+  const item=findCase(selectedPair);
+  const inputs=[...document.querySelectorAll("[data-city-index][data-field]")];
+  let isComplete=true;
+  inputs.forEach(input=>{
+    const city=item.cities[Number(input.dataset.cityIndex)];
+    const expected=String(city[input.dataset.field]);
+    const row=input.closest(".fact-row");
+    const feedback=row.querySelector(".field-feedback");
+    if(normalizeNumberInput(input.value)===expected){
+      row.classList.remove("is-wrong");
+      feedback.textContent="";
+    }else{
+      isComplete=false;
+      row.classList.add("is-wrong");
+      feedback.textContent="Revisa este dato con tu compañero.";
+    }
+  });
+  const dataFeedback=document.getElementById("data-feedback");
+  if(isComplete){
+    dataFeedback.textContent="Datos completos. Ahora ordenad las ciudades.";
+    dataFeedback.className="check-feedback correct";
+    document.getElementById("order-mission").classList.remove("hidden");
+  }else{
+    dataFeedback.textContent="Revisa los datos marcados.";
+    dataFeedback.className="check-feedback incorrect";
+    document.getElementById("order-mission").classList.add("hidden");
+    document.getElementById("talk-mission").classList.add("hidden");
+  }
+}
+function checkOrder(){
+  const item=findCase(selectedPair);
+  const selected=[...document.querySelectorAll("[data-order-select]")].map(select=>select.value);
+  const expected=correctOrder(item);
+  const allSelected=selected.every(Boolean);
+  const noRepeated=new Set(selected).size===selected.length;
+  const isCorrect=allSelected && noRepeated && selected.every((name,index)=>name===expected[index]);
+  const orderFeedback=document.getElementById("order-feedback");
+  if(isCorrect){
+    orderFeedback.textContent="Orden correcto. Ahora haced la conversación final.";
+    orderFeedback.className="check-feedback correct";
+    document.getElementById("talk-mission").classList.remove("hidden");
+  }else{
+    orderFeedback.textContent="Revisad el orden con vuestro compañero.";
+    orderFeedback.className="check-feedback incorrect";
+    document.getElementById("talk-mission").classList.add("hidden");
+  }
+}
+function teacherFact(field,value,isVisible){
+  const css=isVisible?"fact-row":"fact-row teacher-hidden";
+  const tag=isVisible?"VISIBLE":"OCULTO";
+  return `<div class="${css}"><span class="fact-label">${tag} · ${escapeHtml(field.label)}</span><span class="known-number">${formatNumber(value)}</span><span class="known-sentence">${escapeHtml(answerSentence(field,value))}</span></div>`;
+}
+function teacherCityCard(city,role){
+  const facts=FIELDS.map(field=>teacherFact(field,city[field.key],city.visible[field.key]===role)).join("");
+  return `<article class="city-card"><h4>${escapeHtml(city.name)}</h4><div class="fact-list">${facts}</div></article>`;
+}
+function teacherRolePanel(item,role){
+  return `<section class="teacher-card">
+    <h3>ALUMNO ${role}</h3>
+    <p class="teacher-note">VISIBLE = aparece en la ficha. OCULTO = debe preguntarlo.</p>
+    <div class="city-grid">${item.cities.map(city=>teacherCityCard(city,role)).join("")}</div>
+  </section>`;
+}
+function fullCityCard(city){
+  const facts=FIELDS.map(field=>knownFact(field,city[field.key])).join("");
+  return `<article class="city-card"><h4>${escapeHtml(city.name)}</h4><div class="fact-list">${facts}</div></article>`;
+}
+function teacherQuestions(item,role){
+  const questions=[];
+  item.cities.forEach(city=>{
+    FIELDS.forEach(field=>{
+      if(city.visible[field.key]!==role){
+        questions.push(`${questionFor(city,field)} Respuesta: ${answerSentence(field,city[field.key])}`);
+      }
+    });
+  });
+  return questions.map(question=>`<li>${escapeHtml(question)}</li>`).join("");
+}
+function renderTeacher(pairId){
+  const item=findCase(pairId);
+  teacherPairSelect.value=item.id;
+  document.getElementById("teacher-pair-badge").textContent=`PAREJA ${item.id}`;
+  const order=correctOrder(item).map(name=>{
+    const city=item.cities.find(item=>item.name===name);
+    return `<li>${escapeHtml(city.name)} · ${formatNumber(city.habitantes)} habitantes · ${escapeHtml(answerSentence(FIELDS[0],city.habitantes))}</li>`;
+  }).join("");
+  document.getElementById("teacher-content").innerHTML=`
+    <div class="teacher-grid">
+      ${teacherRolePanel(item,"A")}
+      ${teacherRolePanel(item,"B")}
+    </div>
+    <section class="teacher-card" style="margin-top:16px">
+      <h3>DATOS COMPLETOS</h3>
+      <div class="teacher-full-grid">${item.cities.map(fullCityCard).join("")}</div>
+    </section>
+    <section class="teacher-card" style="margin-top:16px">
+      <h3>PREGUNTAS NECESARIAS</h3>
+      <div class="teacher-question-grid">
+        <div><p class="teacher-note">ALUMNO A pregunta</p><ol class="question-list">${teacherQuestions(item,"A")}</ol></div>
+        <div><p class="teacher-note">ALUMNO B pregunta</p><ol class="question-list">${teacherQuestions(item,"B")}</ol></div>
+      </div>
+    </section>
+    <section class="mission-card" style="margin-top:16px">
+      <h3>ORDEN CORRECTO</h3>
+      <ol class="question-list">${order}</ol>
+    </section>`;
+}
+function showTeacher(){
+  const pairId=pairSelect.value || teacherPairSelect.value || selectedPair || "1";
+  startScreen.classList.add("hidden");
+  studentScreen.classList.add("hidden");
+  teacherScreen.classList.remove("hidden");
+  renderTeacher(pairId);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function normalizeScale(value){
+  const number=Number(value);
+  const scale=Number.isFinite(number)?number:FONT_DEFAULT;
+  return Math.round(Math.min(FONT_MAX,Math.max(FONT_MIN,scale))*100)/100;
+}
+function readFontScale(){
+  try{return normalizeScale(localStorage.getItem(FONT_STORAGE_KEY));}
+  catch{return FONT_DEFAULT;}
+}
+function saveFontScale(scale){
+  try{localStorage.setItem(FONT_STORAGE_KEY,String(scale));}
+  catch{}
+}
+function updateFontButtons(scale){
+  document.querySelectorAll("[data-font-action]").forEach(button=>{
+    const action=button.dataset.fontAction;
+    button.classList.toggle("active",action==="reset" && scale===FONT_DEFAULT);
+    button.setAttribute("aria-pressed",String(action==="reset" && scale===FONT_DEFAULT));
+  });
+}
+function applyFontScale(value,{persist=true}={}){
+  const scale=normalizeScale(value);
+  document.documentElement.style.setProperty("--font-scale",String(scale));
+  if(persist)saveFontScale(scale);
+  updateFontButtons(scale);
+}
+function changeFontScale(delta){
+  const current=Number(document.documentElement.style.getPropertyValue("--font-scale")) || FONT_DEFAULT;
+  applyFontScale(current+delta);
+}
+
+document.querySelectorAll("[data-role]").forEach(button=>{
+  button.addEventListener("click",()=>showStudent(pairSelect.value,button.dataset.role));
+});
+document.getElementById("teacher-button").addEventListener("click",()=>{
+  const code=document.getElementById("teacher-code").value.trim();
+  if(code==="555")showTeacher();
+  else startMessage.textContent="Código no válido.";
+});
+document.getElementById("teacher-code").addEventListener("keydown",event=>{
+  if(event.key==="Enter"){
+    event.preventDefault();
+    document.getElementById("teacher-button").click();
+  }
+});
+document.getElementById("student-cities").addEventListener("input",event=>{
+  const input=event.target.closest("[data-city-index][data-field]");
+  if(!input)return;
+  input.value=input.value.replace(/[^\d. ]/g,"").slice(0,11);
+  const row=input.closest(".fact-row");
+  row.classList.remove("is-wrong");
+  row.querySelector(".field-feedback").textContent="";
+});
+document.getElementById("order-grid").addEventListener("change",()=>{
+  document.getElementById("order-feedback").textContent="";
+  document.getElementById("order-feedback").className="check-feedback";
+  document.getElementById("talk-mission").classList.add("hidden");
+});
+document.getElementById("check-data-button").addEventListener("click",checkData);
+document.getElementById("check-order-button").addEventListener("click",checkOrder);
+document.getElementById("change-button").addEventListener("click",showStart);
+document.getElementById("teacher-exit").addEventListener("click",showStart);
+teacherPairSelect.addEventListener("change",()=>renderTeacher(teacherPairSelect.value));
+document.querySelector(".font-controls").addEventListener("click",event=>{
+  const button=event.target.closest("[data-font-action]");
+  if(!button)return;
+  const action=button.dataset.fontAction;
+  if(action==="decrease")changeFontScale(-FONT_STEP);
+  if(action==="increase")changeFontScale(FONT_STEP);
+  if(action==="reset")applyFontScale(FONT_DEFAULT);
+});
+
+fillPairSelects();
+applyFontScale(readFontScale(),{persist:false});
+</script>
+</body>
+</html>

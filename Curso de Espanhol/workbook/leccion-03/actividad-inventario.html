@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Actividad oral · Lección 3 · El inventario</title>
+<style>
+:root{
+  --red:#aa151b;
+  --gold:#f1bf00;
+  --ink:#172033;
+  --muted:#667085;
+  --blue:#2d5ea8;
+  --green:#2d7a5b;
+  --soft:#f4efe4;
+  --paper:#fffdf8;
+  --line:rgba(23,32,51,.12);
+  --danger:#b42318;
+  --danger-soft:#fff1f0;
+  --success:#067647;
+  --success-soft:#ecfdf3;
+  --focus:rgba(45,94,168,.38);
+  --font-scale:1;
+}
+*{box-sizing:border-box}
+html{font-size:calc(16px * var(--font-scale))}
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--ink);
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 92% 10%,rgba(241,191,0,.22),transparent 28%),
+    linear-gradient(135deg,#fff,#f7f1e5);
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.page{width:min(1140px,calc(100% - 32px));margin:0 auto;padding:30px 0 44px}
+.topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;border-bottom:2px solid rgba(170,21,27,.18);padding-bottom:10px;margin-bottom:24px}
+.course{color:var(--red);font-size:.82rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.font-controls{position:sticky;top:12px;z-index:10;display:flex;gap:4px;padding:5px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.88);box-shadow:0 8px 22px #0002;backdrop-filter:blur(8px)}
+.font-controls button{width:34px;height:32px;border:0;border-radius:8px;background:transparent;color:var(--ink);font-size:.88rem;font-weight:900}
+.font-controls button:hover,.font-controls button.active{background:var(--soft);color:var(--red)}
+.hero{display:grid;gap:10px;margin-bottom:20px}
+.kicker{width:max-content;max-width:100%;padding:7px 11px;border-radius:999px;background:var(--soft);color:var(--red);font-size:.78rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+h1{margin:0;font-size:clamp(2rem,5vw,3.1rem);line-height:1.04;letter-spacing:0}
+h2{margin:0;font-size:clamp(1.45rem,3vw,2.1rem);line-height:1.12;letter-spacing:0}
+h3{margin:0;font-size:1.08rem}
+p{line-height:1.45}
+.subtitle{margin:0;max-width:780px;color:var(--muted);font-size:1.08rem;line-height:1.45}
+.panel{overflow:hidden;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.9);box-shadow:0 22px 58px #0002}
+.panel-body{padding:24px}
+.start-grid{display:grid;grid-template-columns:1fr .9fr;gap:22px;align-items:start}
+.instructions{display:grid;gap:14px}
+.instructions strong{color:var(--red)}
+ol{margin:0;padding-left:22px;line-height:1.55;font-weight:750}
+.selector-card{display:grid;gap:18px;border-left:7px solid var(--blue);border-radius:18px;background:white;padding:20px;box-shadow:0 8px 22px #0001}
+label{display:grid;gap:7px;color:var(--muted);font-size:.76rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+select,input{width:100%;min-height:46px;border:1px solid var(--line);border-radius:12px;background:white;color:var(--ink);padding:10px 12px}
+.role-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.role-button,.primary-button,.secondary-button{min-height:48px;border:0;border-radius:12px;padding:12px 14px;font-weight:900}
+.role-button{background:var(--ink);color:white;letter-spacing:.08em}
+.primary-button{background:var(--red);color:white}
+.secondary-button{background:var(--soft);color:var(--red);text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.teacher-entry{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;border-top:1px solid var(--line);padding-top:16px}
+.teacher-entry button{min-height:46px}
+.message{min-height:1.35em;color:var(--red);font-weight:850}
+.hidden{display:none!important}
+.activity-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:18px}
+.identity{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;min-height:34px;border-radius:999px;padding:7px 11px;background:var(--soft);color:var(--red);font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.pill.dark{background:var(--ink);color:white}
+.warning{border-left:7px solid var(--red);border-radius:16px;background:#fffdf8;padding:14px 16px;color:var(--red);font-size:1.08rem;font-weight:900}
+.main-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px;align-items:start;margin-top:16px}
+.work-stack{display:grid;gap:16px}
+.inventory-card,.support-card,.mission-card{border-radius:18px;background:white;padding:18px;box-shadow:0 8px 22px #0001}
+.inventory-card h3,.support-card h3,.mission-card h3{color:var(--red);margin-bottom:12px;letter-spacing:.08em;text-transform:uppercase}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:16px}
+table{width:100%;border-collapse:collapse;background:white}
+th,td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle;text-align:left}
+th{background:var(--ink);color:white;font-size:.76rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:900}
+.known-cell{display:grid;gap:4px}
+.quantity-number{color:var(--red);font-size:1.7rem;font-weight:900;line-height:1}
+.quantity-word{color:var(--muted);font-size:.88rem;font-weight:800;line-height:1.2}
+.missing-cell{display:grid;gap:7px}
+.missing-input{min-height:48px;max-width:160px;border:2px solid rgba(45,94,168,.32);font-size:1.25rem;font-weight:900;text-align:center}
+.unknown-badge{display:inline-flex;align-items:center;justify-content:center;min-height:32px;width:max-content;min-width:52px;border-radius:999px;background:var(--soft);color:var(--red);font-weight:900}
+.field-feedback{min-height:1.2em;color:var(--danger);font-size:.82rem;font-weight:850;line-height:1.2}
+tr.is-wrong .missing-input{border-color:var(--danger);background:var(--danger-soft)}
+.check-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:14px}
+.check-feedback{font-weight:900;line-height:1.35}
+.check-feedback.correct{color:var(--success)}
+.check-feedback.incorrect{color:var(--danger)}
+.support-column{display:grid;gap:14px;position:sticky;top:78px}
+.support-card ul,.mission-card ul{display:grid;gap:7px;margin:0;padding-left:18px;line-height:1.28}
+.support-card li,.mission-card li{padding-left:2px}
+.turn-card{border-left:7px solid var(--gold)}
+.questions-card{border-left:7px solid var(--blue)}
+.answers-card{border-left:7px solid var(--green)}
+.mission-card{border-left:7px solid var(--red);background:#fffdf8}
+.mission-title{margin:0 0 10px;color:var(--ink);font-size:.86rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.support-strip{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.support-strip span{display:inline-flex;border-radius:999px;background:var(--soft);color:var(--ink);padding:7px 10px;font-weight:900}
+.teacher-controls{display:flex;flex-wrap:wrap;align-items:end;gap:12px;margin:14px 0}
+.teacher-controls label{min-width:220px}
+.teacher-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.teacher-note{margin:0 0 12px;color:var(--muted);font-weight:800}
+.teacher-hidden{display:grid;gap:3px}
+.teacher-hidden .unknown-badge{background:#fff1f0;color:var(--danger)}
+.full-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0;padding:0;list-style:none}
+.full-list li{border-radius:12px;background:#fffdf8;padding:10px 12px;font-weight:850;line-height:1.25}
+.return-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+@media(max-width:900px){
+  .start-grid,.main-grid,.teacher-grid{grid-template-columns:1fr}
+  .support-column{position:static}
+  .teacher-entry{grid-template-columns:1fr}
+  .full-list{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .page{width:min(100% - 22px,1140px);padding-top:22px}
+  .panel-body{padding:16px}
+  .role-grid{grid-template-columns:1fr}
+  .activity-head{display:grid}
+  th,td{padding:10px}
+  .quantity-number{font-size:1.35rem}
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="topbar">
+    <div class="course">CURSO DE ESPAÑOL</div>
+    <div class="font-controls" aria-label="Tamaño de fuente">
+      <button type="button" data-font-action="decrease" aria-label="Disminuir tamaño de fuente">A−</button>
+      <button type="button" data-font-action="reset" aria-label="Restaurar tamaño de fuente">A</button>
+      <button type="button" data-font-action="increase" aria-label="Aumentar tamaño de fuente">A+</button>
+    </div>
+  </div>
+
+  <section id="start-screen">
+    <div class="hero">
+      <div class="kicker">ACTIVIDAD ORAL</div>
+      <h1>El inventario</h1>
+      <p class="subtitle">Lección 3 · El inventario</p>
+    </div>
+    <div class="panel">
+      <div class="panel-body start-grid">
+        <div class="instructions">
+          <h2>Trabajad en parejas.</h2>
+          <ol>
+            <li>Elegid el mismo número de pareja.</li>
+            <li>Una persona elige <strong>ALUMNO A</strong>.</li>
+            <li>La otra persona elige <strong>ALUMNO B</strong>.</li>
+            <li>No enseñéis vuestra pantalla.</li>
+            <li>Preguntad por las cantidades que faltan.</li>
+            <li>Completad el inventario.</li>
+          </ol>
+        </div>
+        <div class="selector-card">
+          <label for="pair-select">NÚMERO DE PAREJA
+            <select id="pair-select">
+              <option value="">Seleccionad una pareja</option>
+            </select>
+          </label>
+          <div>
+            <h3>¿Quién eres?</h3>
+            <div class="role-grid" style="margin-top:10px">
+              <button class="role-button" type="button" data-role="A">ALUMNO A</button>
+              <button class="role-button" type="button" data-role="B">ALUMNO B</button>
+            </div>
+          </div>
+          <div class="teacher-entry">
+            <label for="teacher-code">Código
+              <input id="teacher-code" type="password" inputmode="numeric" autocomplete="off">
+            </label>
+            <button id="teacher-button" class="secondary-button" type="button">Abrir</button>
+          </div>
+          <div id="start-message" class="message" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="student-screen" class="hidden">
+    <div class="activity-head">
+      <div>
+        <div class="identity">
+          <span id="student-pair" class="pill"></span>
+          <span id="student-role" class="pill dark"></span>
+        </div>
+        <h1 style="margin-top:10px">El inventario</h1>
+      </div>
+      <button id="change-button" class="secondary-button" type="button">Cambiar pareja o alumno</button>
+    </div>
+    <div class="warning">NO ENSEÑES TU PANTALLA.</div>
+    <div class="main-grid">
+      <div class="work-stack">
+        <section class="inventory-card">
+          <h3>MI INVENTARIO</h3>
+          <p class="teacher-note">Pregunta por las cantidades que faltan. Responde con <strong>Hay...</strong>.</p>
+          <div id="student-table" class="table-wrap"></div>
+          <div class="check-row">
+            <button id="check-button" class="primary-button" type="button">COMPROBAR INVENTARIO</button>
+            <div id="check-feedback" class="check-feedback" aria-live="polite"></div>
+          </div>
+        </section>
+        <section id="second-mission" class="mission-card hidden" aria-live="polite">
+          <h3>¡Inventario completo!</h3>
+          <p class="mission-title">AHORA COMPARAD LAS CANTIDADES</p>
+          <p><strong>Hablad con vuestro compañero:</strong></p>
+          <ul id="second-mission-list"></ul>
+          <div class="support-strip">
+            <span>más de</span>
+            <span>menos de</span>
+          </div>
+          <div class="return-row">
+            <a class="secondary-button" href="../../leccion_3_material_v01.html#8">VOLVER A LA LECCIÓN</a>
+          </div>
+        </section>
+      </div>
+      <aside class="support-column" aria-label="Apoyo para hablar">
+        <section class="support-card turn-card">
+          <h3>TURNOS</h3>
+          <ul>
+            <li>A pregunta por una cantidad.</li>
+            <li>B responde con <strong>Hay...</strong>.</li>
+            <li>B pregunta por otra cantidad.</li>
+            <li>A responde con <strong>Hay...</strong>.</li>
+            <li>Repetid hasta completar.</li>
+          </ul>
+        </section>
+        <section class="support-card questions-card">
+          <h3>PREGUNTAS ÚTILES</h3>
+          <ul>
+            <li>¿Cuántos libros hay?</li>
+            <li>¿Cuántos cuadernos hay?</li>
+            <li>¿Cuántos bolígrafos hay?</li>
+            <li>¿Cuántos lápices hay?</li>
+            <li>¿Cuántas mesas hay?</li>
+            <li>¿Cuántas sillas hay?</li>
+            <li>¿Cuántas ventanas hay?</li>
+            <li>¿Cuántos sillones hay?</li>
+            <li>¿Y cuántos...?</li>
+            <li>¿Y cuántas...?</li>
+          </ul>
+        </section>
+        <section class="support-card answers-card">
+          <h3>RESPUESTAS ÚTILES</h3>
+          <ul>
+            <li>Hay cuarenta y siete libros.</li>
+            <li>Hay veintiocho cuadernos.</li>
+            <li>Hay treinta y seis bolígrafos.</li>
+            <li>Hay cincuenta y nueve lápices.</li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </section>
+
+  <section id="teacher-screen" class="hidden">
+    <div class="activity-head">
+      <div>
+        <div class="identity">
+          <span class="pill dark">MODO PROFESOR</span>
+          <span id="teacher-pair-badge" class="pill"></span>
+        </div>
+        <h1 style="margin-top:10px">El inventario</h1>
+      </div>
+      <button id="teacher-exit" class="secondary-button" type="button">Volver al inicio</button>
+    </div>
+    <div class="teacher-controls">
+      <label for="teacher-pair-select">NÚMERO DE PAREJA
+        <select id="teacher-pair-select"></select>
+      </label>
+    </div>
+    <div id="teacher-content"></div>
+  </section>
+</main>
+
+<script>
+const FONT_STORAGE_KEY="leccion3InventoryFontScale";
+const FONT_MIN=.85;
+const FONT_DEFAULT=1;
+const FONT_MAX=1.7;
+const FONT_STEP=.05;
+const inventories=[
+  {id:"1",items:[
+    {name:"libros",gender:"m",qty:41,visible:"A"},
+    {name:"cuadernos",gender:"m",qty:29,visible:"B"},
+    {name:"bolígrafos",gender:"m",qty:37,visible:"A"},
+    {name:"lápices",gender:"m",qty:58,visible:"B"},
+    {name:"mesas",gender:"f",qty:71,visible:"A"},
+    {name:"sillas",gender:"f",qty:21,visible:"B"},
+    {name:"ventanas",gender:"f",qty:61,visible:"A"},
+    {name:"espejos",gender:"m",qty:84,visible:"B"}
+  ]},
+  {id:"2",items:[
+    {name:"sillones",gender:"m",qty:21,visible:"A"},
+    {name:"libros",gender:"m",qty:61,visible:"B"},
+    {name:"cuadernos",gender:"m",qty:31,visible:"A"},
+    {name:"mesas",gender:"f",qty:42,visible:"B"},
+    {name:"sillas",gender:"f",qty:86,visible:"A"},
+    {name:"ventanas",gender:"f",qty:41,visible:"B"},
+    {name:"alfombras",gender:"f",qty:23,visible:"A"},
+    {name:"discos compactos",gender:"m",qty:56,visible:"B"},
+    {name:"vídeos",gender:"m",qty:74,visible:"A"}
+  ]},
+  {id:"3",items:[
+    {name:"libros",gender:"m",qty:21,visible:"B"},
+    {name:"cuadernos",gender:"m",qty:47,visible:"A"},
+    {name:"bolígrafos",gender:"m",qty:28,visible:"B"},
+    {name:"lápices",gender:"m",qty:36,visible:"A"},
+    {name:"mesas",gender:"f",qty:51,visible:"B"},
+    {name:"sillas",gender:"f",qty:67,visible:"A"},
+    {name:"ventanas",gender:"f",qty:22,visible:"B"},
+    {name:"espejos",gender:"m",qty:95,visible:"A"}
+  ]},
+  {id:"4",items:[
+    {name:"alfombras",gender:"f",qty:31,visible:"B"},
+    {name:"sillones",gender:"m",qty:91,visible:"A"},
+    {name:"libros",gender:"m",qty:26,visible:"B"},
+    {name:"cuadernos",gender:"m",qty:81,visible:"A"},
+    {name:"bolígrafos",gender:"m",qty:59,visible:"B"},
+    {name:"lápices",gender:"m",qty:47,visible:"A"},
+    {name:"mesas",gender:"f",qty:28,visible:"B"},
+    {name:"sillas",gender:"f",qty:99,visible:"A"},
+    {name:"ventanas",gender:"f",qty:56,visible:"B"},
+    {name:"vídeos",gender:"m",qty:73,visible:"A"}
+  ]},
+  {id:"5",items:[
+    {name:"discos compactos",gender:"m",qty:22,visible:"A"},
+    {name:"vídeos",gender:"m",qty:31,visible:"B"},
+    {name:"libros",gender:"m",qty:86,visible:"A"},
+    {name:"cuadernos",gender:"m",qty:52,visible:"B"},
+    {name:"bolígrafos",gender:"m",qty:67,visible:"A"},
+    {name:"lápices",gender:"m",qty:91,visible:"B"},
+    {name:"mesas",gender:"f",qty:23,visible:"A"},
+    {name:"sillas",gender:"f",qty:61,visible:"B"}
+  ]},
+  {id:"6",items:[
+    {name:"ventanas",gender:"f",qty:21,visible:"A"},
+    {name:"espejos",gender:"m",qty:74,visible:"B"},
+    {name:"alfombras",gender:"f",qty:56,visible:"A"},
+    {name:"sillones",gender:"m",qty:28,visible:"B"},
+    {name:"libros",gender:"m",qty:95,visible:"A"},
+    {name:"cuadernos",gender:"m",qty:41,visible:"B"},
+    {name:"bolígrafos",gender:"m",qty:71,visible:"A"},
+    {name:"lápices",gender:"m",qty:26,visible:"B"},
+    {name:"mesas",gender:"f",qty:81,visible:"A"}
+  ]},
+  {id:"7",items:[
+    {name:"sillas",gender:"f",qty:47,visible:"B"},
+    {name:"mesas",gender:"f",qty:36,visible:"A"},
+    {name:"ventanas",gender:"f",qty:91,visible:"B"},
+    {name:"sillones",gender:"m",qty:61,visible:"A"},
+    {name:"espejos",gender:"m",qty:22,visible:"B"},
+    {name:"alfombras",gender:"f",qty:86,visible:"A"},
+    {name:"discos compactos",gender:"m",qty:99,visible:"B"},
+    {name:"vídeos",gender:"m",qty:51,visible:"A"}
+  ]},
+  {id:"8",items:[
+    {name:"libros",gender:"m",qty:74,visible:"A"},
+    {name:"cuadernos",gender:"m",qty:21,visible:"B"},
+    {name:"bolígrafos",gender:"m",qty:81,visible:"A"},
+    {name:"lápices",gender:"m",qty:28,visible:"B"},
+    {name:"mesas",gender:"f",qty:41,visible:"A"},
+    {name:"sillas",gender:"f",qty:31,visible:"B"},
+    {name:"ventanas",gender:"f",qty:47,visible:"A"},
+    {name:"sillones",gender:"m",qty:23,visible:"B"},
+    {name:"espejos",gender:"m",qty:67,visible:"A"},
+    {name:"alfombras",gender:"f",qty:59,visible:"B"}
+  ]}
+];
+const basicWords={0:"cero",1:"uno",2:"dos",3:"tres",4:"cuatro",5:"cinco",6:"seis",7:"siete",8:"ocho",9:"nueve",10:"diez",11:"once",12:"doce",13:"trece",14:"catorce",15:"quince",16:"dieciséis",17:"diecisiete",18:"dieciocho",19:"diecinueve",20:"veinte"};
+const twentyWords={21:"veintiuno",22:"veintidós",23:"veintitrés",24:"veinticuatro",25:"veinticinco",26:"veintiséis",27:"veintisiete",28:"veintiocho",29:"veintinueve"};
+const tenWords={30:"treinta",40:"cuarenta",50:"cincuenta",60:"sesenta",70:"setenta",80:"ochenta",90:"noventa"};
+let selectedPair="";
+let selectedRole="";
+const startScreen=document.getElementById("start-screen");
+const studentScreen=document.getElementById("student-screen");
+const teacherScreen=document.getElementById("teacher-screen");
+const pairSelect=document.getElementById("pair-select");
+const teacherPairSelect=document.getElementById("teacher-pair-select");
+const startMessage=document.getElementById("start-message");
+
+function escapeHtml(text){
+  return String(text).replace(/[&<>"']/g,character=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[character]));
+}
+function findInventory(pairId){
+  return inventories.find(item=>item.id===String(pairId)) || inventories[0];
+}
+function unitWord(unit,gender){
+  if(unit===1)return gender==="f"?"una":"un";
+  return basicWords[unit];
+}
+function numberToWords(number,gender){
+  if(number===21)return gender==="f"?"veintiuna":"veintiún";
+  if(number>21 && number<30)return twentyWords[number];
+  if(number<=20)return basicWords[number];
+  const ten=Math.floor(number/10)*10;
+  const unit=number%10;
+  if(unit===0)return tenWords[number];
+  return `${tenWords[ten]} y ${unitWord(unit,gender)}`;
+}
+function answerSentence(item){
+  return `Hay ${numberToWords(item.qty,item.gender)} ${item.name}.`;
+}
+function fillPairSelects(){
+  inventories.forEach(inventory=>{
+    const option=document.createElement("option");
+    option.value=inventory.id;
+    option.textContent=`Pareja ${inventory.id}`;
+    pairSelect.appendChild(option);
+    const teacherOption=option.cloneNode(true);
+    teacherPairSelect.appendChild(teacherOption);
+  });
+}
+function showStart(){
+  startScreen.classList.remove("hidden");
+  studentScreen.classList.add("hidden");
+  teacherScreen.classList.add("hidden");
+  startMessage.textContent="";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function knownCell(item){
+  return `<div class="known-cell"><span class="quantity-number">${item.qty}</span><span class="quantity-word">${escapeHtml(answerSentence(item))}</span></div>`;
+}
+function missingCell(index,item){
+  return `<div class="missing-cell"><input class="missing-input" type="text" inputmode="numeric" maxlength="2" autocomplete="off" spellcheck="false" aria-label="Cantidad de ${escapeHtml(item.name)}" data-missing-index="${index}"><div class="field-feedback" aria-live="polite"></div></div>`;
+}
+function renderStudentTable(inventory,role){
+  const rows=inventory.items.map((item,index)=>{
+    const cell=item.visible===role?knownCell(item):missingCell(index,item);
+    return `<tr><td>${escapeHtml(item.name)}</td><td>${cell}</td></tr>`;
+  }).join("");
+  document.getElementById("student-table").innerHTML=`<table>
+    <thead><tr><th>Producto</th><th>Cantidad</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+function renderSecondMission(inventory){
+  const tasks=[
+    "¿Cuál es la cantidad más grande?",
+    "¿Cuál es la cantidad más pequeña?",
+    "¿Qué número ha sido más difícil de pronunciar?"
+  ];
+  if(inventory.items.some(item=>item.qty>50))tasks.push("¿En qué productos hay más de cincuenta unidades?");
+  if(inventory.items.some(item=>item.qty<40))tasks.push("¿En qué productos hay menos de cuarenta unidades?");
+  if(inventory.items.some(item=>numberToWords(item.qty,item.gender).includes(" y ")))tasks.push("Busca un número con “y”.");
+  if(inventory.items.some(item=>item.qty%10===1))tasks.push("Busca una cantidad acabada en uno.");
+  document.getElementById("second-mission-list").innerHTML=tasks.map(task=>`<li>${escapeHtml(task)}</li>`).join("");
+}
+function showStudent(pairId,role){
+  if(!pairId){
+    startMessage.textContent="Elegid un número de pareja.";
+    return;
+  }
+  selectedPair=String(pairId);
+  selectedRole=role;
+  const inventory=findInventory(selectedPair);
+  document.getElementById("student-pair").textContent=`PAREJA ${selectedPair}`;
+  document.getElementById("student-role").textContent=`ALUMNO ${role}`;
+  document.getElementById("check-feedback").textContent="";
+  document.getElementById("check-feedback").className="check-feedback";
+  document.getElementById("second-mission").classList.add("hidden");
+  renderStudentTable(inventory,role);
+  startScreen.classList.add("hidden");
+  teacherScreen.classList.add("hidden");
+  studentScreen.classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function checkInventory(){
+  const inventory=findInventory(selectedPair);
+  const inputs=[...document.querySelectorAll("[data-missing-index]")];
+  let isComplete=true;
+  inputs.forEach(input=>{
+    const item=inventory.items[Number(input.dataset.missingIndex)];
+    const row=input.closest("tr");
+    const feedback=row.querySelector(".field-feedback");
+    if(input.value.trim()===String(item.qty)){
+      row.classList.remove("is-wrong");
+      feedback.textContent="";
+    }else{
+      isComplete=false;
+      row.classList.add("is-wrong");
+      feedback.textContent="Revisa esta cantidad con tu compañero.";
+    }
+  });
+  const checkFeedback=document.getElementById("check-feedback");
+  if(isComplete){
+    checkFeedback.textContent="¡Inventario completo!";
+    checkFeedback.className="check-feedback correct";
+    renderSecondMission(inventory);
+    document.getElementById("second-mission").classList.remove("hidden");
+  }else{
+    checkFeedback.textContent="Revisa las cantidades marcadas.";
+    checkFeedback.className="check-feedback incorrect";
+    document.getElementById("second-mission").classList.add("hidden");
+  }
+}
+function teacherRolePanel(inventory,role){
+  const rows=inventory.items.map(item=>{
+    const cell=item.visible===role
+      ? knownCell(item)
+      : `<div class="teacher-hidden"><span class="unknown-badge">OCULTO</span><span class="quantity-word">${item.qty} · ${escapeHtml(answerSentence(item))}</span></div>`;
+    return `<tr><td>${escapeHtml(item.name)}</td><td>${cell}</td></tr>`;
+  }).join("");
+  return `<section class="inventory-card">
+    <h3>ALUMNO ${role}</h3>
+    <p class="teacher-note">La ficha muestra datos visibles y cantidades ocultas para este alumno.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Producto</th><th>Ficha</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>
+  </section>`;
+}
+function fullInventoryList(inventory){
+  return inventory.items.map(item=>`<li><strong>${escapeHtml(item.name)}</strong><br>${item.qty} · ${escapeHtml(answerSentence(item))}</li>`).join("");
+}
+function renderTeacher(pairId){
+  const inventory=findInventory(pairId);
+  teacherPairSelect.value=inventory.id;
+  document.getElementById("teacher-pair-badge").textContent=`PAREJA ${inventory.id}`;
+  document.getElementById("teacher-content").innerHTML=`
+    <div class="teacher-grid">
+      ${teacherRolePanel(inventory,"A")}
+      ${teacherRolePanel(inventory,"B")}
+    </div>
+    <section class="mission-card" style="margin-top:16px">
+      <h3>INVENTARIO COMPLETO</h3>
+      <ul class="full-list">${fullInventoryList(inventory)}</ul>
+    </section>`;
+}
+function showTeacher(){
+  const pairId=pairSelect.value || teacherPairSelect.value || "1";
+  startScreen.classList.add("hidden");
+  studentScreen.classList.add("hidden");
+  teacherScreen.classList.remove("hidden");
+  renderTeacher(pairId);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function normalizeScale(value){
+  const number=Number(value);
+  const scale=Number.isFinite(number)?number:FONT_DEFAULT;
+  return Math.round(Math.min(FONT_MAX,Math.max(FONT_MIN,scale))*100)/100;
+}
+function readFontScale(){
+  try{return normalizeScale(localStorage.getItem(FONT_STORAGE_KEY));}
+  catch{return FONT_DEFAULT;}
+}
+function saveFontScale(scale){
+  try{localStorage.setItem(FONT_STORAGE_KEY,String(scale));}
+  catch{}
+}
+function updateFontButtons(scale){
+  document.querySelectorAll("[data-font-action]").forEach(button=>{
+    const action=button.dataset.fontAction;
+    button.classList.toggle("active",action==="reset" && scale===FONT_DEFAULT);
+    button.setAttribute("aria-pressed",String(action==="reset" && scale===FONT_DEFAULT));
+  });
+}
+function applyFontScale(value,{persist=true}={}){
+  const scale=normalizeScale(value);
+  document.documentElement.style.setProperty("--font-scale",String(scale));
+  if(persist)saveFontScale(scale);
+  updateFontButtons(scale);
+}
+function changeFontScale(delta){
+  const current=Number(document.documentElement.style.getPropertyValue("--font-scale")) || FONT_DEFAULT;
+  applyFontScale(current+delta);
+}
+
+document.querySelectorAll("[data-role]").forEach(button=>{
+  button.addEventListener("click",()=>showStudent(pairSelect.value,button.dataset.role));
+});
+document.getElementById("teacher-button").addEventListener("click",()=>{
+  const code=document.getElementById("teacher-code").value.trim();
+  if(code==="555")showTeacher();
+  else startMessage.textContent="Código no válido.";
+});
+document.getElementById("teacher-code").addEventListener("keydown",event=>{
+  if(event.key==="Enter"){
+    event.preventDefault();
+    document.getElementById("teacher-button").click();
+  }
+});
+document.getElementById("student-table").addEventListener("input",event=>{
+  const input=event.target.closest("[data-missing-index]");
+  if(!input)return;
+  input.value=input.value.replace(/\D/g,"").slice(0,2);
+  const row=input.closest("tr");
+  row.classList.remove("is-wrong");
+  row.querySelector(".field-feedback").textContent="";
+});
+document.getElementById("check-button").addEventListener("click",checkInventory);
+document.getElementById("change-button").addEventListener("click",showStart);
+document.getElementById("teacher-exit").addEventListener("click",showStart);
+teacherPairSelect.addEventListener("change",()=>renderTeacher(teacherPairSelect.value));
+document.querySelector(".font-controls").addEventListener("click",event=>{
+  const button=event.target.closest("[data-font-action]");
+  if(!button)return;
+  const action=button.dataset.fontAction;
+  if(action==="decrease")changeFontScale(-FONT_STEP);
+  if(action==="increase")changeFontScale(FONT_STEP);
+  if(action==="reset")applyFontScale(FONT_DEFAULT);
+});
+
+fillPairSelects();
+applyFontScale(readFontScale(),{persist:false});
+</script>
+</body>
+</html>
