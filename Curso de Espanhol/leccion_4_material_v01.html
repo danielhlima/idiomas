@@ -1,0 +1,1046 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Estructura técnica de la Lección 4 del Curso de Español.">
+<title>Lección 4 · Contenido pendiente · Versión 01</title>
+<style>
+:root{
+  --red:#aa151b; --gold:#f1bf00; --ink:#172033; --muted:#667085;
+  --paper:#fffdf8; --blue:#2d5ea8; --green:#2d7a5b; --soft:#f4efe4;
+  --focus:rgba(45,94,168,.38); --line:rgba(23,32,51,.11);
+  --font-scale:1;
+  --slide-pad-y:28px; --slide-pad-x:54px; --slide-pad-bottom:48px;
+  --slide-pad-y-mobile:20px; --slide-pad-x-mobile:24px; --slide-pad-bottom-mobile:60px;
+  --content-offset:58px; --foot-x:54px; --foot-x-mobile:24px;
+  --grid-gap:16px; --grid-gap-small:10px; --card-pad:19px; --term-gap:7px; --translation-gap:5px;
+  --fs-top:13px; --fs-subtitle:30px; --fs-h1:39px; --fs-h1-mobile:30px; --fs-h2:46px; --fs-h3:24px; --fs-foot:12px;
+  --fs-lead:22px; --fs-badge:14px; --fs-card:20px; --fs-compact-card:18px; --fs-small:13px;
+  --fs-note:17px; --fs-example-big:24px; --fs-translation:13px; --fs-controls:14px;
+  --fs-cover-kicker:20px; --fs-cover-main:58px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;font-family:Inter,Segoe UI,Arial,sans-serif;background:#111;color:var(--ink)}
+button,a,input,select,textarea{font:inherit}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.slide{
+  position:absolute;inset:0;padding:var(--slide-pad-y) var(--slide-pad-x) var(--slide-pad-bottom);
+  background:radial-gradient(circle at 88% 8%,rgba(241,191,0,.18),transparent 30%),linear-gradient(135deg,#fff,#f7f1e5);
+  opacity:0;transform:scale(.99);transition:.35s ease;pointer-events:none;overflow:hidden;
+}
+.slide.active{opacity:1;transform:none;pointer-events:auto}
+.top{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(170,21,27,.18);padding-bottom:9px;font-size:var(--fs-top);letter-spacing:.09em;text-transform:uppercase}
+.course{font-weight:900;color:var(--red)}
+.count{color:var(--muted)}
+.content{height:calc(100% - var(--content-offset));display:flex;flex-direction:column}
+.subtitle{margin-top:9px;color:var(--muted);font-size:var(--fs-subtitle);line-height:1.12;overflow-wrap:break-word}
+.subtitle.lesson-label{color:var(--red);font-size:var(--fs-cover-kicker);font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+h1{font-size:var(--fs-h1);line-height:1.05;margin:7px 0 13px;letter-spacing:0}
+h2{font-size:var(--fs-h2);line-height:1.08;margin:12px 0 18px;letter-spacing:0}
+h3{font-size:var(--fs-h3);margin:0 0 12px}
+p{line-height:1.42}
+.body{flex:1;min-height:0;overflow:auto;padding-right:6px}
+.body::-webkit-scrollbar{width:10px}
+.body::-webkit-scrollbar-thumb{background:#d4ccbd;border-radius:99px}
+.foot{position:absolute;left:var(--foot-x);right:var(--foot-x);bottom:15px;border-top:1px solid #ddd;padding-top:7px;color:#777;font-size:var(--fs-foot);display:flex;justify-content:space-between;gap:16px}
+.cover-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;height:88%}
+.cover-intro{display:grid;gap:18px;align-content:center}
+.eyebrow{font-weight:900;letter-spacing:.14em;color:var(--red);text-transform:uppercase}
+.lead{font-size:var(--fs-lead);line-height:1.42}
+.cover-main-title{max-width:760px;font-size:var(--fs-cover-main);margin-top:10px;margin-bottom:18px}
+.cover-visual{display:grid;place-items:center;min-height:300px;background:white;border-radius:28px;padding:34px;box-shadow:0 24px 60px #0002}
+.placeholder-card{width:min(100%,520px);border:2px dashed rgba(45,94,168,.32);border-radius:20px;background:var(--paper);padding:28px;text-align:center;color:var(--muted);font-size:var(--fs-card);font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.verb-composition{width:min(100%,520px);display:grid;gap:12px}
+.verb-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.verb-token{display:grid;place-items:center;min-height:64px;border-radius:18px;padding:10px 8px;background:var(--soft);color:var(--ink);font-size:clamp(1.2rem,2.6vw,1.65rem);font-weight:900;line-height:1;box-shadow:0 8px 20px #0001}
+.verb-infinitives .verb-token:nth-child(1){color:var(--red);transform:translateY(4px)}
+.verb-infinitives .verb-token:nth-child(2){transform:translateY(-5px)}
+.verb-infinitives .verb-token:nth-child(3){color:var(--blue);transform:translateY(4px)}
+.verb-arrows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;color:var(--gold);font-size:1.55rem;font-weight:900;text-align:center;line-height:.75}
+.verb-arrows span:nth-child(2){color:var(--red);transform:translateY(3px)}
+.verb-arrows span:nth-child(3){color:var(--blue)}
+.verb-conjugated .verb-token{background:linear-gradient(135deg,var(--ink),#273653);color:white;box-shadow:0 10px 24px #0002}
+.verb-conjugated .verb-token:nth-child(1){transform:translateY(-3px)}
+.verb-conjugated .verb-token:nth-child(2){background:linear-gradient(135deg,var(--red),#7d1115);transform:translateY(5px)}
+.verb-conjugated .verb-token:nth-child(3){transform:translateY(-3px)}
+.action-debrief{max-width:980px}
+.action-sentences{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.action-sentences p{margin:0;border-radius:12px;background:var(--paper);padding:10px 12px;font-size:var(--fs-compact-card);font-weight:850;line-height:1.2}
+.action-question{margin:0;color:var(--ink);font-size:var(--fs-example-big);font-weight:900;line-height:1.2}
+.action-words{display:flex;flex-wrap:wrap;gap:9px}
+.action-words span{display:inline-flex;align-items:center;min-height:38px;padding:8px 12px;border-radius:999px;background:var(--soft);color:var(--red);font-size:var(--fs-card);font-weight:900}
+.action-transformations{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.action-transformations div{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;border-radius:12px;background:var(--paper);padding:10px 12px;font-size:var(--fs-compact-card);font-weight:900}.action-transformations b{color:var(--red)}.action-transformations span{color:var(--muted)}
+.action-conclusion{margin:0;text-align:center;color:var(--red);font-size:var(--fs-example-big);font-weight:900}
+.family-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.family-card{display:grid;place-items:center;min-height:110px;border-radius:16px;background:var(--paper);padding:14px;font-size:clamp(1.65rem,3.5vw,2.35rem);font-weight:900;line-height:1;box-shadow:0 6px 18px #0001}.family-card:nth-child(2){border-top:5px solid var(--blue)}.family-card:nth-child(3){border-top:5px solid var(--red)}.family-card:nth-child(1){border-top:5px solid var(--gold)}
+.family-root{color:var(--ink)}.family-ending{color:var(--red)}
+.family-decomposition{display:grid;gap:9px}.family-decomposition div{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px;align-items:center;border-radius:12px;background:var(--paper);padding:11px 13px;font-size:var(--fs-card);font-weight:900}.family-decomposition b{color:var(--ink)}.family-decomposition .family-ending,.family-decomposition strong{color:var(--red)}.family-decomposition span{color:var(--muted)}
+.family-conclusions{display:grid;gap:10px}.family-conclusions p{margin:0;border-left:6px solid var(--gold);border-radius:13px;background:var(--paper);padding:12px 14px;font-size:var(--fs-note);font-weight:900;line-height:1.28}.family-conclusions p:last-child{border-left-color:var(--green)}
+.present-summary{margin:0;color:var(--ink);font-size:var(--fs-example-big);font-weight:900;line-height:1.25}
+.present-use{display:grid;gap:12px;border-radius:16px;background:var(--paper);padding:16px;border-left:6px solid var(--gold)}.present-use.current{border-left-color:var(--blue)}.present-use.future{border-left-color:var(--red)}.present-use p{margin:0}.present-use-label{color:var(--red);font-size:var(--fs-badge);font-weight:900;letter-spacing:.1em;text-transform:uppercase}.present-use-example{font-size:var(--fs-card);font-weight:900;line-height:1.2}
+.negative-demo{display:grid;gap:14px}.negative-line{display:flex;flex-wrap:wrap;align-items:center;gap:9px;border-radius:13px;background:var(--paper);padding:12px 14px;font-size:var(--fs-card);font-weight:900}.negative-arrow{justify-self:center;color:var(--muted);font-size:1.4rem;font-weight:900}.negative-no{color:var(--red)}.oral-prompt{margin:0;border-left:6px solid var(--green);border-radius:13px;background:white;padding:12px 14px;font-size:var(--fs-note);font-weight:900}
+.ar-build{display:grid;gap:13px;text-align:center}.ar-build p{margin:0;font-size:var(--fs-example-big);font-weight:900}.ar-root{color:var(--ink)}.ar-ending{color:var(--red)}.ar-build-note{color:var(--muted)!important;font-size:var(--fs-note)!important}
+.conjugation-table{overflow:hidden;border:1px solid var(--line);border-radius:15px}.conjugation-table>div{display:grid;grid-template-columns:1.1fr 1fr;gap:12px;background:white;padding:10px 14px;border-bottom:1px solid var(--line);font-size:var(--fs-compact-card);font-weight:850}.conjugation-table>div:last-child{border-bottom:0}.conjugation-table .head{background:var(--ink);color:white;font-size:var(--fs-badge);font-weight:900;letter-spacing:.08em;text-transform:uppercase}.conjugation-table strong{color:var(--red)}
+.ar-endings{display:flex;flex-wrap:wrap;gap:8px}.ar-endings span{display:inline-flex;align-items:center;min-height:36px;border-radius:999px;background:var(--soft);padding:7px 11px;color:var(--red);font-size:var(--fs-badge);font-weight:900}.ar-compositions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}.ar-compositions div{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:6px;align-items:center;border-radius:12px;background:var(--paper);padding:9px 10px;font-size:var(--fs-small);font-weight:900}.ar-compositions b:first-child{color:var(--ink)}.ar-compositions b:nth-child(3){color:var(--red)}.ar-compositions strong{color:var(--ink)}.ar-compositions span{color:var(--muted)}.ar-conclusion{margin:0;text-align:center;color:var(--red);font-size:var(--fs-example-big);font-weight:900}
+.pattern-recap{margin:0;text-align:center;font-size:var(--fs-card);font-weight:900;line-height:1.3}.pattern-recap strong{color:var(--red)}
+.pattern-examples{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.pattern-example{display:grid;gap:5px;border-radius:13px;background:var(--paper);padding:10px 12px;font-size:var(--fs-card);font-weight:900;line-height:1.18}.pattern-example span{color:var(--muted);font-size:var(--fs-small);font-weight:800}.pattern-example b{color:var(--red)}
+.pattern-compositions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.pattern-compositions div{display:grid;grid-template-columns:auto 1fr;gap:7px;border-radius:12px;background:var(--paper);padding:9px 11px;font-size:var(--fs-compact-card);font-weight:900}.pattern-compositions div span{color:var(--muted)}.pattern-compositions div strong{color:var(--red)}
+.pattern-message{margin:0;border-left:6px solid var(--green);border-radius:13px;background:white;padding:12px 14px;font-size:var(--fs-note);font-weight:900;line-height:1.25}.pattern-questions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}.pattern-questions span{border-radius:11px;background:var(--soft);padding:9px 10px;color:var(--ink);font-size:var(--fs-small);font-weight:900;line-height:1.2}
+.erir-compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.erir-column{overflow:hidden;border:1px solid var(--line);border-radius:15px;background:white}.erir-column h4{margin:0;padding:10px 14px;background:var(--ink);color:white;font-size:var(--fs-badge);letter-spacing:.1em;text-transform:uppercase}.erir-column.ir h4{background:var(--blue)}.erir-row{display:grid;grid-template-columns:1.35fr 1fr;gap:8px;padding:8px 12px;border-bottom:1px solid var(--line);font-size:var(--fs-compact-card);font-weight:850}.erir-row:last-child{border-bottom:0}.erir-row strong{color:var(--red)}.erir-endings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.erir-ending-card{border-radius:14px;background:var(--paper);padding:12px}.erir-ending-card h4{margin:0 0 8px;color:var(--red);font-size:var(--fs-badge);letter-spacing:.1em}.erir-ending-card p{margin:0;font-size:var(--fs-card);font-weight:900;line-height:1.25}.erir-difference{display:flex;flex-wrap:wrap;gap:9px}.erir-difference span{border-radius:999px;background:var(--soft);padding:8px 12px;color:var(--red);font-size:var(--fs-card);font-weight:900}.erir-conclusion{margin:0;border-left:6px solid var(--green);border-radius:13px;background:white;padding:13px 15px;color:var(--ink);font-size:var(--fs-example-big);font-weight:900;line-height:1.2}.erir-question{margin:0;color:var(--ink)!important;font-size:var(--fs-note);font-weight:900!important}
+.vocab-bank{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.vocab-bank span{display:flex;flex-direction:column;gap:4px;border-radius:11px;background:var(--paper);padding:8px 9px;color:var(--red);font-size:var(--fs-small);font-weight:900;line-height:1.1}.vocab-bank small{color:var(--muted);font-size:calc(var(--fs-small) * .9);font-weight:750}.receptive-bank{display:flex;flex-wrap:wrap;gap:8px}.receptive-bank span{display:inline-flex;flex-direction:column;gap:3px;border-radius:999px;background:var(--soft);padding:8px 11px;color:var(--ink);font-size:var(--fs-small);font-weight:900}.receptive-bank small{color:var(--muted);font-size:calc(var(--fs-small) * .88);font-weight:750}
+.frequent-vocab{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.frequent-vocab section{border-radius:14px;background:var(--paper);padding:12px}.frequent-vocab h4{margin:0 0 8px;color:var(--red);font-size:var(--fs-badge);letter-spacing:.1em}.frequent-vocab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.frequent-vocab-grid span{display:flex;flex-direction:column;gap:3px;color:var(--ink);font-size:var(--fs-small);font-weight:900}.frequent-vocab-grid small{color:var(--muted);font-weight:750}.frequent-sentences{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.frequent-sentences span{border-radius:11px;background:var(--paper);padding:9px 11px;color:var(--ink);font-size:var(--fs-compact-card);font-weight:900}.frequent-reconoce{display:flex;flex-wrap:wrap;gap:8px}.frequent-reconoce span{border-radius:999px;background:var(--soft);padding:8px 12px;color:var(--muted);font-size:var(--fs-small);font-weight:850}.frequent-message{margin:0;border-left:6px solid var(--green);border-radius:13px;background:white;padding:12px 14px;color:var(--ink);font-size:var(--fs-note);font-weight:900;line-height:1.25}
+.round-questions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.round-questions div{display:grid;grid-template-columns:30px 1fr;gap:9px;align-items:start;border-radius:12px;background:var(--paper);padding:10px 12px;font-size:var(--fs-compact-card);font-weight:900;line-height:1.2}.round-questions b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--red);color:white;font-size:var(--fs-small)}.round-support{margin:0;border-left:6px solid var(--green);border-radius:13px;background:white;padding:11px 14px;color:var(--ink);font-size:var(--fs-note);font-weight:900}
+.audio-box{display:grid;gap:10px;border-radius:14px;background:var(--paper);padding:14px}.audio-box audio{width:100%}.audio-placeholder{color:var(--muted);font-size:var(--fs-small);font-weight:800}.story-text{max-height:270px;overflow:auto;border:1px solid var(--line);border-radius:14px;background:#fffdf8;padding:14px 16px;color:var(--ink);font-size:var(--fs-small);font-weight:700;line-height:1.35}.story-text p{margin:0 0 10px}.story-text p:last-child{margin-bottom:0}.story-segments{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.story-segments[hidden]{display:none}.story-segments div{display:grid;grid-template-columns:28px 1fr;gap:8px;border-radius:11px;background:var(--paper);padding:9px 10px;font-size:var(--fs-small);font-weight:800;line-height:1.25}.story-segments b{color:var(--red)}.story-tasks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.story-tasks div{border-radius:11px;background:var(--paper);padding:9px 10px;font-size:var(--fs-small);font-weight:850;line-height:1.2}
+.story-audio-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.story-toggle{margin-top:0;min-height:44px;padding:10px 14px}.story-audio-row .audio-placeholder{font-style:italic}
+.story-slide-shell .progressive-stage-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.story-slide-shell .progressive-stage-card[data-progressive-stage][hidden]{display:grid}.story-slide-shell .progressive-stage-card:nth-child(3){grid-column:1/-1}.story-slide .story-text{width:100%;max-height:390px;font-size:var(--fs-compact-card)}
+.cards{display:grid;gap:var(--grid-gap)}
+.cards.two{grid-template-columns:repeat(2,1fr)}
+.cards.three{grid-template-columns:repeat(3,1fr)}
+.cards.four{grid-template-columns:repeat(4,1fr)}
+.lesson-map{max-width:1080px;margin:0 auto}
+.lesson-map-kicker{display:inline-flex;align-items:center;min-height:42px;margin:0 0 16px;padding:9px 15px;border-radius:999px;background:var(--ink);color:white;font-size:var(--fs-badge);font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.lesson-map-grid{gap:12px}
+.lesson-map-card{display:flex;align-items:center;min-height:74px;border-top:5px solid var(--gold);font-size:var(--fs-compact-card);font-weight:850;line-height:1.25}
+.lesson-map-card:nth-child(2n){border-top-color:var(--blue)}
+.lesson-map-card:nth-child(3n){border-top-color:var(--red)}
+.lesson-map-card strong{color:var(--red);white-space:nowrap}
+.lesson-map-continuity{margin-top:16px;border-left-color:var(--green);font-size:var(--fs-note);font-weight:850}
+.warmup-activity{max-width:1050px;margin:8px auto 0}
+.warmup-activity .cards>div{min-height:280px}
+.warmup-activity .cards>div:first-child{border-left:7px solid var(--blue)}
+.warmup-activity .cards>div:last-child{display:grid;align-content:center;border-left:7px solid var(--red);background:var(--paper)}
+.warmup-activity h3{margin:12px 0;color:var(--ink);font-size:var(--fs-h3)}
+.warmup-activity p{margin:0;color:var(--muted);font-size:var(--fs-card);font-weight:750}
+.warmup-warning{margin:0;color:var(--red)!important;font-size:var(--fs-example-big)!important;font-weight:900!important;line-height:1.18}
+.warmup-mission{margin-top:14px!important;color:var(--ink)!important;font-weight:850!important}
+.cards>div,.cards>a,.exercise-call,.rule-box,.note,.teacher-question,.text-panel,.audio-card{
+  background:white;border-radius:18px;padding:var(--card-pad);box-shadow:0 8px 22px #0001;font-size:var(--fs-card)
+}
+.cards.compact>div,.cards.compact>a{font-size:var(--fs-compact-card);display:flex;flex-direction:column;gap:var(--term-gap)}
+.cards small{display:block;margin-top:max(8px,var(--translation-gap));color:var(--muted);font-size:var(--fs-small);line-height:1.2}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.split.wide-left{grid-template-columns:1.15fr .85fr}
+.split.wide-right{grid-template-columns:.85fr 1.15fr}
+.note{margin-top:14px;border-left:6px solid var(--gold);font-size:var(--fs-note)}
+.rule-box{margin-top:18px;text-align:center;border:2px solid var(--gold)}
+.teacher-question{margin-top:20px;border-left:6px solid var(--gold)}
+.text-panel{font-size:var(--fs-card);line-height:1.52;border-left:7px solid var(--red)}
+.audio-card{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:18px;border-left:7px solid var(--green)}
+.exercise-call{display:block;margin:14px auto;max-width:800px;border-left:7px solid var(--blue);text-decoration:none;color:inherit}
+.exercise-call:hover,.activity-button:hover{transform:translateY(-1px)}
+.exercise-number{font-size:13px;font-weight:900;letter-spacing:.12em;color:var(--blue);text-transform:uppercase}
+.exercise-call h3{margin:7px 0}
+.exercise-call p{margin:0;color:var(--muted)}
+.exercise-path{display:block;margin-top:9px;color:var(--muted);font-size:12px;font-weight:800;word-break:break-word}
+.activity-button{display:inline-flex;align-items:center;justify-content:center;min-height:54px;width:max-content;max-width:100%;margin-top:24px;padding:14px 20px;border-radius:14px;background:var(--ink);color:white;text-decoration:none;font-size:var(--fs-badge);font-weight:900;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 12px 28px #0002}
+.pt{display:block;margin-top:var(--translation-gap);color:var(--muted);font-size:var(--fs-translation);font-weight:600;line-height:1.2}
+.progressive-shell{max-width:1120px;margin:0 auto;display:grid;gap:14px}
+.progressive-header{display:flex;justify-content:space-between;align-items:center;gap:16px;background:white;border-radius:18px;padding:14px 16px;box-shadow:0 8px 22px #0001;border-left:7px solid var(--blue)}
+.progressive-kicker{margin:0;color:var(--red);font-size:var(--fs-badge);font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.progressive-header h3{margin:5px 0 0;color:var(--ink);font-size:var(--fs-h3)}
+.progressive-counter{display:inline-flex;align-items:center;min-height:36px;border-radius:999px;background:var(--soft);color:var(--red);padding:8px 12px;font-size:var(--fs-badge);font-weight:900;white-space:nowrap}
+.progressive-stage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.progressive-stage-card{display:grid;gap:12px;background:white;border-radius:18px;padding:18px 20px;box-shadow:0 10px 26px #0001;border-top:6px solid var(--gold)}
+.progressive-stage-card[hidden]{display:none}
+.progressive-stage-card:nth-child(2n){border-top-color:var(--blue)}
+.progressive-stage-card:nth-child(3n){border-top-color:var(--red)}
+.progressive-stage-card h3{margin:0;color:var(--red);font-size:var(--fs-badge);letter-spacing:.09em;text-transform:uppercase}
+.progressive-stage-card p{margin:0;color:var(--muted);font-weight:800}
+.progressive-controls{display:flex;justify-content:flex-end;gap:10px;position:sticky;bottom:0;z-index:5;background:linear-gradient(180deg,rgba(247,241,229,0),rgba(247,241,229,.96) 28%);padding:18px 0 4px}
+.progressive-next-button,.progressive-reset-button{min-height:48px;border-radius:12px;padding:12px 16px;font-size:var(--fs-badge);font-weight:900;letter-spacing:.09em;text-transform:uppercase;cursor:pointer}
+.progressive-next-button{border:0;background:var(--red);color:white}
+.progressive-next-button:disabled{background:#c9c3b8;color:#6b6258;cursor:not-allowed}
+.progressive-reset-button{border:1px solid var(--line);background:white;color:var(--red)}
+.progress{position:fixed;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--red),var(--gold));z-index:20;transition:.3s}
+.font-controls{position:fixed;right:18px;top:58px;z-index:30;display:flex;gap:4px;background:rgba(255,255,255,.86);border:1px solid rgba(23,32,51,.14);border-radius:12px;padding:5px;box-shadow:0 8px 22px #0002;backdrop-filter:blur(8px)}
+.font-controls button{width:34px;height:32px;border:0;border-radius:8px;background:transparent;color:var(--ink);font-size:var(--fs-controls);font-weight:900;cursor:pointer}
+.font-controls button:hover,.font-controls button.active{background:var(--soft);color:var(--red)}
+.chain-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.chain-sentence{display:grid;grid-template-columns:2rem 1fr;gap:8px;align-items:start;border-radius:12px;background:var(--paper);padding:9px 10px;font-size:var(--fs-compact-card);font-weight:850;line-height:1.22}.chain-sentence b{display:grid;place-items:center;width:1.65rem;height:1.65rem;border-radius:50%;background:var(--ink);color:white;font-size:var(--fs-small);line-height:1}.chain-prompt{display:block;margin-top:5px;color:var(--muted);font-size:var(--fs-small);font-weight:800}
+.pair-activity{max-width:1050px;margin:8px auto 0}.pair-activity .cards>div{min-height:270px}.pair-activity .cards>div:first-child{border-left:7px solid var(--blue)}.pair-activity .cards>div:last-child{display:grid;align-content:center;border-left:7px solid var(--red);background:var(--paper)}.pair-activity h3{margin:12px 0;color:var(--ink);font-size:var(--fs-h3)}.pair-activity p{margin:0;color:var(--muted);font-size:var(--fs-card);font-weight:750}.pair-warning{margin:0;color:var(--red)!important;font-size:var(--fs-example-big)!important;font-weight:900!important;line-height:1.18}.pair-mission{margin-top:14px!important;color:var(--ink)!important;font-weight:850!important}
+@media(max-width:900px){
+  .slide{padding:var(--slide-pad-y-mobile) var(--slide-pad-x-mobile) var(--slide-pad-bottom-mobile)}
+  .foot{left:var(--foot-x-mobile);right:var(--foot-x-mobile)}
+  .cover-grid,.split,.split.wide-left,.split.wide-right{grid-template-columns:1fr}
+  .cover-visual{min-height:180px;padding:18px}
+  .verb-row,.verb-arrows{gap:8px}
+  .verb-token{min-height:54px;padding:8px 5px;font-size:min(1.25rem,4.7vw)}
+  .action-sentences,.action-transformations{grid-template-columns:1fr}
+  .family-cards{gap:8px}
+  .family-card{min-height:76px;padding:10px;font-size:min(1.6rem,7vw)}
+  .family-decomposition div{grid-template-columns:1fr auto 1fr;justify-items:center;font-size:min(var(--fs-card),16px)}
+  .family-decomposition div strong{grid-column:1 / -1}
+  .conjugation-table>div{padding:8px 10px;font-size:min(var(--fs-compact-card),15px)}
+  .ar-compositions{grid-template-columns:1fr}.ar-compositions div{font-size:min(var(--fs-small),12px)}
+  .pattern-examples,.pattern-compositions,.pattern-questions{grid-template-columns:1fr}
+  .erir-compare,.erir-endings{grid-template-columns:1fr}
+  .frequent-vocab,.frequent-sentences{grid-template-columns:1fr}
+  .round-questions{grid-template-columns:1fr}
+  .story-segments,.story-tasks{grid-template-columns:1fr}
+  .story-slide-shell .progressive-stage-grid{grid-template-columns:1fr}.story-slide-shell .progressive-stage-card:nth-child(3){grid-column:auto}
+  .vocab-bank{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  .chain-grid{grid-template-columns:1fr}.chain-sentence{font-size:min(var(--fs-compact-card),15px)}
+  .pair-activity .cards>div{min-height:0}
+  .cards.two,.cards.three{grid-template-columns:1fr}
+  .lesson-map-kicker{margin-bottom:10px}
+  .lesson-map-card{min-height:58px}
+  .warmup-activity .cards>div{min-height:0}
+  .cards.four{grid-template-columns:repeat(2,1fr)}
+  h1{font-size:var(--fs-h1-mobile)}
+  h2{font-size:min(var(--fs-h2),32px)}
+  h3{font-size:min(var(--fs-h3),18px)}
+  .cover-main-title{font-size:min(var(--fs-cover-main),42px)}
+  .progressive-header{display:grid;gap:10px;padding:12px 14px}
+  .progressive-stage-grid{grid-template-columns:1fr}
+  .progressive-stage-card{padding:14px}
+  .progressive-controls{justify-content:stretch;display:grid;grid-template-columns:1fr 1fr}
+  .progressive-next-button,.progressive-reset-button{width:100%;font-size:min(var(--fs-badge),13px)}
+  .font-controls{right:10px;top:50px}
+  .foot span:last-child{display:none}
+}
+@media(max-width:520px){
+  .cards.four{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .slide,.progress{transition:none}
+  *{scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+
+<section class="slide cover active" id="slide-1" data-section="inicio" aria-labelledby="slide-1-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle lesson-label">Lección 4</div>
+    <h1 id="slide-1-title" class="cover-main-title">Los verbos regulares</h1>
+    <div class="body">
+      <div class="cover-grid">
+        <div class="cover-intro">
+          <div class="eyebrow">CURSO DE ESPAÑOL · NIVEL INICIAL</div>
+          <p class="lead">Hablar de acciones en el presente.</p>
+        </div>
+        <div class="cover-visual" aria-label="Formas visuales de los verbos regulares">
+          <div class="verb-composition">
+            <div class="verb-row verb-infinitives">
+              <span class="verb-token">hablar</span>
+              <span class="verb-token">comer</span>
+              <span class="verb-token">vivir</span>
+            </div>
+            <div class="verb-arrows" aria-hidden="true"><span>↓</span><span>↓</span><span>↓</span></div>
+            <div class="verb-row verb-conjugated">
+              <span class="verb-token">hablo</span>
+              <span class="verb-token">comemos</span>
+              <span class="verb-token">viven</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 4 · Contenido pendiente</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-2" data-section="pendiente" aria-labelledby="slide-2-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Mapa rápido de la clase</div>
+    <h1 id="slide-2-title">Lo que vamos a hacer</h1>
+    <div class="body">
+      <div class="lesson-map">
+        <div class="lesson-map-kicker">HOY VAMOS A…</div>
+        <div class="lesson-map-grid cards two">
+          <div class="lesson-map-card">descubrir cómo funcionan los verbos regulares;</div>
+          <div class="lesson-map-card">conjugar verbos en <strong>-ar, -er e -ir</strong>;</div>
+          <div class="lesson-map-card">hablar de acciones y hábitos;</div>
+          <div class="lesson-map-card">hacer preguntas y responder;</div>
+          <div class="lesson-map-card">utilizar&nbsp;<strong>a</strong>&nbsp;y&nbsp;<strong>al</strong>;</div>
+          <div class="lesson-map-card">leer una historia utilizando los nuevos verbos.</div>
+        </div>
+        <div class="note lesson-map-continuity">Seguiremos usando números, horas, ser, estar y hay.</div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 4 · Contenido pendiente</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-3" data-section="calentamiento" aria-labelledby="slide-3-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Un día diferente</div>
+    <h1 id="slide-3-title">Calentamiento</h1>
+    <div class="body">
+      <div class="warmup-activity">
+        <div class="cards two">
+          <div>
+            <div class="eyebrow">ACTIVIDAD ORAL EN PAREJAS</div>
+            <h3>Un día diferente</h3>
+            <p>Completad las rutinas de Ana y Carlos con la información de vuestro compañero.</p>
+            <a class="activity-button" href="workbook/leccion-04/actividad-un-dia-diferente.html" target="_blank" rel="noopener">EMPEZAR LA ACTIVIDAD</a>
+          </div>
+          <div>
+            <p class="warmup-warning">No enseñéis vuestra pantalla.</p>
+            <p class="warmup-mission">Completad las dos rutinas y descubrid tres diferencias.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 4 · Calentamiento</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-4" data-section="verbos" aria-labelledby="slide-4-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Observamos la actividad</div>
+    <h1 id="slide-4-title">¿Qué palabras indican acciones?</h1>
+    <div class="body">
+      <div class="progressive-shell action-debrief" data-progressive-reveal data-progressive-navigation data-initial-stage="1">
+        <div class="progressive-header">
+          <div>
+            <p class="progressive-kicker">De la actividad a la idea</p>
+            <h3>Observa las frases.</h3>
+          </div>
+          <p class="progressive-counter" data-progressive-counter aria-live="polite">Etapa 1 / 5</p>
+        </div>
+        <div class="progressive-stage-grid" aria-label="Observación guiada de palabras de acción">
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Frases</h3>
+            <div class="action-sentences">
+              <p>Ana estudia español.</p>
+              <p>Carlos trabaja en un restaurante.</p>
+              <p>Marta escucha música.</p>
+              <p>Pablo camina al hotel.</p>
+            </div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Pregunta</h3>
+            <p class="action-question">¿Qué palabras expresan acciones?</p>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Palabras de acción</h3>
+            <div class="action-words"><span>estudia</span><span>trabaja</span><span>escucha</span><span>camina</span></div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Infinitivos</h3>
+            <div class="action-transformations">
+              <div><b>estudia</b><span>→</span><strong>estudiar</strong></div>
+              <div><b>trabaja</b><span>→</span><strong>trabajar</strong></div>
+              <div><b>escucha</b><span>→</span><strong>escuchar</strong></div>
+              <div><b>camina</b><span>→</span><strong>caminar</strong></div>
+            </div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Conclusión</h3>
+            <p class="action-conclusion">Son verbos.</p>
+          </article>
+        </div>
+        <div class="progressive-controls" data-no-slide-advance>
+          <button class="progressive-reset-button" type="button" data-progressive-reset>REINICIAR</button>
+          <button class="progressive-next-button" type="button" data-progressive-next>SIGUIENTE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 4 · Verbos regulares</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-5" data-section="verbos" aria-labelledby="slide-5-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Infinitivos</div>
+    <h1 id="slide-5-title">Tres familias</h1>
+    <div class="body">
+      <div class="progressive-shell" data-progressive-reveal data-progressive-navigation data-initial-stage="1">
+        <div class="progressive-header">
+          <div>
+            <p class="progressive-kicker">Observa las terminaciones</p>
+            <h3>Raíz y terminación</h3>
+          </div>
+          <p class="progressive-counter" data-progressive-counter aria-live="polite">Etapa 1 / 4</p>
+        </div>
+        <div class="progressive-stage-grid" aria-label="Las tres familias de infinitivos">
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Las tres familias</h3>
+            <div class="family-cards">
+              <div class="family-card"><span class="family-root">cant-</span><span class="family-ending">ar</span></div>
+              <div class="family-card"><span class="family-root">com-</span><span class="family-ending">er</span></div>
+              <div class="family-card"><span class="family-root">viv-</span><span class="family-ending">ir</span></div>
+            </div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Raíz y terminación</h3>
+            <div class="family-decomposition">
+              <div><b>cant</b><span>+</span><b class="family-ending">ar</b><span>=</span><strong>cantar</strong></div>
+              <div><b>com</b><span>+</span><b class="family-ending">er</b><span>=</span><strong>comer</strong></div>
+              <div><b>viv</b><span>+</span><b class="family-ending">ir</b><span>=</span><strong>vivir</strong></div>
+            </div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Idea clave</h3>
+            <div class="family-conclusions"><p>Todos los infinitivos terminan en <span class="family-ending">-ar</span>, <span class="family-ending">-er</span> o <span class="family-ending">-ir</span>.</p></div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Idea clave</h3>
+            <div class="family-conclusions"><p>Los verbos regulares mantienen la raíz.</p></div>
+          </article>
+        </div>
+        <div class="progressive-controls" data-no-slide-advance>
+          <button class="progressive-reset-button" type="button" data-progressive-reset>REINICIAR</button>
+          <button class="progressive-next-button" type="button" data-progressive-next>SIGUIENTE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 4 · Verbos regulares</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-6" data-section="presente" aria-labelledby="slide-6-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Usos en contexto</div>
+    <h1 id="slide-6-title">El presente</h1>
+    <div class="body">
+      <div class="progressive-shell" data-progressive-reveal data-progressive-navigation data-initial-stage="1">
+        <div class="progressive-header">
+          <div>
+            <p class="progressive-kicker">Observa el contexto</p>
+            <h3>El presente puede hablar de situaciones distintas.</h3>
+          </div>
+          <p class="progressive-counter" data-progressive-counter aria-live="polite">Etapa 1 / 5</p>
+        </div>
+        <div class="progressive-stage-grid" aria-label="Usos del presente">
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Idea central</h3>
+            <p class="present-summary">El presente habla de acciones actuales, habituales o previstas en un contexto claro.</p>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <div class="present-use current"><p class="present-use-label">Acción actual</p><p class="present-use-example">Ana estudia español.</p></div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <div class="present-use"><p class="present-use-label">Hábito</p><p class="present-use-example">Trabajo de lunes a viernes.</p></div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <div class="present-use future"><p class="present-use-label">Futuro próximo con marca temporal</p><p class="present-use-example">Mañana trabajo en casa.</p></div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Negativa</h3>
+            <div class="negative-demo">
+              <div class="negative-line">Trabajo en la oficina.</div>
+              <div class="negative-arrow">↓</div>
+              <div class="negative-line"><span class="negative-no">No</span><span>trabajo en casa.</span></div>
+            </div>
+            <p class="oral-prompt"><span class="negative-no">no</span> + verbo · ¿Qué palabra hace negativa la última frase?</p>
+          </article>
+        </div>
+        <div class="progressive-controls" data-no-slide-advance>
+          <button class="progressive-reset-button" type="button" data-progressive-reset>REINICIAR</button>
+          <button class="progressive-next-button" type="button" data-progressive-next>SIGUIENTE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 4 · El presente</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-7" data-section="verbos-ar" aria-labelledby="slide-7-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Presente regular</div>
+    <h1 id="slide-7-title">Los verbos en -ar</h1>
+    <div class="body">
+      <div class="progressive-shell" data-progressive-reveal data-progressive-navigation data-initial-stage="1">
+        <div class="progressive-header">
+          <div>
+            <p class="progressive-kicker">Verbo modelo</p>
+            <h3>hablar</h3>
+          </div>
+          <p class="progressive-counter" data-progressive-counter aria-live="polite">Etapa 1 / 5</p>
+        </div>
+        <div class="progressive-stage-grid" aria-label="Construcción del presente de hablar">
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Construcción</h3>
+            <div class="ar-build"><p><span class="ar-root">habl</span> + <span class="ar-ending">ar</span> = hablar</p></div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Raíz</h3>
+            <div class="ar-build"><p>hablar → <span class="ar-root">habl-</span></p><p class="ar-build-note">Quitamos <span class="ar-ending">-ar</span> y mantenemos la raíz.</p></div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Presente</h3>
+            <div class="conjugation-table" aria-label="Conjugación de hablar en presente">
+              <div class="head"><span>Pronombre</span><span>Forma</span></div>
+              <div><span>yo</span><strong>hablo</strong></div>
+              <div><span>tú</span><strong>hablas</strong></div>
+              <div><span>él / ella / usted</span><strong>habla</strong></div>
+              <div><span>nosotros/as</span><strong>hablamos</strong></div>
+              <div><span>vosotros/as</span><strong>habláis</strong></div>
+              <div><span>ellos / ellas / ustedes</span><strong>hablan</strong></div>
+            </div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Terminaciones</h3>
+            <div class="ar-endings"><span>-o</span><span>-as</span><span>-a</span><span>-amos</span><span>-áis</span><span>-an</span></div>
+            <div class="ar-compositions">
+              <div><b>habl</b><span>+</span><b>o</b><span>→</span><strong>hablo</strong></div>
+              <div><b>habl</b><span>+</span><b>as</b><span>→</span><strong>hablas</strong></div>
+              <div><b>habl</b><span>+</span><b>amos</b><span>→</span><strong>hablamos</strong></div>
+              <div><b>habl</b><span>+</span><b>áis</b><span>→</span><strong>habláis</strong></div>
+            </div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Idea clave</h3>
+            <p class="ar-conclusion">La raíz no cambia.</p>
+            <p class="oral-prompt">Si la raíz es <span class="ar-root">habl-</span>, ¿cómo decimos con nosotros?</p>
+          </article>
+        </div>
+        <div class="progressive-controls" data-no-slide-advance>
+          <button class="progressive-reset-button" type="button" data-progressive-reset>REINICIAR</button>
+          <button class="progressive-next-button" type="button" data-progressive-next>SIGUIENTE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 4 · Verbos en -ar</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-8" data-section="verbos-ar" aria-labelledby="slide-8-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Raíces y terminaciones</div>
+    <h1 id="slide-8-title">Muchos verbos, un mismo patrón</h1>
+    <div class="body">
+      <div class="progressive-shell" data-progressive-reveal data-progressive-navigation data-initial-stage="1">
+        <div class="progressive-header">
+          <div><p class="progressive-kicker">Reutilizamos lo aprendido</p><h3>El patrón es el mismo.</h3></div>
+          <p class="progressive-counter" data-progressive-counter aria-live="polite">Etapa 1 / 5</p>
+        </div>
+        <div class="progressive-stage-grid" aria-label="Aplicación del patrón de verbos en ar">
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Recordamos hablar</h3>
+            <p class="pattern-recap"><strong>hablar</strong> → hablo, hablas, habla, hablamos, habláis, hablan</p>
+            <p class="pattern-message">El patrón es el mismo. Cambia la raíz.</p>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Aplicamos el mismo patrón</h3>
+            <div class="pattern-examples">
+              <div class="pattern-example"><b>trabajar</b><span>→ trabajo, trabajas, trabaja...</span></div>
+              <div class="pattern-example"><b>estudiar</b><span>→ estudio, estudias, estudia...</span></div>
+              <div class="pattern-example"><b>escuchar</b><span>→ escucho, escuchas, escucha...</span></div>
+              <div class="pattern-example"><b>caminar</b><span>→ camino, caminas, camina...</span></div>
+              <div class="pattern-example"><b>cocinar</b><span>→ cocino...</span></div>
+              <div class="pattern-example"><b>comprar</b><span>→ compro...</span></div>
+            </div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Raíz + terminación</h3>
+            <div class="pattern-compositions">
+              <div><span>trabaj + o</span><strong>→ trabajo</strong></div>
+              <div><span>estudi + as</span><strong>→ estudias</strong></div>
+              <div><span>escuch + amos</span><strong>→ escuchamos</strong></div>
+              <div><span>camin + an</span><strong>→ caminan</strong></div>
+            </div>
+            <p class="pattern-message">La raíz cambia. Las terminaciones siguen el mismo patrón.</p>
+            <div class="pattern-questions"><span>¿Cómo decimos “nosotros” con estudiar?</span><span>¿Y “ellos” con trabajar?</span><span>¿Cómo decimos “yo” con escuchar?</span></div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Aprende</h3>
+            <div class="vocab-bank">
+              <span>bailar<small>dançar</small></span><span>caminar<small>caminhar</small></span><span>cocinar<small>cozinhar</small></span><span>comprar<small>comprar</small></span>
+              <span>contestar<small>responder</small></span><span>descansar<small>descansar</small></span><span>escuchar<small>escutar</small></span><span>estudiar<small>estudar</small></span>
+              <span>hablar<small>falar</small></span><span>limpiar<small>limpar</small></span><span>mirar<small>olhar</small></span><span>practicar<small>praticar</small></span>
+              <span>trabajar<small>trabalhar</small></span><span>viajar<small>viajar</small></span>
+            </div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Reconoce</h3>
+            <div class="receptive-bank"><span>bajar<small>baixar</small></span><span>entrar<small>entrar</small></span><span>llegar<small>chegar</small></span><span>nadar<small>nadar</small></span><span>regresar<small>regressar</small></span></div>
+          </article>
+        </div>
+        <div class="progressive-controls" data-no-slide-advance><button class="progressive-reset-button" type="button" data-progressive-reset>REINICIAR</button><button class="progressive-next-button" type="button" data-progressive-next>SIGUIENTE</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 4 · Verbos regulares</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-9" data-section="lectura" aria-labelledby="slide-9-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Práctica oral</div>
+    <h1 id="slide-9-title">Leemos y conjugamos</h1>
+    <div class="body">
+      <div class="progressive-shell" data-progressive-reveal data-progressive-navigation data-initial-stage="1">
+        <div class="progressive-header">
+          <div><p class="progressive-kicker">LEEMOS EN CADENA</p><h3>Una persona lee una frase. La siguiente continúa.</h3></div>
+          <p class="progressive-counter" data-progressive-counter aria-live="polite">Etapa 1 / 4</p>
+        </div>
+        <div class="progressive-stage-grid" aria-label="Veinte frases para leer en cadena">
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Frases 1–5</h3>
+            <div class="chain-grid">
+              <div class="chain-sentence"><b>1</b><span>Yo trabajo en una oficina.</span></div>
+              <div class="chain-sentence"><b>2</b><span>Tú compras dos libros.</span></div>
+              <div class="chain-sentence"><b>3</b><span>Marta estudia español por la noche y escucha música después de la clase.</span></div>
+              <div class="chain-sentence"><b>4</b><span>Ana cocina a las ocho y media.</span></div>
+              <div class="chain-sentence"><b>5</b><span>¿Vosotros habláis español en clase?</span></div>
+            </div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Frases 6–10</h3>
+            <div class="chain-grid">
+              <div class="chain-sentence"><b>6</b><span>Nosotros escuchamos música en casa después de la clase.</span></div>
+              <div class="chain-sentence"><b>7</b><span>Ellas limpian la cocina por la mañana.</span></div>
+              <div class="chain-sentence"><b>8</b><span>¿Tú trabajas por la mañana o por la tarde?</span></div>
+              <div class="chain-sentence"><b>9</b><span>Los estudiantes practican la pronunciación durante veinte minutos.</span></div>
+              <div class="chain-sentence"><b>10</b><span>Ellos caminan al restaurante a las doce y cuarto.</span></div>
+            </div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Frases 11–15</h3>
+            <div class="chain-grid">
+              <div class="chain-sentence"><b>11</b><span>Hay treinta estudiantes en la clase, pero solo veinte practican hoy.</span></div>
+              <div class="chain-sentence"><b>12</b><span>La clase es a las ocho y los estudiantes llegan a las ocho menos cuarto.</span></div>
+              <div class="chain-sentence"><b>13</b><span>Ustedes estudian español todos los días, ¿verdad?</span></div>
+              <div class="chain-sentence"><b>14</b><span>Hoy no trabajo en la oficina; trabajo en casa.</span></div>
+              <div class="chain-sentence"><b>15</b><span>Ellos no cocinan por la noche porque descansan después del trabajo.</span></div>
+            </div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Frases 16–20</h3>
+            <div class="chain-grid">
+              <div class="chain-sentence"><b>16</b><span>Usted habla con los estudiantes y contesta dos preguntas.</span></div>
+              <div class="chain-sentence"><b>17</b><span>En la sala hay veinte estudiantes y todos practican español.</span></div>
+              <div class="chain-sentence"><b>18</b><span>Nosotros viajamos en julio y descansamos los domingos.</span></div>
+              <div class="chain-sentence"><b>19</b><span>¿Ella mira la agenda y trabaja a las seis?</span></div>
+              <div class="chain-sentence"><b>20</b><span>Los estudiantes viajan a Madrid en agosto y hablan español durante el viaje.</span></div>
+            </div>
+          </article>
+        </div>
+        <div class="progressive-controls" data-no-slide-advance><button class="progressive-reset-button" type="button" data-progressive-reset>REINICIAR</button><button class="progressive-next-button" type="button" data-progressive-next>SIGUIENTE</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 4 · Lectura oral</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-10" data-section="actividad" aria-labelledby="slide-10-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">¿Quién es?</div>
+    <h1 id="slide-10-title">En parejas</h1>
+    <div class="body">
+      <div class="pair-activity">
+        <div class="cards two">
+          <div>
+            <div class="eyebrow">ACTIVIDAD ORAL</div>
+            <h3>¿Quién es?</h3>
+            <p>Cada persona tiene información diferente sobre cuatro personas.</p>
+            <p style="margin-top:12px">Preguntad por los datos que faltan y completad las fichas.</p>
+            <a class="activity-button" href="workbook/leccion-04/actividad-quien-es.html" target="_blank" rel="noopener">EMPEZAR LA ACTIVIDAD</a>
+          </div>
+          <div>
+            <p class="pair-warning">No enseñéis vuestra pantalla.</p>
+            <p class="pair-mission">Completad la información y descubrid qué persona corresponde a cada descripción.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 4 · Actividad oral</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-11" data-section="practica" aria-labelledby="slide-11-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Verbos regulares en -ar</div>
+    <h1 id="slide-11-title">Práctica 1</h1>
+    <div class="body">
+      <a class="exercise-call" href="workbook/leccion-04/ejercicio-01-verbos-ar.html" target="_blank" rel="noopener">
+        <div class="exercise-number">PRÁCTICA 1</div>
+        <h3>Verbos regulares en -ar</h3>
+        <p>Vamos a practicar cómo se forman y se utilizan los verbos regulares en -ar.</p>
+        <span class="activity-button">EMPEZAR</span>
+        <span class="exercise-path">workbook/leccion-04/ejercicio-01-verbos-ar.html</span>
+      </a>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 4 · Práctica 1</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-12" data-section="verbos-er-ir" aria-labelledby="slide-12-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Presente regular</div>
+    <h1 id="slide-12-title">-ER y -IR: observa la diferencia</h1>
+    <div class="body">
+      <div class="progressive-shell" data-progressive-reveal data-progressive-navigation data-initial-stage="1">
+        <div class="progressive-header">
+          <div><p class="progressive-kicker">Comparamos dos familias</p><h3>Observa las formas</h3></div>
+          <p class="progressive-counter" data-progressive-counter aria-live="polite">Etapa 1 / 6</p>
+        </div>
+        <div class="progressive-stage-grid erir-stage-grid" aria-label="Comparación de comer y vivir">
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Comer</h3>
+            <div class="erir-compare"><div class="erir-column"><h4>COMER</h4><div class="erir-row"><span>yo</span><strong>como</strong></div><div class="erir-row"><span>tú</span><strong>comes</strong></div><div class="erir-row"><span>él / ella / usted</span><strong>come</strong></div><div class="erir-row"><span>nosotros/as</span><strong>comemos</strong></div><div class="erir-row"><span>vosotros/as</span><strong>coméis</strong></div><div class="erir-row"><span>ellos / ellas / ustedes</span><strong>comen</strong></div></div></div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Vivir</h3>
+            <div class="erir-compare"><div class="erir-column ir"><h4>VIVIR</h4><div class="erir-row"><span>yo</span><strong>vivo</strong></div><div class="erir-row"><span>tú</span><strong>vives</strong></div><div class="erir-row"><span>él / ella / usted</span><strong>vive</strong></div><div class="erir-row"><span>nosotros/as</span><strong>vivimos</strong></div><div class="erir-row"><span>vosotros/as</span><strong>vivís</strong></div><div class="erir-row"><span>ellos / ellas / ustedes</span><strong>viven</strong></div></div></div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Terminaciones</h3>
+            <div class="erir-endings"><div class="erir-ending-card"><h4>-ER</h4><p>-o · -es · -e · -emos · -éis · -en</p></div><div class="erir-ending-card"><h4>-IR</h4><p>-o · -es · -e · -imos · -ís · -en</p></div></div>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Lo que cambia</h3>
+            <div class="erir-difference"><span>-emos</span><span>-imos</span><span>-éis</span><span>-ís</span></div>
+            <p class="erir-question">Las demás terminaciones se alinean: -o · -es · -e · -en.</p>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Pregunta guiada</h3>
+            <p class="erir-question">¿Qué formas son iguales? ¿Qué formas cambian?</p>
+          </article>
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Idea clave</h3>
+            <p class="erir-conclusion">La principal diferencia está en nosotros/as y vosotros/as.</p>
+          </article>
+        </div>
+        <div class="progressive-controls" data-no-slide-advance><button class="progressive-reset-button" type="button" data-progressive-reset>REINICIAR</button><button class="progressive-next-button" type="button" data-progressive-next>SIGUIENTE</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 4 · Verbos regulares</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-13" data-section="vocabulario" aria-labelledby="slide-13-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Vocabulario nuevo</div>
+    <h1 id="slide-13-title">Verbos frecuentes en -er e -ir</h1>
+    <div class="body">
+      <div class="progressive-shell" data-progressive-reveal data-progressive-navigation data-initial-stage="1">
+        <div class="progressive-header"><div><p class="progressive-kicker">LEE Y RELACIONA</p><h3>Ya conocemos el patrón. Ahora ampliamos el vocabulario.</h3></div><p class="progressive-counter" data-progressive-counter aria-live="polite">Etapa 1 / 5</p></div>
+        <div class="progressive-stage-grid" aria-label="Vocabulario frecuente en er e ir">
+          <article class="progressive-stage-card" data-progressive-stage hidden><h3>-ER · APRENDE</h3><div class="frequent-vocab-grid"><span>aprender<small>aprender</small></span><span>beber<small>beber</small></span><span>comer<small>comer</small></span><span>comprender<small>compreender</small></span><span>correr<small>correr</small></span><span>leer<small>ler</small></span><span>vender<small>vender</small></span><span>romper<small>romper</small></span></div></article>
+          <article class="progressive-stage-card" data-progressive-stage hidden><h3>-IR · APRENDE</h3><div class="frequent-vocab-grid"><span>abrir<small>abrir</small></span><span>compartir<small>compartilhar</small></span><span>decidir<small>decidir</small></span><span>describir<small>descrever</small></span><span>discutir<small>discutir</small></span><span>escribir<small>escrever</small></span><span>recibir<small>receber</small></span><span>subir<small>subir</small></span><span>vivir<small>viver</small></span></div></article>
+          <article class="progressive-stage-card" data-progressive-stage hidden><h3>En frases</h3><div class="frequent-sentences"><span>Yo leo.</span><span>Nosotros comemos.</span><span>Ella aprende español.</span><span>Vosotros bebéis café.</span><span>Yo vivo en Brasil.</span><span>Ellos escriben.</span><span>Nosotros compartimos los libros.</span><span>Ellas venden libros.</span><span>Tú recibes un mensaje.</span><span>Ustedes abren la puerta.</span></div></article>
+          <article class="progressive-stage-card" data-progressive-stage hidden><h3>Reconoce</h3><div class="frequent-reconoce"><span>sufrir — sofrer</span><span>meter — colocar</span><span>prender — prender</span></div></article>
+          <article class="progressive-stage-card" data-progressive-stage hidden><h3>Idea clave</h3><p class="frequent-message">El patrón es regular: cambia la raíz, pero seguimos usando las terminaciones de -er o -ir.</p><p class="erir-question">¿“Comer” es un verbo en -er o en -ir? ¿Cuál es el infinitivo de “escriben”?</p></article>
+        </div>
+        <div class="progressive-controls" data-no-slide-advance><button class="progressive-reset-button" type="button" data-progressive-reset>REINICIAR</button><button class="progressive-next-button" type="button" data-progressive-next>SIGUIENTE</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 4 · Vocabulario</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-14" data-section="actividad" aria-labelledby="slide-14-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content"><div class="subtitle">La semana de dos personas</div><h1 id="slide-14-title">En parejas</h1><div class="body"><div class="pair-activity"><div class="cards two"><div><div class="eyebrow">ACTIVIDAD ORAL</div><h3>La semana de dos personas</h3><p>Cada persona tiene una parte de la semana.</p><p>Preguntad por la información que falta y completad las actividades.</p><a class="activity-button" href="workbook/leccion-04/actividad-la-semana.html" target="_blank" rel="noopener">EMPEZAR LA ACTIVIDAD</a></div><div><p class="pair-warning">No enseñéis vuestra pantalla.</p><p class="pair-mission"><strong>Completad las actividades.</strong><br><br><strong>Encontrad dos cosas que hacen los dos.</strong><br><br>Después, explicad dos diferencias entre las personas.</p></div></div></div></div></div>
+  <div class="foot"><span>Lección 4 · Actividad oral</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-15" data-section="practica" aria-labelledby="slide-15-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content"><div class="subtitle">-AR · -ER · -IR</div><h1 id="slide-15-title">Práctica 2</h1><div class="body"><a class="exercise-call" href="workbook/leccion-04/ejercicio-02-ar-er-ir.html" target="_blank" rel="noopener"><div class="exercise-number">PRÁCTICA 2</div><h3>-AR · -ER · -IR</h3><p>Ahora combinamos las tres familias.</p><span class="activity-button">EMPEZAR</span><span class="exercise-path">workbook/leccion-04/ejercicio-02-ar-er-ir.html</span></a></div></div>
+  <div class="foot"><span>Lección 4 · Práctica 2</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-16" data-section="preposiciones" aria-labelledby="slide-16-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content"><div class="subtitle">Preposición y contracción</div><h1 id="slide-16-title">A y al</h1><div class="body"><div class="progressive-shell" data-progressive-reveal data-progressive-navigation data-initial-stage="1">
+    <div class="progressive-header"><div><p class="progressive-kicker">Observa y compara</p><h3>Una forma corta, un uso muy frecuente.</h3></div><p class="progressive-counter" data-progressive-counter aria-live="polite">Etapa 1 / 5</p></div>
+    <div class="progressive-stage-grid" aria-label="Uso de a y al">
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Ejemplo principal</h3><p class="erir-conclusion">Caminamos <span class="ar-ending">al</span> hotel.</p></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>De dónde viene</h3><div class="family-decomposition"><div><b>a</b><span>+</span><b>el</b><span>=</span><strong>al</strong></div><div><span>a + el hotel</span><span>→</span><strong>al hotel</strong></div></div></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Los otros artículos</h3><div class="pattern-examples"><div class="pattern-example"><b>a la tienda</b><span>a + la → a la</span></div><div class="pattern-example"><b>a los estados del sur</b><span>a + los → a los</span></div><div class="pattern-example"><b>a las ciudades grandes</b><span>a + las → a las</span></div><div class="pattern-example"><b>Viajamos a la tienda.</b><span>Ella viaja a las ciudades grandes.</span></div></div></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Regla central</h3><p class="erir-conclusion">Solo <span class="ar-ending">a + el</span> se contrae: <span class="ar-ending">al</span>.</p><p class="erir-question">¿Cómo decimos “a + el restaurante”? ¿Y “a + la oficina”? ¿Y “a + los hoteles”?</p></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Ya conoces · Ahora</h3><div class="family-conclusions"><p>YA CONOCES · <span class="family-ending">de + el → del</span></p><p>AHORA · <span class="family-ending">a + el → al</span></p></div></article>
+    </div>
+    <div class="progressive-controls" data-no-slide-advance><button class="progressive-reset-button" type="button" data-progressive-reset>REINICIAR</button><button class="progressive-next-button" type="button" data-progressive-next>SIGUIENTE</button></div>
+  </div></div></div>
+  <div class="foot"><span>Lección 4 · A y al</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-17" data-section="vocabulario" aria-labelledby="slide-17-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content"><div class="subtitle">Comprensión por contexto</div><h1 id="slide-17-title">Un verbo, más de un significado</h1><div class="body"><div class="progressive-shell" data-progressive-reveal data-progressive-navigation data-initial-stage="1">
+    <div class="progressive-header"><div><p class="progressive-kicker">Observa las frases</p><h3>El contexto cambia lo que entendemos.</h3></div><p class="progressive-counter" data-progressive-counter aria-live="polite">Etapa 1 / 6</p></div>
+    <div class="progressive-stage-grid" aria-label="Verbos con más de un significado">
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Tomar</h3><div class="pattern-examples"><div class="pattern-example"><b>Tomo café.</b><span>El complemento nos orienta.</span></div><div class="pattern-example"><b>Tomamos el tren.</b><span>Observa el contexto.</span></div><div class="pattern-example"><b>Tomamos el almuerzo.</b><span>La frase cambia el sentido.</span></div></div><p class="erir-question">¿“Tomar” significa exactamente lo mismo en las tres frases?</p></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Tocar</h3><div class="pattern-examples"><div class="pattern-example"><b>Toco el piano.</b><span>Un instrumento.</span></div><div class="pattern-example"><b>Toco la mesa.</b><span>Un objeto físico.</span></div></div><p class="erir-question">¿Qué cambia: el verbo o el contexto?</p></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Llevar</h3><div class="pattern-examples"><div class="pattern-example"><b>Llevo una bolsa.</b><span>La situación ayuda a comprender.</span></div><div class="pattern-example"><b>Llevo un abrigo.</b><span>El complemento da la pista.</span></div></div></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Pasar</h3><div class="pattern-examples"><div class="pattern-example"><b>El tiempo pasa.</b><span>El tiempo sigue.</span></div><div class="pattern-example"><b>Paso la tarde en casa.</b><span>Una tarde en un lugar.</span></div></div></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Para consultar</h3><div class="frequent-reconoce"><span>deber</span><span>ganar</span></div></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Idea clave</h3><p class="frequent-message">El contexto nos ayuda a entender el significado.</p></article>
+    </div>
+    <div class="progressive-controls" data-no-slide-advance><button class="progressive-reset-button" type="button" data-progressive-reset>REINICIAR</button><button class="progressive-next-button" type="button" data-progressive-next>SIGUIENTE</button></div>
+  </div></div></div>
+  <div class="foot"><span>Lección 4 · Comprensión</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-18" data-section="oral" aria-labelledby="slide-18-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content"><div class="subtitle">Ronda oral colectiva</div><h1 id="slide-18-title">Todos hablan</h1><div class="body"><div class="progressive-shell" data-progressive-reveal data-progressive-navigation data-initial-stage="1">
+    <div class="progressive-header"><div><p class="progressive-kicker">Una persona responde a cada pregunta.</p><h3>Responde con una frase.</h3></div><p class="progressive-counter" data-progressive-counter aria-live="polite">Etapa 1 / 4</p></div>
+    <div class="progressive-stage-grid" aria-label="Preguntas para la ronda oral">
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Preguntas 1–4</h3><div class="round-questions"><div><b>1</b><span>¿Estudias español todos los días?</span></div><div><b>2</b><span>¿A qué hora escuchas música?</span></div><div><b>3</b><span>¿Trabajas por la mañana o por la tarde?</span></div><div><b>4</b><span>¿Cocinas en casa?</span></div></div></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Preguntas 5–8</h3><div class="round-questions"><div><b>5</b><span>¿Lees mucho?</span></div><div><b>6</b><span>¿Bebes café?</span></div><div><b>7</b><span>¿Caminas mucho?</span></div><div><b>8</b><span>¿Practicas español fuera de clase?</span></div></div></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Preguntas 9–12</h3><div class="round-questions"><div><b>9</b><span>¿Escribes mucho en el trabajo?</span></div><div><b>10</b><span>¿Viajas mucho?</span></div><div><b>11</b><span>¿Compartes libros o documentos?</span></div><div><b>12</b><span>¿Descansas por la tarde?</span></div></div></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Preguntas 13–16</h3><div class="round-questions"><div><b>13</b><span>¿Compras libros?</span></div><div><b>14</b><span>¿Hablas español con otras personas?</span></div><div><b>15</b><span>¿Vives cerca del trabajo?</span></div><div><b>16</b><span>¿Qué verbo utilizas mucho hoy?</span></div></div><p class="round-support">Ejemplos: Sí, estudio español todos los días. · Trabajo por la mañana. · Escucho música a las ocho.</p></article>
+    </div>
+    <div class="progressive-controls" data-no-slide-advance><button class="progressive-reset-button" type="button" data-progressive-reset>REINICIAR</button><button class="progressive-next-button" type="button" data-progressive-next>SIGUIENTE</button></div>
+  </div></div></div>
+  <div class="foot"><span>Lección 4 · Todos hablan</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-19" data-section="lectura" aria-labelledby="slide-19-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content story-slide"><div class="subtitle">Escucha, lee y comparte</div><h1 id="slide-19-title">Una escuela en México</h1><div class="body"><div class="progressive-shell story-slide-shell">
+    <div class="progressive-header"><div><p class="progressive-kicker">Texto final de la lección</p><h3>Una historia para integrar lo aprendido.</h3></div><p class="progressive-counter">Texto completo</p></div>
+    <div class="story-audio-row"><button class="activity-button story-toggle" type="button" data-story-toggle aria-expanded="false">MOSTRAR TEXTO</button></div>
+    <div class="progressive-stage-grid" aria-label="Actividad final de comprensión">
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Antes de escuchar</h3><p class="present-summary">Durante la primera escucha, identifica:</p><div class="pattern-questions"><span>el lugar</span><span>una hora</span><span>una actividad</span><span>un verbo que ya conoces</span></div><p class="round-support">No necesitas entender todo.</p></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Primera escucha</h3><p class="erir-question">Escucha sin leer.</p><div class="audio-box"><audio controls preload="metadata" aria-label="Audio de Una escuela en México" src="assets/leccion-04/audio/una-escuela-en-mexico.mp3"></audio><span class="audio-placeholder">Audio: Una escuela en México</span></div><div class="pattern-questions"><span>el lugar</span><span>una hora</span><span>una actividad</span><span>un verbo que ya conoces</span></div></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Escucha y lee</h3><p class="erir-question">Escucha otra vez y sigue el texto.</p><div class="story-text" data-story-text hidden><p><strong>Una escuela en México</strong></p><p>Es el año mil novecientos sesenta y tres. Es una época de paz en los Estados Unidos. En la ciudad donde vivimos este verano, hay paz también pero no estoy segura si hay paz en el resto de México.</p><p>La ciudad es muy linda, con calles estrechas y casas del estilo español. Hay unas plazas hermosas y muchas iglesias. Vivimos en las montañas y estamos a tres millas de la ciudad. Laura y yo caminamos treinta minutos y llegamos a la escuela a las diez de la mañana; la madre de Laura pasa el día en el campo porque estudia las civilizaciones antiguas. El padre de Laura descansa en la casa hasta las diez. Después, él baja a la ciudad y pasa la mañana en un restaurante bonito donde él toma uno o dos cafés más; lee un periódico y habla con la gente. Ellos hablan bien el español, pero Laura y yo no hablamos mucho; estudiamos en la escuela secundaria porque necesitamos practicar más.</p><p>Laura y yo decidimos tomar un curso de historia de México, una clase de baile, una clase donde los estudiantes aprenden canciones mexicanas y aprenden a tocar la guitarra. Guanajuato está ubicada en las montañas y la clase de baile es difícil porque es trabajoso respirar en las montañas. Las clases de música son fantásticas porque hablamos y practicamos la pronunciación.</p><p>En la noche, regresamos a la casa y discutimos las experiencias del día. La madre cocina bien y comemos una comida saludable. Laura y yo lavamos los platos y el padre escucha la conversación y descansa.</p></div></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Lectura compartida</h3><p class="erir-question">Leemos en cadena. Una persona lee cada parte.</p><div class="story-segments"><div><b>1</b><span>Es el año mil novecientos sesenta y tres.</span></div><div><b>2</b><span>Es una época de paz en los Estados Unidos.</span></div><div><b>3</b><span>En la ciudad donde vivimos este verano, hay paz también.</span></div><div><b>4</b><span>La ciudad es muy linda, con calles estrechas y casas del estilo español.</span></div><div><b>5</b><span>Hay unas plazas hermosas y muchas iglesias.</span></div><div><b>6</b><span>Vivimos en las montañas y estamos a tres millas de la ciudad.</span></div><div><b>7</b><span>Laura y yo caminamos treinta minutos y llegamos a la escuela.</span></div><div><b>8</b><span>La madre de Laura pasa el día en el campo porque estudia las civilizaciones antiguas.</span></div><div><b>9</b><span>El padre de Laura descansa en la casa hasta las diez.</span></div><div><b>10</b><span>Después, él baja a la ciudad y pasa la mañana en un restaurante bonito.</span></div><div><b>11</b><span>Lee un periódico y habla con la gente.</span></div><div><b>12</b><span>Laura y yo estudiamos en la escuela secundaria porque necesitamos practicar más.</span></div><div><b>13</b><span>Laura y yo decidimos tomar un curso de historia de México y una clase de baile.</span></div><div><b>14</b><span>Las clases de música son fantásticas porque hablamos y practicamos la pronunciación.</span></div><div><b>15</b><span>En la noche, regresamos a la casa y discutimos las experiencias del día.</span></div><div><b>16</b><span>La madre cocina bien y comemos una comida saludable.</span></div></div></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Todos hablan</h3><div class="story-tasks"><div>1. ¿Cómo es Guanajuato?</div><div>2. ¿Qué estación del año es?</div><div>3. ¿Cómo pasa el día el padre de Laura?</div><div>4. ¿Qué estudian Laura y su amiga?</div><div>5. En la noche, ¿de qué hablan?</div><div>6. Busca un verbo en -ar.</div><div>7. Busca un verbo en -er.</div><div>8. Busca un verbo en -ir.</div><div>9. Busca una forma de nosotros.</div><div>10. Busca una hora.</div><div>11. Busca un número.</div><div>12. Busca una forma de estar.</div><div>13. Busca una forma de ser.</div><div>14. Busca una frase con hay.</div><div>15. Busca un adjetivo.</div><div>16. Di una palabra nueva que has entendido por el contexto.</div></div></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Vocabulario de la historia</h3><div class="vocab-bank"><span>la época<small>época</small></span><span>estar seguro/a<small>estar seguro/a</small></span><span>estar a tres millas de<small>estar a três milhas de</small></span><span>después<small>depois</small></span><span>estar ubicado/a<small>estar localizado/a</small></span><span>trabajoso<small>trabalhoso / difícil</small></span><span>respirar<small>respirar</small></span><span>saludable<small>saudável</small></span><span>lavar<small>lavar</small></span></div></article>
+    </div>
+  </div></div></div><div class="foot"><span>Lección 4 · Texto final</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" id="slide-20" data-section="workbook" aria-labelledby="slide-20-title" tabindex="-1">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content"><div class="subtitle">Trabajo individual</div><h1 id="slide-20-title">Workbook</h1><div class="body"><a class="exercise-call" href="workbook/leccion-04/workbook.html" target="_blank" rel="noopener"><div class="exercise-number">LECCIÓN 4</div><h3>Los verbos regulares</h3><p>Practica y repasa todo lo aprendido en esta lección.</p><span class="activity-button">ABRIR CUADERNO</span><span class="exercise-path">workbook/leccion-04/workbook.html</span></a></div></div>
+  <div class="foot"><span>Lección 4 · Workbook</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<template id="leccion-4-activity-link-template">
+  <a class="activity-button" href="workbook/leccion-04/[ARCHIVO].html" target="_blank" rel="noopener">[ABRIR ACTIVIDAD]</a>
+</template>
+<template id="leccion-4-practice-link-template">
+  <a class="exercise-call" href="workbook/leccion-04/ejercicio-00-[SLUG].html" target="_blank" rel="noopener">
+    <div class="exercise-number">[PRÁCTICA]</div>
+    <h3>[TÍTULO PENDIENTE]</h3>
+    <p>[DESCRIPCIÓN PENDIENTE]</p>
+    <span class="activity-button">EMPEZAR</span>
+    <span class="exercise-path">workbook/leccion-04/ejercicio-00-[SLUG].html</span>
+  </a>
+</template>
+
+<div class="font-controls" aria-label="Tamaño de fuente" data-no-slide-advance>
+  <button type="button" data-font-action="decrease" aria-label="Disminuir tamaño de fuente">A−</button>
+  <button type="button" data-font-action="reset" aria-label="Restaurar tamaño de fuente">A</button>
+  <button type="button" data-font-action="increase" aria-label="Aumentar tamaño de fuente">A+</button>
+</div>
+<div id="progress" class="progress" aria-hidden="true"></div>
+
+<script>
+const FONT_STORAGE_KEY='leccion4FontScale';
+const FONT_MIN=.85;
+const FONT_DEFAULT=1;
+const FONT_MAX=1.7;
+const FONT_STEP=.05;
+const fontBase={
+  '--fs-top':13,'--fs-subtitle':30,'--fs-h1':39,'--fs-h1-mobile':30,'--fs-h2':46,'--fs-h3':24,'--fs-foot':12,
+  '--fs-lead':22,'--fs-badge':14,'--fs-card':20,'--fs-compact-card':18,'--fs-small':13,'--fs-note':17,'--fs-example-big':24,
+  '--fs-translation':13,'--fs-controls':14,'--fs-cover-kicker':20,'--fs-cover-main':58
+};
+const spacingBase={
+  '--slide-pad-y':28,'--slide-pad-x':54,'--slide-pad-bottom':48,
+  '--slide-pad-y-mobile':20,'--slide-pad-x-mobile':24,'--slide-pad-bottom-mobile':60,
+  '--content-offset':58,'--foot-x':54,'--foot-x-mobile':24,
+  '--grid-gap':16,'--grid-gap-small':10,'--card-pad':19,'--term-gap':7,'--translation-gap':5
+};
+function normalizeScale(value){
+  if(value===null || value===undefined || value==='')return FONT_DEFAULT;
+  const number=Number(value);
+  const scaled=Number.isFinite(number)?number:FONT_DEFAULT;
+  return Math.round(Math.min(FONT_MAX,Math.max(FONT_MIN,scaled))*100)/100;
+}
+function setPxVar(name,value){
+  document.documentElement.style.setProperty(name,`${Math.round(value*100)/100}px`);
+}
+function readFontScale(){
+  try{return normalizeScale(localStorage.getItem(FONT_STORAGE_KEY));}
+  catch{return FONT_DEFAULT;}
+}
+function saveFontScale(scale){
+  try{localStorage.setItem(FONT_STORAGE_KEY,String(scale));}
+  catch{}
+}
+function updateFontButtons(scale){
+  document.querySelectorAll('[data-font-action]').forEach(button=>{
+    const action=button.dataset.fontAction;
+    const active=action==='reset' && scale===FONT_DEFAULT;
+    button.classList.toggle('active',active);
+    button.setAttribute('aria-pressed',String(active));
+  });
+}
+function applyFontScale(value,{persist=true}={}){
+  const scale=normalizeScale(value);
+  const pressure=Math.max(0,scale-FONT_DEFAULT)/(FONT_MAX-FONT_DEFAULT);
+  const spacingFactor=1-(pressure*.34);
+  document.documentElement.style.setProperty('--font-scale',String(scale));
+  Object.entries(fontBase).forEach(([name,base])=>setPxVar(name,base*scale));
+  Object.entries(spacingBase).forEach(([name,base])=>setPxVar(name,base*spacingFactor));
+  if(persist)saveFontScale(scale);
+  updateFontButtons(scale);
+  return scale;
+}
+function changeFontScale(delta){
+  const scale=normalizeScale((Number(document.documentElement.style.getPropertyValue('--font-scale')) || FONT_DEFAULT)+delta);
+  applyFontScale(scale);
+}
+let slides=[...document.querySelectorAll('.slide')];
+let current=0;
+function refreshSlideMetadata(){
+  slides=[...document.querySelectorAll('.slide')];
+  const total=String(slides.length).padStart(2,'0');
+  slides.forEach((slide,index)=>{
+    slide.dataset.index=String(index+1);
+    const count=slide.querySelector('.count');
+    if(count)count.textContent=`${String(index+1).padStart(2,'0')} / ${total}`;
+  });
+}
+function slideIndexFromHash(){
+  const hashIndex=Number.parseInt(location.hash.slice(1),10);
+  return Number.isFinite(hashIndex)?hashIndex-1:0;
+}
+function syncHash(){
+  const next=String(current+1);
+  if(location.hash.slice(1)!==next)location.hash=next;
+}
+function show(index,{updateHash=true,focusSlide=false}={}){
+  current=Math.max(0,Math.min(slides.length-1,index));
+  slides.forEach((slide,slideIndex)=>{
+    const active=slideIndex===current;
+    slide.classList.toggle('active',active);
+    slide.setAttribute('aria-hidden',String(!active));
+  });
+  document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';
+  if(updateHash)syncHash();
+  if(focusSlide)slides[current]?.focus({preventScroll:true});
+}
+function initProgressiveReveals(){
+  document.querySelectorAll('[data-progressive-reveal]').forEach(panel=>{
+    const stages=[...panel.querySelectorAll('[data-progressive-stage]')];
+    const nextButton=panel.querySelector('[data-progressive-next]');
+    const resetButton=panel.querySelector('[data-progressive-reset]');
+    const counter=panel.querySelector('[data-progressive-counter]');
+    const scroller=panel.closest('.body');
+    const initialStage=Math.max(0,Math.min(stages.length,Number.parseInt(panel.dataset.initialStage || '0',10) || 0));
+    let currentStage=initialStage;
+
+    function updateReveal({scrollToStage=false}={}){
+      stages.forEach((stage,index)=>{
+        stage.hidden=index>=currentStage;
+      });
+      if(counter)counter.textContent=`Etapa ${currentStage} / ${stages.length}`;
+      if(nextButton){
+        const complete=currentStage>=stages.length;
+        nextButton.disabled=complete;
+        nextButton.textContent=complete?'LISTO':'SIGUIENTE';
+      }
+      if(scrollToStage && currentStage>0){
+        stages[currentStage-1]?.scrollIntoView({behavior:'smooth',block:'nearest'});
+      }
+    }
+
+    panel.advanceProgressiveReveal=()=>{
+      if(currentStage>=stages.length)return false;
+      currentStage=Math.min(currentStage+1,stages.length);
+      updateReveal({scrollToStage:true});
+      return true;
+    };
+    panel.hasProgressiveRevealNext=()=>currentStage<stages.length;
+
+    nextButton?.addEventListener('click',event=>{
+      event.stopPropagation();
+      panel.advanceProgressiveReveal();
+    });
+    resetButton?.addEventListener('click',event=>{
+      event.stopPropagation();
+      currentStage=initialStage;
+      updateReveal();
+      scroller?.scrollTo({top:0,behavior:'smooth'});
+    });
+    [nextButton,resetButton].forEach(button=>{
+      button?.addEventListener('keydown',event=>{
+        if([' ','Enter'].includes(event.key))event.stopPropagation();
+      });
+    });
+    updateReveal();
+  });
+}
+function advanceActiveProgressiveReveal(){
+  const panel=slides[current]?.querySelector('[data-progressive-navigation]');
+  if(panel?.hasProgressiveRevealNext?.())return panel.advanceProgressiveReveal();
+  return false;
+}
+function isInteractiveTarget(target){
+  return target instanceof Element && Boolean(target.closest('a,button,input,select,textarea,audio,video,details,summary,dialog,[contenteditable="true"],[data-no-slide-advance]'));
+}
+document.addEventListener('keydown',event=>{
+  if(event.ctrlKey || event.metaKey){
+    if(['+','='].includes(event.key)){event.preventDefault();changeFontScale(FONT_STEP);return;}
+    if(['-','_'].includes(event.key)){event.preventDefault();changeFontScale(-FONT_STEP);return;}
+    if(event.key==='0'){event.preventDefault();applyFontScale(FONT_DEFAULT);return;}
+  }
+  if(isInteractiveTarget(event.target))return;
+  if(['ArrowRight','PageDown',' '].includes(event.key)){
+    event.preventDefault();
+    if(!advanceActiveProgressiveReveal())show(current+1,{focusSlide:true});
+  }
+  if(['ArrowLeft','PageUp'].includes(event.key)){event.preventDefault();show(current-1,{focusSlide:true});}
+  if(event.key==='Home')show(0,{focusSlide:true});
+  if(event.key==='End')show(slides.length-1,{focusSlide:true});
+  if(event.key.toLowerCase()==='f'){
+    const request=document.documentElement.requestFullscreen?.();
+    request?.catch?.(()=>{});
+  }
+});
+document.addEventListener('click',event=>{
+  if(isInteractiveTarget(event.target))return;
+  if(event.clientX>innerWidth*.68){
+    if(!advanceActiveProgressiveReveal())show(current+1);
+  }else if(event.clientX<innerWidth*.32){
+    show(current-1);
+  }
+});
+document.querySelector('.font-controls')?.addEventListener('click',event=>{
+  event.stopPropagation();
+  if(!(event.target instanceof Element))return;
+  const button=event.target.closest('[data-font-action]');
+  if(!button)return;
+  const action=button.dataset.fontAction;
+  if(action==='decrease')changeFontScale(-FONT_STEP);
+  if(action==='increase')changeFontScale(FONT_STEP);
+  if(action==='reset')applyFontScale(FONT_DEFAULT);
+});
+window.addEventListener('hashchange',()=>show(slideIndexFromHash(),{updateHash:false}));
+function initStoryTextToggle(){
+  const button=document.querySelector('[data-story-toggle]');
+  const textBlocks=[...document.querySelectorAll('[data-story-text], .story-segments')];
+  if(!button||!textBlocks.length)return;
+  const text=document.querySelector('[data-story-text]');
+  textBlocks.forEach(block=>{if(block.classList.contains('story-segments'))block.hidden=true;});
+  button.addEventListener('click',event=>{
+    event.stopPropagation();
+    const open=textBlocks.some(block=>block.hidden);
+    textBlocks.forEach(block=>{block.hidden=!open;});
+    button.textContent=open?'OCULTAR TEXTO':'MOSTRAR TEXTO';
+    button.setAttribute('aria-expanded',String(open));
+  });
+}
+refreshSlideMetadata();
+initProgressiveReveals();
+initStoryTextToggle();
+applyFontScale(readFontScale(),{persist:false});
+show(slideIndexFromHash());
+</script>
+</body>
+</html>
