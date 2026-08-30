@@ -8161,7 +8161,9 @@
 
             <div class="asking-info-stage" data-asking-info-stage hidden>
               <div class="asking-info-stage-inner">
-                <h3>2 - Build the question</h3>
+                <h3>2 - Build the question, step by step</h3>
+                <p class="asking-info-instruction">Build the question in four steps.</p>
+
                 <div class="asking-info-formula" aria-label="Question word plus do or does plus subject plus base verb plus question mark">
                   <span class="asking-info-token">Question word</span>
                   <span class="asking-info-token">DO / DOES</span>
@@ -8169,30 +8171,46 @@
                   <span class="asking-info-token">Base verb</span>
                   <span class="asking-info-token">...?</span>
                 </div>
-                <div class="asking-info-built-examples">
-                  <p>WHERE | DO | YOU | WORK | ?</p>
-                  <p>WHAT | DO | THEY | LIKE | ?</p>
-                  <p>WHERE | DOES | SHE | LIVE | ?</p>
-                  <p>WHAT | DOES | HE | DO | ?</p>
-                </div>
+
                 <div class="asking-info-grid-two">
-                  <section class="asking-info-card asking-info-transform">
-                    <p class="asking-info-mini-label">Build it</p>
-                    <p>YOU WORK</p>
-                    <div class="asking-info-arrow">↓</div>
-                    <p>DO YOU WORK...?</p>
-                    <div class="asking-info-arrow">↓</div>
-                    <p>WHERE DO YOU WORK?</p>
+                  <section class="asking-info-card">
+                    <p class="asking-info-mini-label">1. Find the information</p>
+                    <p class="asking-info-question">YOU WORK IN MADRID.</p>
+                    <p class="asking-info-answer"><strong>What information do we want?</strong> A place, so choose <strong>WHERE</strong>.</p>
+                  </section>
+                  <section class="asking-info-card">
+                    <p class="asking-info-mini-label">2. Choose the helper</p>
+                    <p class="asking-info-question">YOU &rarr; DO</p>
+                    <p class="asking-info-answer"><strong>Who is the subject?</strong> You uses <strong>DO</strong>.</p>
+                  </section>
+                  <section class="asking-info-card">
+                    <p class="asking-info-mini-label">3. Add the subject and verb</p>
+                    <p class="asking-info-question">WHERE &rarr; DO &rarr; YOU &rarr; WORK</p>
+                    <p class="asking-info-answer"><strong>What is the base verb?</strong> WORK, not WORKS.</p>
+                  </section>
+                  <section class="asking-info-card">
+                    <p class="asking-info-mini-label">4. Say the question</p>
+                    <p class="asking-info-question">WHERE DO YOU WORK?</p>
+                    <p class="asking-info-answer">Answer: <strong>I work in Madrid.</strong></p>
+                  </section>
+                </div>
+
+                <div class="asking-info-grid-two">
+                  <section class="asking-info-card">
+                    <p class="asking-info-mini-label">Same process with SHE</p>
+                    <p class="asking-info-question">SHE LIVES IN LONDON.</p>
+                    <p class="asking-info-answer">Place &rarr; WHERE. She &rarr; DOES. Base verb &rarr; LIVE.</p>
                   </section>
                   <section class="asking-info-card asking-info-does-rule">
-                    <p class="asking-info-mini-label">After DOES</p>
-                    <p>SHE LIVES</p>
-                    <div class="asking-info-arrow">↓</div>
-                    <p>WHERE DOES SHE LIVE?</p>
-                    <p class="asking-info-bad">Where does she lives?</p>
-                    <p class="asking-info-good">Where does she live?</p>
+                    <p class="asking-info-mini-label">Final question</p>
+                    <p class="asking-info-question">WHERE DOES SHE LIVE?</p>
+                    <p class="asking-info-bad">Not: Where does she lives?</p>
+                    <p class="asking-info-good">Correct: Where does she live?</p>
+                    <p class="asking-info-answer"><strong>DOES</strong> carries the -s, so LIVE returns to the base form.</p>
                   </section>
                 </div>
+
+                <p class="asking-info-note"><strong>Build it in this order:</strong> 1) Information 2) Subject 3) DO or DOES 4) Base verb 5) Complete question.</p>
               </div>
             </div>
 
@@ -9555,6 +9573,185 @@
         nextChallenge();
         nextTf();
         selectRound("say");
+      };
+    })(window);
+
+    (function attachPresentSimpleNegative(window) {
+      "use strict";
+
+      var Utils = window.CourseUtils;
+
+      window.createPresentSimpleNegative = function createPresentSimpleNegative(root) {
+        var panel = Utils.query("[data-negative-simple-reveal]", root);
+
+        if (!panel || panel.dataset.negativeSimpleReady === "true") {
+          return;
+        }
+
+        panel.dataset.negativeSimpleReady = "true";
+
+        var stages = Utils.queryAll("[data-negative-stage]", panel);
+        var nextButton = Utils.query("[data-negative-next]", panel);
+        var resetButton = Utils.query("[data-negative-reset]", panel);
+        var stageCounter = Utils.query("[data-negative-stage-counter]", panel);
+        var summary = Utils.query("[data-negative-summary]", panel);
+        var quickCheck = Utils.query("[data-negative-quick-check]", panel);
+        var quickNumber = Utils.query("[data-negative-quick-number]", panel);
+        var quickSource = Utils.query("[data-negative-quick-source]", panel);
+        var quickOptions = Utils.query("[data-negative-options]", panel);
+        var quickAnswer = Utils.query("[data-negative-quick-answer]", panel);
+        var quickNextButton = Utils.query("[data-negative-quick-next]", panel);
+        var quickShowAnswerButton = Utils.query("[data-negative-quick-show-answer]", panel);
+        var currentStage = 0;
+        var questionIndex = 0;
+
+        var questions = [
+          {
+            source: "I work in an office.",
+            options: ["I don't work in an office.", "I doesn't work in an office."],
+            answer: "I don't work in an office.",
+            reason: "I uses DON'T."
+          },
+          {
+            source: "She works here.",
+            options: ["She doesn't work here.", "She don't work here."],
+            answer: "She doesn't work here.",
+            reason: "She uses DOESN'T, and the main verb returns to the base form."
+          },
+          {
+            source: "They speak Spanish.",
+            options: ["They don't speak Spanish.", "They doesn't speak Spanish."],
+            answer: "They don't speak Spanish.",
+            reason: "They uses DON'T."
+          },
+          {
+            source: "Thomas has a meeting.",
+            options: ["Thomas doesn't have a meeting.", "Thomas doesn't has a meeting."],
+            answer: "Thomas doesn't have a meeting.",
+            reason: "After DOESN'T, HAVE returns to the base form."
+          },
+          {
+            source: "Claire goes to the cinema.",
+            options: ["Claire doesn't go to the cinema.", "Claire doesn't goes to the cinema."],
+            answer: "Claire doesn't go to the cinema.",
+            reason: "After DOESN'T, GO returns to the base form."
+          },
+          {
+            source: "We watch TV at night.",
+            options: ["We don't watch TV at night.", "We doesn't watch TV at night."],
+            answer: "We don't watch TV at night.",
+            reason: "We uses DON'T."
+          },
+          {
+            source: "Laura likes animals.",
+            options: ["Laura doesn't like animals.", "Laura doesn't likes animals."],
+            answer: "Laura doesn't like animals.",
+            reason: "After DOESN'T, LIKE returns to the base form."
+          },
+          {
+            source: "He drinks coffee.",
+            options: ["He doesn't drink coffee.", "He don't drink coffee."],
+            answer: "He doesn't drink coffee.",
+            reason: "He uses DOESN'T."
+          }
+        ];
+
+        function renderQuickQuestion(showAnswer) {
+          var question = questions[questionIndex];
+
+          if (!question) {
+            return;
+          }
+
+          if (quickNumber) {
+            quickNumber.textContent = "Item " + (questionIndex + 1) + " / " + questions.length;
+          }
+
+          if (quickSource) {
+            quickSource.textContent = "Make it negative: " + question.source;
+          }
+
+          if (quickOptions) {
+            quickOptions.replaceChildren();
+            question.options.forEach(function addOption(optionText) {
+              var option = document.createElement("p");
+              option.className = "negative-option-line";
+              option.textContent = optionText;
+              if (showAnswer && optionText === question.answer) {
+                option.classList.add("is-correct-choice");
+              }
+              quickOptions.appendChild(option);
+            });
+          }
+
+          if (quickAnswer) {
+            quickAnswer.hidden = !showAnswer;
+            quickAnswer.textContent = question.answer + " | " + question.reason;
+          }
+        }
+
+        function renderStages() {
+          stages.forEach(function updateStage(stage, index) {
+            stage.hidden = index >= currentStage;
+          });
+
+          if (stageCounter) {
+            stageCounter.textContent = "Stage " + currentStage + " / " + stages.length;
+          }
+
+          if (summary) {
+            summary.hidden = currentStage < stages.length;
+          }
+
+          if (quickCheck) {
+            quickCheck.hidden = currentStage < stages.length;
+          }
+
+          if (nextButton) {
+            nextButton.disabled = currentStage >= stages.length;
+            nextButton.textContent = currentStage >= stages.length ? "READY" : "NEXT";
+          }
+
+          renderQuickQuestion(false);
+        }
+
+        if (nextButton) {
+          nextButton.addEventListener("click", function onNextStage(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            currentStage = Math.min(currentStage + 1, stages.length);
+            renderStages();
+          });
+        }
+
+        if (resetButton) {
+          resetButton.addEventListener("click", function onReset(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            currentStage = 0;
+            questionIndex = 0;
+            renderStages();
+          });
+        }
+
+        if (quickNextButton) {
+          quickNextButton.addEventListener("click", function onNextQuestion(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            questionIndex = (questionIndex + 1) % questions.length;
+            renderQuickQuestion(false);
+          });
+        }
+
+        if (quickShowAnswerButton) {
+          quickShowAnswerButton.addEventListener("click", function onShowAnswer(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            renderQuickQuestion(true);
+          });
+        }
+
+        renderStages();
       };
     })(window);
 
