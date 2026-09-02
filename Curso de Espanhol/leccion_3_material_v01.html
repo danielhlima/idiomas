@@ -1,0 +1,1498 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lección 3 · Los números y la hora · Versión 01</title>
+<style>
+:root{
+  --red:#aa151b; --gold:#f1bf00; --ink:#172033; --muted:#667085;
+  --paper:#fffdf8; --blue:#2d5ea8; --green:#2d7a5b; --soft:#f4efe4;
+  --focus:rgba(45,94,168,.38); --line:rgba(23,32,51,.11);
+  --font-scale:1;
+  --slide-pad-y:28px; --slide-pad-x:54px; --slide-pad-bottom:48px;
+  --slide-pad-y-mobile:20px; --slide-pad-x-mobile:24px; --slide-pad-bottom-mobile:60px;
+  --content-offset:58px; --foot-x:54px; --foot-x-mobile:24px;
+  --grid-gap:16px; --grid-gap-small:10px; --cloud-gap:9px;
+  --card-pad:19px; --card-pad-small:13px 15px; --term-gap:7px; --translation-gap:5px;
+  --fs-top:13px; --fs-subtitle:30px; --fs-h1:39px; --fs-h1-mobile:30px; --fs-h2:46px; --fs-h3:24px; --fs-foot:12px;
+  --fs-lead:22px; --fs-badge:14px; --fs-stack:31px; --fs-sentence:30px; --fs-card:20px; --fs-compact-card:18px; --fs-small:13px;
+  --fs-vocab-strong:26px; --fs-vocab-small:15px; --fs-vocab-list:18px; --fs-example-big:24px; --fs-example-compact:17px; --fs-note:17px;
+  --fs-word:19px; --fs-word-dense:17px; --fs-small-dense:12px; --fs-summary:19px; --fs-summary-span:24px;
+  --fs-final:22px; --fs-workbook-icon:74px; --fs-workbook-h3:30px; --fs-workbook-p:20px; --fs-huge:68px;
+  --fs-closing-p:24px; --fs-closing-sentence:33px; --fs-translation:13px; --fs-controls:14px; --fs-reading:19px;
+  --fs-cover-kicker:20px; --fs-cover-main:58px; --fs-number-small:29px; --fs-number-mid:43px; --fs-number-time:51px; --fs-number-huge:62px;
+  --fs-basic-digit:38px; --fs-basic-word:18px; --fs-context-sentence:17px;
+  --fs-pattern-title:15px; --fs-pattern-item:14px; --fs-pattern-small:12px; --fs-pattern-formula:20px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;font-family:Inter,Segoe UI,Arial,sans-serif;background:#111;color:var(--ink)}
+button,a{font:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.slide{
+  position:absolute;inset:0;padding:var(--slide-pad-y) var(--slide-pad-x) var(--slide-pad-bottom);
+  background:radial-gradient(circle at 88% 8%,rgba(241,191,0,.18),transparent 30%),linear-gradient(135deg,#fff,#f7f1e5);
+  opacity:0;transform:scale(.99);transition:.35s ease;pointer-events:none;overflow:hidden;
+}
+.slide.active{opacity:1;transform:none;pointer-events:auto}
+.top{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(170,21,27,.18);padding-bottom:9px;font-size:var(--fs-top);letter-spacing:.09em;text-transform:uppercase}
+.course{font-weight:900;color:var(--red)} .count{color:var(--muted)}
+.content{height:calc(100% - var(--content-offset));display:flex;flex-direction:column}
+.subtitle{margin-top:9px;color:var(--muted);font-size:var(--fs-subtitle);line-height:1.12;overflow-wrap:break-word}
+h1{font-size:var(--fs-h1);line-height:1.05;margin:7px 0 13px;letter-spacing:0}
+h2{font-size:var(--fs-h2);line-height:1.08;margin:12px 0 18px;letter-spacing:0}
+h3{font-size:var(--fs-h3);margin:0 0 12px}
+p{line-height:1.42}
+.body{flex:1;min-height:0;overflow:auto;padding-right:6px}
+.body::-webkit-scrollbar{width:10px}.body::-webkit-scrollbar-thumb{background:#d4ccbd;border-radius:99px}
+.body.scrollable{overflow:auto;padding-right:6px}
+.foot{position:absolute;left:var(--foot-x);right:var(--foot-x);bottom:15px;border-top:1px solid #ddd;padding-top:7px;color:#777;font-size:var(--fs-foot);display:flex;justify-content:space-between;gap:16px}
+.cover-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;height:88%}
+.eyebrow{font-weight:900;letter-spacing:.14em;color:var(--red);text-transform:uppercase}
+.lead{font-size:var(--fs-lead);line-height:1.42}.badge{display:inline-block;background:white;border:1px solid #ddd;border-radius:999px;padding:10px 16px;font-weight:800;font-size:var(--fs-badge)}
+.cover-visual{background:white;border-radius:28px;padding:34px;box-shadow:0 24px 60px #0002}
+.cover-kicker{font-size:var(--fs-cover-kicker);font-weight:900;color:var(--red);letter-spacing:.08em;text-transform:uppercase}
+.subtitle.lesson-label{color:var(--red);font-size:var(--fs-cover-kicker);font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.cover-main-title{max-width:760px;font-size:var(--fs-cover-main);margin-top:10px;margin-bottom:18px}
+.cover-intro{display:grid;gap:18px;align-content:center}
+.number-composition{
+  min-height:340px;
+  display:grid;
+  grid-template-columns:.7fr .85fr 1fr 1.1fr;
+  grid-template-rows:auto auto auto auto;
+  gap:16px 18px;
+  align-items:center;
+}
+.number-token{
+  display:inline-grid;
+  place-items:center;
+  min-height:74px;
+  border-radius:18px;
+  background:var(--soft);
+  color:var(--ink);
+  font-weight:900;
+  line-height:1;
+  box-shadow:0 8px 20px #0001;
+}
+.number-token.small-a{grid-column:1;grid-row:1;font-size:var(--fs-number-small);color:var(--red)}
+.number-token.small-b{grid-column:2;grid-row:1;font-size:calc(var(--fs-number-small) * 1.12);transform:translateY(18px)}
+.number-token.mid-a{grid-column:1 / 3;grid-row:2;font-size:var(--fs-number-mid);background:white;border:2px solid rgba(241,191,0,.52);color:var(--blue)}
+.number-token.mid-b{grid-column:3 / 5;grid-row:2;font-size:calc(var(--fs-number-mid) * 1.08);background:#fffdf8;color:var(--red);transform:translateY(20px)}
+.number-token.time{grid-column:1 / 3;grid-row:3;font-size:var(--fs-number-time);background:var(--ink);color:white}
+.number-token.huge{grid-column:2 / 5;grid-row:4;font-size:min(calc(var(--fs-number-huge) * .82),68px);background:linear-gradient(90deg,var(--red),#6f1115);color:white}
+.agenda-shell{max-width:980px;margin:6px auto 0}
+.agenda-intro{display:inline-flex;align-items:center;min-height:42px;padding:9px 15px;border-radius:999px;background:var(--ink);color:white;font-size:var(--fs-badge);font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.agenda-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
+.agenda-item{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:13px;background:white;border-radius:18px;padding:18px 20px;box-shadow:0 8px 22px #0001;font-size:var(--fs-card);font-weight:850;line-height:1.23}
+.agenda-mark{width:13px;height:13px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 6px rgba(241,191,0,.16)}
+.agenda-item:nth-child(2n) .agenda-mark{background:var(--blue);box-shadow:0 0 0 6px rgba(45,94,168,.12)}
+.agenda-item:nth-child(3n) .agenda-mark{background:var(--red);box-shadow:0 0 0 6px rgba(170,21,27,.1)}
+.continuity-note{margin-top:22px;background:white;border-left:7px solid var(--green);border-radius:18px;padding:20px 22px;box-shadow:0 8px 22px #0001;font-size:var(--fs-example-big);font-weight:850;line-height:1.32}
+.continuity-note b{color:var(--red)}
+.warmup-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:stretch;max-width:1050px;margin:8px auto 0}
+.warmup-card{background:white;border-radius:22px;padding:28px;box-shadow:0 12px 32px #0001}
+.warmup-card.primary{border-left:7px solid var(--blue)}
+.warmup-card.rule{display:grid;align-content:center;gap:18px;border-left:7px solid var(--red);background:#fffdf8}
+.warmup-kicker{display:inline-flex;align-items:center;width:max-content;max-width:100%;min-height:36px;padding:8px 12px;border-radius:999px;background:var(--soft);color:var(--red);font-size:var(--fs-badge);font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.warmup-lines{display:grid;gap:12px;margin-top:20px;font-size:var(--fs-card);font-weight:800;line-height:1.34}
+.warmup-lines p{margin:0}
+.warmup-warning{font-size:var(--fs-example-big);font-weight:900;color:var(--red);line-height:1.18}
+.warmup-mission{font-size:var(--fs-card);font-weight:850;line-height:1.35}
+.activity-button{display:inline-flex;align-items:center;justify-content:center;min-height:54px;width:max-content;max-width:100%;margin-top:24px;padding:14px 20px;border-radius:14px;background:var(--ink);color:white;text-decoration:none;font-size:var(--fs-badge);font-weight:900;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 12px 28px #0002}
+.activity-button:hover{transform:translateY(-1px)}
+.debrief-shell{max-width:1060px;margin:0 auto}
+.chain-call{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:2px 0 14px}
+.chain-call b{display:inline-flex;align-items:center;min-height:38px;padding:8px 13px;border-radius:999px;background:var(--ink);color:white;font-size:var(--fs-badge);letter-spacing:.12em;text-transform:uppercase}
+.chain-call span{color:var(--muted);font-size:var(--fs-note);font-weight:800}
+.debrief-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.debrief-card{display:grid;gap:8px;background:white;border-radius:18px;padding:17px 18px;box-shadow:0 8px 22px #0001;border-top:5px solid var(--gold);min-height:142px}
+.debrief-card:nth-child(2n){border-top-color:var(--blue)}
+.debrief-card:nth-child(3n){border-top-color:var(--red)}
+.debrief-card h3{margin:0;color:var(--red);font-size:var(--fs-h3);letter-spacing:.08em;text-transform:uppercase}
+.debrief-card p{margin:0;font-size:var(--fs-compact-card);font-weight:850;line-height:1.26}
+.debrief-card small{display:block;color:var(--muted);font-size:var(--fs-small);font-weight:800;line-height:1.22}
+.numbers-bridge{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;margin-top:18px;background:white;border-left:7px solid var(--green);border-radius:18px;padding:19px 22px;box-shadow:0 8px 22px #0001}
+.numbers-bridge p{margin:0;color:var(--muted);font-size:var(--fs-note);font-weight:800}
+.numbers-bridge strong{display:block;margin-top:4px;color:var(--ink);font-size:var(--fs-card);line-height:1.22}
+.numbers-next{display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:12px 16px;border-radius:14px;background:var(--red);color:white;font-size:var(--fs-badge);font-weight:900;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.basic-numbers-shell{max-width:980px;margin:0 auto}
+.listen-row{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 14px}
+.listen-row span{display:inline-flex;align-items:center;min-height:36px;padding:8px 12px;border-radius:999px;background:var(--ink);color:white;font-size:var(--fs-badge);font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.listen-row span:last-child{background:var(--soft);color:var(--red)}
+.basic-number-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.basic-number-card{display:grid;gap:6px;place-items:center;min-height:104px;background:white;border-radius:18px;padding:15px 10px;box-shadow:0 8px 22px #0001;border-top:5px solid var(--gold)}
+.basic-number-card:nth-child(2n){border-top-color:var(--blue)}
+.basic-number-card:nth-child(3n){border-top-color:var(--red)}
+.basic-number-card b{display:block;color:var(--red);font-size:var(--fs-basic-digit);line-height:1;font-weight:900}
+.basic-number-card span{display:block;color:var(--ink);font-size:var(--fs-basic-word);font-weight:850;line-height:1.1}
+.context-shell{max-width:1080px;margin:0 auto}
+.context-flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 12px}
+.context-flow b{display:inline-flex;align-items:center;min-height:34px;padding:7px 12px;border-radius:999px;background:var(--ink);color:white;font-size:var(--fs-badge);font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.context-flow span{display:inline-flex;align-items:center;min-height:34px;padding:7px 11px;border-radius:999px;background:var(--soft);color:var(--red);font-size:var(--fs-small);font-weight:900}
+.context-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.context-card{background:white;border-radius:13px;padding:10px 12px;box-shadow:0 6px 18px #0001;border-left:5px solid var(--gold);font-size:var(--fs-context-sentence);font-weight:780;line-height:1.22}
+.context-card:nth-child(2n){border-left-color:var(--blue)}
+.context-card:nth-child(3n){border-left-color:var(--red)}
+.pattern-shell{max-width:1120px;margin:0 auto}
+.pattern-grid{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:10px;align-items:start}
+.pattern-panel{background:white;border-radius:16px;padding:13px 14px;box-shadow:0 8px 22px #0001;border-top:5px solid var(--gold)}
+.pattern-panel:nth-child(2n){border-top-color:var(--blue)}
+.pattern-panel:nth-child(3n){border-top-color:var(--red)}
+.pattern-panel h3{margin:0 0 9px;color:var(--red);font-size:var(--fs-pattern-title);letter-spacing:.09em;text-transform:uppercase}
+.pattern-note{margin:0 0 8px;color:var(--muted);font-size:var(--fs-pattern-small);font-weight:850;line-height:1.2}
+.number-lines{display:grid;gap:5px}
+.number-line{display:grid;grid-template-columns:2.6rem minmax(0,.9fr) minmax(0,1.45fr);gap:7px;align-items:start;font-size:var(--fs-pattern-item);line-height:1.16}
+.number-line b{color:var(--red);font-weight:900}.number-line strong{font-weight:900}.number-line span:last-child{color:var(--muted);font-size:var(--fs-pattern-small);font-weight:750}
+.compact-lines{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 9px}
+.compact-lines .number-line{grid-template-columns:2.5rem 1fr}
+.compact-lines .number-line>span:last-child{display:none}
+.accent-word{display:inline-block;border-radius:7px;background:rgba(241,191,0,.28);padding:0 .18em;color:var(--red)}
+.decena-lines{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 9px}
+.decena-line{display:grid;grid-template-columns:2.6rem 1fr;gap:7px;font-size:var(--fs-pattern-item);line-height:1.15}.decena-line b{color:var(--red)}
+.formula-box{display:grid;gap:6px;margin:8px 0;padding:10px;border-radius:13px;background:var(--soft);text-align:center;font-weight:900}
+.formula-box .main{font-size:var(--fs-pattern-formula);color:var(--red)}
+.formula-box .parts{font-size:var(--fs-pattern-small);color:var(--ink)}
+.example-lines{display:grid;gap:5px}.example-lines div{font-size:var(--fs-pattern-item);font-weight:850;line-height:1.15}.example-lines small{display:block;color:var(--muted);font-size:var(--fs-pattern-small);font-weight:750}
+.micro-questions{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.micro-questions span{display:inline-flex;border-radius:999px;background:var(--ink);color:white;padding:6px 9px;font-size:var(--fs-pattern-small);font-weight:900}
+.uno-flow{display:grid;gap:8px}.uno-step{border-radius:12px;background:#fffdf8;padding:9px 10px;font-size:var(--fs-pattern-item);font-weight:850;line-height:1.18}.uno-step b{color:var(--red)}.uno-step small{display:block;margin-top:4px;color:var(--muted);font-size:var(--fs-pattern-small)}
+.uno-message{border-left:5px solid var(--green);border-radius:12px;background:white;padding:9px 10px;font-size:var(--fs-pattern-item);font-weight:900}
+.progressive-shell{max-width:1120px;margin:0 auto;display:grid;gap:14px}
+.progressive-header{display:flex;justify-content:space-between;align-items:center;gap:16px;background:white;border-radius:18px;padding:14px 16px;box-shadow:0 8px 22px #0001;border-left:7px solid var(--blue)}
+.progressive-kicker{margin:0;color:var(--red);font-size:var(--fs-badge);font-weight:900;letter-spacing:.12em;text-transform:uppercase}.progressive-header h3{margin:5px 0 0;color:var(--ink);font-size:var(--fs-h3)}
+.progressive-counter{display:inline-flex;align-items:center;min-height:36px;border-radius:999px;background:var(--soft);color:var(--red);padding:8px 12px;font-size:var(--fs-badge);font-weight:900;white-space:nowrap}
+.progressive-stage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.progressive-stage-card{display:grid;gap:12px;background:white;border-radius:18px;padding:18px 20px;box-shadow:0 10px 26px #0001;border-top:6px solid var(--gold)}
+.progressive-stage-card[hidden]{display:none}
+.progressive-stage-card:nth-child(2n){border-top-color:var(--blue)}.progressive-stage-card:nth-child(3n){border-top-color:var(--red)}
+.progressive-stage-card h3{margin:0;color:var(--red);font-size:calc(var(--fs-pattern-title) * 1.14);letter-spacing:.09em;text-transform:uppercase}
+.progressive-stage-card .pattern-note{font-size:calc(var(--fs-pattern-small) * 1.08);line-height:1.28}
+.progressive-stage-card .number-lines,.progressive-stage-card .example-lines,.progressive-stage-card .uno-flow,.progressive-stage-card .tiny-lines,.progressive-stage-card .big-examples{gap:8px}
+.progressive-stage-card .number-line{grid-template-columns:3.4rem minmax(0,.9fr) minmax(0,1.45fr);gap:10px;font-size:calc(var(--fs-pattern-item) * 1.08);line-height:1.24}
+.progressive-stage-card .compact-lines{gap:8px 14px}.progressive-stage-card .compact-lines .number-line{grid-template-columns:3.2rem 1fr}
+.progressive-stage-card .decena-line{grid-template-columns:3.1rem 1fr;gap:10px;font-size:calc(var(--fs-pattern-item) * 1.12);line-height:1.24}
+.progressive-stage-card .example-lines div,.progressive-stage-card .uno-step,.progressive-stage-card .uno-message{font-size:calc(var(--fs-pattern-item) * 1.08);line-height:1.24}.progressive-stage-card .example-lines small,.progressive-stage-card .uno-step small{font-size:calc(var(--fs-pattern-small) * 1.08)}
+.progressive-stage-card .formula-box{padding:14px;gap:8px}.progressive-stage-card .formula-box .main{font-size:calc(var(--fs-pattern-formula) * 1.12)}
+.progressive-controls{display:flex;justify-content:flex-end;gap:10px;position:sticky;bottom:0;z-index:5;background:linear-gradient(180deg,rgba(247,241,229,0),rgba(247,241,229,.96) 28%);padding:18px 0 4px}
+.progressive-next-button,.progressive-reset-button{min-height:48px;border-radius:12px;padding:12px 16px;font-size:var(--fs-badge);font-weight:900;letter-spacing:.09em;text-transform:uppercase;cursor:pointer}
+.progressive-next-button{border:0;background:var(--red);color:white}.progressive-next-button:disabled{background:#c9c3b8;color:#6b6258;cursor:not-allowed}.progressive-reset-button{border:1px solid var(--line);background:white;color:var(--red)}
+.large-number-shell{max-width:1120px;margin:0 auto;display:grid;gap:8px}
+.reading-strip{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:2px}.reading-strip b{display:inline-flex;align-items:center;min-height:30px;border-radius:999px;background:var(--ink);color:white;padding:6px 10px;font-size:var(--fs-pattern-small);font-weight:900;letter-spacing:.12em;text-transform:uppercase}.reading-strip span{display:inline-flex;border-radius:999px;background:var(--soft);color:var(--red);padding:5px 8px;font-size:var(--fs-pattern-small);font-weight:900}
+.big-system-grid{display:grid;grid-template-columns:1.18fr 1fr .84fr;gap:8px;align-items:start}
+.big-area{background:white;border-radius:15px;padding:10px 11px;box-shadow:0 8px 22px #0001;border-top:5px solid var(--gold);display:grid;gap:8px}
+.big-area:nth-child(2){border-top-color:var(--blue)}.big-area:nth-child(3){border-top-color:var(--red)}
+.big-area h3{margin:0;color:var(--red);font-size:var(--fs-pattern-title);letter-spacing:.09em;text-transform:uppercase}
+.mini-block{border-radius:12px;background:#fffdf8;padding:8px 9px}.mini-block strong{display:block;margin-bottom:5px;color:var(--ink);font-size:var(--fs-pattern-small);letter-spacing:.08em;text-transform:uppercase}
+.tiny-lines{display:grid;gap:4px}.tiny-line{display:grid;grid-template-columns:4.6rem minmax(0,1fr);gap:6px;align-items:start;font-size:var(--fs-pattern-small);font-weight:850;line-height:1.14}.tiny-line b{color:var(--red);font-weight:900}.tiny-line span{color:var(--ink)}.tiny-line .accent-word,.million-card .accent-word,.mini-block strong .accent-word{color:var(--red)}
+.hundreds-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 7px}.hundred-line{display:grid;grid-template-columns:2.7rem 1fr;gap:5px;font-size:var(--fs-pattern-small);font-weight:850;line-height:1.14}.hundred-line b{color:var(--red)}
+.construction-box{display:grid;gap:4px;border-radius:12px;background:var(--soft);padding:8px;text-align:center;font-weight:900}.construction-box .digits{font-size:var(--fs-pattern-formula);color:var(--red)}.construction-box .parts{font-size:var(--fs-pattern-small);color:var(--ink)}
+.ok-wrong{display:grid;gap:4px;margin-top:4px;font-size:var(--fs-pattern-small);font-weight:900}.ok-wrong span{display:block;border-radius:9px;background:white;padding:5px 7px}.ok-wrong span:last-child{color:var(--red)}
+.big-examples{display:grid;gap:5px}.big-example{display:grid;gap:2px;border-radius:10px;background:#fffdf8;padding:7px 8px;font-size:var(--fs-pattern-small);font-weight:850;line-height:1.15}.big-example b{color:var(--red);font-size:var(--fs-pattern-item)}.split-number{display:grid;grid-template-columns:1fr auto 1fr;gap:5px;align-items:center;color:var(--muted);font-weight:900}
+.million-card{border-radius:12px;background:#fffdf8;padding:9px;display:grid;gap:6px;font-size:var(--fs-pattern-item);font-weight:900;line-height:1.16}.million-card b{color:var(--red)}.million-card small{display:block;color:var(--muted);font-size:var(--fs-pattern-small);font-weight:850}.mini-message{border-left:5px solid var(--green);border-radius:10px;background:white;padding:7px 8px;font-size:var(--fs-pattern-small);font-weight:900;line-height:1.18}
+.big-progressive .progressive-stage-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.big-progressive .progressive-stage-card{padding:18px;gap:14px}.big-progressive .progressive-stage-card.wide{grid-column:1 / -1}
+.big-progressive .mini-block{padding:13px 14px}.big-progressive .tiny-lines{gap:8px}.big-progressive .tiny-line{grid-template-columns:5.4rem minmax(0,1fr);gap:10px;font-size:calc(var(--fs-pattern-small) * 1.18);line-height:1.25}
+.big-progressive .hundreds-grid{gap:8px 12px}.big-progressive .hundred-line{grid-template-columns:3.4rem 1fr;gap:10px;font-size:calc(var(--fs-pattern-small) * 1.18);line-height:1.25}
+.big-progressive .construction-box{padding:14px;gap:8px}.big-progressive .construction-box .digits{font-size:calc(var(--fs-pattern-formula) * 1.35)}.big-progressive .construction-box .parts{font-size:calc(var(--fs-pattern-small) * 1.14)}
+.big-progressive .big-example{padding:12px 14px;gap:5px;font-size:calc(var(--fs-pattern-small) * 1.14);line-height:1.24}.big-progressive .big-example b{font-size:calc(var(--fs-pattern-item) * 1.18)}
+.big-progressive .million-card{padding:13px 14px;font-size:calc(var(--fs-pattern-item) * 1.14)}.big-progressive .mini-message{padding:10px 12px;font-size:calc(var(--fs-pattern-small) * 1.1)}
+.time-shell{max-width:1120px}
+.time-stage-grid{display:grid;grid-template-columns:1fr;gap:14px}
+.time-stage-card{display:grid;gap:14px;background:white;border-radius:18px;padding:18px 20px;box-shadow:0 10px 26px #0001;border-left:7px solid var(--gold)}
+.time-stage-card[hidden]{display:none}
+.time-stage-card:nth-child(2n){border-left-color:var(--blue)}.time-stage-card:nth-child(3n){border-left-color:var(--red)}
+.time-stage-title{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0;color:var(--red);font-size:calc(var(--fs-pattern-title) * 1.18);letter-spacing:.1em;text-transform:uppercase}
+.time-stage-title span{display:inline-flex;align-items:center;min-height:30px;border-radius:999px;background:var(--soft);color:var(--ink);padding:6px 10px;font-size:var(--fs-pattern-small);letter-spacing:.08em}
+.time-question-big{margin:0;color:var(--ink);font-size:calc(var(--fs-h2) * .72);font-weight:900;line-height:1.02}
+.time-clock-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.time-clock-grid.wide{grid-template-columns:repeat(4,minmax(0,1fr))}
+.time-clock-grid.five{grid-template-columns:repeat(5,minmax(0,1fr))}
+.time-example{display:grid;gap:9px;justify-items:center;border-radius:16px;background:#fffdf8;padding:13px 12px;text-align:center}
+.time-example b{color:var(--red);font-size:calc(var(--fs-pattern-item) * 1.35);line-height:1}
+.time-example strong{display:block;color:var(--ink);font-size:calc(var(--fs-pattern-item) * 1.08);line-height:1.16}
+.time-example em{color:var(--blue);font-style:normal;font-weight:900}
+.clock{position:relative;width:74px;aspect-ratio:1;border:4px solid var(--ink);border-radius:50%;background:white;box-shadow:inset 0 0 0 3px rgba(241,191,0,.18)}
+.clock::before{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;background:var(--red);transform:translate(-50%,-50%);z-index:3}
+.clock .hand{position:absolute;left:50%;bottom:50%;border-radius:999px;transform-origin:50% 100%;transform:translateX(-50%) rotate(var(--angle))}
+.clock .hour{width:6px;height:23px;background:var(--ink);--angle:var(--hour)}
+.clock .minute{width:4px;height:30px;background:var(--red);--angle:var(--minute)}
+.time-contrast{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.time-rule{display:grid;gap:6px;border-radius:16px;background:var(--soft);padding:14px;text-align:center;font-weight:900}
+.time-rule b{color:var(--red);font-size:calc(var(--fs-pattern-formula) * 1.05);letter-spacing:.08em}
+.time-rule small{display:block;color:var(--muted);font-size:var(--fs-pattern-small);line-height:1.25}
+.time-tag-row{display:flex;flex-wrap:wrap;gap:8px}.time-tag-row span{display:inline-flex;align-items:center;min-height:32px;border-radius:999px;background:var(--ink);color:white;padding:7px 10px;font-size:var(--fs-pattern-small);font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.time-tag-row span.light{background:var(--soft);color:var(--red)}
+.time-formula{display:grid;gap:6px;border-radius:16px;background:var(--ink);color:white;padding:14px;text-align:center;font-weight:900}.time-formula b{color:var(--gold);font-size:calc(var(--fs-pattern-formula) * 1.05)}
+.time-note{border-radius:16px;background:#fffdf8;border-left:6px solid var(--green);padding:13px 14px;color:var(--ink);font-size:calc(var(--fs-pattern-item) * 1.02);font-weight:850;line-height:1.28}
+.time-mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.time-mini-panel{display:grid;gap:8px;border-radius:16px;background:#fffdf8;padding:14px}.time-mini-panel h4{margin:0;color:var(--red);font-size:var(--fs-pattern-title);letter-spacing:.08em;text-transform:uppercase}.time-mini-panel p{margin:0;font-size:calc(var(--fs-pattern-item) * 1.08);font-weight:850;line-height:1.25}
+.time-secondary{opacity:.72;border-left-color:var(--muted)}.time-secondary .time-stage-title{color:var(--muted)}.time-secondary .time-note{border-left-color:var(--muted)}
+.story-shell{max-width:1120px}
+.story-shell .progressive-stage-grid{grid-template-columns:1fr}
+.story-stage-card{border-top:0;border-left:7px solid var(--gold)}
+.story-stage-card:nth-child(2n){border-left-color:var(--blue)}.story-stage-card:nth-child(3n){border-left-color:var(--red)}
+.story-stage-card h3{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0;color:var(--red);font-size:calc(var(--fs-pattern-title) * 1.2);letter-spacing:.1em;text-transform:uppercase}
+.story-stage-card h3 span{display:inline-flex;align-items:center;min-height:30px;border-radius:999px;background:var(--soft);color:var(--ink);padding:6px 10px;font-size:var(--fs-pattern-small);letter-spacing:.08em}
+.story-mission-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.story-mission{display:grid;gap:7px;border-radius:15px;background:#fffdf8;padding:14px 15px;font-size:calc(var(--fs-pattern-item) * 1.08);font-weight:850;line-height:1.22}
+.story-mission b{color:var(--red);font-size:calc(var(--fs-pattern-formula) * 1.08);line-height:1}
+.story-soft-note{border-left:6px solid var(--green);border-radius:14px;background:#fffdf8;padding:13px 15px;color:var(--ink);font-size:calc(var(--fs-pattern-item) * 1.08);font-weight:900;line-height:1.25}
+.story-audio-space{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;border-radius:16px;background:#fffdf8;padding:16px;border-left:6px solid var(--green)}
+.story-audio-player{max-width:1120px;margin:10px auto 14px}
+.story-audio-icon{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:var(--soft);color:var(--green);font-size:28px;font-weight:900}
+.story-audio-space strong{display:block;margin-bottom:4px;color:var(--ink);font-size:calc(var(--fs-pattern-item) * 1.12)}
+.story-audio-space p{margin:0;color:var(--muted);font-size:var(--fs-pattern-small);font-weight:850}
+.story-audio-space audio{display:block;width:100%;height:40px;margin-top:10px}
+.story-text{display:grid;gap:12px;border-left:7px solid var(--red);border-radius:16px;background:#fffdf8;padding:18px 20px;font-size:calc(var(--fs-reading) * 1.02);line-height:1.58}
+.story-text p{margin:0}
+.story-source-title{color:var(--red);font-size:calc(var(--fs-pattern-formula) * 1.08);font-weight:900;line-height:1.15}
+.story-segments{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.story-segment{display:grid;grid-template-columns:2.2rem 1fr;gap:9px;align-items:start;border-radius:13px;background:#fffdf8;padding:10px 12px;font-size:calc(var(--fs-pattern-small) * 1.12);font-weight:800;line-height:1.26}
+.story-segment b{display:grid;place-items:center;width:1.55rem;height:1.55rem;border-radius:50%;background:var(--ink);color:white;font-size:var(--fs-pattern-small);line-height:1}
+.story-tasks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.story-task{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:start;border-radius:13px;background:#fffdf8;padding:10px 11px;font-size:calc(var(--fs-pattern-small) * 1.12);font-weight:850;line-height:1.22}
+.story-task b{color:var(--red)}
+.story-vocab-grid{display:grid;grid-template-columns:1.15fr .82fr 1fr;gap:12px;align-items:start}
+.story-vocab-panel{display:grid;gap:8px;border-radius:16px;background:#fffdf8;padding:14px}
+.story-vocab-panel h4{margin:0;color:var(--red);font-size:var(--fs-pattern-title);letter-spacing:.08em;text-transform:uppercase}
+.story-vocab-list{display:grid;gap:7px}
+.story-vocab-item{display:grid;grid-template-columns:minmax(7rem,.85fr) minmax(0,1fr);gap:9px;font-size:calc(var(--fs-pattern-small) * 1.12);line-height:1.18}
+.story-vocab-item b{color:var(--ink)}.story-vocab-item span{color:var(--muted);font-weight:850}
+.story-final-note{border-left:6px solid var(--green);border-radius:16px;background:white;padding:14px 16px;font-size:calc(var(--fs-pattern-item) * 1.05);font-weight:900;line-height:1.28}
+.cards{display:grid;gap:var(--grid-gap)}.cards.two{grid-template-columns:repeat(2,1fr)}.cards.three{grid-template-columns:repeat(3,1fr)}.cards.four{grid-template-columns:repeat(4,1fr)}
+.cards>div,.cards>a,.examples>div,.exercise-call,.rule-box,.note,.teacher-question,.workbook,.text-panel,.audio-card,.toc-card,.mini-table,.summary-map div,.calendar-strip,.month-grid b,.season-grid b{
+  background:white;border-radius:18px;padding:var(--card-pad);box-shadow:0 8px 22px #0001;font-size:var(--fs-card)
+}
+.cards.compact>div,.cards.compact>a{font-size:var(--fs-compact-card);display:flex;flex-direction:column;gap:var(--term-gap)}
+.cards small,.examples small{display:block;color:var(--muted);font-size:var(--fs-small);line-height:1.2}
+.cards:not(.compact) small,.examples small{margin-top:max(8px,var(--translation-gap))}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:24px}.split.wide-left{grid-template-columns:1.15fr .85fr}.split.wide-right{grid-template-columns:.85fr 1.15fr}
+.vocab-list{display:grid;gap:var(--grid-gap-small)}
+.vocab-list>div{background:white;border-radius:14px;padding:14px 16px;display:grid;grid-template-columns:minmax(8rem,.8fr) minmax(0,1.2fr);gap:14px;box-shadow:0 6px 18px #0001;font-size:var(--fs-vocab-list);line-height:1.15}
+.vocab-list b{color:var(--red)}.vocab-list span{color:var(--muted);overflow-wrap:break-word}
+.examples{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.examples>div{display:flex;flex-direction:column;gap:var(--term-gap);line-height:1.2}
+.examples.big>div{font-size:var(--fs-example-big)}.examples.compact{grid-template-columns:repeat(3,1fr)}.examples.compact>div{font-size:var(--fs-example-compact)}
+.word-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--grid-gap-small)}.word-columns.two{grid-template-columns:repeat(2,1fr)}.word-columns.four{grid-template-columns:repeat(4,1fr)}
+.word-columns>div{background:white;border-radius:13px;padding:var(--card-pad-small);font-size:var(--fs-word);box-shadow:0 5px 15px #0001;line-height:1.15}.word-columns small{display:block;color:var(--muted);margin-top:var(--translation-gap);font-size:var(--fs-small)}
+.note{margin-top:14px;border-left:6px solid var(--gold);font-size:var(--fs-note)}.rule-box{margin-top:18px;text-align:center;border:2px solid var(--gold)}
+.teacher-question{margin-top:20px;border-left:6px solid var(--gold)}
+.text-panel{font-size:var(--fs-reading);line-height:1.52;border-left:7px solid var(--red)}
+.text-panel p{margin:0 0 14px}.text-panel p:last-child{margin-bottom:0}
+.audio-card{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:18px;border-left:7px solid var(--green)}
+.audio-icon{width:70px;height:70px;border-radius:50%;display:grid;place-items:center;background:var(--soft);color:var(--green)}
+.audio-icon svg{width:38px;height:38px;display:block}
+.audio-card audio{display:block;width:100%;height:40px;margin-top:12px}
+.exercise-call{display:block;margin:14px auto;max-width:800px;border-left:7px solid var(--blue);text-decoration:none;color:inherit}
+.exercise-call:hover{transform:translateY(-1px)}
+.exercise-number{font-size:13px;font-weight:900;letter-spacing:.12em;color:var(--blue);text-transform:uppercase}.exercise-call h3{margin:7px 0}.exercise-call p{margin:0;color:var(--muted)}
+.exercise-path{display:block;margin-top:9px;color:var(--muted);font-size:12px;font-weight:800;word-break:break-word}
+.mini-table{display:grid;gap:2px;background:#ddd;border-radius:16px;overflow:hidden;padding:0}
+.mini-table>div{background:white;padding:11px 14px;display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:var(--fs-vocab-list)}
+.mini-table .head{background:var(--ink);color:white;font-weight:900}
+.badge-row{display:flex;flex-wrap:wrap;gap:9px}.badge-row span{display:inline-flex;align-items:center;min-height:38px;padding:8px 12px;border-radius:999px;background:var(--soft);color:var(--red);font-weight:900}
+.calendar-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}.calendar-strip b{background:var(--soft);border-radius:12px;padding:12px 8px;text-align:center;color:var(--red)}
+.month-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.season-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.month-grid b,.season-grid b{text-align:center;color:var(--red)}
+.summary-map{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center}.summary-map div{font-size:var(--fs-summary);font-weight:900}.summary-map span{display:block;color:var(--muted);font-size:var(--fs-small);margin-top:6px}
+.final-sentences{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:26px}.final-sentences p{background:white;border-radius:15px;padding:17px;text-align:center;font-size:var(--fs-final);margin:0}
+.workbook{display:grid;grid-template-columns:120px 1fr;gap:28px;align-items:center;max-width:900px;margin:28px auto}.workbook-icon{font-size:var(--fs-workbook-icon);text-align:center;color:var(--green);font-weight:900}.workbook h3{font-size:var(--fs-workbook-h3);margin:0 0 10px}.workbook p{font-size:var(--fs-workbook-p);line-height:1.5;margin:0 0 14px}
+.closing{text-align:center;padding-top:58px}.huge{font-size:var(--fs-huge);font-weight:900;color:var(--red)}.closing p{font-size:var(--fs-closing-p)}.closing .sentence{font-size:var(--fs-closing-sentence)}
+.pt{display:block;margin-top:var(--translation-gap);color:var(--muted);font-size:var(--fs-translation);font-weight:600;line-height:1.2}
+.progress{position:fixed;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--red),var(--gold));z-index:20;transition:.3s}
+.font-controls{position:fixed;right:18px;top:58px;z-index:30;display:flex;gap:4px;background:rgba(255,255,255,.86);border:1px solid rgba(23,32,51,.14);border-radius:12px;padding:5px;box-shadow:0 8px 22px #0002;backdrop-filter:blur(8px)}
+.font-controls button{width:34px;height:32px;border:0;border-radius:8px;background:transparent;color:var(--ink);font-size:var(--fs-controls);font-weight:900;cursor:pointer}
+.font-controls button:hover,.font-controls button.active{background:var(--soft);color:var(--red)}
+@media(max-width:900px){
+  .slide{padding:var(--slide-pad-y-mobile) var(--slide-pad-x-mobile) var(--slide-pad-bottom-mobile)}.foot{left:var(--foot-x-mobile);right:var(--foot-x-mobile)}.cover-grid,.split,.split.wide-left,.split.wide-right{grid-template-columns:1fr}
+  .cover-visual{padding:18px}.cards.two,.cards.three{grid-template-columns:1fr}.cards.four,.word-columns.four{grid-template-columns:repeat(2,1fr)}.word-columns{grid-template-columns:repeat(2,1fr)}
+  h1{font-size:var(--fs-h1-mobile)}h2{font-size:min(var(--fs-h2),32px)}h3{font-size:min(var(--fs-h3),18px)}
+  .cover-main-title{font-size:min(var(--fs-cover-main),42px)}
+  .cards>div,.cards>a,.examples>div,.exercise-call,.rule-box,.note,.teacher-question,.workbook,.text-panel,.audio-card,.toc-card,.mini-table,.summary-map div,.calendar-strip,.month-grid b,.season-grid b{padding:12px 14px}
+  .vocab-list>div{grid-template-columns:1fr;gap:6px;font-size:min(var(--fs-vocab-list),14px)}
+  .examples{gap:8px}.examples.compact{grid-template-columns:repeat(2,1fr)}.examples>div,.examples.compact>div{font-size:min(var(--fs-example-compact),14px)}
+  .audio-card{grid-template-columns:1fr}.audio-icon{width:54px;height:54px}.audio-icon svg{width:30px;height:30px}
+  .calendar-strip,.month-grid,.season-grid{grid-template-columns:repeat(2,1fr)}.mini-table>div{grid-template-columns:1fr;font-size:min(var(--fs-vocab-list),14px)}
+  .summary-map{gap:7px}.summary-map div{font-size:min(var(--fs-summary),14px)}.final-sentences{grid-template-columns:1fr;gap:8px;margin-top:14px}.final-sentences p{font-size:min(var(--fs-final),15px);padding:10px}
+  .workbook{grid-template-columns:1fr;gap:12px;margin:20px auto}.workbook-icon{font-size:min(var(--fs-workbook-icon),52px)}.workbook h3{font-size:min(var(--fs-workbook-h3),21px)}.workbook p{font-size:min(var(--fs-workbook-p),15px)}
+  .number-composition{min-height:220px;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto;gap:10px}
+  .number-token{min-height:56px}
+  .number-token.small-a,.number-token.small-b,.number-token.mid-a,.number-token.mid-b,.number-token.time,.number-token.huge{grid-column:auto;grid-row:auto;transform:none;writing-mode:horizontal-tb}
+  .number-token.small-a{font-size:min(var(--fs-number-small),22px)}
+  .number-token.small-b{font-size:min(calc(var(--fs-number-small) * 1.12),24px)}
+  .number-token.mid-a,.number-token.mid-b{font-size:min(var(--fs-number-mid),28px)}
+  .number-token.time{font-size:min(var(--fs-number-time),30px)}
+  .number-token.huge{grid-column:1 / -1;font-size:min(var(--fs-number-huge),34px)}
+  .agenda-grid{grid-template-columns:1fr;gap:9px;margin-top:12px}.agenda-item{padding:12px 14px;font-size:min(var(--fs-card),16px)}.continuity-note{margin-top:14px;padding:14px 16px;font-size:min(var(--fs-example-big),17px)}
+  .warmup-layout{grid-template-columns:1fr;gap:12px}.warmup-card{padding:16px}.warmup-lines{gap:8px;font-size:min(var(--fs-card),16px)}.warmup-warning{font-size:min(var(--fs-example-big),19px)}.activity-button{width:100%;font-size:min(var(--fs-badge),13px)}
+  .debrief-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.debrief-card{min-height:0;padding:12px 14px}.debrief-card h3{font-size:min(var(--fs-h3),18px)}.debrief-card p{font-size:min(var(--fs-compact-card),15px)}.numbers-bridge{grid-template-columns:1fr;gap:12px;padding:14px 16px}.numbers-next{justify-content:center}
+  .basic-number-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.basic-number-card{min-height:78px;padding:10px 6px}.basic-number-card b{font-size:min(var(--fs-basic-digit),28px)}.basic-number-card span{font-size:min(var(--fs-basic-word),14px)}
+  .context-grid{grid-template-columns:1fr;gap:6px}.context-card{font-size:min(var(--fs-context-sentence),15px);padding:8px 10px}
+  .pattern-grid{grid-template-columns:1fr}.pattern-panel{padding:11px 12px}.number-line,.decena-line,.example-lines div,.uno-step,.uno-message{font-size:min(var(--fs-pattern-item),14px)}
+  .progressive-header{display:grid;gap:10px;padding:12px 14px}.progressive-stage-grid,.big-progressive .progressive-stage-grid{grid-template-columns:1fr}.progressive-stage-card{padding:14px}.progressive-controls{justify-content:stretch;display:grid;grid-template-columns:1fr 1fr}.progressive-next-button,.progressive-reset-button{width:100%;font-size:min(var(--fs-badge),13px)}
+  .progressive-stage-card .number-line{grid-template-columns:2.9rem minmax(0,1fr);font-size:min(calc(var(--fs-pattern-item) * 1.08),15px)}.progressive-stage-card .number-line span:last-child{grid-column:2}.progressive-stage-card .compact-lines{grid-template-columns:1fr}.progressive-stage-card .decena-lines,.progressive-stage-card .hundreds-grid{grid-template-columns:1fr}
+  .big-system-grid{grid-template-columns:1fr}.big-area{padding:10px}.hundreds-grid{grid-template-columns:1fr}.tiny-line{grid-template-columns:4.2rem 1fr}.reading-strip span:nth-child(n+8){display:none}
+  .big-progressive .tiny-line,.big-progressive .hundred-line{grid-template-columns:4.5rem 1fr;font-size:min(calc(var(--fs-pattern-small) * 1.18),14px)}
+  .time-clock-grid,.time-clock-grid.wide,.time-clock-grid.five,.time-contrast,.time-mini-grid{grid-template-columns:1fr}
+  .time-stage-card{padding:14px}.time-question-big{font-size:min(calc(var(--fs-h2) * .62),30px)}.clock{width:68px}
+  .story-mission-grid,.story-tasks{grid-template-columns:repeat(2,minmax(0,1fr))}.story-segments,.story-vocab-grid{grid-template-columns:1fr}.story-text{padding:14px;font-size:min(calc(var(--fs-reading) * 1.02),17px)}.story-audio-space{grid-template-columns:1fr}
+  .font-controls{right:10px;top:50px}.foot span:last-child{display:none}
+}
+@media(max-width:520px){
+  .examples,.examples.compact,.word-columns,.word-columns.two,.word-columns.four,.calendar-strip,.month-grid,.season-grid,.debrief-grid{grid-template-columns:1fr}
+  .basic-number-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .story-mission-grid,.story-tasks{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<section class="slide cover" data-section="inicio">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle lesson-label">Lección 3</div>
+    <h1 class="cover-main-title">Los números y la hora</h1>
+    <div class="body">
+      <div class="cover-grid">
+        <div class="cover-intro">
+          <div class="eyebrow">CURSO DE ESPAÑOL · NIVEL INICIAL</div>
+          <p class="lead">Contar, expresar cantidades y hablar de la hora.</p>
+        </div>
+        <div class="cover-visual" aria-hidden="true">
+          <div class="number-composition">
+            <span class="number-token small-a">7</span>
+            <span class="number-token small-b">23</span>
+            <span class="number-token mid-a">145</span>
+            <span class="number-token mid-b">2.500</span>
+            <span class="number-token time">8:30</span>
+            <span class="number-token huge">1.000.000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 3 · Los números y la hora</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" data-section="inicio">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Ruta rápida de la clase</div>
+    <h1>Lo que vamos a hacer</h1>
+    <div class="body">
+      <div class="agenda-shell">
+        <div class="agenda-intro">HOY VAMOS A…</div>
+        <div class="agenda-grid">
+          <div class="agenda-item"><span class="agenda-mark" aria-hidden="true"></span><span>recordar lo que ya sabemos</span></div>
+          <div class="agenda-item"><span class="agenda-mark" aria-hidden="true"></span><span>aprender los números hasta 1.000.000</span></div>
+          <div class="agenda-item"><span class="agenda-mark" aria-hidden="true"></span><span>hablar de cantidades</span></div>
+          <div class="agenda-item"><span class="agenda-mark" aria-hidden="true"></span><span>preguntar y decir la hora</span></div>
+          <div class="agenda-item"><span class="agenda-mark" aria-hidden="true"></span><span>utilizar todo en conversaciones</span></div>
+          <div class="agenda-item"><span class="agenda-mark" aria-hidden="true"></span><span>escuchar y leer una historia</span></div>
+        </div>
+        <div class="continuity-note">Seguiremos usando <b>ser</b>, <b>estar</b>, <b>hay</b>, <b>artículos</b> y <b>concordancia</b>.</div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 3 · Lo que vamos a hacer</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" data-section="calentamiento">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Dos apartamentos</div>
+    <h1>Calentamiento</h1>
+    <div class="body">
+      <div class="warmup-layout">
+        <div class="warmup-card primary">
+          <div class="warmup-kicker">Actividad oral en parejas</div>
+          <div class="warmup-lines">
+            <p>En parejas, vais a comparar dos apartamentos.</p>
+            <p>Cada persona recibe información de un apartamento diferente.</p>
+            <p>Hablad con vuestro compañero y descubrid qué es igual y qué es diferente.</p>
+          </div>
+          <a class="activity-button" href="workbook/leccion-03/calentamiento-dos-apartamentos.html" target="_blank" rel="noopener">EMPEZAR LA ACTIVIDAD</a>
+        </div>
+        <div class="warmup-card rule">
+          <div class="warmup-warning">No enseñéis vuestra pantalla.</div>
+          <div class="warmup-mission">Descubrid por lo menos cinco diferencias y algunas coincidencias entre los apartamentos.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 3 · Calentamiento</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" data-section="calentamiento">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Debrief rápido del calentamiento</div>
+    <h1>¿Qué hemos utilizado?</h1>
+    <div class="body">
+      <div class="debrief-shell">
+        <div class="chain-call">
+          <b>RESPONDEMOS EN CADENA</b>
+          <span>Una persona responde a cada desafío.</span>
+        </div>
+        <div class="debrief-grid">
+          <div class="debrief-card">
+            <h3>HAY</h3>
+            <p>Di una cosa que hay en uno de los apartamentos.</p>
+            <small>Hay dos baños.</small>
+          </div>
+          <div class="debrief-card">
+            <h3>SER</h3>
+            <p>Describe una característica.</p>
+            <small>La cocina es grande.</small>
+          </div>
+          <div class="debrief-card">
+            <h3>ESTAR</h3>
+            <p>Di dónde está un objeto.</p>
+            <small>El piano está en la sala.</small>
+          </div>
+          <div class="debrief-card">
+            <h3>ARTÍCULOS</h3>
+            <p>Da un ejemplo con el, la, los o las.</p>
+            <small>Las ventanas.</small>
+          </div>
+          <div class="debrief-card">
+            <h3>PLURAL</h3>
+            <p>Transforma una palabra del singular al plural.</p>
+            <small>sillón → sillones</small>
+          </div>
+          <div class="debrief-card">
+            <h3>CONCORDANCIA</h3>
+            <p>Di una combinación de sustantivo + adjetivo.</p>
+            <small>las ventanas blancas</small>
+          </div>
+        </div>
+        <div class="numbers-bridge">
+          <div>
+            <p>Ya podemos hablar de objetos y lugares.</p>
+            <strong>Ahora necesitamos hablar de cantidades con más precisión.</strong>
+          </div>
+          <div class="numbers-next">→ LOS NÚMEROS</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 3 · Debrief</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" data-section="numeros">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Escucha, repite y reconoce</div>
+    <h1>De 0 a 15</h1>
+    <div class="body">
+      <div class="basic-numbers-shell">
+        <div class="listen-row">
+          <span>ESCUCHA Y REPITE</span>
+          <span>LEEMOS EN VOZ ALTA</span>
+        </div>
+        <div class="basic-number-grid" aria-label="Números de cero a quince">
+          <div class="basic-number-card"><b>0</b><span>cero</span></div>
+          <div class="basic-number-card"><b>1</b><span>uno</span></div>
+          <div class="basic-number-card"><b>2</b><span>dos</span></div>
+          <div class="basic-number-card"><b>3</b><span>tres</span></div>
+          <div class="basic-number-card"><b>4</b><span>cuatro</span></div>
+          <div class="basic-number-card"><b>5</b><span>cinco</span></div>
+          <div class="basic-number-card"><b>6</b><span>seis</span></div>
+          <div class="basic-number-card"><b>7</b><span>siete</span></div>
+          <div class="basic-number-card"><b>8</b><span>ocho</span></div>
+          <div class="basic-number-card"><b>9</b><span>nueve</span></div>
+          <div class="basic-number-card"><b>10</b><span>diez</span></div>
+          <div class="basic-number-card"><b>11</b><span>once</span></div>
+          <div class="basic-number-card"><b>12</b><span>doce</span></div>
+          <div class="basic-number-card"><b>13</b><span>trece</span></div>
+          <div class="basic-number-card"><b>14</b><span>catorce</span></div>
+          <div class="basic-number-card"><b>15</b><span>quince</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 3 · De 0 a 15</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" data-section="numeros">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Pronunciación, lectura y estructuras conocidas</div>
+    <h1>Leemos números en contexto</h1>
+    <div class="body">
+      <div class="context-shell">
+        <div class="context-flow">
+          <b>LECTURA EN CADENA</b>
+          <span>Cada persona lee una frase entera.</span>
+          <span>¿Qué número has escuchado?</span>
+          <span>¿Hay, ser o estar?</span>
+        </div>
+        <div class="context-grid" aria-label="Frases con números de cero a quince">
+          <div class="context-card">Hay tres libros en la mesa.</div>
+          <div class="context-card">Hay cuatro ventanas en la casa.</div>
+          <div class="context-card">En la sala hay dos sillones grises.</div>
+          <div class="context-card">Somos seis estudiantes en este grupo.</div>
+          <div class="context-card">Hay once cuadernos en el estudio.</div>
+          <div class="context-card">Las cinco mesas son blancas.</div>
+          <div class="context-card">En el hotel hay ocho habitaciones pequeñas.</div>
+          <div class="context-card">Hay doce mesas en el restaurante.</div>
+          <div class="context-card">Hay siete flores en el patio.</div>
+          <div class="context-card">Los nueve libros están en la mesa.</div>
+          <div class="context-card">En la cocina hay cuatro sillas.</div>
+          <div class="context-card">Las trece ventanas están abiertas.</div>
+          <div class="context-card">Hay quince estudiantes en la clase.</div>
+          <div class="context-card">Dos habitaciones son grandes y una es pequeña.</div>
+          <div class="context-card">En el baño hay un espejo y dos lámparas.</div>
+          <div class="context-card">Las seis paredes son blancas.</div>
+          <div class="context-card">Hay diez lápices y cinco bolígrafos.</div>
+          <div class="context-card">En el comedor hay catorce sillas.</div>
+          <div class="context-card">Los cuatro cuadros están en la sala.</div>
+          <div class="context-card">No hay libros en el baño.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 3 · Números en contexto</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" data-section="numeros">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Observa cómo se construyen los números.</div>
+    <h1>De 16 a 99</h1>
+    <div class="body scrollable">
+      <div class="progressive-shell" data-progressive-reveal>
+        <div class="progressive-header">
+          <div>
+            <p class="progressive-kicker">Construcción paso a paso</p>
+            <h3>Revelamos los bloques uno por uno.</h3>
+          </div>
+          <p class="progressive-counter" data-progressive-counter aria-live="polite">Etapa 0 / 5</p>
+        </div>
+        <div class="progressive-stage-grid" aria-label="Etapas de números de dieciséis a noventa y nueve">
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>De 16 a 19</h3>
+            <p class="pattern-note">Del 16 al 19 escribimos una sola palabra.</p>
+            <div class="number-lines">
+              <div class="number-line"><b>16</b><strong><span class="accent-word">dieciséis</span></strong><span>Hay dieciséis libros en la sala.</span></div>
+              <div class="number-line"><b>17</b><strong>diecisiete</strong><span>Hay diecisiete estudiantes en la clase.</span></div>
+              <div class="number-line"><b>18</b><strong>dieciocho</strong><span>Hay dieciocho ventanas en el edificio.</span></div>
+              <div class="number-line"><b>19</b><strong>diecinueve</strong><span>Hay diecinueve cuadernos en el estudio.</span></div>
+            </div>
+          </article>
+
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>De 20 a 29</h3>
+            <p class="pattern-note">En los 20 escribimos todo junto: veintiuno, veintidós, veintitrés...</p>
+            <div class="compact-lines">
+              <div class="number-line"><b>20</b><strong>veinte</strong><span></span></div>
+              <div class="number-line"><b>21</b><strong>veintiuno</strong><span></span></div>
+              <div class="number-line"><b>22</b><strong><span class="accent-word">veintidós</span></strong><span></span></div>
+              <div class="number-line"><b>23</b><strong><span class="accent-word">veintitrés</span></strong><span></span></div>
+              <div class="number-line"><b>24</b><strong>veinticuatro</strong><span></span></div>
+              <div class="number-line"><b>25</b><strong>veinticinco</strong><span></span></div>
+              <div class="number-line"><b>26</b><strong><span class="accent-word">veintiséis</span></strong><span></span></div>
+              <div class="number-line"><b>27</b><strong>veintisiete</strong><span></span></div>
+              <div class="number-line"><b>28</b><strong>veintiocho</strong><span></span></div>
+              <div class="number-line"><b>29</b><strong>veintinueve</strong><span></span></div>
+            </div>
+            <div class="example-lines" style="margin-top:9px">
+              <div>Hay veinte mesas en el restaurante.</div>
+              <div>Hay veintidós ventanas.</div>
+              <div>Hay veintitrés estudiantes.</div>
+              <div>Hay veintiséis sillas.</div>
+              <div>Hay veintinueve cuadernos.</div>
+            </div>
+            <div class="micro-questions"><span>¿Qué palabras llevan tilde?</span></div>
+          </article>
+
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Las decenas</h3>
+            <div class="decena-lines">
+              <div class="decena-line"><b>30</b><strong>treinta</strong></div>
+              <div class="decena-line"><b>40</b><strong>cuarenta</strong></div>
+              <div class="decena-line"><b>50</b><strong><span class="accent-word">cincuenta</span></strong></div>
+              <div class="decena-line"><b>60</b><strong><span class="accent-word">sesenta</span></strong></div>
+              <div class="decena-line"><b>70</b><strong><span class="accent-word">setenta</span></strong></div>
+              <div class="decena-line"><b>80</b><strong>ochenta</strong></div>
+              <div class="decena-line"><b>90</b><strong>noventa</strong></div>
+            </div>
+            <div class="example-lines" style="margin-top:9px">
+              <div>Hay treinta estudiantes.</div>
+              <div>Hay cuarenta libros.</div>
+              <div>Hay cincuenta mesas.</div>
+              <div>Hay sesenta ventanas.</div>
+              <div>Hay setenta cuadernos.</div>
+              <div>Hay ochenta sillas.</div>
+              <div>Hay noventa habitaciones.</div>
+            </div>
+          </article>
+
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>De 31 a 99</h3>
+            <p class="pattern-note">A partir de 30, escribimos separado con y.</p>
+            <div class="formula-box">
+              <div class="main">DECENA + Y + UNIDAD</div>
+              <div class="parts">42 · cuarenta + y + dos → cuarenta y dos</div>
+            </div>
+            <div class="example-lines">
+              <div>31 — treinta y uno<small>Hay treinta y un libros.</small></div>
+              <div>42 — cuarenta y dos<small>Hay cuarenta y dos ventanas.</small></div>
+              <div>57 — cincuenta y siete<small>Hay cincuenta y siete cuadernos.</small></div>
+              <div>68 — sesenta y ocho<small>Hay sesenta y ocho sillas.</small></div>
+              <div>74 — setenta y cuatro<small>Hay setenta y cuatro estudiantes.</small></div>
+              <div>99 — noventa y nueve<small>Hay noventa y nueve libros.</small></div>
+            </div>
+            <div class="micro-questions"><span>¿Cómo se dice 43?</span><span>¿Y 76?</span></div>
+          </article>
+
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>Uno, un o una</h3>
+            <div class="uno-flow">
+              <div class="uno-message">Uno cambia delante de un sustantivo.</div>
+              <div class="uno-step"><b>21 → veintiuno</b><small>veintiún libros · veintiuna casas</small></div>
+              <div class="uno-step"><b>veintiuno</b><small>↓ veintiún + sustantivo masculino</small><small>↓ veintiuna + sustantivo femenino</small></div>
+              <div class="uno-step"><b>treinta y uno</b><small>↓ treinta y un + sustantivo masculino</small><small>↓ treinta y una + sustantivo femenino</small></div>
+              <div class="uno-step"><b>31 libros</b><small>→ treinta y un libros</small></div>
+              <div class="uno-step"><b>41 ventanas</b><small>→ cuarenta y una ventanas</small></div>
+              <div class="example-lines">
+                <div>Hay veintiún libros.</div>
+                <div>Hay veintiuna ventanas.</div>
+                <div>Hay treinta y un cuadernos.</div>
+                <div>Hay cuarenta y una mesas.</div>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="progressive-controls">
+          <button class="progressive-reset-button" type="button" data-progressive-reset>REINICIAR</button>
+          <button class="progressive-next-button" type="button" data-progressive-next>SIGUIENTE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 3 · De 16 a 99</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" data-section="numeros">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">El inventario</div>
+    <h1>En parejas</h1>
+    <div class="body">
+      <div class="warmup-layout">
+        <div class="warmup-card primary">
+          <div class="warmup-kicker">Actividad oral</div>
+          <div class="warmup-lines">
+            <p>Cada persona recibe una parte del inventario.</p>
+            <p>Preguntad por las cantidades que faltan y completad vuestra información.</p>
+          </div>
+          <a class="activity-button" href="workbook/leccion-03/actividad-inventario.html" target="_blank" rel="noopener">EMPEZAR LA ACTIVIDAD</a>
+        </div>
+        <div class="warmup-card rule">
+          <div class="warmup-warning">No enseñéis vuestra pantalla.</div>
+          <div class="warmup-mission">Completad el inventario hablando en español.</div>
+          <div class="badge-row" aria-label="Estructuras de apoyo">
+            <span>¿Cuántos...?</span>
+            <span>¿Cuántas...?</span>
+            <span>Hay...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 3 · El inventario</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" data-section="numeros">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Números de 0 a 99</div>
+    <h1>Práctica 1</h1>
+    <div class="body">
+      <a class="exercise-call" href="workbook/leccion-03/ejercicio-01-numeros-0-99.html" target="_blank" rel="noopener">
+        <div class="exercise-number">Práctica 1</div>
+        <h3>Números de 0 a 99</h3>
+        <p>Vamos a utilizar los números en frases y situaciones.</p>
+        <span class="activity-button">EMPEZAR</span>
+        <span class="exercise-path">workbook/leccion-03/ejercicio-01-numeros-0-99.html</span>
+      </a>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 3 · Práctica 1</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" data-section="numeros">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Construimos números cada vez más grandes.</div>
+    <h1>De 100 a 1.000.000</h1>
+    <div class="body scrollable">
+      <div class="progressive-shell big-progressive" data-progressive-reveal>
+        <div class="progressive-header">
+          <div>
+            <p class="progressive-kicker">Construcción paso a paso</p>
+            <h3>De cien a un millón, por etapas.</h3>
+          </div>
+          <p class="progressive-counter" data-progressive-counter aria-live="polite">Etapa 0 / 7</p>
+        </div>
+        <div class="reading-strip" aria-label="Lectura secuencial">
+          <b>LEEMOS EN VOZ ALTA</b>
+          <span>100</span><span>125</span><span>200</span><span>245</span><span>500</span><span>731</span><span>1.000</span><span>12.500</span><span>25.000</span><span>100.000</span><span>125.438</span><span>999.999</span><span>1.000.000</span>
+        </div>
+        <div class="progressive-stage-grid" aria-label="Etapas de números de cien a un millón">
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>1 — Cien o ciento</h3>
+            <div class="tiny-lines">
+              <div class="tiny-line"><b>100</b><span>→ <span class="accent-word">cien</span></span></div>
+              <div class="tiny-line"><b>101</b><span>ciento uno</span></div>
+              <div class="tiny-line"><b>125</b><span>ciento veinticinco</span></div>
+              <div class="tiny-line"><b>199</b><span>ciento noventa y nueve</span></div>
+              <div class="tiny-line"><b>cien</b><span>libros · ventanas</span></div>
+              <div class="tiny-line"><b>Hay</b><span>cien libros. Hay cien ventanas.</span></div>
+            </div>
+            <div class="mini-message">100 exactamente → cien · 101–199 → ciento...</div>
+          </article>
+
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>2 — Las centenas</h3>
+            <div class="hundreds-grid">
+              <div class="hundred-line"><b>200</b><span>doscientos / doscientas</span></div>
+              <div class="hundred-line"><b>300</b><span>trescientos / trescientas</span></div>
+              <div class="hundred-line"><b>400</b><span>cuatrocientos / cuatrocientas</span></div>
+              <div class="hundred-line"><b>500</b><span><span class="accent-word">quinientos</span> / quinientas</span></div>
+              <div class="hundred-line"><b>600</b><span>seiscientos / seiscientas</span></div>
+              <div class="hundred-line"><b>700</b><span><span class="accent-word">setecientos</span> / setecientas</span></div>
+              <div class="hundred-line"><b>800</b><span>ochocientos / ochocientas</span></div>
+              <div class="hundred-line"><b>900</b><span><span class="accent-word">novecientos</span> / novecientas</span></div>
+            </div>
+            <div class="mini-message">Atención: 500, 700 y 900 usan formas especiales: quinientos, setecientos y novecientos.</div>
+          </article>
+
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>3 — Concordancia</h3>
+            <div class="tiny-lines">
+              <div class="tiny-line"><b>200</b><span>doscientos libros · doscientas casas</span></div>
+              <div class="tiny-line"><b>500</b><span>quinientos estudiantes · quinientas ventanas</span></div>
+              <div class="tiny-line"><b>Hay</b><span>doscientos libros. Hay doscientas casas.</span></div>
+              <div class="tiny-line"><b>Hay</b><span>quinientos estudiantes. Hay quinientas ventanas.</span></div>
+            </div>
+            <div class="micro-questions"><span>¿Por qué decimos “doscientas casas”?</span></div>
+            <div class="mini-message">Las centenas concuerdan con el sustantivo.</div>
+          </article>
+
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>4 — Construimos números</h3>
+            <div class="construction-box">
+              <div class="digits">245</div>
+              <div class="parts">doscientos + cuarenta + y + cinco</div>
+              <div class="parts">→ doscientos cuarenta y cinco</div>
+            </div>
+            <div class="tiny-lines">
+              <div class="tiny-line"><b>731</b><span>setecientos treinta y uno</span></div>
+              <div class="tiny-line"><b>999</b><span>novecientos noventa y nueve</span></div>
+            </div>
+            <div class="ok-wrong">
+              <span>✓ doscientos cuarenta y cinco</span>
+              <span>✕ doscientos y cuarenta y cinco</span>
+            </div>
+            <div class="mini-message">Usamos “y” entre decenas y unidades. No entre centenas y decenas.</div>
+            <div class="micro-questions"><span>¿Dónde utilizamos “y”?</span></div>
+          </article>
+
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>5 — Mil</h3>
+            <div class="tiny-lines">
+              <div class="tiny-line"><b>1.000</b><span><span class="accent-word">mil</span></span></div>
+              <div class="tiny-line"><b>2.000</b><span>dos mil</span></div>
+              <div class="tiny-line"><b>10.000</b><span>diez mil</span></div>
+              <div class="tiny-line"><b>25.000</b><span>veinticinco mil</span></div>
+              <div class="tiny-line"><b>100.000</b><span>cien mil</span></div>
+            </div>
+            <div class="mini-message">Decimos “mil”, no “un mil”.</div>
+            <div class="tiny-lines">
+              <div class="tiny-line"><b>Hay</b><span>mil libros.</span></div>
+              <div class="tiny-line"><b>Hay</b><span>dos mil estudiantes.</span></div>
+              <div class="tiny-line"><b>Hay</b><span>veinticinco mil habitantes.</span></div>
+            </div>
+          </article>
+
+          <article class="progressive-stage-card wide" data-progressive-stage hidden>
+            <h3>6 — Construimos números grandes</h3>
+            <div class="big-examples">
+              <div class="big-example"><b>1.245</b><span>→ mil doscientos cuarenta y cinco</span></div>
+              <div class="big-example"><b>12.500</b><span>→ doce mil quinientos</span></div>
+              <div class="big-example">
+                <b>125.438</b>
+                <div class="split-number"><span>125 mil</span><span>+</span><span>438</span></div>
+                <span>→ ciento veinticinco mil cuatrocientos treinta y ocho</span>
+              </div>
+              <div class="big-example"><b>999.999</b><span>→ novecientos noventa y nueve mil novecientos noventa y nueve</span></div>
+            </div>
+          </article>
+
+          <article class="progressive-stage-card" data-progressive-stage hidden>
+            <h3>7 — Un millón</h3>
+            <div class="million-card">
+              <div><b>1.000.000</b><small><span class="accent-word">un millón</span></small></div>
+              <div><b>2.000.000</b><small>dos millones</small></div>
+            </div>
+            <div class="million-card">
+              <div>un millón <span class="accent-word">de</span> habitantes</div>
+              <div>dos millones <span class="accent-word">de</span> libros</div>
+            </div>
+            <div class="tiny-lines">
+              <div class="tiny-line"><b>Hay</b><span>un millón de habitantes.</span></div>
+              <div class="tiny-line"><b>Hay</b><span>dos millones de libros.</span></div>
+            </div>
+            <div class="mini-message">Millón es un sustantivo.</div>
+            <div class="mini-message">Delante de otro sustantivo usamos “de”.</div>
+            <div class="construction-box">
+              <div class="parts">un millón de + sustantivo</div>
+              <div class="parts">dos millones de + sustantivo</div>
+            </div>
+          </article>
+        </div>
+        <div class="progressive-controls">
+          <button class="progressive-reset-button" type="button" data-progressive-reset>REINICIAR</button>
+          <button class="progressive-next-button" type="button" data-progressive-next>SIGUIENTE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 3 · De 100 a 1.000.000</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" data-section="numeros">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Tres ciudades</div>
+    <h1>En parejas</h1>
+    <div class="body">
+      <div class="warmup-layout">
+        <div class="warmup-card primary">
+          <div class="warmup-kicker">Actividad oral</div>
+          <div class="warmup-lines">
+            <p>Cada persona recibe información diferente sobre tres ciudades.</p>
+            <p>Preguntad por los datos que faltan y completad vuestra ficha.</p>
+          </div>
+          <a class="activity-button" href="workbook/leccion-03/actividad-tres-ciudades.html" target="_blank" rel="noopener">EMPEZAR LA ACTIVIDAD</a>
+        </div>
+        <div class="warmup-card rule">
+          <div class="warmup-warning">No enseñéis vuestra pantalla.</div>
+          <div class="warmup-mission"><strong>MISIÓN 1</strong><br>Completad la información.</div>
+          <div class="warmup-mission"><strong>MISIÓN 2</strong><br>Ordenad las ciudades de menor a mayor población.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 3 · Tres ciudades</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" data-section="numeros">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Números grandes</div>
+    <h1>Práctica 2</h1>
+    <div class="body">
+      <a class="exercise-call" href="workbook/leccion-03/ejercicio-02-numeros-grandes.html" target="_blank" rel="noopener">
+        <div class="exercise-number">Práctica 2</div>
+        <h3>Números grandes</h3>
+        <p>Vamos a construir y utilizar números de 100 a 1.000.000.</p>
+        <span class="activity-button">EMPEZAR</span>
+        <span class="exercise-path">workbook/leccion-03/ejercicio-02-numeros-grandes.html</span>
+      </a>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 3 · Práctica 2</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" data-section="hora">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">¿Qué hora es? ¿A qué hora...?</div>
+    <h1>La hora</h1>
+    <div class="body scrollable">
+      <div class="progressive-shell time-shell" data-progressive-reveal data-progressive-navigation data-initial-stage="1">
+        <div class="progressive-header">
+          <div>
+            <p class="progressive-kicker">Construcción paso a paso</p>
+            <h3>Revelamos la hora por partes.</h3>
+          </div>
+          <p class="progressive-counter" data-progressive-counter aria-live="polite">Etapa 1 / 6</p>
+        </div>
+
+        <div class="time-stage-grid" aria-label="Etapas para hablar de la hora">
+          <article class="time-stage-card" data-progressive-stage hidden>
+            <h3 class="time-stage-title"><span>REPASO · SER</span> ¿Qué hora es?</h3>
+            <p class="time-question-big">¿Qué hora es?</p>
+            <div class="time-clock-grid">
+              <div class="time-example">
+                <div class="clock" aria-label="Reloj: 1:00" style="--hour:30deg;--minute:0deg"><span class="hand hour"></span><span class="hand minute"></span></div>
+                <b>1:00</b><strong>Es la una.</strong>
+              </div>
+              <div class="time-example">
+                <div class="clock" aria-label="Reloj: 2:00" style="--hour:60deg;--minute:0deg"><span class="hand hour"></span><span class="hand minute"></span></div>
+                <b>2:00</b><strong>Son las dos.</strong>
+              </div>
+              <div class="time-example">
+                <div class="clock" aria-label="Reloj: 5:00" style="--hour:150deg;--minute:0deg"><span class="hand hour"></span><span class="hand minute"></span></div>
+                <b>5:00</b><strong>Son las cinco.</strong>
+              </div>
+            </div>
+            <div class="time-contrast">
+              <div class="time-rule"><b>ES LA UNA</b><small>Con la una usamos: es la...</small></div>
+              <div class="time-rule"><b>SON LAS...</b><small>Con las demás horas usamos: son las...</small></div>
+            </div>
+            <div class="time-tag-row"><span>¿Qué hora es?</span><span class="light">¿Y 2:00?</span><span class="light">¿Y 5:00?</span></div>
+          </article>
+
+          <article class="time-stage-card" data-progressive-stage hidden>
+            <h3 class="time-stage-title">Mañana · tarde · noche</h3>
+            <div class="time-clock-grid wide">
+              <div class="time-example">
+                <div class="clock" aria-label="Reloj: 8:00" style="--hour:240deg;--minute:0deg"><span class="hand hour"></span><span class="hand minute"></span></div>
+                <b>8:00</b><strong>Son las ocho <em>de la mañana</em>.</strong>
+              </div>
+              <div class="time-example">
+                <div class="clock" aria-label="Reloj: 1:00" style="--hour:30deg;--minute:0deg"><span class="hand hour"></span><span class="hand minute"></span></div>
+                <b>1:00</b><strong>Es la una <em>de la tarde</em>.</strong>
+              </div>
+              <div class="time-example">
+                <div class="clock" aria-label="Reloj: 5:00" style="--hour:150deg;--minute:0deg"><span class="hand hour"></span><span class="hand minute"></span></div>
+                <b>5:00</b><strong>Son las cinco <em>de la tarde</em>.</strong>
+              </div>
+              <div class="time-example">
+                <div class="clock" aria-label="Reloj: 9:00" style="--hour:270deg;--minute:0deg"><span class="hand hour"></span><span class="hand minute"></span></div>
+                <b>9:00</b><strong>Son las nueve <em>de la noche</em>.</strong>
+              </div>
+            </div>
+            <div class="time-tag-row"><span>de la mañana</span><span>de la tarde</span><span>de la noche</span></div>
+          </article>
+
+          <article class="time-stage-card" data-progressive-stage hidden>
+            <h3 class="time-stage-title">Y + minutos</h3>
+            <div class="time-formula"><b>hora + y + minutos</b><span>Son las cinco y diez.</span></div>
+            <div class="time-clock-grid five">
+              <div class="time-example">
+                <div class="clock" aria-label="Reloj: 2:05" style="--hour:62.5deg;--minute:30deg"><span class="hand hour"></span><span class="hand minute"></span></div>
+                <b>2:05</b><strong>Son las dos <em>y cinco</em>.</strong>
+              </div>
+              <div class="time-example">
+                <div class="clock" aria-label="Reloj: 5:10" style="--hour:155deg;--minute:60deg"><span class="hand hour"></span><span class="hand minute"></span></div>
+                <b>5:10</b><strong>Son las cinco <em>y diez</em>.</strong>
+              </div>
+              <div class="time-example">
+                <div class="clock" aria-label="Reloj: 3:15" style="--hour:97.5deg;--minute:90deg"><span class="hand hour"></span><span class="hand minute"></span></div>
+                <b>3:15</b><strong>Son las tres <em>y cuarto</em>.</strong>
+              </div>
+              <div class="time-example">
+                <div class="clock" aria-label="Reloj: 6:20" style="--hour:190deg;--minute:120deg"><span class="hand hour"></span><span class="hand minute"></span></div>
+                <b>6:20</b><strong>Son las seis <em>y veinte</em>.</strong>
+              </div>
+              <div class="time-example">
+                <div class="clock" aria-label="Reloj: 8:30" style="--hour:255deg;--minute:180deg"><span class="hand hour"></span><span class="hand minute"></span></div>
+                <b>8:30</b><strong>Son las ocho <em>y media</em>.</strong>
+              </div>
+            </div>
+            <div class="time-tag-row"><span>¿Cómo se dice 3:15?</span><span class="light">¿Y 8:30?</span></div>
+          </article>
+
+          <article class="time-stage-card" data-progressive-stage hidden>
+            <h3 class="time-stage-title">Menos</h3>
+            <div class="time-clock-grid">
+              <div class="time-example">
+                <div class="clock" aria-label="Reloj: 8:45" style="--hour:262.5deg;--minute:270deg"><span class="hand hour"></span><span class="hand minute"></span></div>
+                <b>8:45</b><strong>Son las nueve <em>menos cuarto</em>.</strong>
+              </div>
+              <div class="time-example">
+                <div class="clock" aria-label="Reloj: 10:50" style="--hour:325deg;--minute:300deg"><span class="hand hour"></span><span class="hand minute"></span></div>
+                <b>10:50</b><strong>Son las once <em>menos diez</em>.</strong>
+              </div>
+              <div class="time-example">
+                <div class="clock" aria-label="Reloj: 11:55" style="--hour:357.5deg;--minute:330deg"><span class="hand hour"></span><span class="hand minute"></span></div>
+                <b>11:55</b><strong>Son las doce <em>menos cinco</em>.</strong>
+              </div>
+            </div>
+            <div class="time-note">Podemos contar los minutos que faltan para la próxima hora.</div>
+            <div class="time-tag-row"><span>menos cuarto</span><span>menos diez</span><span>menos cinco</span><span class="light">¿Cómo se dice 8:45?</span></div>
+          </article>
+
+          <article class="time-stage-card time-secondary" data-progressive-stage hidden>
+            <h3 class="time-stage-title"><span>RECONOCE</span> Para</h3>
+            <div class="time-note">También puedes oír: <strong>cinco para las tres</strong>.</div>
+            <div class="time-mini-grid">
+              <div class="time-mini-panel">
+                <h4>Forma principal</h4>
+                <p>Son las tres menos cinco.</p>
+              </div>
+              <div class="time-mini-panel">
+                <h4>Reconoce</h4>
+                <p>Cinco para las tres.</p>
+              </div>
+            </div>
+            <div class="time-note">Reconócelo si lo oyes; no es la forma que practicamos ahora.</div>
+          </article>
+
+          <article class="time-stage-card" data-progressive-stage hidden>
+            <h3 class="time-stage-title">¿A qué hora...?</h3>
+            <div class="time-mini-grid">
+              <div class="time-mini-panel">
+                <h4>¿Qué hora es?</h4>
+                <p>Son las ocho.</p>
+                <p>Indica la hora actual.</p>
+              </div>
+              <div class="time-mini-panel">
+                <h4>¿A qué hora es la clase?</h4>
+                <p>A las ocho.</p>
+                <p>Pregunta el momento de una actividad.</p>
+              </div>
+            </div>
+            <div class="time-contrast">
+              <div class="time-rule"><b>ES LA UNA<br>SON LAS OCHO</b><small>hora actual</small></div>
+              <div class="time-rule"><b>A LA UNA<br>A LAS OCHO</b><small>momento de una actividad</small></div>
+            </div>
+            <div class="time-clock-grid wide">
+              <div class="time-example"><b>1:00</b><strong>A la una.</strong></div>
+              <div class="time-example"><b>2:00</b><strong>A las dos.</strong></div>
+              <div class="time-example"><b>8:30</b><strong>A las ocho y media.</strong></div>
+              <div class="time-example"><b>8:45</b><strong>A las nueve menos cuarto.</strong></div>
+            </div>
+            <div class="time-mini-grid">
+              <div class="time-mini-panel"><h4>Contexto</h4><p>La clase es a las ocho.</p><p>La reunión es a las nueve y media.</p></div>
+              <div class="time-mini-panel"><h4>Contexto</h4><p>El desayuno es a las siete.</p><p>La cena es a las nueve de la noche.</p></div>
+            </div>
+            <div class="time-tag-row"><span>¿A qué hora es la clase?</span><span class="light">¿A qué hora es la cena?</span></div>
+          </article>
+        </div>
+
+        <div class="progressive-controls">
+          <button class="progressive-reset-button" type="button" data-progressive-reset>REINICIAR</button>
+          <button class="progressive-next-button" type="button" data-progressive-next>SIGUIENTE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 3 · La hora</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" data-section="hora">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">La agenda</div>
+    <h1>En parejas</h1>
+    <div class="body">
+      <div class="warmup-layout">
+        <div class="warmup-card primary">
+          <div class="warmup-kicker">Actividad oral</div>
+          <div class="warmup-lines">
+            <p>Cada persona recibe una parte de la agenda.</p>
+            <p>Preguntad por las horas que faltan y completad vuestra información.</p>
+          </div>
+          <a class="activity-button" href="workbook/leccion-03/actividad-la-agenda.html" target="_blank" rel="noopener">EMPEZAR LA ACTIVIDAD</a>
+        </div>
+        <div class="warmup-card rule">
+          <div class="warmup-warning">No enseñéis vuestra pantalla.</div>
+          <div class="warmup-mission"><strong>MISIÓN 1</strong><br>Completad la agenda.</div>
+          <div class="warmup-mission"><strong>MISIÓN 2</strong><br>Clasificad las actividades: mañana, tarde o noche.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 3 · La agenda</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" data-section="historia">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Antes de escuchar</div>
+    <h1>Una historia con números</h1>
+    <div class="story-audio-space story-audio-player">
+      <div class="story-audio-icon" aria-hidden="true">♪</div>
+      <div>
+        <strong>El oficio de la casa</strong>
+        <p>Audio del texto.</p>
+        <audio controls preload="metadata" aria-label="Audio del texto El oficio de la casa">
+          <source src="assets/leccion-03/ElOficioDeLaCasa.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+    <div class="body scrollable">
+      <div class="progressive-shell story-shell" data-progressive-reveal data-progressive-navigation data-initial-stage="1">
+        <div class="progressive-header">
+          <div>
+            <p class="progressive-kicker">Actividad final</p>
+            <h3>Escuchamos, leemos y hablamos con el mismo texto.</h3>
+          </div>
+          <p class="progressive-counter" data-progressive-counter aria-live="polite">Etapa 1 / 6</p>
+        </div>
+
+        <div class="progressive-stage-grid" aria-label="Etapas de la historia con números">
+          <article class="progressive-stage-card story-stage-card" data-progressive-stage hidden>
+            <h3>Antes de escuchar</h3>
+            <p class="pattern-note">Durante la primera escucha intenta identificar:</p>
+            <div class="story-mission-grid">
+              <div class="story-mission"><b>1</b><span>dónde ocurre</span></div>
+              <div class="story-mission"><b>2</b><span>una hora</span></div>
+              <div class="story-mission"><b>3</b><span>una cantidad</span></div>
+              <div class="story-mission"><b>4</b><span>una palabra conocida</span></div>
+            </div>
+            <div class="story-soft-note">No necesitas entender todo.</div>
+          </article>
+
+          <article class="progressive-stage-card story-stage-card" data-progressive-stage hidden>
+            <h3>Primera escucha</h3>
+            <p class="time-question-big">Escucha sin leer.</p>
+            <div class="story-audio-space">
+              <div class="story-audio-icon" aria-hidden="true">♪</div>
+              <div>
+                <strong>Usa el reproductor de arriba.</strong>
+                <p>Primero escucha sin mirar el texto.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="progressive-stage-card story-stage-card" data-progressive-stage hidden>
+            <h3>Escucha y lee</h3>
+            <p class="pattern-note">Escucha otra vez y sigue el texto.</p>
+            <div class="story-text">
+              <p class="story-source-title">El oficio de la casa</p>
+              <p>Es el otoño y el aire está fresco. Son las once de la mañana y es un buen día para el oficio de la casa.</p>
+              <p>Hoy, todo es un desorden. En el dormitorio, la ropa está en el piso; las sábanas y las almohadas están sucias. La cocina es otro cuento. Hay polvo encima de la nevera y la estufa; las cucharas, los cuchillos, los tenedores y los platos están en el lavaplatos. Hay manchas feas en el piso de la cocina. El baño del primer piso está sucio pero por lo menos, es pequeño. ¿Dónde está mi esponja para la cocina y el baño? Siempre están en el gabinete. También, hay una escoba para la sala y una aspiradora para la alfombra roja del comedor.</p>
+              <p>¿Qué hora es? Son las dos ya. Es la hora del almuerzo. En la nevera, hay sopa sabrosa de pescado y vegetales, pollo y papas fritas, y hay una torta y helado para el postre. Es el veintiuno de septiembre, el día de mi cumpleaños, un día agradable para estar en la casa.</p>
+            </div>
+          </article>
+
+          <article class="progressive-stage-card story-stage-card" data-progressive-stage hidden>
+            <h3><span>LEEMOS EN CADENA</span> Lectura compartida</h3>
+            <p class="pattern-note">Una persona lee cada parte.</p>
+            <div class="story-segments">
+              <div class="story-segment"><b>1</b><span>Es el otoño y el aire está fresco.</span></div>
+              <div class="story-segment"><b>2</b><span>Son las once de la mañana y es un buen día para el oficio de la casa.</span></div>
+              <div class="story-segment"><b>3</b><span>Hoy, todo es un desorden.</span></div>
+              <div class="story-segment"><b>4</b><span>En el dormitorio, la ropa está en el piso;</span></div>
+              <div class="story-segment"><b>5</b><span>las sábanas y las almohadas están sucias.</span></div>
+              <div class="story-segment"><b>6</b><span>La cocina es otro cuento.</span></div>
+              <div class="story-segment"><b>7</b><span>Hay polvo encima de la nevera y la estufa;</span></div>
+              <div class="story-segment"><b>8</b><span>las cucharas, los cuchillos, los tenedores y los platos están en el lavaplatos.</span></div>
+              <div class="story-segment"><b>9</b><span>Hay manchas feas en el piso de la cocina.</span></div>
+              <div class="story-segment"><b>10</b><span>El baño del primer piso está sucio pero por lo menos, es pequeño.</span></div>
+              <div class="story-segment"><b>11</b><span>¿Dónde está mi esponja para la cocina y el baño?</span></div>
+              <div class="story-segment"><b>12</b><span>Siempre están en el gabinete.</span></div>
+              <div class="story-segment"><b>13</b><span>También, hay una escoba para la sala y una aspiradora para la alfombra roja del comedor.</span></div>
+              <div class="story-segment"><b>14</b><span>¿Qué hora es? Son las dos ya. Es la hora del almuerzo.</span></div>
+              <div class="story-segment"><b>15</b><span>En la nevera, hay sopa sabrosa de pescado y vegetales, pollo y papas fritas, y hay una torta y helado para el postre.</span></div>
+              <div class="story-segment"><b>16</b><span>Es el veintiuno de septiembre, el día de mi cumpleaños, un día agradable para estar en la casa.</span></div>
+            </div>
+          </article>
+
+          <article class="progressive-stage-card story-stage-card" data-progressive-stage hidden>
+            <h3>Todos hablan</h3>
+            <p class="pattern-note">Una persona responde a cada tarea.</p>
+            <div class="story-tasks">
+              <div class="story-task"><b>1.</b><span>Busca una hora al inicio del texto.</span></div>
+              <div class="story-task"><b>2.</b><span>¿Dónde ocurre la historia?</span></div>
+              <div class="story-task"><b>3.</b><span>¿Qué estación aparece?</span></div>
+              <div class="story-task"><b>4.</b><span>¿Cómo está el aire?</span></div>
+              <div class="story-task"><b>5.</b><span>Lee una frase con hay.</span></div>
+              <div class="story-task"><b>6.</b><span>Lee una forma de estar.</span></div>
+              <div class="story-task"><b>7.</b><span>Lee una forma de ser.</span></div>
+              <div class="story-task"><b>8.</b><span>¿Qué está en el piso del dormitorio?</span></div>
+              <div class="story-task"><b>9.</b><span>¿Qué objetos están en el lavaplatos?</span></div>
+              <div class="story-task"><b>10.</b><span>Busca una cantidad con una.</span></div>
+              <div class="story-task"><b>11.</b><span>¿Qué objeto aparece para la sala?</span></div>
+              <div class="story-task"><b>12.</b><span>¿Qué objeto aparece para la alfombra roja del comedor?</span></div>
+              <div class="story-task"><b>13.</b><span>¿A qué hora es el almuerzo?</span></div>
+              <div class="story-task"><b>14.</b><span>Lee el número veintiuno.</span></div>
+              <div class="story-task"><b>15.</b><span>Di una comida que aparece en la nevera.</span></div>
+              <div class="story-task"><b>16.</b><span>¿Por qué el día es especial?</span></div>
+            </div>
+          </article>
+
+          <article class="progressive-stage-card story-stage-card" data-progressive-stage hidden>
+            <h3>Vocabulario de la historia</h3>
+            <div class="story-vocab-grid">
+              <div class="story-vocab-panel">
+                <h4>Nombres</h4>
+                <div class="story-vocab-list">
+                  <div class="story-vocab-item"><b>el otoño</b><span>o outono</span></div>
+                  <div class="story-vocab-item"><b>el desorden</b><span>a bagunça</span></div>
+                  <div class="story-vocab-item"><b>las sábanas</b><span>os lençóis</span></div>
+                  <div class="story-vocab-item"><b>las almohadas</b><span>os travesseiros</span></div>
+                  <div class="story-vocab-item"><b>el polvo</b><span>o pó</span></div>
+                  <div class="story-vocab-item"><b>el lavaplatos</b><span>a lava-louças</span></div>
+                  <div class="story-vocab-item"><b>las manchas</b><span>as manchas</span></div>
+                  <div class="story-vocab-item"><b>la esponja</b><span>a esponja</span></div>
+                  <div class="story-vocab-item"><b>la escoba</b><span>a vassoura</span></div>
+                  <div class="story-vocab-item"><b>la aspiradora</b><span>o aspirador</span></div>
+                </div>
+              </div>
+              <div class="story-vocab-panel">
+                <h4>Adjetivos</h4>
+                <div class="story-vocab-list">
+                  <div class="story-vocab-item"><b>fresco</b><span>fresco</span></div>
+                  <div class="story-vocab-item"><b>sucio / sucia</b><span>sujo / suja</span></div>
+                </div>
+              </div>
+              <div class="story-vocab-panel">
+                <h4>Expresiones</h4>
+                <div class="story-vocab-list">
+                  <div class="story-vocab-item"><b>el oficio de la casa</b><span>os afazeres da casa</span></div>
+                  <div class="story-vocab-item"><b>por lo menos</b><span>pelo menos</span></div>
+                  <div class="story-vocab-item"><b>encima de</b><span>em cima de</span></div>
+                  <div class="story-vocab-item"><b>el día de mi cumpleaños</b><span>o dia do meu aniversário</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="story-final-note">No necesitas memorizar todo ahora. Volveremos a utilizar estas palabras.</div>
+          </article>
+        </div>
+
+        <div class="progressive-controls">
+          <button class="progressive-reset-button" type="button" data-progressive-reset>REINICIAR</button>
+          <button class="progressive-next-button" type="button" data-progressive-next>SIGUIENTE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 3 · Una historia con números</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" data-section="practica">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Integración</div>
+    <h1>Práctica 3</h1>
+    <div class="body">
+      <a class="exercise-call" href="workbook/leccion-03/ejercicio-03-integracion.html" target="_blank" rel="noopener">
+        <div class="exercise-number">PARA PRACTICAR · SI HAY TIEMPO</div>
+        <h3>Integración</h3>
+        <p>Integramos lo que hemos aprendido en las últimas lecciones.</p>
+        <div class="badge-row" aria-label="Disponibilidad de la práctica">
+          <span>SI HAY TIEMPO EN CLASE</span>
+          <span>PARA PRACTICAR DESPUÉS</span>
+        </div>
+        <span class="activity-button">EMPEZAR</span>
+        <span class="exercise-path">workbook/leccion-03/ejercicio-03-integracion.html</span>
+      </a>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 3 · Práctica 3</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<section class="slide" data-section="tarea">
+  <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
+  <div class="content">
+    <div class="subtitle">Para practicar después</div>
+    <h1>Tarea de casa</h1>
+    <div class="body">
+      <a class="exercise-call" href="workbook/leccion-03/tarea-leccion-03.html" target="_blank" rel="noopener">
+        <div class="exercise-number">REPASO FINAL</div>
+        <h3>Lección 3</h3>
+        <p>Una lista de 40 ejercicios para consolidar números, horas y estructuras de las Lecciones 1, 2 y 3.</p>
+        <div class="badge-row" aria-label="Contenidos de la tarea">
+          <span>NÚMEROS</span>
+          <span>LA HORA</span>
+          <span>HAY · SER · ESTAR</span>
+          <span>ARTÍCULOS Y CONCORDANCIA</span>
+        </div>
+        <span class="activity-button">ABRIR TAREA</span>
+        <span class="exercise-path">workbook/leccion-03/tarea-leccion-03.html</span>
+      </a>
+    </div>
+  </div>
+  <div class="foot"><span>Lección 3 · Tarea de casa</span><span>← → para navegar · F para pantalla completa</span></div>
+</section>
+
+<div class="font-controls" aria-label="Tamaño de fuente">
+  <button type="button" data-font-action="decrease" aria-label="Disminuir tamaño de fuente">A−</button>
+  <button type="button" data-font-action="reset" aria-label="Restaurar tamaño de fuente">A</button>
+  <button type="button" data-font-action="increase" aria-label="Aumentar tamaño de fuente">A+</button>
+</div>
+<div id="progress" class="progress"></div>
+
+<script>
+const FONT_STORAGE_KEY='leccion3FontScale';
+const FONT_MIN=.85;
+const FONT_DEFAULT=1;
+const FONT_MAX=1.7;
+const FONT_STEP=.05;
+const fontBase={
+  '--fs-top':13,'--fs-subtitle':30,'--fs-h1':39,'--fs-h1-mobile':30,'--fs-h2':46,'--fs-h3':24,'--fs-foot':12,
+  '--fs-lead':22,'--fs-badge':14,'--fs-stack':31,'--fs-sentence':30,'--fs-card':20,'--fs-compact-card':18,'--fs-small':13,
+  '--fs-vocab-strong':26,'--fs-vocab-small':15,'--fs-vocab-list':18,'--fs-example-big':24,'--fs-example-compact':17,'--fs-note':17,
+  '--fs-word':19,'--fs-word-dense':17,'--fs-small-dense':12,'--fs-summary':19,'--fs-summary-span':24,'--fs-final':22,
+  '--fs-workbook-icon':74,'--fs-workbook-h3':30,'--fs-workbook-p':20,'--fs-huge':68,'--fs-closing-p':24,'--fs-closing-sentence':33,
+  '--fs-translation':13,'--fs-controls':14,'--fs-reading':19,'--fs-cover-kicker':20,'--fs-cover-main':58,'--fs-number-small':29,'--fs-number-mid':43,
+  '--fs-number-time':51,'--fs-number-huge':62,'--fs-basic-digit':38,'--fs-basic-word':18,'--fs-context-sentence':17,
+  '--fs-pattern-title':15,'--fs-pattern-item':14,'--fs-pattern-small':12,'--fs-pattern-formula':20
+};
+const spacingBase={
+  '--slide-pad-y':28,'--slide-pad-x':54,'--slide-pad-bottom':48,
+  '--slide-pad-y-mobile':20,'--slide-pad-x-mobile':24,'--slide-pad-bottom-mobile':60,
+  '--content-offset':58,'--foot-x':54,'--foot-x-mobile':24,
+  '--grid-gap':16,'--grid-gap-small':10,'--cloud-gap':9,
+  '--card-pad':19,'--term-gap':7,'--translation-gap':5
+};
+function normalizeScale(value){
+  if(value===null || value===undefined || value==='')return FONT_DEFAULT;
+  const number=Number(value);
+  const scaled=Number.isFinite(number)?number:FONT_DEFAULT;
+  return Math.round(Math.min(FONT_MAX,Math.max(FONT_MIN,scaled))*100)/100;
+}
+function setPxVar(name,value){
+  document.documentElement.style.setProperty(name,`${Math.round(value*100)/100}px`);
+}
+function readFontScale(){
+  try{return normalizeScale(localStorage.getItem(FONT_STORAGE_KEY));}
+  catch{return FONT_DEFAULT;}
+}
+function saveFontScale(scale){
+  try{localStorage.setItem(FONT_STORAGE_KEY,String(scale));}
+  catch{}
+}
+function updateFontButtons(scale){
+  document.querySelectorAll('[data-font-action]').forEach(button=>{
+    const action=button.dataset.fontAction;
+    button.classList.toggle('active',action==='reset' && scale===FONT_DEFAULT);
+    button.setAttribute('aria-pressed',String(action==='reset' && scale===FONT_DEFAULT));
+  });
+}
+function applyFontScale(value,{persist=true}={}){
+  const scale=normalizeScale(value);
+  const pressure=Math.max(0,scale-FONT_DEFAULT)/(FONT_MAX-FONT_DEFAULT);
+  const spacingFactor=1-(pressure*.34);
+  document.documentElement.style.setProperty('--font-scale',String(scale));
+  Object.entries(fontBase).forEach(([name,base])=>setPxVar(name,base*scale));
+  Object.entries(spacingBase).forEach(([name,base])=>setPxVar(name,base*spacingFactor));
+  if(persist)saveFontScale(scale);
+  updateFontButtons(scale);
+  return scale;
+}
+function changeFontScale(delta){
+  const scale=normalizeScale((Number(document.documentElement.style.getPropertyValue('--font-scale')) || FONT_DEFAULT)+delta);
+  applyFontScale(scale);
+}
+let slides=[...document.querySelectorAll('.slide')];
+let current=0;
+function refreshSlideMetadata(){
+  slides=[...document.querySelectorAll('.slide')];
+  const total=String(slides.length).padStart(2,'0');
+  slides.forEach((slide,index)=>{
+    slide.dataset.index=String(index+1);
+    const count=slide.querySelector('.count');
+    if(count)count.textContent=`${String(index+1).padStart(2,'0')} / ${total}`;
+  });
+}
+function slideIndexFromHash(){
+  const h=Number.parseInt(location.hash.slice(1),10);
+  return Number.isFinite(h)?h-1:0;
+}
+function syncHash(){
+  const next=String(current+1);
+  if(location.hash.slice(1)!==next)location.hash=next;
+}
+function show(n,{updateHash=true}={}){
+  current=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,i)=>s.classList.toggle('active',i===current));
+  document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';
+  if(updateHash)syncHash();
+}
+function initProgressiveReveals(){
+  document.querySelectorAll('[data-progressive-reveal]').forEach(panel=>{
+    const stages=[...panel.querySelectorAll('[data-progressive-stage]')];
+    const nextButton=panel.querySelector('[data-progressive-next]');
+    const resetButton=panel.querySelector('[data-progressive-reset]');
+    const counter=panel.querySelector('[data-progressive-counter]');
+    const scroller=panel.closest('.body');
+    const initialStage=Math.max(0,Math.min(stages.length,Number.parseInt(panel.dataset.initialStage || '0',10) || 0));
+    let currentStage=initialStage;
+
+    function updateReveal({scrollToStage=false}={}){
+      stages.forEach((stage,index)=>{
+        stage.hidden=index>=currentStage;
+      });
+      if(counter)counter.textContent=`Etapa ${currentStage} / ${stages.length}`;
+      if(nextButton){
+        const complete=currentStage>=stages.length;
+        nextButton.disabled=complete;
+        nextButton.textContent=complete?'LISTO':'SIGUIENTE';
+      }
+      if(scrollToStage && currentStage>0){
+        stages[currentStage-1]?.scrollIntoView({behavior:'smooth',block:'nearest'});
+      }
+    }
+
+    panel.advanceProgressiveReveal=()=>{
+      if(currentStage>=stages.length)return false;
+      currentStage=Math.min(currentStage+1,stages.length);
+      updateReveal({scrollToStage:true});
+      return true;
+    };
+    panel.hasProgressiveRevealNext=()=>currentStage<stages.length;
+
+    nextButton?.addEventListener('click',event=>{
+      event.stopPropagation();
+      panel.advanceProgressiveReveal();
+    });
+    resetButton?.addEventListener('click',event=>{
+      event.stopPropagation();
+      currentStage=initialStage;
+      updateReveal();
+      scroller?.scrollTo({top:0,behavior:'smooth'});
+    });
+    [nextButton,resetButton].forEach(button=>{
+      button?.addEventListener('keydown',event=>{
+        if([' ','Enter'].includes(event.key))event.stopPropagation();
+      });
+    });
+    updateReveal();
+  });
+}
+function advanceActiveProgressiveReveal(){
+  const panel=slides[current]?.querySelector('[data-progressive-navigation]');
+  if(panel?.hasProgressiveRevealNext?.())return panel.advanceProgressiveReveal();
+  return false;
+}
+document.onkeydown=e=>{
+  if(e.target instanceof Element && e.target.closest('.font-controls'))return;
+  if(e.ctrlKey || e.metaKey){
+    if(['+','='].includes(e.key)){e.preventDefault();changeFontScale(FONT_STEP);return;}
+    if(['-','_'].includes(e.key)){e.preventDefault();changeFontScale(-FONT_STEP);return;}
+    if(e.key==='0'){e.preventDefault();applyFontScale(FONT_DEFAULT);return;}
+  }
+  if(['ArrowRight','PageDown',' '].includes(e.key)){
+    e.preventDefault();
+    if(!advanceActiveProgressiveReveal())show(current+1);
+  }
+  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1);}
+  if(e.key==='Home')show(0);
+  if(e.key==='End')show(slides.length-1);
+  if(e.key.toLowerCase()==='f'){
+    const request=document.documentElement.requestFullscreen?.();
+    request?.catch?.(()=>{});
+  }
+};
+document.onclick=e=>{
+  if(e.target instanceof Element && e.target.closest('.font-controls,a,button'))return;
+  if(e.clientX>innerWidth*.68){
+    if(!advanceActiveProgressiveReveal())show(current+1);
+  }
+  else if(e.clientX<innerWidth*.32)show(current-1);
+};
+document.querySelector('.font-controls').onclick=e=>{
+  e.stopPropagation();
+  if(!(e.target instanceof Element))return;
+  const button=e.target.closest('[data-font-action]');
+  if(!button)return;
+  const action=button.dataset.fontAction;
+  if(action==='decrease')changeFontScale(-FONT_STEP);
+  if(action==='increase')changeFontScale(FONT_STEP);
+  if(action==='reset')applyFontScale(FONT_DEFAULT);
+};
+window.onhashchange=()=>show(slideIndexFromHash(),{updateHash:false});
+refreshSlideMetadata();
+initProgressiveReveals();
+applyFontScale(readFontScale(),{persist:false});
+show(slideIndexFromHash());
+</script>
+</body>
+</html>
