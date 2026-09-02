@@ -236,9 +236,11 @@ p{line-height:1.42}
 .story-mission b{color:var(--red);font-size:calc(var(--fs-pattern-formula) * 1.08);line-height:1}
 .story-soft-note{border-left:6px solid var(--green);border-radius:14px;background:#fffdf8;padding:13px 15px;color:var(--ink);font-size:calc(var(--fs-pattern-item) * 1.08);font-weight:900;line-height:1.25}
 .story-audio-space{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;border-radius:16px;background:#fffdf8;padding:16px;border-left:6px solid var(--green)}
+.story-audio-player{max-width:1120px;margin:10px auto 14px}
 .story-audio-icon{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:var(--soft);color:var(--green);font-size:28px;font-weight:900}
 .story-audio-space strong{display:block;margin-bottom:4px;color:var(--ink);font-size:calc(var(--fs-pattern-item) * 1.12)}
 .story-audio-space p{margin:0;color:var(--muted);font-size:var(--fs-pattern-small);font-weight:850}
+.story-audio-space audio{display:block;width:100%;height:40px;margin-top:10px}
 .story-text{display:grid;gap:12px;border-left:7px solid var(--red);border-radius:16px;background:#fffdf8;padding:18px 20px;font-size:calc(var(--fs-reading) * 1.02);line-height:1.58}
 .story-text p{margin:0}
 .story-source-title{color:var(--red);font-size:calc(var(--fs-pattern-formula) * 1.08);font-weight:900;line-height:1.15}
@@ -1103,6 +1105,16 @@ p{line-height:1.42}
   <div class="content">
     <div class="subtitle">Antes de escuchar</div>
     <h1>Una historia con números</h1>
+    <div class="story-audio-space story-audio-player">
+      <div class="story-audio-icon" aria-hidden="true">♪</div>
+      <div>
+        <strong>El oficio de la casa</strong>
+        <p>Audio del texto.</p>
+        <audio controls preload="metadata" aria-label="Audio del texto El oficio de la casa">
+          <source src="assets/leccion-03/ElOficioDeLaCasa.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
     <div class="body scrollable">
       <div class="progressive-shell story-shell" data-progressive-reveal data-progressive-navigation data-initial-stage="1">
         <div class="progressive-header">
@@ -1132,8 +1144,8 @@ p{line-height:1.42}
             <div class="story-audio-space">
               <div class="story-audio-icon" aria-hidden="true">♪</div>
               <div>
-                <strong>Audio pendiente de archivo.</strong>
-                <p>Cuando el audio esté disponible, este espacio recibe el player del texto.</p>
+                <strong>Usa el reproductor de arriba.</strong>
+                <p>Primero escucha sin mirar el texto.</p>
               </div>
             </div>
           </article>
