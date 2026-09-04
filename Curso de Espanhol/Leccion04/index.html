@@ -130,6 +130,34 @@ p{line-height:1.42}
 .audio-card{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:18px;border-left:7px solid var(--green)}
 .exercise-call{display:block;margin:14px auto;max-width:800px;border-left:7px solid var(--blue);text-decoration:none;color:inherit}
 .exercise-call:hover,.activity-button:hover{transform:translateY(-1px)}
+.homework-grid{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:18px;align-items:start}
+.homework-grid .exercise-call{max-width:none;margin:0;border-left-color:var(--blue)}
+.homework-writing-card{display:grid;gap:12px;background:white;border-radius:18px;padding:var(--card-pad);box-shadow:0 8px 22px #0001;border-left:7px solid var(--red)}
+.homework-writing-kicker{margin:0;color:var(--red);font-size:var(--fs-badge);font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.homework-writing-card h3{margin:0;color:var(--ink);font-size:var(--fs-h3);line-height:1.15}
+.homework-writing-lead{margin:0;color:var(--ink);font-size:var(--fs-example-big);font-weight:900;line-height:1.15}
+.homework-writing-instructions{display:grid;gap:7px;margin:0;padding-left:22px;color:var(--muted);font-size:var(--fs-compact-card);font-weight:800;line-height:1.22}
+.homework-includes{display:grid;gap:8px;border-radius:14px;background:var(--soft);padding:13px 15px}
+.homework-includes h4{margin:0;color:var(--red);font-size:var(--fs-badge);letter-spacing:.09em;text-transform:uppercase}
+.homework-checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 18px;margin:0;padding-left:20px;color:var(--ink);font-size:var(--fs-small);font-weight:850;line-height:1.18}
+.homework-support{border:1px solid var(--line);border-radius:13px;background:var(--paper);padding:0 12px}
+.homework-support summary{padding:11px 0;color:var(--blue);font-size:var(--fs-compact-card);font-weight:900;cursor:pointer}
+.homework-support[open] summary{border-bottom:1px solid var(--line);margin-bottom:10px}
+.homework-verb-families{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding-bottom:11px}
+.homework-verb-family{display:grid;gap:5px}
+.homework-verb-family h5{margin:0;color:var(--red);font-size:var(--fs-small);letter-spacing:.08em;text-transform:uppercase}
+.homework-verb-family p{margin:0;color:var(--ink);font-size:var(--fs-small);font-weight:800;line-height:1.25}
+.homework-support-note{margin:0 0 11px;color:var(--muted);font-size:var(--fs-small);font-weight:800;line-height:1.2}
+.homework-next-class{margin:0;border-left:6px solid var(--green);border-radius:13px;background:#fff;padding:11px 13px;color:var(--ink);font-size:var(--fs-note);font-weight:900;line-height:1.25}
+.homework-final-checklist{margin-top:0}
+@media(max-width:900px){
+  .homework-grid{grid-template-columns:1fr}
+  .homework-verb-families{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .homework-checklist{grid-template-columns:1fr}
+}
+
 .exercise-number{font-size:13px;font-weight:900;letter-spacing:.12em;color:var(--blue);text-transform:uppercase}
 .exercise-call h3{margin:7px 0}
 .exercise-call p{margin:0;color:var(--muted)}
@@ -803,7 +831,7 @@ p{line-height:1.42}
     <div class="story-audio-row"><button class="activity-button story-toggle" type="button" data-story-toggle aria-expanded="false">MOSTRAR TEXTO</button></div>
     <div class="progressive-stage-grid" aria-label="Actividad final de comprensión">
       <article class="progressive-stage-card" data-progressive-stage hidden><h3>Antes de escuchar</h3><p class="present-summary">Durante la primera escucha, identifica:</p><div class="pattern-questions"><span>el lugar</span><span>una hora</span><span>una actividad</span><span>un verbo que ya conoces</span></div><p class="round-support">No necesitas entender todo.</p></article>
-      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Primera escucha</h3><p class="erir-question">Escucha sin leer.</p><div class="audio-box"><audio controls preload="metadata" aria-label="Audio de Una escuela en México" src="assets/leccion-04/audio/una-escuela-en-mexico.mp3"></audio><span class="audio-placeholder">Audio: Una escuela en México</span></div><div class="pattern-questions"><span>el lugar</span><span>una hora</span><span>una actividad</span><span>un verbo que ya conoces</span></div></article>
+      <article class="progressive-stage-card" data-progressive-stage hidden><h3>Primera escucha</h3><p class="erir-question">Escucha sin leer.</p><div class="audio-box"><audio controls preload="metadata" aria-label="Audio de Una escuela en México" src="assets/audio/una-escuela-en-mexico.mp3"></audio><span class="audio-placeholder">Audio: Una escuela en México</span></div><div class="pattern-questions"><span>el lugar</span><span>una hora</span><span>una actividad</span><span>un verbo que ya conoces</span></div></article>
       <article class="progressive-stage-card" data-progressive-stage hidden><h3>Escucha y lee</h3><p class="erir-question">Escucha otra vez y sigue el texto.</p><div class="story-text" data-story-text hidden><p><strong>Una escuela en México</strong></p><p>Es el año mil novecientos sesenta y tres. Es una época de paz en los Estados Unidos. En la ciudad donde vivimos este verano, hay paz también pero no estoy segura si hay paz en el resto de México.</p><p>La ciudad es muy linda, con calles estrechas y casas del estilo español. Hay unas plazas hermosas y muchas iglesias. Vivimos en las montañas y estamos a tres millas de la ciudad. Laura y yo caminamos treinta minutos y llegamos a la escuela a las diez de la mañana; la madre de Laura pasa el día en el campo porque estudia las civilizaciones antiguas. El padre de Laura descansa en la casa hasta las diez. Después, él baja a la ciudad y pasa la mañana en un restaurante bonito donde él toma uno o dos cafés más; lee un periódico y habla con la gente. Ellos hablan bien el español, pero Laura y yo no hablamos mucho; estudiamos en la escuela secundaria porque necesitamos practicar más.</p><p>Laura y yo decidimos tomar un curso de historia de México, una clase de baile, una clase donde los estudiantes aprenden canciones mexicanas y aprenden a tocar la guitarra. Guanajuato está ubicada en las montañas y la clase de baile es difícil porque es trabajoso respirar en las montañas. Las clases de música son fantásticas porque hablamos y practicamos la pronunciación.</p><p>En la noche, regresamos a la casa y discutimos las experiencias del día. La madre cocina bien y comemos una comida saludable. Laura y yo lavamos los platos y el padre escucha la conversación y descansa.</p></div></article>
       <article class="progressive-stage-card" data-progressive-stage hidden><h3>Lectura compartida</h3><p class="erir-question">Leemos en cadena. Una persona lee cada parte.</p><div class="story-segments"><div><b>1</b><span>Es el año mil novecientos sesenta y tres.</span></div><div><b>2</b><span>Es una época de paz en los Estados Unidos.</span></div><div><b>3</b><span>En la ciudad donde vivimos este verano, hay paz también.</span></div><div><b>4</b><span>La ciudad es muy linda, con calles estrechas y casas del estilo español.</span></div><div><b>5</b><span>Hay unas plazas hermosas y muchas iglesias.</span></div><div><b>6</b><span>Vivimos en las montañas y estamos a tres millas de la ciudad.</span></div><div><b>7</b><span>Laura y yo caminamos treinta minutos y llegamos a la escuela.</span></div><div><b>8</b><span>La madre de Laura pasa el día en el campo porque estudia las civilizaciones antiguas.</span></div><div><b>9</b><span>El padre de Laura descansa en la casa hasta las diez.</span></div><div><b>10</b><span>Después, él baja a la ciudad y pasa la mañana en un restaurante bonito.</span></div><div><b>11</b><span>Lee un periódico y habla con la gente.</span></div><div><b>12</b><span>Laura y yo estudiamos en la escuela secundaria porque necesitamos practicar más.</span></div><div><b>13</b><span>Laura y yo decidimos tomar un curso de historia de México y una clase de baile.</span></div><div><b>14</b><span>Las clases de música son fantásticas porque hablamos y practicamos la pronunciación.</span></div><div><b>15</b><span>En la noche, regresamos a la casa y discutimos las experiencias del día.</span></div><div><b>16</b><span>La madre cocina bien y comemos una comida saludable.</span></div></div></article>
       <article class="progressive-stage-card" data-progressive-stage hidden><h3>Todos hablan</h3><div class="story-tasks"><div>1. ¿Cómo es Guanajuato?</div><div>2. ¿Qué estación del año es?</div><div>3. ¿Cómo pasa el día el padre de Laura?</div><div>4. ¿Qué estudian Laura y su amiga?</div><div>5. En la noche, ¿de qué hablan?</div><div>6. Busca un verbo en -ar.</div><div>7. Busca un verbo en -er.</div><div>8. Busca un verbo en -ir.</div><div>9. Busca una forma de nosotros.</div><div>10. Busca una hora.</div><div>11. Busca un número.</div><div>12. Busca una forma de estar.</div><div>13. Busca una forma de ser.</div><div>14. Busca una frase con hay.</div><div>15. Busca un adjetivo.</div><div>16. Di una palabra nueva que has entendido por el contexto.</div></div></article>
@@ -814,8 +842,73 @@ p{line-height:1.42}
 
 <section class="slide" id="slide-20" data-section="workbook" aria-labelledby="slide-20-title" tabindex="-1">
   <div class="top"><div class="course">CURSO DE ESPAÑOL</div><div class="count">00 / 00</div></div>
-  <div class="content"><div class="subtitle">Trabajo individual</div><h1 id="slide-20-title">Workbook</h1><div class="body"><a class="exercise-call" href="workbook/leccion-04/workbook.html" target="_blank" rel="noopener"><div class="exercise-number">LECCIÓN 4</div><h3>Los verbos regulares</h3><p>Practica y repasa todo lo aprendido en esta lección.</p><span class="activity-button">ABRIR CUADERNO</span><span class="exercise-path">workbook/leccion-04/workbook.html</span></a></div></div>
-  <div class="foot"><span>Lección 4 · Workbook</span><span>← → para navegar · F para pantalla completa</span></div>
+  <div class="content"><div class="subtitle">Trabajo individual</div><h1 id="slide-20-title">Cuaderno de trabajo y tarea</h1><div class="body"><div class="homework-grid">
+    <a class="exercise-call" href="workbook/leccion-04/workbook.html" target="_blank" rel="noopener"><div class="exercise-number">LECCIÓN 4 · CUADERNO DE TRABAJO</div><h3>Los verbos regulares</h3><p>Practica y repasa todo lo aprendido en esta lección.</p><span class="activity-button">ABRIR CUADERNO</span><span class="exercise-path">workbook/leccion-04/workbook.html</span></a>
+
+    <section class="homework-writing-card" aria-labelledby="homework-writing-title">
+      <p class="homework-writing-kicker">TAREA PARA LA PRÓXIMA CLASE</p>
+      <h3 id="homework-writing-title">Prepara un texto breve sobre ti y tu vida cotidiana.</h3>
+      <p class="homework-writing-lead">Escribe entre 8 y 10 frases.</p>
+      <ul class="homework-writing-instructions">
+        <li>Usa solamente estructuras y vocabulario que ya conoces.</li>
+        <li>No necesitas escribir un texto complicado.</li>
+        <li>No memorices el texto palabra por palabra. Prepárate para leerlo y hablar sobre él en la próxima clase.</li>
+      </ul>
+
+      <div class="homework-includes">
+        <h4>Incluye:</h4>
+        <ul class="homework-checklist">
+          <li>quién eres;</li>
+          <li>dónde vives, trabajas o estudias;</li>
+          <li>algo que hay en tu casa, trabajo o entorno;</li>
+          <li>una actividad de la mañana;</li>
+          <li>una actividad de la tarde o de la noche;</li>
+          <li>una hora;</li>
+          <li>un día de la semana;</li>
+          <li>un número;</li>
+          <li>varios verbos de la Lección 4;</li>
+          <li>verbos de las familias -ar, -er e -ir;</li>
+          <li>al menos una frase negativa.</li>
+        </ul>
+        <p class="homework-support-note">No es necesario que cada elemento aparezca en una frase separada. Puedes combinar varios elementos en una misma frase.</p>
+      </div>
+
+      <details class="homework-support">
+        <summary>Puedes utilizar verbos que ya conocemos</summary>
+        <div class="homework-verb-families">
+          <div class="homework-verb-family">
+            <h5>Verbos en -AR</h5>
+            <p>bailar · caminar · cocinar · comprar · contestar · descansar · escuchar · estudiar · hablar · limpiar · mirar · practicar · trabajar · viajar</p>
+          </div>
+          <div class="homework-verb-family">
+            <h5>Verbos en -ER</h5>
+            <p>aprender · beber · comer · comprender · correr · leer · vender</p>
+          </div>
+          <div class="homework-verb-family">
+            <h5>Verbos en -IR</h5>
+            <p>abrir · compartir · decidir · describir · discutir · escribir · recibir · subir · vivir</p>
+          </div>
+        </div>
+        <p class="homework-support-note">No necesitas utilizar todos. Intenta utilizar varios verbos y combinar las tres familias: -ar, -er e -ir.</p>
+      </details>
+
+      <p class="homework-next-class"><strong>En la próxima clase vas a leer tu texto para el grupo.</strong><br>Tus compañeros escucharán y buscarán información sobre ti.</p>
+
+      <details class="homework-support homework-final-checklist">
+        <summary>Antes de terminar</summary>
+        <ul class="homework-writing-instructions">
+          <li>He escrito entre 8 y 10 frases.</li>
+          <li>He utilizado ser, estar o hay.</li>
+          <li>He incluido una hora o un número.</li>
+          <li>He utilizado varios verbos de la Lección 4.</li>
+          <li>He utilizado verbos en -ar, -er e -ir.</li>
+          <li>He escrito una frase negativa.</li>
+          <li>Estoy preparado/a para leer mi texto en clase.</li>
+        </ul>
+      </details>
+    </section>
+  </div></div></div>
+  <div class="foot"><span>Lección 4 · Cuaderno de trabajo y tarea</span><span>← → para navegar · F para pantalla completa</span></div>
 </section>
 
 <template id="leccion-4-activity-link-template">
