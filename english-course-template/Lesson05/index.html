@@ -6593,6 +6593,344 @@
       outline-offset: 3px;
     }
 
+    .telling-time-slide {
+      background: linear-gradient(135deg, rgba(8, 127, 122, 0.1), transparent 42%), var(--color-page);
+    }
+
+    .telling-time-slide .slide-header {
+      padding-bottom: 0.5rem;
+      padding-top: 4.7rem;
+    }
+
+    .telling-time-slide .slide-content {
+      display: grid;
+      min-height: 0;
+      padding-top: 0.3rem;
+    }
+
+    .telling-time-stage.is-stage-13 .telling-time-callout:last-child p {
+      column-count: 2;
+      column-gap: 1.5rem;
+      text-align: left;
+    }
+
+    .telling-time-stage {
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-panel);
+      display: grid;
+      gap: 1rem;
+      min-height: 0;
+      padding: clamp(1rem, 2.1vw, 1.6rem);
+    }
+
+    .telling-time-stage-header {
+      align-items: start;
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+    }
+
+    .telling-time-stage-header h3 {
+      margin: 0;
+    }
+
+    .telling-time-stage-kicker,
+    .telling-time-progress {
+      color: var(--color-accent-strong);
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .telling-time-stage-kicker {
+      margin: 0 0 0.3rem;
+    }
+
+    .telling-time-progress {
+      margin: 0;
+      text-align: right;
+    }
+
+    .telling-time-stage-body {
+      align-content: center;
+      display: grid;
+      gap: 1rem;
+      min-height: 0;
+    }
+
+    .telling-time-clock-row,
+    .telling-time-example-grid,
+    .telling-time-two-ways,
+    .telling-time-question-grid,
+    .telling-time-timeline,
+    .telling-time-recap-grid {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .telling-time-clock-row {
+      align-items: center;
+      grid-template-columns: auto minmax(0, 1fr);
+      justify-content: center;
+    }
+
+    .telling-time-clock {
+      aspect-ratio: 1;
+      background: var(--color-surface-soft);
+      border: 0.35rem solid var(--color-accent);
+      border-radius: 50%;
+      height: clamp(9rem, 22vh, 13rem);
+      position: relative;
+      width: clamp(9rem, 22vh, 13rem);
+    }
+
+    .telling-time-clock::before,
+    .telling-time-clock::after {
+      background: var(--color-ink);
+      border-radius: 999px;
+      content: "";
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform-origin: 50% 100%;
+    }
+
+    .telling-time-clock::before {
+      height: 31%;
+      transform: translate(-50%, -100%) rotate(var(--hour-angle, 0deg));
+      width: 0.36rem;
+    }
+
+    .telling-time-clock::after {
+      height: 42%;
+      transform: translate(-50%, -100%) rotate(var(--minute-angle, 0deg));
+      width: 0.22rem;
+    }
+
+    .telling-time-clock-center {
+      background: var(--color-warm);
+      border-radius: 50%;
+      height: 0.8rem;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 0.8rem;
+      z-index: 2;
+    }
+
+    .telling-time-clock-number {
+      color: var(--color-muted);
+      font-weight: 900;
+      left: 50%;
+      position: absolute;
+      top: 0.45rem;
+      transform: translateX(-50%);
+    }
+
+    .telling-time-clock-caption,
+    .telling-time-rule,
+    .telling-time-callout,
+    .telling-time-example,
+    .telling-time-practice-card,
+    .telling-time-recap-card {
+      background: var(--color-surface-soft);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      padding: 0.9rem;
+    }
+
+    .telling-time-clock-caption p,
+    .telling-time-rule p,
+    .telling-time-callout p,
+    .telling-time-example p,
+    .telling-time-practice-card p,
+    .telling-time-recap-card p {
+      margin: 0;
+    }
+
+    .telling-time-digital {
+      color: var(--color-accent-strong);
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 900;
+    }
+
+    .telling-time-example-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .telling-time-example strong,
+    .telling-time-practice-time {
+      color: var(--color-accent-strong);
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 900;
+    }
+
+    .telling-time-example strong {
+      margin-bottom: 0.3rem;
+    }
+
+    .telling-time-example em {
+      color: var(--color-muted);
+      font-style: normal;
+      font-weight: 800;
+    }
+
+    .telling-time-two-ways {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .telling-time-two-ways .telling-time-example {
+      align-items: center;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.7rem;
+    }
+
+    .telling-time-arrow {
+      color: var(--color-warm);
+      font-weight: 950;
+    }
+
+    .telling-time-callout {
+      background: var(--color-warm-soft);
+      border-color: rgba(198, 83, 54, 0.3);
+      color: var(--color-ink);
+      text-align: center;
+    }
+
+    .telling-time-callout strong {
+      color: var(--color-warm);
+    }
+
+    .telling-time-question-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .telling-time-question-grid .telling-time-rule {
+      border-top: 0.28rem solid var(--color-accent);
+    }
+
+    .telling-time-question-grid strong {
+      color: var(--color-accent-strong);
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    .telling-time-timeline {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .telling-time-timeline .telling-time-example {
+      text-align: center;
+    }
+
+    .telling-time-practice-card {
+      display: grid;
+      gap: 0.75rem;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .telling-time-practice-card .telling-time-practice-time {
+      font-size: 2.5rem;
+    }
+
+    .telling-time-practice-answer[hidden] {
+      display: none;
+    }
+
+    .telling-time-practice-answer {
+      background: var(--color-accent-soft);
+      border-radius: var(--radius-sm);
+      color: var(--color-accent-strong);
+      font-weight: 900;
+      padding: 0.65rem 1rem;
+    }
+
+    .telling-time-stage-controls {
+      align-items: center;
+      border-top: 1px solid var(--color-line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      justify-content: space-between;
+      padding-top: 0.8rem;
+    }
+
+    .telling-time-stage-controls .telling-time-control-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .telling-time-map {
+      align-items: center;
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin: 0 auto;
+      max-width: 60rem;
+      width: 100%;
+    }
+
+    .telling-time-map .telling-time-example {
+      text-align: center;
+    }
+
+    .telling-time-map-center {
+      align-items: center;
+      background: var(--color-accent-soft);
+      border: 0.25rem solid var(--color-accent);
+      border-radius: 50%;
+      display: grid;
+      grid-column: 2;
+      grid-row: 2;
+      min-height: 8rem;
+      text-align: center;
+    }
+
+    .telling-time-map-top { grid-column: 2; grid-row: 1; }
+    .telling-time-map-right { grid-column: 3; grid-row: 2; }
+    .telling-time-map-bottom { grid-column: 2; grid-row: 3; }
+    .telling-time-map-left { grid-column: 1; grid-row: 2; }
+
+    .telling-time-recap-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .telling-time-recap-card strong {
+      color: var(--color-accent-strong);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    @media (max-height: 780px) and (min-width: 900px) {
+      .telling-time-slide .slide-header { padding-bottom: 0.2rem; padding-top: 2.85rem; }
+      .telling-time-slide .slide-content { padding-top: 0.15rem; }
+      .telling-time-stage { gap: 0.42rem; padding: 0.5rem; }
+      .telling-time-stage-body { gap: 0.42rem; }
+      .telling-time-clock { height: 8.5rem; width: 8.5rem; }
+      .telling-time-clock-caption, .telling-time-rule, .telling-time-callout, .telling-time-example, .telling-time-practice-card, .telling-time-recap-card { padding: 0.42rem; }
+      .telling-time-timeline, .telling-time-example-grid, .telling-time-question-grid, .telling-time-recap-grid { gap: 0.32rem; }
+      .telling-time-example-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+      .telling-time-two-ways { gap: 0.32rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .telling-time-map { gap: 0.32rem; }
+      .telling-time-map { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: auto auto; }
+      .telling-time-map-top { grid-column: 2; grid-row: 1; }
+      .telling-time-map-left { grid-column: 1; grid-row: 2; }
+      .telling-time-map-center { grid-column: 2 / span 2; grid-row: 2; min-height: 4.6rem; }
+      .telling-time-map-right { grid-column: 4; grid-row: 2; }
+      .telling-time-map-bottom { display: none; }
+      .telling-time-stage-controls { padding-top: 0.45rem; }
+      .telling-time-stage.is-stage-13 .telling-time-callout:last-child p { column-gap: 1rem; }
+      .telling-time-stage.is-stage-14 .telling-time-recap-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+      .telling-time-stage.is-stage-14 .telling-time-question-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
   </style>
 </head>
 <body>
@@ -6646,7 +6984,7 @@
           <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="1" aria-valuenow="1">
             <span></span>
           </div>
-          <p class="slide-count" data-slide-count>Slide 1 / 1</p>
+          <p class="slide-count" data-slide-count>Slide 1 / 18</p>
         </footer>
       </section>
 
@@ -6709,7 +7047,7 @@
           <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="2" aria-valuenow="2">
             <span></span>
           </div>
-          <p class="slide-count" data-slide-count>Slide 2 / 2</p>
+          <p class="slide-count" data-slide-count>Slide 2 / 18</p>
         </footer>
       </section>
 
@@ -6797,7 +7135,7 @@
           <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="3" aria-valuenow="3">
             <span></span>
           </div>
-          <p class="slide-count" data-slide-count>Slide 3 / 3</p>
+          <p class="slide-count" data-slide-count>Slide 3 / 18</p>
         </footer>
       </section>
 
@@ -6930,7 +7268,7 @@
           <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="4" aria-valuenow="4">
             <span></span>
           </div>
-          <p class="slide-count" data-slide-count>Slide 4 / 4</p>
+          <p class="slide-count" data-slide-count>Slide 4 / 18</p>
         </footer>
       </section>
 
@@ -7104,7 +7442,7 @@
           <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="5" aria-valuenow="5">
             <span></span>
           </div>
-          <p class="slide-count" data-slide-count>Slide 5 / 5</p>
+          <p class="slide-count" data-slide-count>Slide 5 / 18</p>
         </footer>
       </section>
 
@@ -7185,7 +7523,7 @@
           <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="6" aria-valuenow="6">
             <span></span>
           </div>
-          <p class="slide-count" data-slide-count>Slide 6 / 6</p>
+          <p class="slide-count" data-slide-count>Slide 6 / 18</p>
         </footer>
       </section>
 
@@ -7292,7 +7630,7 @@
           <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="7" aria-valuenow="7">
             <span></span>
           </div>
-          <p class="slide-count" data-slide-count>Slide 7 / 7</p>
+          <p class="slide-count" data-slide-count>Slide 7 / 18</p>
         </footer>
       </section>
 
@@ -7386,8 +7724,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="8"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 8 / 17</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="8"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 8 / 18</p>
         </footer>
       </section>
 
@@ -7466,8 +7804,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="9"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 9 / 17</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="9"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 9 / 18</p>
         </footer>
       </section>
 
@@ -7532,8 +7870,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="10"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 10 / 17</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="10"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 10 / 18</p>
         </footer>
       </section>
 
@@ -7703,8 +8041,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="11"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 11 / 17</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="11"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 11 / 18</p>
         </footer>
       </section>
 
@@ -7837,8 +8175,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="12"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 12 / 17</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="12"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 12 / 18</p>
         </footer>
       </section>
 
@@ -7937,8 +8275,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="13"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 13 / 17</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="13"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 13 / 18</p>
         </footer>
       </section>
 
@@ -8013,8 +8351,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="14"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 14 / 17</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="14"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 14 / 18</p>
         </footer>
       </section>
 
@@ -8046,8 +8384,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="15"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 15 / 17</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="15"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 15 / 18</p>
         </footer>
       </section>
 
@@ -8126,8 +8464,35 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="16"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 16 / 17</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="16"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 16 / 18</p>
+        </footer>
+      </section>
+
+      <section class="slide telling-time-slide" id="slide-telling-time" data-slide data-telling-time aria-labelledby="slide-telling-time-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <p class="slide-kicker">Lesson 5 &middot; Time and routines</p>
+          <h2 id="slide-telling-time-title">Telling the Time</h2>
+          <p class="slide-subtitle">Learn the clock language, then practise asking and answering about routine times.</p>
+        </header>
+
+        <div class="slide-content" data-no-slide-advance>
+          <section class="telling-time-stage" aria-live="polite" aria-labelledby="telling-time-stage-title">
+            <div class="telling-time-stage-header">
+              <div><p class="telling-time-stage-kicker" data-telling-time-kicker>Section 1</p><h3 id="telling-time-stage-title" data-telling-time-title>What time is it?</h3></div>
+              <p class="telling-time-progress" data-telling-time-progress>1 / 15</p>
+            </div>
+            <div class="telling-time-stage-body" data-telling-time-body></div>
+            <div class="telling-time-stage-controls">
+              <div class="telling-time-control-group"><button class="family-reasoning-button secondary" type="button" data-telling-time-back>BACK</button><button class="family-reasoning-button secondary" type="button" data-telling-time-next-item hidden>NEXT ITEM</button></div>
+              <button class="family-reasoning-button" type="button" data-telling-time-next>NEXT</button>
+            </div>
+          </section>
+        </div>
+
+        <footer class="slide-footer">
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="17"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 17 / 18</p>
         </footer>
       </section>
 
@@ -8148,8 +8513,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="17"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 17 / 17</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="18"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 18 / 18</p>
         </footer>
       </section>
     </main>
@@ -9721,6 +10086,184 @@
       };
     })(window);
 
+    (function attachTellingTime(window) {
+      "use strict";
+
+      var Utils = window.CourseUtils;
+
+      window.createTellingTime = function createTellingTime(root) {
+        var slide = Utils.query("[data-telling-time]", root);
+        var stageKicker;
+        var stageTitle;
+        var stageProgress;
+        var stageBody;
+        var stageShell;
+        var backButton;
+        var nextButton;
+        var nextItemButton;
+        var currentStage = 0;
+        var practiceIndex = 0;
+        var practiceRounds = {
+          9: [
+            { time: "6:00", answer: "It's six o'clock." },
+            { time: "7:10", answer: "It's seven ten.", also: "ten past seven" },
+            { time: "8:15", answer: "It's eight fifteen.", also: "quarter past eight" },
+            { time: "9:30", answer: "It's nine thirty.", also: "half past nine" },
+            { time: "10:45", answer: "It's ten forty-five.", also: "quarter to eleven" },
+            { time: "11:50", answer: "It's eleven fifty.", also: "ten to twelve" }
+          ],
+          10: [
+            { time: "6:20", answer: "It's twenty past six." },
+            { time: "7:40", answer: "It's twenty to eight." },
+            { time: "9:25", answer: "It's twenty-five past nine." },
+            { time: "10:55", answer: "It's five to eleven." }
+          ],
+          11: [
+            { time: "Laura gets up ___ 6:30.", answer: "Laura gets up at 6:30.", also: "Laura gets up at half past six." },
+            { time: "Peter starts work ___ 8:15.", answer: "Peter starts work at 8:15.", also: "Peter starts work at quarter past eight." },
+            { time: "Sophie has lunch ___ 12:45.", answer: "Sophie has lunch at 12:45.", also: "Sophie has lunch at quarter to one." }
+          ],
+          12: [
+            { time: "you / get up", answer: "What time do you get up?" },
+            { time: "Laura / start work", answer: "What time does Laura start work?" },
+            { time: "your parents / have dinner", answer: "What time do your parents have dinner?" },
+            { time: "Daniel / go to bed", answer: "What time does Daniel go to bed?" }
+          ]
+        };
+        var navigationKeys = [" ", "Spacebar", "Enter", "ArrowRight", "ArrowLeft", "PageDown", "PageUp", "Home", "End"];
+
+        if (!slide || slide.dataset.tellingTimeReady === "true") {
+          return;
+        }
+
+        slide.dataset.tellingTimeReady = "true";
+        stageKicker = Utils.query("[data-telling-time-kicker]", slide);
+        stageTitle = Utils.query("[data-telling-time-title]", slide);
+        stageProgress = Utils.query("[data-telling-time-progress]", slide);
+        stageBody = Utils.query("[data-telling-time-body]", slide);
+        stageShell = Utils.query(".telling-time-stage", slide);
+        backButton = Utils.query("[data-telling-time-back]", slide);
+        nextButton = Utils.query("[data-telling-time-next]", slide);
+        nextItemButton = Utils.query("[data-telling-time-next-item]", slide);
+
+        function clockMarkup(time, hour, minute) {
+          return "<div class=\"telling-time-clock\" style=\"--hour-angle:" + (hour % 12 * 30 + minute * 0.5) + "deg;--minute-angle:" + (minute * 6) + "deg\"><span class=\"telling-time-clock-number\">12</span><span class=\"telling-time-clock-center\"></span></div>";
+        }
+
+        function exampleMarkup(time, spoken, note) {
+          return "<div class=\"telling-time-example\"><strong>" + time + "</strong><p>" + spoken + "</p>" + (note ? "<em>" + note + "</em>" : "") + "</div>";
+        }
+
+        function stageMarkup(index) {
+          var item;
+          var rows;
+
+          if (index === 0) {
+            return "<div class=\"telling-time-clock-row\">" + clockMarkup("7:00", 7, 0) + "<div class=\"telling-time-clock-caption\"><p class=\"telling-time-digital\">7:00</p><p><strong>seven o'clock</strong></p><p>:00 &rarr; O'CLOCK</p><p>6:00 &rarr; six o'clock<br>8:00 &rarr; eight o'clock<br>10:00 &rarr; ten o'clock</p></div></div>";
+          }
+          if (index === 1) {
+            return "<p class=\"telling-time-callout\"><strong>HOUR + MINUTES</strong><br>A natural and useful way to say the time.</p><div class=\"telling-time-example-grid\">" + exampleMarkup("7:10", "seven ten") + exampleMarkup("8:20", "eight twenty") + exampleMarkup("9:30", "nine thirty") + exampleMarkup("6:45", "six forty-five") + exampleMarkup("11:50", "eleven fifty") + exampleMarkup("7:05", "seven oh five", "05 = oh five") + "</div>";
+          }
+          if (index === 2) {
+            return "<div class=\"telling-time-clock-row\">" + clockMarkup("7:20", 7, 20) + "<div class=\"telling-time-clock-caption\"><p class=\"telling-time-digital\">MINUTES + PAST + HOUR</p><p><strong>PAST = after the hour</strong></p><p>7:05 &rarr; five past seven<br>7:10 &rarr; ten past seven<br>7:20 &rarr; twenty past seven<br>7:25 &rarr; twenty-five past seven</p></div></div>";
+          }
+          if (index === 3) {
+            return "<div class=\"telling-time-clock-row\">" + clockMarkup("7:30", 7, 30) + "<div class=\"telling-time-clock-caption\"><p class=\"telling-time-digital\">7:30</p><p><strong>half past seven</strong></p><p>30 minutes after the hour = half past.</p><p>seven thirty <strong>=</strong> half past seven</p></div></div>";
+          }
+          if (index === 4) {
+            return "<div class=\"telling-time-clock-row\">" + clockMarkup("7:50", 7, 50) + "<div class=\"telling-time-clock-caption\"><p class=\"telling-time-digital\">MINUTES + TO + NEXT HOUR</p><p>7:40 &rarr; twenty to eight<br>7:50 &rarr; ten to eight<br>7:55 &rarr; five to eight</p><p><strong>The hour after TO is the next hour.</strong><br>NOT: ten to seven</p></div></div>";
+          }
+          if (index === 5) {
+            return "<div class=\"telling-time-example-grid\">" + exampleMarkup(":15", "quarter past") + exampleMarkup(":30", "half past") + exampleMarkup(":45", "quarter to") + "</div><div class=\"telling-time-two-ways\">" + exampleMarkup("7:15", "quarter past seven") + exampleMarkup("7:45", "quarter to eight") + exampleMarkup("9:15", "quarter past nine") + exampleMarkup("9:45", "quarter to ten") + "</div>";
+          }
+          if (index === 6) {
+            return "<div class=\"telling-time-map\"><div class=\"telling-time-example telling-time-map-top\"><strong>12</strong><p>O'CLOCK</p></div><div class=\"telling-time-example telling-time-map-right\"><strong>3</strong><p>QUARTER PAST</p></div><div class=\"telling-time-map-center\"><p>30 minutes<br><strong>HALF</strong></p></div><div class=\"telling-time-example telling-time-map-bottom\"><strong>6</strong><p>HALF PAST</p></div><div class=\"telling-time-example telling-time-map-left\"><strong>9</strong><p>QUARTER TO</p></div></div><p class=\"telling-time-callout\">Clockwise: <strong>5 past &middot; 10 past &middot; quarter past &middot; 20 past &middot; 25 past &middot; half past</strong><br>Then: <strong>25 to &middot; 20 to &middot; quarter to &middot; 10 to &middot; 5 to</strong></p>";
+          }
+          if (index === 7) {
+            return "<div class=\"telling-time-two-ways\">" + exampleMarkup("7:15", "seven fifteen", "OR quarter past seven") + exampleMarkup("8:30", "eight thirty", "OR half past eight") + exampleMarkup("9:45", "nine forty-five", "OR quarter to ten") + exampleMarkup("10:20", "ten twenty", "OR twenty past ten") + exampleMarkup("6:50", "six fifty", "OR ten to seven") + "</div><p class=\"telling-time-callout\"><strong>BOTH ARE CORRECT.</strong><br>Use either natural form unless an exercise asks for PAST / TO.</p>";
+          }
+          if (index === 8) {
+            return "<div class=\"telling-time-question-grid\"><div class=\"telling-time-rule\"><strong>WHAT TIME IS IT?</strong><p>It's seven thirty.</p></div><div class=\"telling-time-rule\"><strong>WHAT TIME DO YOU GET UP?</strong><p>I get up at seven thirty.</p></div><div class=\"telling-time-rule\"><strong>WHAT TIME DOES LAURA START WORK?</strong><p>She starts work at eight o'clock.</p></div><div class=\"telling-time-rule\"><strong>WHAT TIME DO THEY HAVE LUNCH?</strong><p>They have lunch at half past twelve.</p></div><div class=\"telling-time-rule\"><strong>DO / DOES</strong><p>What time + DO + you/we/they + base verb?<br>What time + DOES + he/she + base verb?</p></div><div class=\"telling-time-rule\"><strong>REMEMBER</strong><p>What time does she <strong>START</strong> work?<br>NOT: does she starts work?</p></div></div>";
+          }
+          if (index >= 9 && index <= 12) {
+            item = practiceRounds[index][practiceIndex % practiceRounds[index].length];
+            return "<div class=\"telling-time-practice-card\"><p>" + (index === 9 ? "What time is it? Say the time." : index === 10 ? "Say the time using PAST or TO." : index === 11 ? "Complete the sentence with the correct time expression." : "Build a complete WHAT TIME question.") + "</p><p class=\"telling-time-practice-time\">" + item.time + "</p><button class=\"family-reasoning-button secondary\" type=\"button\" data-telling-time-show-answer>SHOW ANSWER</button><div class=\"telling-time-practice-answer\" data-telling-time-answer hidden><p>" + item.answer + "</p>" + (item.also ? "<p>Also: " + item.also + "</p>" : "") + "</div></div>";
+          }
+          if (index === 13) {
+            return "<p class=\"telling-time-callout\"><strong>FINAL CHALLENGE &middot; READ THE DAY</strong><br>Describe the complete routine aloud.</p><div class=\"telling-time-timeline\">" + exampleMarkup("6:30", "GET UP") + exampleMarkup("7:15", "HAVE BREAKFAST") + exampleMarkup("8:00", "START WORK") + exampleMarkup("12:30", "HAVE LUNCH") + exampleMarkup("17:45", "FINISH WORK") + exampleMarkup("23:00", "GO TO BED") + "</div><div class=\"telling-time-callout\"><p>She gets up at six thirty.<br>She has breakfast at quarter past seven.<br>She starts work at eight o'clock.<br>She has lunch at half past twelve.<br>She finishes work at quarter to six.<br>She goes to bed at eleven o'clock.</p></div>";
+          }
+          rows = "<div class=\"telling-time-recap-grid\">" + exampleMarkup("7:00", "seven o'clock") + exampleMarkup("7:15", "seven fifteen", "quarter past seven") + exampleMarkup("7:30", "seven thirty", "half past seven") + exampleMarkup("7:45", "seven forty-five", "quarter to eight") + exampleMarkup("7:50", "seven fifty", "ten to eight") + "<div class=\"telling-time-recap-card\"><strong>PAST</strong><p>after the hour</p><strong>TO</strong><p>before the next hour</p></div></div><div class=\"telling-time-question-grid\"><div class=\"telling-time-rule\"><strong>What time is it?</strong><p>It's seven thirty.</p></div><div class=\"telling-time-rule\"><strong>What time do you start work?</strong><p>I start work at eight.</p></div><div class=\"telling-time-rule\"><strong>What time does she start work?</strong><p>She starts work at eight.</p></div></div>";
+          return rows;
+        }
+
+        function renderStage() {
+          var isPractice = currentStage >= 9 && currentStage <= 12;
+          stageKicker.textContent = currentStage === 14 ? "Final recap" : "Section " + (currentStage + 1);
+          stageTitle.textContent = ["What time is it?", "The simple / digital way", "Past", "Half past", "To", "Quarter", "The clock map", "Two ways to say the time", "Asking about routines", "Guided practice - Round 1", "Guided practice - Round 2", "Guided practice - Round 3", "Guided practice - Round 4", "Final challenge", "Final recap"][currentStage];
+          stageProgress.textContent = (currentStage + 1) + " / 15";
+          if (stageShell) {
+            stageShell.className = "telling-time-stage is-stage-" + currentStage;
+          }
+          stageBody.innerHTML = stageMarkup(currentStage);
+          backButton.disabled = currentStage === 0;
+          nextButton.textContent = currentStage === 14 ? "DONE" : "NEXT";
+          nextItemButton.hidden = !isPractice;
+          if (isPractice) {
+            nextItemButton.textContent = practiceIndex === practiceRounds[currentStage].length - 1 ? "NEXT STAGE" : "NEXT ITEM";
+          }
+          var showButton = Utils.query("[data-telling-time-show-answer]", stageBody);
+          if (showButton) {
+            showButton.addEventListener("click", function onShowAnswer(event) {
+              event.stopPropagation();
+              var answer = Utils.query("[data-telling-time-answer]", stageBody);
+              if (answer) {
+                answer.hidden = false;
+              }
+            });
+            showButton.addEventListener("keydown", stopNavigationKey);
+          }
+        }
+
+        function stopNavigationKey(event) {
+          if (navigationKeys.indexOf(event.key) >= 0) {
+            event.stopPropagation();
+          }
+        }
+
+        backButton.addEventListener("click", function onBack(event) {
+          event.stopPropagation();
+          if (currentStage > 0) {
+            currentStage -= 1;
+            practiceIndex = 0;
+            renderStage();
+          }
+        });
+        nextButton.addEventListener("click", function onNext(event) {
+          event.stopPropagation();
+          if (currentStage < 14) {
+            currentStage += 1;
+            practiceIndex = 0;
+            renderStage();
+          }
+        });
+        nextItemButton.addEventListener("click", function onNextItem(event) {
+          event.stopPropagation();
+          if (practiceIndex < practiceRounds[currentStage].length - 1) {
+            practiceIndex += 1;
+            renderStage();
+          } else if (currentStage < 14) {
+            currentStage += 1;
+            practiceIndex = 0;
+            renderStage();
+          }
+        });
+        [backButton, nextButton, nextItemButton].forEach(function bindControl(button) {
+          button.addEventListener("keydown", stopNavigationKey);
+        });
+        renderStage();
+      };
+    })(window);
+
     (function bootLessonFive(window, document) {
       "use strict";
 
@@ -9747,6 +10290,7 @@
         window.createFrequencyPractice(root);
         window.createFrequencyConsolidation(root);
         window.createOkinawaVideoActivity(root);
+        window.createTellingTime(root);
       });
     })(window, document);
   </script>

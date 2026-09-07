@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lesson 6 — Review Exercises</title>
+  <style>
+    *{box-sizing:border-box}body{background:#f5f7fa;color:#161616;font-family:Arial,Helvetica,sans-serif;margin:0;padding:2rem}main{margin:auto;max-width:980px}h1,h2{font-family:Georgia,"Times New Roman",serif;line-height:1.08;margin:0}h1{font-size:clamp(2.5rem,6vw,4.5rem)}.kicker{color:#005f5c;font-weight:900;text-transform:uppercase}.intro{color:#596675;font-size:1.2rem;font-weight:700;margin:1rem 0 1.5rem}.exercise-list{display:grid;gap:.8rem}.exercise{background:#fff;border:1px solid #d7dde4;border-radius:8px;display:grid;gap:.6rem;grid-template-columns:2rem 1fr;padding:1rem}.exercise.is-correct{background:#d8f1ee;border-color:#007c78}.exercise.is-incorrect{background:#ffe3d6;border-color:#c8562f}.number{color:#005f5c;font-weight:900}.prompt{font-family:Georgia,"Times New Roman",serif;font-size:1.25rem;font-weight:700}.answer{background:#fff;border:2px solid #d7dde4;border-radius:6px;font-size:1rem;font-weight:700;padding:.5rem;width:min(100%,28rem)}button{background:#007c78;border:0;border-radius:6px;color:#fff;cursor:pointer;font-weight:900;margin-top:1.25rem;min-height:2.8rem;padding:.65rem 1rem}.feedback{font-weight:900;margin-left:1rem}@media(max-width:600px){body{padding:1rem}.exercise{grid-template-columns:1.5rem 1fr}.prompt{font-size:1.1rem}}
+  </style>
+</head>
+<body>
+  <main>
+    <p class="kicker">Lesson 6</p>
+    <h1>Review Exercises</h1>
+    <p class="intro">Complete the 20 mixed exercises. Then check your answers.</p>
+    <div id="exercise-list" class="exercise-list"></div>
+    <button id="check" type="button">CHECK ANSWERS</button><span id="feedback" class="feedback" aria-live="polite"></span>
+  </main>
+  <script>
+    (function(){
+      "use strict";
+      var items=[
+        ["Laura ___ in an office.","works|work|working","works"],
+        ["Claire ___ work at weekends.","doesn't|don't|isn't","doesn't"],
+        ["Thomas ___ two children.","has|have|haves","has"],
+        ["___ they speak English?","Do|Does|Are","Do"],
+        ["Where ___ Laura work?","does|do|is","does"],
+        ["___ bag is this?","Whose|Who's|Who","Whose"],
+        ["This is my ___ house.","parents'|parent's|parents","parents'"],
+        ["The ___ room is upstairs.","children's|childrens'|children","children's"],
+        ["I start work ___ 8:30.","at|on|in","at"],
+        ["We have English ___ Monday.","on|at|in","on"],
+        ["She works ___ an office.","in|at|to","in"],
+        ["Complete: I usually go ___ after work.","home|to home|at home","home"],
+        ["I ___ work from home.","usually|work usually|usually am","usually"],
+        ["Peter ___ late for work.","is never|never is|isn't never","is never"],
+        ["2 times a week =","twice a week|two week|second a week","twice a week"],
+        ["___ Laura work from home?","How often does|How often do|How many does","How often does"],
+        ["Anna is Peter's sister. Peter is Daniel's father. Anna is Daniel's ___.","aunt|niece|grandmother","aunt"],
+        ["Julia is Mark's wife. Mark is Sarah's brother. Julia is Sarah's ___.","sister-in-law|aunt|niece","sister-in-law"],
+        ["Choose the correct sentence.","She doesn't work at weekends.|She doesn't works at weekends.|She don't work at weekends.","She doesn't work at weekends."],
+        ["Change to HE: I go to the gym.","He goes to the gym.|He go to the gym.|He is go to the gym.","He goes to the gym."]
+      ];
+      var list=document.getElementById("exercise-list");
+      items.forEach(function(item,index){var options=item[1].split("|").map(function(option){return "<option value=\""+option.replace(/"/g,"&quot;")+"\">"+option+"</option>";}).join("");var row=document.createElement("div");row.className="exercise";row.dataset.answer=item[2];row.innerHTML="<span class=\"number\">"+(index+1)+"</span><label><span class=\"prompt\">"+item[0]+"</span><br><select class=\"answer\"><option value=\"\">Choose…</option>"+options+"</select></label>";list.appendChild(row);});
+      document.getElementById("check").addEventListener("click",function(){var correct=0;list.querySelectorAll(".exercise").forEach(function(row){var isCorrect=row.querySelector("select").value===row.dataset.answer;row.classList.toggle("is-correct",isCorrect);row.classList.toggle("is-incorrect",!isCorrect&&Boolean(row.querySelector("select").value));if(isCorrect)correct+=1;});document.getElementById("feedback").textContent=correct+" / "+items.length+" correct";});
+    })();
+  </script>
+</body>
+</html>
