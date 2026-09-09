@@ -733,7 +733,7 @@
               { label: "The magazines are ___. (not new)", answer: "old" },
               { label: "The problem is ___. (not difficult)", answer: "easy" },
               { label: "The desk is ___. (not dirty)", answer: "clean" },
-              { label: "Rachel is ___. (not nervous)", answer: "relaxed" }
+              { label: "Rachel is ___. (not nervous)", answer: ["relaxed", "calm", "fine"] }
             ], feedback: "Use one adjective, not a comparative form." }
           ]
         },
@@ -772,11 +772,11 @@
           title: "Let's + Mixed Review",
           intro: "Use Let's for a suggestion and mix grammar from the lesson.",
           exercises: [
-            { id: 33, type: "fields", instruction: "Complete with Let's + base verb.", prompt: "Write the missing verb.", fields: [
-              { label: "Let's ___ the document.", answer: "check" },
-              { label: "Let's ___ Reception.", answer: "call" },
-              { label: "Let's ___ the file.", answer: "open" },
-              { label: "Let's ___ the boxes here.", answer: "put" }
+            { id: 33, type: "fields", instruction: "Complete with Let's + base verb.", prompt: "Write the missing verb. Use the clue to help you.", fields: [
+              { label: "Let's ___ the document. (look at it carefully)", answer: ["check", "read"] },
+              { label: "Let's ___ Reception. (speak to someone there)", answer: "call" },
+              { label: "Let's ___ the file. (make it available or locate it)", answer: ["open", "find"] },
+              { label: "Let's ___ the boxes here. (place them here or open them)", answer: ["put", "open"] }
             ], feedback: "After Let's, use the base form of the verb." },
             { id: 34, type: "choice", instruction: "Choose the best instruction.", prompt: "You want to make a suggestion to your partner.", options: ["Open the file.", "Let's open the file.", "Don't open the file."], answer: "Let's open the file.", feedback: "Let's means you and I do it together." },
             { id: 35, type: "fields", instruction: "Complete the mini-dialogue.", prompt: "Use Let's, Are, aren't, and Don't.", fields: [
