@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Lección 5 del Curso de Español: repaso general.">
+  <title>Lección 5 · Repaso general</title>
+  <style>
+    :root {
+      --red: #aa151b;
+      --gold: #f1bf00;
+      --ink: #172033;
+      --muted: #667085;
+      --paper: #fffdf8;
+      --blue: #2d5ea8;
+      --green: #2d7a5b;
+      --soft: #f4efe4;
+      --focus: rgba(45, 94, 168, .38);
+      --line: rgba(23, 32, 51, .11);
+      --slide-font-scale: 1;
+      --space: clamp(18px, 3.2vw, 52px);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; margin: 0; }
+    body {
+      overflow: hidden;
+      background: #111;
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+    }
+    button { font: inherit; }
+    button:focus-visible, a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+    .skip-link {
+      position: fixed;
+      z-index: 20;
+      top: 10px;
+      left: 10px;
+      padding: 10px 14px;
+      background: var(--ink);
+      color: white;
+      transform: translateY(-160%);
+    }
+    .skip-link:focus { transform: none; }
+    .course-app { min-height: 100dvh; font-size: calc(1rem * var(--slide-font-scale)); }
+    .deck-toolbar {
+      position: fixed;
+      z-index: 11;
+      top: 16px;
+      left: 16px;
+      right: 150px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .94);
+      box-shadow: 0 8px 22px rgba(23, 32, 51, .1);
+    }
+    .slide-nav { display: flex; gap: 8px; }
+    .deck-toolbar button, .deck-toolbar select {
+      min-height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: white;
+      color: var(--ink);
+      font-weight: 850;
+    }
+    .deck-toolbar button { min-width: 86px; padding: 9px 15px; }
+    .deck-toolbar button:disabled { color: var(--muted); cursor: not-allowed; opacity: .62; }
+    .deck-toolbar select { min-width: 0; flex: 1; padding: 9px 12px; }
+    .deck-toolbar button:hover:not(:disabled), .deck-toolbar select:focus-visible { border-color: var(--blue); }
+    .lesson-deck { position: relative; min-height: 100dvh; }
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      gap: clamp(14px, 2.2vh, 24px);
+      padding: calc(clamp(20px, 3.4vh, 34px) + 62px) var(--space) clamp(16px, 2.5vh, 24px);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 88% 7%, rgba(241, 191, 0, .18), transparent 29%),
+        linear-gradient(135deg, #fff, #f7f1e5);
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(.99);
+      transition: opacity .25s ease, transform .25s ease;
+    }
+    .slide.is-active { opacity: 1; pointer-events: auto; transform: none; }
+    .slide-header { padding-bottom: 12px; border-bottom: 2px solid rgba(170, 21, 27, .18); }
+    .slide-topline { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .app-title, .slide-kicker { margin: 0; font-size: .78rem; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
+    .app-title { color: var(--red); }
+    .slide-kicker { color: var(--muted); }
+    .slide-header h2 { margin: 10px 0 5px; font-size: clamp(2rem, 4.25vw, 3.25rem); line-height: 1.04; }
+    .slide-subtitle { margin: 0; color: var(--muted); font-size: clamp(1rem, 1.75vw, 1.35rem); font-weight: 650; }
+    .slide-content { min-height: 0; display: grid; place-items: center; }
+
+    .calentamiento-shell {
+      width: min(100%, 1000px);
+      display: grid;
+      gap: clamp(16px, 2.6vh, 26px);
+    }
+    .calentamiento-meta { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .calentamiento-prompt { margin: 0; color: var(--muted); font-size: clamp(.98rem, 1.7vw, 1.2rem); font-weight: 750; }
+    .calentamiento-counter {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--red);
+      font-size: .9rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .calentamiento-stage[hidden] { display: none; }
+    .calentamiento-card {
+      min-height: min(42vh, 330px);
+      display: grid;
+      align-content: center;
+      gap: clamp(20px, 3.2vh, 34px);
+      padding: clamp(24px, 5vw, 58px);
+      border: 1px solid var(--line);
+      border-top: 7px solid var(--gold);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, .96);
+      box-shadow: 0 16px 36px rgba(23, 32, 51, .08);
+      text-align: center;
+    }
+    .calentamiento-sentence { margin: 0; font-size: clamp(1.75rem, 4.2vw, 3.65rem); font-weight: 850; line-height: 1.16; }
+    .calentamiento-response[hidden] { display: none; }
+    .calentamiento-response { display: grid; gap: 8px; justify-items: center; }
+    .calentamiento-verdict { margin: 0; font-size: clamp(1rem, 1.8vw, 1.26rem); font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .calentamiento-response.is-correct .calentamiento-verdict { color: var(--green); }
+    .calentamiento-response.is-incorrect .calentamiento-verdict { color: var(--red); }
+    .calentamiento-correction { margin: 0; color: var(--ink); font-size: clamp(1.18rem, 2.25vw, 1.7rem); font-weight: 850; line-height: 1.25; }
+    .calentamiento-reason { margin: 0; color: var(--muted); font-size: clamp(.92rem, 1.4vw, 1.08rem); font-style: italic; font-weight: 620; line-height: 1.3; }
+    .calentamiento-controls { display: flex; justify-content: flex-end; gap: 10px; }
+    .calentamiento-action, .calentamiento-reset {
+      min-height: 48px;
+      padding: 11px 18px;
+      border-radius: 12px;
+      font-size: .86rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .calentamiento-action { border: 0; background: var(--red); color: white; }
+    .calentamiento-action:hover { background: #8e1116; }
+    .calentamiento-reset { border: 1px solid var(--line); background: white; color: var(--red); }
+    .calentamiento-reset[hidden] { display: none; }
+    .slide-footer { display: flex; align-items: center; gap: 16px; }
+    .slide-progress { height: 7px; flex: 1; overflow: hidden; border-radius: 999px; background: rgba(23, 32, 51, .12); }
+    .slide-progress span { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--red), var(--gold)); transition: width .25s ease; }
+    .slide-count { margin: 0; color: var(--muted); font-size: .8rem; font-weight: 800; white-space: nowrap; }
+    .font-controls { position: fixed; z-index: 10; top: 16px; right: 16px; display: flex; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: rgba(255, 255, 255, .94); box-shadow: 0 5px 16px rgba(23, 32, 51, .1); }
+    .font-controls button { min-width: 34px; min-height: 30px; border: 0; border-right: 1px solid var(--line); background: transparent; color: var(--ink); font-size: .76rem; font-weight: 900; cursor: pointer; }
+    .font-controls button:last-child { border-right: 0; }
+    .font-controls button:hover, .font-controls button[aria-pressed="true"] { background: var(--soft); color: var(--red); }
+
+    .repaso-shell { width: min(100%, 1120px); display: grid; gap: clamp(12px, 2vh, 20px); align-self: stretch; min-height: 0; overflow: auto; padding-right: 4px; }
+    .repaso-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .repaso-area { display: grid; align-content: start; gap: 11px; padding: 18px 20px; border: 1px solid var(--line); border-top: 6px solid var(--gold); border-radius: 18px; background: rgba(255,255,255,.95); box-shadow: 0 10px 24px rgba(23,32,51,.06); }
+    .repaso-area:nth-child(2) { border-top-color: var(--blue); }
+    .repaso-area h3 { margin: 0; color: var(--red); font-size: .84rem; letter-spacing: .1em; text-transform: uppercase; }
+    .repaso-lines { display: grid; gap: 5px; margin: 0; font-size: clamp(1rem, 1.55vw, 1.25rem); font-weight: 850; line-height: 1.22; }
+    .repaso-lines p { margin: 0; }
+    .repaso-rule { margin: 2px 0 0; padding: 10px 12px; border-radius: 12px; background: var(--soft); color: var(--ink); font-size: clamp(.88rem, 1.3vw, 1rem); font-weight: 750; line-height: 1.3; }
+    .repaso-emphasis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .repaso-emphasis span { padding: 7px 8px; border-radius: 9px; background: #fff8d8; color: var(--red); text-align: center; font-size: .84rem; font-weight: 900; }
+    .repaso-meaning { display: grid; gap: 6px; }
+    .repaso-meaning p { margin: 0; padding: 8px 10px; border-radius: 10px; background: var(--paper); font-size: clamp(.9rem, 1.3vw, 1.02rem); font-weight: 850; }
+    .repaso-meaning strong { color: var(--red); }
+    .repaso-check { display: grid; gap: 9px; padding: 15px 17px; border-left: 6px solid var(--green); border-radius: 15px; background: rgba(255,255,255,.96); }
+    .repaso-check h3 { margin: 0; font-size: .84rem; color: var(--green); letter-spacing: .1em; text-transform: uppercase; }
+    .repaso-check-item[hidden] { display: none; }
+    .repaso-check-item p { margin: 0; font-size: clamp(1rem, 1.5vw, 1.18rem); font-weight: 850; }
+    .repaso-check-answer { margin-top: 3px !important; color: var(--green); }
+    .repaso-controls { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 10px; }
+    .repaso-controls button { min-height: 45px; padding: 10px 16px; border-radius: 11px; font-size: .82rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+    .repaso-reveal { border: 1px solid var(--line); background: white; color: var(--red); }
+    .repaso-practice { border: 0; background: var(--red); color: white; text-decoration: none; }
+    .repaso-controls button:hover { filter: brightness(.95); }
+    .repaso-shell::-webkit-scrollbar { width: 8px; }
+    .repaso-shell::-webkit-scrollbar-thumb { background: #d4ccbd; border-radius: 99px; }
+    .transform-shell { width:min(100%,1040px); display:grid; gap:14px; align-self:stretch; min-height:0; overflow:auto; }
+    .transform-card { display:grid; gap:10px; padding:18px 20px; border-top:6px solid var(--gold); border-radius:17px; background:rgba(255,255,255,.95); box-shadow:0 10px 24px rgba(23,32,51,.06); }
+    .transform-card h3,.transform-check h3 { margin:0; color:var(--red); font-size:.82rem; letter-spacing:.1em; text-transform:uppercase; }
+    .transform-models { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    .transform-models p { margin:0; padding:9px 10px; border-radius:10px; background:var(--paper); font-size:clamp(.85rem,1.25vw,1.05rem); font-weight:850; line-height:1.35; }
+    .transform-endings { margin:0; color:var(--muted); font-size:.9rem; font-weight:750; }
+    .transform-note { margin:0; padding:9px 11px; border-radius:10px; background:var(--soft); font-weight:850; }
+    .transform-check { display:grid; gap:10px; padding:16px 18px; border-left:6px solid var(--green); border-radius:15px; background:rgba(255,255,255,.96); }
+    .transform-item[hidden] { display:none; }
+    .transform-item p { margin:0; font-size:clamp(1rem,1.65vw,1.2rem); font-weight:850; }
+    .transform-answer { color:var(--green); }
+    .transform-controls { display:flex; justify-content:flex-end; gap:10px; }
+    .transform-controls button,.transform-practice { min-height:44px; padding:9px 15px; border-radius:11px; font-size:.8rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; }
+    .transform-reveal { border:1px solid var(--line); background:white; color:var(--red); }
+    .transform-practice { border:0; background:var(--red); color:white; text-decoration:none; }
+    .question-shell{width:min(100%,1040px);display:grid;gap:14px;align-self:stretch;min-height:0;overflow:auto}.question-board{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;padding:17px 19px;border-top:6px solid var(--blue);border-radius:17px;background:#ffff;box-shadow:0 10px 24px #17203310}.question-board h3{grid-column:1/-1;margin:0;color:var(--red);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}.question-board p{margin:0;padding:8px 10px;border-radius:10px;background:var(--paper);font-size:clamp(.9rem,1.35vw,1.05rem);font-weight:850}.question-message{grid-column:1/-1;margin:0!important;background:var(--soft)!important}.question-check{display:grid;gap:10px;padding:16px 18px;border-left:6px solid var(--green);border-radius:15px;background:#ffff}.question-item[hidden]{display:none}.question-item p{margin:0;font-size:clamp(1rem,1.55vw,1.18rem);font-weight:850}.question-highlight{color:var(--red)}.question-answer{color:var(--green)}.question-controls{display:flex;justify-content:flex-end;gap:10px}.question-controls button,.question-practice{min-height:44px;padding:9px 15px;border-radius:11px;font-size:.8rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}.question-reveal{border:1px solid var(--line);background:#fff;color:var(--red)}.question-practice{border:0;background:var(--red);color:#fff;text-decoration:none}@media(max-width:700px){.question-board{grid-template-columns:1fr}.question-controls{display:grid;grid-template-columns:1fr}.question-controls button,.question-practice{width:100%;text-align:center}}
+
+    .agenda-shell{width:min(100%,1060px);display:grid;grid-template-columns:280px 1fr;gap:14px;align-self:stretch;min-height:0;overflow:auto}.agenda-ref,.agenda-check{padding:16px 18px;border-radius:16px;background:#fff;box-shadow:0 10px 24px #17203310}.agenda-ref{border-top:6px solid var(--gold)}.agenda-ref h3,.agenda-check h3{margin:0 0 10px;color:var(--red);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}.agenda-ref p{margin:5px 0;font-weight:850}.agenda-ref small{color:var(--muted)}.agenda-check{display:grid;gap:10px;border-left:6px solid var(--green)}.agenda-item[hidden]{display:none}.agenda-item p{margin:0;font-size:clamp(1rem,1.6vw,1.2rem);font-weight:850}.agenda-answer{color:var(--green)}.agenda-controls{display:flex;justify-content:flex-end;gap:10px}.agenda-controls button,.agenda-practice{min-height:44px;padding:9px 15px;border-radius:11px;font-size:.8rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}.agenda-reveal{border:1px solid var(--line);background:#fff;color:var(--red)}.agenda-practice{border:0;background:var(--red);color:#fff;text-decoration:none}
+    .actions-shell{width:min(100%,1060px);display:grid;grid-template-columns:1.05fr .95fr;gap:14px;align-self:stretch;min-height:0;overflow:auto}.actions-board,.actions-check{padding:17px 19px;border-radius:17px;background:#fff;box-shadow:0 10px 24px #17203310}.actions-board{border-top:6px solid var(--gold)}.actions-board h3,.actions-check h3{margin:0 0 11px;color:var(--red);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}.actions-families{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.actions-family{padding:10px 11px;border-radius:11px;background:var(--paper);font-size:clamp(.86rem,1.25vw,1rem);font-weight:850;line-height:1.45}.actions-family strong{display:block;margin-bottom:3px;color:var(--red)}.actions-family mark{padding:0 .1em;background:var(--gold-soft);color:inherit}.actions-message{margin:12px 0 0;padding:10px 11px;border-radius:10px;background:var(--soft);font-weight:800}.actions-check{display:grid;gap:10px;border-left:6px solid var(--green)}.actions-item[hidden]{display:none}.actions-item p{margin:0;font-size:clamp(1rem,1.6vw,1.2rem);font-weight:850}.actions-answer{color:var(--green)}.actions-controls{display:flex;justify-content:flex-end;gap:10px}.actions-controls button,.actions-practice{min-height:44px;padding:9px 15px;border-radius:11px;font-size:.8rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}.actions-reveal{border:1px solid var(--line);background:#fff;color:var(--red)}.actions-practice{border:0;background:var(--red);color:#fff;text-decoration:none}.actions-progress{color:var(--muted);font-size:.8rem;font-weight:850}
+    @media(max-width:700px){.actions-shell{grid-template-columns:1fr}.actions-families{grid-template-columns:1fr}.actions-controls{display:grid;grid-template-columns:1fr}.actions-controls button,.actions-practice{width:100%;text-align:center}}
+    .texto-shell{width:min(100%,1100px);display:grid;gap:12px;align-self:stretch;min-height:0;overflow:auto}.texto-main{display:grid;grid-template-columns:1.08fr .92fr;gap:14px}.texto-read,.texto-listen,.texto-after{padding:18px 20px;border-radius:17px;background:rgba(255,255,255,.96);box-shadow:0 10px 24px rgba(23,32,51,.06)}.texto-read{border-top:6px solid var(--gold)}.texto-listen{border-top:6px solid var(--blue)}.texto-read h3,.texto-listen h3,.texto-after h3{margin:0 0 11px;color:var(--red);font-size:.84rem;letter-spacing:.1em;text-transform:uppercase}.texto-read p,.texto-listen p{margin:6px 0;font-size:clamp(.98rem,1.45vw,1.14rem);font-weight:750;line-height:1.3}.texto-read-lead{font-size:clamp(1.15rem,1.9vw,1.45rem)!important;font-weight:900!important}.texto-note{margin-top:13px!important;padding:10px 11px;border-radius:10px;background:var(--soft);font-size:.92rem!important;font-weight:750!important}.texto-listen ul{display:grid;gap:7px;margin:11px 0 0;padding:0;list-style:none}.texto-listen li{padding:8px 10px;border-radius:9px;background:var(--paper);font-size:clamp(.98rem,1.45vw,1.12rem);font-weight:900}.texto-listen li::before{content:'•';margin-right:8px;color:var(--red)}.texto-listen-note{margin-top:13px!important;color:var(--muted);font-size:.9rem!important;font-weight:800!important}.texto-after{border-left:6px solid var(--green)}.texto-after h3{color:var(--green)}.texto-questions{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.texto-questions p{margin:0;padding:9px 10px;border-radius:9px;background:var(--paper);font-size:clamp(.9rem,1.35vw,1.06rem);font-weight:850}.texto-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:11px 13px;border-radius:12px;background:var(--soft)}.texto-flow p{display:flex;align-items:center;gap:8px;margin:0;font-size:clamp(.88rem,1.25vw,1rem);font-weight:850}.texto-flow b{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#fff;color:var(--red);font-size:.8rem;flex:none}.texto-focus{margin:0;color:var(--red);font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+    @media(max-width:700px){.texto-main{grid-template-columns:1fr}.texto-questions{grid-template-columns:1fr 1fr}.texto-flow{grid-template-columns:1fr 1fr}}
+    @media(max-width:430px){.texto-questions,.texto-flow{grid-template-columns:1fr}}
+    @media (max-width: 700px) {
+      .deck-toolbar { top: 58px; right: 16px; }
+      .deck-toolbar button { min-width: 70px; padding-inline: 11px; }
+      .slide { gap: 14px; padding: 122px 22px 16px; }
+      .slide-header { padding-right: 106px; padding-bottom: 9px; }
+      .slide-header h2 { margin-top: 7px; }
+      .calentamiento-shell { gap: 14px; }
+      .calentamiento-card { min-height: 0; padding: 24px 20px; }
+      .calentamiento-controls { justify-content: stretch; }
+      .calentamiento-action, .calentamiento-reset { flex: 1; }
+      .repaso-columns { grid-template-columns: 1fr; }
+      .repaso-shell { padding-right: 0; }
+    }
+    @media (max-width: 430px) {
+      .deck-toolbar { gap: 6px; left: 10px; right: 10px; padding: 6px; }
+      .deck-toolbar button { min-width: 62px; padding-inline: 8px; }
+      .slide-topline { align-items: flex-start; flex-direction: column; gap: 3px; }
+      .slide-header { padding-right: 0; }
+      .calentamiento-meta { align-items: flex-start; flex-direction: column; gap: 7px; }
+      .calentamiento-sentence { font-size: clamp(1.45rem, 8vw, 2rem); }
+      .calentamiento-controls { display: grid; grid-template-columns: 1fr; }
+      .slide-footer { gap: 10px; }
+      .repaso-controls { display: grid; grid-template-columns: 1fr; }
+      .repaso-controls button { width: 100%; text-align: center; }
+      .transform-models { grid-template-columns:1fr; }
+      .transform-controls { display:grid; grid-template-columns:1fr; }
+      .transform-controls button,.transform-practice { width:100%; text-align:center; }
+      .agenda-shell{grid-template-columns:1fr}.agenda-controls{display:grid;grid-template-columns:1fr}.agenda-controls button,.agenda-practice{width:100%;text-align:center}
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#lesson-deck">Ir a la actividad</a>
+
+  <div class="course-app" data-course-app>
+    <nav class="deck-toolbar" aria-label="Controles de la lección" data-no-slide-advance>
+      <div class="slide-nav" aria-label="Navegación de slides">
+        <button type="button" data-slide-prev aria-label="Slide anterior" aria-controls="lesson-deck">Anterior</button>
+        <button type="button" data-slide-next aria-label="Siguiente slide" aria-controls="lesson-deck">Siguiente</button>
+      </div>
+      <select data-slide-select aria-label="Ir a un slide" aria-controls="lesson-deck"></select>
+    </nav>
+    <main id="lesson-deck" class="lesson-deck" aria-live="polite">
+      <section class="slide calentamiento-slide is-active" id="slide-calentamiento" data-slide aria-labelledby="slide-calentamiento-title" tabindex="-1">
+        <header class="slide-header">
+          <div class="slide-topline">
+            <p class="app-title">Curso de Español</p>
+            <p class="slide-kicker">Lección 5 · Repaso general · 8 minutos</p>
+          </div>
+          <h2 id="slide-calentamiento-title">Calentamiento</h2>
+          <p class="slide-subtitle">¿Está bien? Corrige si es necesario.</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="calentamiento-shell" data-calentamiento-progressive data-progressive-reveal data-progressive-navigation>
+            <div class="calentamiento-meta">
+              <p class="calentamiento-prompt">¿Está bien o está mal? Corrige la frase si es necesario.</p>
+              <p class="calentamiento-counter" data-calentamiento-counter aria-live="polite">1 / 8</p>
+            </div>
+
+            <article class="calentamiento-stage" data-calentamiento-stage data-answer="Las casas blancas están en Madrid." aria-label="Frase 1">
+              <div class="calentamiento-card">
+                <p class="calentamiento-sentence">Los casa blancas están en Madrid.</p>
+                <div class="calentamiento-response is-incorrect" data-calentamiento-response hidden aria-live="polite">
+                  <p class="calentamiento-verdict">Incorrecta.</p>
+                  <p class="calentamiento-correction">Las casas blancas están en Madrid.</p>
+                  <p class="calentamiento-reason">“casa” y “blanca” deben concordar en plural.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="calentamiento-stage" data-calentamiento-stage data-answer="Correcta." aria-label="Frase 2" hidden>
+              <div class="calentamiento-card">
+                <p class="calentamiento-sentence">Hay tres libros encima de la mesa.</p>
+                <div class="calentamiento-response is-correct" data-calentamiento-response hidden aria-live="polite">
+                  <p class="calentamiento-verdict">Correcta.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="calentamiento-stage" data-calentamiento-stage data-answer="Los libros son azules." aria-label="Frase 3" hidden>
+              <div class="calentamiento-card">
+                <p class="calentamiento-sentence">Los libros es azules.</p>
+                <div class="calentamiento-response is-incorrect" data-calentamiento-response hidden aria-live="polite">
+                  <p class="calentamiento-verdict">Incorrecta.</p>
+                  <p class="calentamiento-correction">Los libros son azules.</p>
+                  <p class="calentamiento-reason">Con “los libros”, usamos “son”.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="calentamiento-stage" data-calentamiento-stage data-answer="Marta es española." aria-label="Frase 4" hidden>
+              <div class="calentamiento-card">
+                <p class="calentamiento-sentence">Marta está española.</p>
+                <div class="calentamiento-response is-incorrect" data-calentamiento-response hidden aria-live="polite">
+                  <p class="calentamiento-verdict">Incorrecta.</p>
+                  <p class="calentamiento-correction">Marta es española.</p>
+                  <p class="calentamiento-reason">La nacionalidad se expresa con “ser”.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="calentamiento-stage" data-calentamiento-stage data-answer="Correcta." aria-label="Frase 5" hidden>
+              <div class="calentamiento-card">
+                <p class="calentamiento-sentence">Son las ocho y media.</p>
+                <div class="calentamiento-response is-correct" data-calentamiento-response hidden aria-live="polite">
+                  <p class="calentamiento-verdict">Correcta.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="calentamiento-stage" data-calentamiento-stage data-answer="Nosotros vivimos en Brasil." aria-label="Frase 6" hidden>
+              <div class="calentamiento-card">
+                <p class="calentamiento-sentence">Nosotros vivemos en Brasil.</p>
+                <div class="calentamiento-response is-incorrect" data-calentamiento-response hidden aria-live="polite">
+                  <p class="calentamiento-verdict">Incorrecta.</p>
+                  <p class="calentamiento-correction">Nosotros vivimos en Brasil.</p>
+                  <p class="calentamiento-reason">“Vivir” cambia a “vivimos” con nosotros.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="calentamiento-stage" data-calentamiento-stage data-answer="Correcta." aria-label="Frase 7" hidden>
+              <div class="calentamiento-card">
+                <p class="calentamiento-sentence">Ellos estudian español por la noche.</p>
+                <div class="calentamiento-response is-correct" data-calentamiento-response hidden aria-live="polite">
+                  <p class="calentamiento-verdict">Correcta.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="calentamiento-stage" data-calentamiento-stage data-answer="Caminamos al hotel." aria-label="Frase 8" hidden>
+              <div class="calentamiento-card">
+                <p class="calentamiento-sentence">Caminamos a el hotel.</p>
+                <div class="calentamiento-response is-incorrect" data-calentamiento-response hidden aria-live="polite">
+                  <p class="calentamiento-verdict">Incorrecta.</p>
+                  <p class="calentamiento-correction">Caminamos al hotel.</p>
+                  <p class="calentamiento-reason">a + el = al.</p>
+                </div>
+              </div>
+            </article>
+
+            <div class="calentamiento-controls" data-no-slide-advance>
+              <button class="calentamiento-reset" type="button" data-calentamiento-reset hidden>REINICIAR</button>
+              <button class="calentamiento-action" type="button" data-calentamiento-action>MOSTRAR RESPUESTA</button>
+            </div>
+          </div>
+        </div>
+
+        <footer class="slide-footer">
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Progreso de la lección" aria-valuemin="1"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 1 / 1</p>
+        </footer>
+      </section>
+
+      <section class="slide repaso-slide" id="slide-repaso-1" data-slide aria-labelledby="slide-repaso-1-title" tabindex="-1" hidden>
+        <header class="slide-header">
+          <div class="slide-topline">
+            <p class="app-title">Curso de Español</p>
+            <p class="slide-kicker">Lección 5 · Repaso general · 12 minutos</p>
+          </div>
+          <h2 id="slide-repaso-1-title">Repaso 1</h2>
+          <p class="slide-subtitle">Estructuras básicas</p>
+        </header>
+
+        <div class="slide-content">
+          <div class="repaso-shell">
+            <div class="repaso-columns">
+              <section class="repaso-area" aria-labelledby="repaso-articulos-title">
+                <h3 id="repaso-articulos-title">Recordamos · Artículos y concordancia</h3>
+                <div class="repaso-lines">
+                  <p>el libro rojo</p><p>la casa blanca</p><p>los libros rojos</p><p>las casas blancas</p>
+                </div>
+                <p class="repaso-rule">Artículo + sustantivo + adjetivo deben concordar en género y número.</p>
+                <div class="repaso-emphasis" aria-label="Cambios de género y número">
+                  <span>el → los</span><span>libro → libros</span><span>rojo → rojos</span>
+                  <span>la → las</span><span>casa → casas</span><span>blanca → blancas</span>
+                </div>
+              </section>
+              <section class="repaso-area" aria-labelledby="repaso-ser-title">
+                <h3 id="repaso-ser-title">Recordamos · Ser / estar / hay</h3>
+                <div class="repaso-meaning">
+                  <p><strong>La oficina es grande.</strong> → descripción</p>
+                  <p><strong>Marta está en la oficina.</strong> → localización</p>
+                  <p><strong>Hay tres personas en la oficina.</strong> → existencia</p>
+                </div>
+                <p class="repaso-rule"><strong>SER</strong> → describir · <strong>ESTAR</strong> → localizar · <strong>HAY</strong> → decir que algo existe</p>
+              </section>
+            </div>
+
+            <section class="repaso-check" data-repaso-check data-progressive-navigation aria-labelledby="repaso-check-title">
+              <h3 id="repaso-check-title">Comprobación oral</h3>
+              <div class="repaso-check-item" data-repaso-check-item>
+                <p>1. En esta sala ______ veinte personas.</p><p class="repaso-check-answer" data-repaso-check-answer hidden>Respuesta: hay</p>
+              </div>
+              <div class="repaso-check-item" data-repaso-check-item hidden>
+                <p>2. Las ventanas ______ abiertas.</p><p class="repaso-check-answer" data-repaso-check-answer hidden>Respuesta: están</p>
+              </div>
+              <div class="repaso-check-item" data-repaso-check-item hidden>
+                <p>3. La oficina ______ grande y moderna.</p><p class="repaso-check-answer" data-repaso-check-answer hidden>Respuesta: es</p>
+              </div>
+              <div class="repaso-controls" data-no-slide-advance>
+                <button class="repaso-reveal" type="button" data-repaso-reveal>MOSTRAR RESPUESTAS</button>
+                <a class="repaso-practice" href="workbook/leccion-05/repaso-01-estructuras-basicas.html" target="_blank" rel="noopener">PRACTICAR JUNTOS</a>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <footer class="slide-footer">
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Progreso de la lección" aria-valuemin="1"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 2 / 2</p>
+        </footer>
+      </section>
+
+      <section class="slide transform-slide" id="slide-repaso-2" data-slide aria-labelledby="slide-repaso-2-title" tabindex="-1" hidden>
+        <header class="slide-header"><div class="slide-topline"><p class="app-title">Curso de Español</p><p class="slide-kicker">Lección 5 · Repaso general · 12 minutos</p></div><h2 id="slide-repaso-2-title">Repaso 2</h2><p class="slide-subtitle">Reconstruye y transforma</p></header>
+        <div class="slide-content"><div class="transform-shell">
+          <section class="transform-card" aria-labelledby="transform-recordamos-title"><h3 id="transform-recordamos-title">Recordamos · Presente regular</h3><div class="transform-models"><p>hablar → <strong>yo hablo · tú hablas · él/ella habla · nosotros hablamos · vosotros habláis · ellos hablan</strong></p><p>comer → <strong>yo como · tú comes · él/ella come · nosotros comemos · vosotros coméis · ellos comen</strong></p><p>vivir → <strong>yo vivo · tú vives · él/ella vive · nosotros vivimos · vosotros vivís · ellos viven</strong></p></div><p class="transform-note">El sujeto cambia → la forma verbal también.</p><p class="transform-endings"><strong>-amos / -emos / -imos</strong> · <strong>-an / -en</strong></p></section>
+          <section class="transform-check" data-transform-check data-progressive-navigation aria-labelledby="transform-check-title"><h3 id="transform-check-title">Practicamos juntos · Transformaciones orales</h3>
+            <div class="transform-item" data-transform-item><p>Yo trabajo en casa. → <strong>nosotros</strong></p><p class="transform-answer" data-transform-answer hidden>Nosotros trabajamos en casa.</p></div>
+            <div class="transform-item" data-transform-item hidden><p>Ella come a la una. → <strong>ellos</strong></p><p class="transform-answer" data-transform-answer hidden>Ellos comen a la una.</p></div>
+            <div class="transform-item" data-transform-item hidden><p>Nosotros vivimos en Brasil. → <strong>yo</strong></p><p class="transform-answer" data-transform-answer hidden>Yo vivo en Brasil.</p></div>
+            <div class="transform-controls" data-no-slide-advance><button class="transform-reveal" type="button" data-transform-reveal>MOSTRAR RESPUESTA</button><a class="transform-practice" href="workbook/leccion-05/repaso-02-reconstruye-transforma.html" target="_blank" rel="noopener">PRACTICAR JUNTOS</a></div>
+          </section>
+        </div></div>
+        <footer class="slide-footer"><div class="slide-progress" data-slide-progress role="progressbar" aria-label="Progreso de la lección" aria-valuemin="1"><span></span></div><p class="slide-count" data-slide-count>Slide 3 / 3</p></footer>
+      </section>
+
+      <section class="slide question-slide" id="slide-repaso-3" data-slide aria-labelledby="slide-repaso-3-title" tabindex="-1" hidden>
+        <header class="slide-header"><div class="slide-topline"><p class="app-title">Curso de Español</p><p class="slide-kicker">Lección 5 · Repaso general · 12 minutos</p></div><h2 id="slide-repaso-3-title">Repaso 3</h2><p class="slide-subtitle">La pregunta exacta</p></header>
+        <div class="slide-content"><div class="question-shell"><section class="question-board" aria-labelledby="question-board-title"><h3 id="question-board-title">¿Qué información buscamos?</h3><p><strong>¿Dónde...?</strong> → lugar</p><p><strong>¿Cuándo...?</strong> → momento / día</p><p><strong>¿A qué hora...?</strong> → hora</p><p><strong>¿Quién...?</strong> → persona</p><p><strong>¿Cuánto/a/os/as...?</strong> → cantidad</p><p><strong>¿Con quién...?</strong> → compañía</p><p><strong>¿De quién...?</strong> → posesión</p><p class="question-message">Primero identifica la información. Después construye la pregunta.</p></section><section class="question-check" data-question-check data-progressive-navigation aria-labelledby="question-check-title"><h3 id="question-check-title">Practicamos juntos</h3><div class="question-item" data-question-item><p>Marta trabaja en <span class="question-highlight">Madrid</span>.</p><p class="question-answer" data-question-answer hidden>¿Dónde trabaja Marta?</p></div><div class="question-item" data-question-item hidden><p>La clase es <span class="question-highlight">a las ocho</span>.</p><p class="question-answer" data-question-answer hidden>¿A qué hora es la clase?</p></div><div class="question-item" data-question-item hidden><p>Hay <span class="question-highlight">veinte estudiantes</span> en la sala.</p><p class="question-answer" data-question-answer hidden>¿Cuántos estudiantes hay en la sala?</p></div><div class="question-controls" data-no-slide-advance><button class="question-reveal" type="button" data-question-reveal>MOSTRAR RESPUESTA</button><a class="question-practice" href="workbook/leccion-05/repaso-03-la-pregunta-exacta.html" target="_blank" rel="noopener">PRACTICAR JUNTOS</a></div></section></div></div>
+        <footer class="slide-footer"><div class="slide-progress" data-slide-progress role="progressbar" aria-label="Progreso de la lección" aria-valuemin="1"><span></span></div><p class="slide-count" data-slide-count>Slide 4 / 4</p></footer>
+      </section>
+      <section class="slide agenda-slide" id="slide-repaso-4" data-slide aria-labelledby="slide-repaso-4-title" tabindex="-1" hidden><header class="slide-header"><div class="slide-topline"><p class="app-title">Curso de Español</p><p class="slide-kicker">Lección 5 · Repaso general · 12 minutos</p></div><h2 id="slide-repaso-4-title">Repaso 4</h2><p class="slide-subtitle">La agenda imposible</p></header><div class="slide-content"><div class="agenda-shell"><section class="agenda-ref"><h3>Marta · Martes</h3><p>08:15 <small>trabaja</small></p><p>12:30 <small>come</small></p><p>14:45 <small>estudia español</small></p><p>18:20 <small>camina</small></p><p>21:00 <small>lee</small></p><p class="repaso-rule">¿Qué hora es? → Son las ocho.<br>¿A qué hora es la clase? → A las ocho.</p></section><section class="agenda-check" data-agenda-check data-progressive-navigation><h3>Recordamos · Practicamos juntos</h3><div class="agenda-item" data-agenda-item><p>09:30 → ¿A qué hora es la reunión?</p><p class="agenda-answer" data-agenda-answer hidden>A las nueve y media.</p></div><div class="agenda-item" data-agenda-item hidden><p>13:00 → ¿A qué hora comes?</p><p class="agenda-answer" data-agenda-answer hidden>A la una.</p></div><div class="agenda-item" data-agenda-item hidden><p>18:45 → ¿A qué hora estudia Marta?</p><p class="agenda-answer" data-agenda-answer hidden>A las siete menos cuarto.</p></div><div class="agenda-controls" data-no-slide-advance><button class="agenda-reveal" type="button" data-agenda-reveal>MOSTRAR RESPUESTA</button><a class="agenda-practice" href="workbook/leccion-05/repaso-04-la-agenda-imposible.html" target="_blank" rel="noopener">PRACTICAR JUNTOS</a></div></section></div></div><footer class="slide-footer"><div class="slide-progress" data-slide-progress role="progressbar" aria-label="Progreso de la lección" aria-valuemin="1"><span></span></div><p class="slide-count" data-slide-count>Slide 5 / 5</p></footer></section>
+      <section class="slide actions-slide" id="slide-repaso-5" data-slide aria-labelledby="slide-repaso-5-title" tabindex="-1" hidden>
+        <header class="slide-header"><div class="slide-topline"><p class="app-title">Curso de Español</p><p class="slide-kicker">Lección 5 · Repaso general · 18 minutos</p></div><h2 id="slide-repaso-5-title">Repaso 5</h2><p class="slide-subtitle">Las acciones</p></header>
+        <div class="slide-content"><div class="actions-shell">
+          <section class="actions-board" aria-labelledby="actions-recordamos-title"><h3 id="actions-recordamos-title">Recordamos · Presente regular</h3><div class="actions-families"><div class="actions-family"><strong>-AR</strong>-o · -as · -a · <mark>-amos</mark> · -áis · -an</div><div class="actions-family"><strong>-ER</strong>-o · -es · -e · <mark>-emos</mark> · -éis · -en</div><div class="actions-family"><strong>-IR</strong>-o · -es · -e · <mark>-imos</mark> · -ís · -en</div></div><p class="actions-contrast">Contraste clave: <mark>comemos / vivimos</mark> · <mark>coméis / vivís</mark></p><p class="actions-message">La raíz se mantiene. La terminación cambia según la persona y la familia.</p></section>
+          <section class="actions-check" data-actions-check data-progressive-navigation aria-labelledby="actions-check-title"><h3 id="actions-check-title">Practicamos juntos</h3><p class="actions-progress" aria-live="polite" data-actions-progress>1 / 4</p><div class="actions-item" data-actions-item><p>nosotros + comer</p><p class="actions-answer" data-actions-answer hidden><strong>comemos</strong></p></div><div class="actions-item" data-actions-item hidden><p>nosotros + vivir</p><p class="actions-answer" data-actions-answer hidden><strong>vivimos</strong></p></div><div class="actions-item" data-actions-item hidden><p>vosotros + beber</p><p class="actions-answer" data-actions-answer hidden><strong>bebéis</strong></p></div><div class="actions-item" data-actions-item hidden><p>vosotros + escribir</p><p class="actions-answer" data-actions-answer hidden><strong>escribís</strong></p></div><div class="actions-controls" data-no-slide-advance><button class="actions-reveal" type="button" data-actions-reveal>MOSTRAR RESPUESTA</button><a class="actions-practice" href="workbook/leccion-05/repaso-05-las-acciones.html" target="_blank" rel="noopener">PRACTICAR JUNTOS</a></div></section>
+        </div></div>
+        <footer class="slide-footer"><div class="slide-progress" data-slide-progress role="progressbar" aria-label="Progreso de la lección" aria-valuemin="1"><span></span></div><p class="slide-count" data-slide-count>Slide 6 / 6</p></footer>
+      </section>
+      <section class="slide texto-slide" id="slide-mi-texto" data-slide aria-labelledby="slide-mi-texto-title" tabindex="-1" hidden>
+        <header class="slide-header"><div class="slide-topline"><p class="app-title">Curso de Español</p><p class="slide-kicker">Lección 5 · Repaso general · 20 minutos</p></div><h2 id="slide-mi-texto-title">Mi texto</h2><p class="slide-subtitle">Escuchamos, leemos y comprendemos</p></header>
+        <div class="slide-content"><div class="texto-shell">
+          <div class="texto-main">
+            <section class="texto-read" aria-labelledby="texto-read-title"><h3 id="texto-read-title">Lee tu texto</h3><p class="texto-read-lead">Lee tu texto en voz alta para la clase.</p><p>Habla despacio y con claridad.</p><p>No necesitas memorizarlo.</p></section>
+            <section class="texto-listen" aria-labelledby="texto-listen-title"><h3 id="texto-listen-title">Escucha y anota</h3><p>Durante la lectura de cada compañero, identifica:</p><ul><li>una actividad</li><li>una hora</li><li>un lugar</li></ul></section>
+          </div>
+          <div class="texto-flow" aria-label="Secuencia de la actividad"><p><b>1</b> Lee tu texto.</p><p><b>2</b> Escucha a tus compañeros.</p><p><b>3</b> Anota una actividad, una hora y un lugar.</p><p><b>4</b> Prepárate para responder una pregunta.</p></div>
+          <p class="texto-focus">Hablar · escuchar · comprender</p>
+        </div></div>
+        <footer class="slide-footer"><div class="slide-progress" data-slide-progress role="progressbar" aria-label="Progreso de la lección" aria-valuemin="1"><span></span></div><p class="slide-count" data-slide-count>Slide 7 / 7</p></footer>
+      </section>
+    </main>
+  </div>
+
+  <div class="font-controls" aria-label="Tamaño de fuente" data-no-slide-advance>
+    <button type="button" data-font-action="decrease" aria-label="Disminuir tamaño de fuente">A−</button>
+    <button type="button" data-font-action="reset" aria-label="Restaurar tamaño de fuente">A</button>
+    <button type="button" data-font-action="increase" aria-label="Aumentar tamaño de fuente">A+</button>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.querySelector('[data-course-app]');
+      const deck = document.querySelector('.lesson-deck');
+      const slides = [...document.querySelectorAll('[data-slide]')];
+      const fontStorageKey = 'leccion5FontScale';
+      const fontMinimum = .85;
+      const fontMaximum = 1.35;
+      const fontStep = .05;
+      let currentSlide = 0;
+
+      function clamp(value, minimum, maximum) {
+        return Math.min(Math.max(value, minimum), maximum);
+      }
+
+      function isInteractiveTarget(target) {
+        return target instanceof Element && Boolean(target.closest('a, button, input, select, textarea, audio, video, dialog, [contenteditable="true"], [data-no-slide-advance]'));
+      }
+
+      function updateSlideMetadata() {
+        const total = slides.length;
+        slides.forEach((slide, index) => {
+          slide.querySelectorAll('[data-slide-count]').forEach(counter => {
+            counter.textContent = `Slide ${index + 1} / ${total}`;
+          });
+          slide.querySelectorAll('[data-slide-progress]').forEach(progress => {
+            progress.setAttribute('aria-valuemax', String(total));
+            progress.setAttribute('aria-valuenow', String(index + 1));
+            progress.querySelector('span').style.width = `${((index + 1) / total) * 100}%`;
+          });
+        });
+      }
+
+      function indexFromHash() {
+        const hash = decodeURIComponent(window.location.hash.slice(1));
+        const matchedIndex = slides.findIndex(slide => slide.id === hash);
+        if (matchedIndex >= 0) return matchedIndex;
+        const numericIndex = Number.parseInt(hash, 10) - 1;
+        return Number.isFinite(numericIndex) ? clamp(numericIndex, 0, slides.length - 1) : 0;
+      }
+
+      function showSlide(index, { updateHash = true, focusSlide = false } = {}) {
+        currentSlide = clamp(index, 0, slides.length - 1);
+        slides.forEach((slide, slideIndex) => {
+          const isActive = slideIndex === currentSlide;
+          slide.classList.toggle('is-active', isActive);
+          slide.hidden = !isActive;
+          slide.setAttribute('aria-hidden', String(!isActive));
+        });
+        if (updateHash && window.location.hash.slice(1) !== slides[currentSlide].id) {
+          window.location.hash = slides[currentSlide].id;
+        }
+        if (focusSlide) slides[currentSlide].focus({ preventScroll: true });
+        updateDeckToolbar();
+      }
+
+      const previousButton = document.querySelector('[data-slide-prev]');
+      const nextButton = document.querySelector('[data-slide-next]');
+      const slideSelect = document.querySelector('[data-slide-select]');
+
+      function updateDeckToolbar() {
+        if (previousButton) previousButton.disabled = currentSlide === 0;
+        if (nextButton) nextButton.disabled = currentSlide === slides.length - 1;
+        if (slideSelect) slideSelect.value = String(currentSlide);
+      }
+
+      function populateSlideSelect() {
+        if (!slideSelect) return;
+        slides.forEach((slide, index) => {
+          const option = document.createElement('option');
+          const title = slide.querySelector('h2')?.textContent.trim() || `Slide ${index + 1}`;
+          option.value = String(index);
+          option.textContent = `${index + 1}. ${title}`;
+          slideSelect.append(option);
+        });
+      }
+
+      function createCalentamientoProgressive(panel) {
+        const stages = [...panel.querySelectorAll('[data-calentamiento-stage]')];
+        const action = panel.querySelector('[data-calentamiento-action]');
+        const reset = panel.querySelector('[data-calentamiento-reset]');
+        const counter = panel.querySelector('[data-calentamiento-counter]');
+        let itemIndex = 0;
+        let responseIsVisible = false;
+
+        function render() {
+          stages.forEach((stage, stageIndex) => {
+            const isCurrent = stageIndex === itemIndex;
+            stage.hidden = !isCurrent;
+            stage.setAttribute('aria-hidden', String(!isCurrent));
+            const response = stage.querySelector('[data-calentamiento-response]');
+            response.hidden = !(isCurrent && responseIsVisible);
+          });
+          counter.textContent = `${itemIndex + 1} / ${stages.length}`;
+          const isFinalAnswer = responseIsVisible && itemIndex === stages.length - 1;
+          action.textContent = responseIsVisible ? (isFinalAnswer ? 'REINICIAR' : 'SIGUIENTE') : 'MOSTRAR RESPUESTA';
+          action.setAttribute('aria-label', action.textContent);
+          reset.hidden = !(itemIndex > 0 || responseIsVisible);
+        }
+
+        function advance() {
+          if (!responseIsVisible) {
+            responseIsVisible = true;
+            render();
+            return true;
+          }
+          if (itemIndex < stages.length - 1) {
+            itemIndex += 1;
+            responseIsVisible = false;
+            render();
+            return true;
+          }
+          itemIndex = 0;
+          responseIsVisible = false;
+          render();
+          return true;
+        }
+
+        function resetActivity() {
+          itemIndex = 0;
+          responseIsVisible = false;
+          render();
+        }
+
+        panel.advanceProgressiveReveal = advance;
+        panel.hasProgressiveRevealNext = () => !(responseIsVisible && itemIndex === stages.length - 1);
+        action.addEventListener('click', event => {
+          event.stopPropagation();
+          advance();
+        });
+        reset.addEventListener('click', event => {
+          event.stopPropagation();
+          resetActivity();
+        });
+        [action, reset].forEach(button => {
+          button.addEventListener('keydown', event => {
+            if (event.key === ' ' || event.key === 'Enter') event.stopPropagation();
+          });
+        });
+        render();
+      }
+
+      function createRepasoCheck(panel) {
+        const items = [...panel.querySelectorAll('[data-repaso-check-item]')];
+        const reveal = panel.querySelector('[data-repaso-reveal]');
+        let itemIndex = 0;
+        let responseIsVisible = false;
+
+        function render() {
+          items.forEach((item, index) => {
+            const current = index === itemIndex;
+            item.hidden = !current;
+            item.querySelector('[data-repaso-check-answer]').hidden = !(current && responseIsVisible);
+          });
+          const finalAnswer = responseIsVisible && itemIndex === items.length - 1;
+          reveal.textContent = responseIsVisible ? (finalAnswer ? 'REINICIAR' : 'SIGUIENTE') : 'MOSTRAR RESPUESTAS';
+          reveal.setAttribute('aria-label', reveal.textContent);
+        }
+
+        function advance() {
+          if (!responseIsVisible) responseIsVisible = true;
+          else if (itemIndex < items.length - 1) { itemIndex += 1; responseIsVisible = false; }
+          else { itemIndex = 0; responseIsVisible = false; }
+          render();
+          return true;
+        }
+
+        panel.advanceProgressiveReveal = advance;
+        panel.hasProgressiveRevealNext = () => !(responseIsVisible && itemIndex === items.length - 1);
+        reveal.addEventListener('click', event => { event.stopPropagation(); advance(); });
+        reveal.addEventListener('keydown', event => { if (event.key === ' ' || event.key === 'Enter') event.stopPropagation(); });
+        render();
+      }
+
+      function createTransformCheck(panel) {
+        const items=[...panel.querySelectorAll('[data-transform-item]')]; const button=panel.querySelector('[data-transform-reveal]'); let index=0; let visible=false;
+        function render(){ items.forEach((item,i)=>{ item.hidden=i!==index; item.querySelector('[data-transform-answer]').hidden=!(i===index&&visible); }); const last=visible&&index===items.length-1; button.textContent=visible?(last?'REINICIAR':'SIGUIENTE'):'MOSTRAR RESPUESTA'; }
+        function advance(){ if(!visible)visible=true; else if(index<items.length-1){index+=1;visible=false;} else {index=0;visible=false;} render(); return true; }
+        panel.advanceProgressiveReveal=advance; panel.hasProgressiveRevealNext=()=>!(visible&&index===items.length-1); button.addEventListener('click',e=>{e.stopPropagation();advance();}); button.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter')e.stopPropagation();}); render();
+      }
+      function createQuestionCheck(panel){const items=[...panel.querySelectorAll('[data-question-item]')],button=panel.querySelector('[data-question-reveal]');let index=0,visible=false;function render(){items.forEach((item,i)=>{item.hidden=i!==index;item.querySelector('[data-question-answer]').hidden=!(i===index&&visible)});const last=visible&&index===items.length-1;button.textContent=visible?(last?'REINICIAR':'SIGUIENTE'):'MOSTRAR RESPUESTA'}function advance(){if(!visible)visible=true;else if(index<items.length-1){index++;visible=false}else{index=0;visible=false}render();return true}panel.advanceProgressiveReveal=advance;panel.hasProgressiveRevealNext=()=>!(visible&&index===items.length-1);button.addEventListener('click',e=>{e.stopPropagation();advance()});render()}
+      function createAgendaCheck(panel){const items=[...panel.querySelectorAll('[data-agenda-item]')],button=panel.querySelector('[data-agenda-reveal]');let index=0,visible=false;function render(){items.forEach((item,i)=>{item.hidden=i!==index;item.querySelector('[data-agenda-answer]').hidden=!(i===index&&visible)});button.textContent=visible?(index===items.length-1?'REINICIAR':'SIGUIENTE'):'MOSTRAR RESPUESTA'}function advance(){if(!visible)visible=true;else if(index<items.length-1){index++;visible=false}else{index=0;visible=false}render();return true}panel.advanceProgressiveReveal=advance;panel.hasProgressiveRevealNext=()=>!(visible&&index===items.length-1);button.addEventListener('click',e=>{e.stopPropagation();advance()});render()}
+      function createActionsCheck(panel){const items=[...panel.querySelectorAll('[data-actions-item]')],button=panel.querySelector('[data-actions-reveal]'),progress=panel.querySelector('[data-actions-progress]');let index=0,visible=false;function render(){items.forEach((item,i)=>{item.hidden=i!==index;item.querySelector('[data-actions-answer]').hidden=!(i===index&&visible)});progress.textContent=`${index+1} / ${items.length}`;button.textContent=visible?(index===items.length-1?'REINICIAR':'SIGUIENTE'):'MOSTRAR RESPUESTA'}function advance(){if(!visible)visible=true;else if(index<items.length-1){index++;visible=false}else{index=0;visible=false}render();return true}panel.advanceProgressiveReveal=advance;panel.hasProgressiveRevealNext=()=>!(visible&&index===items.length-1);button.addEventListener('click',e=>{e.stopPropagation();advance()});button.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter')e.stopPropagation()});render()}
+
+      function advanceActiveProgressiveReveal() {
+        const panel = slides[currentSlide]?.querySelector('[data-progressive-navigation]');
+        return panel?.hasProgressiveRevealNext?.() ? panel.advanceProgressiveReveal() : false;
+      }
+
+      function updateFontButtons(scale) {
+        document.querySelectorAll('[data-font-action]').forEach(button => {
+          button.setAttribute('aria-pressed', String(button.dataset.fontAction === 'reset' && scale === 1));
+        });
+      }
+
+      function applyFontScale(nextScale, persist = true) {
+        const scale = Math.round(clamp(Number(nextScale) || 1, fontMinimum, fontMaximum) * 100) / 100;
+        root.style.setProperty('--slide-font-scale', String(scale));
+        if (persist) {
+          try { localStorage.setItem(fontStorageKey, String(scale)); } catch (_) { /* El almacenamiento puede no estar disponible. */ }
+        }
+        updateFontButtons(scale);
+      }
+
+      function readFontScale() {
+        try { return Number(localStorage.getItem(fontStorageKey)) || 1; } catch (_) { return 1; }
+      }
+
+      document.querySelectorAll('[data-calentamiento-progressive]').forEach(createCalentamientoProgressive);
+      document.querySelectorAll('[data-repaso-check]').forEach(createRepasoCheck);
+      document.querySelectorAll('[data-transform-check]').forEach(createTransformCheck);
+      document.querySelectorAll('[data-question-check]').forEach(createQuestionCheck);
+      document.querySelectorAll('[data-agenda-check]').forEach(createAgendaCheck);
+      document.querySelectorAll('[data-actions-check]').forEach(createActionsCheck);
+      updateSlideMetadata();
+      populateSlideSelect();
+      applyFontScale(readFontScale(), false);
+      showSlide(indexFromHash(), { updateHash: false });
+
+      previousButton?.addEventListener('click', event => { event.stopPropagation(); showSlide(currentSlide - 1, { focusSlide: true }); });
+      nextButton?.addEventListener('click', event => { event.stopPropagation(); showSlide(currentSlide + 1, { focusSlide: true }); });
+      slideSelect?.addEventListener('change', event => { event.stopPropagation(); showSlide(Number(event.target.value), { focusSlide: true }); });
+
+      window.addEventListener('hashchange', () => showSlide(indexFromHash(), { updateHash: false }));
+      document.addEventListener('keydown', event => {
+        if (event.ctrlKey || event.metaKey) {
+          if (['+', '='].includes(event.key)) { event.preventDefault(); applyFontScale((Number(root.style.getPropertyValue('--slide-font-scale')) || 1) + fontStep); return; }
+          if (['-', '_'].includes(event.key)) { event.preventDefault(); applyFontScale((Number(root.style.getPropertyValue('--slide-font-scale')) || 1) - fontStep); return; }
+          if (event.key === '0') { event.preventDefault(); applyFontScale(1); return; }
+        }
+        if (isInteractiveTarget(event.target)) return;
+        if (['ArrowRight', 'PageDown', ' '].includes(event.key)) {
+          event.preventDefault();
+          if (!advanceActiveProgressiveReveal()) showSlide(currentSlide + 1, { focusSlide: true });
+        }
+        if (['ArrowLeft', 'PageUp'].includes(event.key)) { event.preventDefault(); showSlide(currentSlide - 1, { focusSlide: true }); }
+        if (event.key === 'Home') { event.preventDefault(); showSlide(0, { focusSlide: true }); }
+        if (event.key === 'End') { event.preventDefault(); showSlide(slides.length - 1, { focusSlide: true }); }
+        if (event.key.toLowerCase() === 'f') document.documentElement.requestFullscreen?.().catch(() => {});
+      });
+      deck.addEventListener('click', event => {
+        if (isInteractiveTarget(event.target)) return;
+        if (event.clientX > window.innerWidth * .68) {
+          if (!advanceActiveProgressiveReveal()) showSlide(currentSlide + 1);
+        } else if (event.clientX < window.innerWidth * .32) {
+          showSlide(currentSlide - 1);
+        }
+      });
+      document.querySelector('[data-no-slide-advance].font-controls')?.addEventListener('click', event => {
+        event.stopPropagation();
+        const button = event.target.closest('[data-font-action]');
+        if (!button) return;
+        const currentScale = Number(root.style.getPropertyValue('--slide-font-scale')) || 1;
+        if (button.dataset.fontAction === 'decrease') applyFontScale(currentScale - fontStep);
+        if (button.dataset.fontAction === 'increase') applyFontScale(currentScale + fontStep);
+        if (button.dataset.fontAction === 'reset') applyFontScale(1);
+      });
+    })();
+  </script>
+</body>
+</html>
