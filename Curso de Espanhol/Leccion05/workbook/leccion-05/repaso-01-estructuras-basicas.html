@@ -1,0 +1,139 @@
+<script>document.addEventListener("keydown",event=>{if(event.key!=="Enter"||!(event.target instanceof HTMLInputElement||event.target instanceof HTMLTextAreaElement)||event.target.disabled)return;event.preventDefault();document.querySelector("#check-button,#check")?.click()});</script>
+<script>document.addEventListener("click",event=>{if(!event.target.closest("#check-button,#check"))return;setTimeout(()=>{const feedback=document.querySelector("#feedback"),incorrect=feedback&&!feedback.textContent.trim().startsWith("Correcto.");document.querySelectorAll("#answer-area input,#answer-area select,#answer input").forEach(control=>{control.classList.toggle("incorrect",incorrect);control.classList.toggle("correct",!incorrect);if(incorrect){control.style.borderColor="#b42318";control.style.backgroundColor="#fff1f0";control.style.color="#b42318"}})},0)});</script>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Práctica guiada de estructuras básicas de español.">
+  <title>Workbook · Repaso 1 · Estructuras básicas</title>
+  <style>
+    :root { --red:#aa151b; --gold:#f1bf00; --ink:#172033; --muted:#667085; --paper:#fffdf8; --blue:#2d5ea8; --green:#2d7a5b; --soft:#f4efe4; --danger:#b42318; --danger-soft:#fff1f0; --success-soft:#ecfdf3; --focus:rgba(45,94,168,.38); --font-scale:1; }
+    * { box-sizing:border-box; }
+    html { font-size:calc(16px * var(--font-scale)); }
+    body { margin:0; min-height:100vh; color:var(--ink); font-family:Inter,"Segoe UI",Arial,sans-serif; background:radial-gradient(circle at 92% 8%,rgba(241,191,0,.2),transparent 28%),linear-gradient(135deg,#fff,#f7f1e5); }
+    button,input,select { font:inherit; }
+    button:focus-visible,input:focus-visible,select:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
+    .page { width:min(100%,1080px); margin:0 auto; padding:28px 22px 30px; }
+    .top { display:flex; justify-content:space-between; gap:18px; padding-bottom:10px; border-bottom:2px solid rgba(170,21,27,.18); color:var(--muted); font-size:.8rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    .course { color:var(--red); font-weight:900; }
+    .font-controls { position:fixed; z-index:5; top:16px; right:16px; display:flex; overflow:hidden; border:1px solid rgba(23,32,51,.14); border-radius:10px; background:rgba(255,255,255,.94); box-shadow:0 7px 20px #0001; }
+    .font-controls button { min-width:34px; min-height:31px; border:0; border-right:1px solid rgba(23,32,51,.12); background:transparent; color:var(--ink); font-size:.78rem; font-weight:900; cursor:pointer; }
+    .font-controls button:last-child { border-right:0; }
+    .font-controls button:hover,.font-controls button[aria-pressed="true"] { background:var(--soft); color:var(--red); }
+    .hero { margin:26px 0 18px; }
+    .eyebrow { color:var(--red); font-size:.8rem; font-weight:900; letter-spacing:.13em; text-transform:uppercase; }
+    h1 { margin:8px 0 4px; font-size:clamp(2rem,5vw,3.1rem); line-height:1.04; }
+    .subtitle { margin:0; color:var(--muted); font-size:1.08rem; }
+    .activity-tag { display:inline-flex; margin-top:12px; padding:7px 11px; border-radius:999px; background:var(--soft); color:var(--red); font-size:.76rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+    .shell { overflow:hidden; border:1px solid rgba(23,32,51,.09); border-radius:18px; background:rgba(255,255,255,.82); box-shadow:0 22px 60px #0002; }
+    .status { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(23,32,51,.1); }
+    .status > div { padding:14px 18px; background:white; }
+    .status small { display:block; margin-bottom:4px; color:var(--muted); font-size:.7rem; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
+    .status strong { font-size:1.12rem; }
+    .progress-track { height:8px; background:#e6e1d7; }
+    .progress-bar { width:0; height:100%; background:linear-gradient(90deg,var(--red),var(--gold)); transition:width .25s ease; }
+    .exercise { padding:28px; }
+    .block-status { display:grid; gap:3px; margin-bottom:17px; padding:12px 15px; border-left:6px solid var(--gold); border-radius:13px; background:var(--paper); }
+    .block-status small { color:var(--muted); font-size:.72rem; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
+    .block-status strong { font-size:1.08rem; }
+    .prompt { margin:0 0 11px; color:var(--muted); font-size:1rem; font-weight:750; line-height:1.4; white-space:pre-line; }
+    .question-title { margin:0 0 21px; white-space:pre-line; font-size:clamp(1.45rem,4.4vw,2.55rem); line-height:1.16; }
+    .answer-area { display:grid; gap:13px; }
+    .answer-input,.answer-select { width:100%; min-height:57px; padding:12px 14px; border:2px solid rgba(23,32,51,.14); border-radius:13px; background:white; color:var(--ink); font-size:1.14rem; font-weight:750; }
+    .answer-input::placeholder { color:#98a2b3; font-weight:600; }
+    .answer-input:disabled,.answer-select:disabled { background:#f2efe7; }
+    .answer-input.correct,.answer-select.correct { border-color:var(--green); background:var(--success-soft); }
+    .answer-input.incorrect,.answer-select.incorrect { border-color:var(--danger); background:var(--danger-soft); }
+    .answer-label { display:block; margin-bottom:5px; color:var(--muted); font-size:.75rem; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
+    .options { display:grid; grid-template-columns:repeat(2,1fr); gap:11px; }
+    .option { min-height:54px; border:2px solid rgba(23,32,51,.13); border-radius:13px; background:white; color:var(--ink); font-weight:850; cursor:pointer; }
+    .option.selected { border-color:var(--blue); background:#eef4ff; }
+    .option.correct { border-color:var(--green); background:var(--success-soft); }
+    .option.incorrect { border-color:var(--danger); background:var(--danger-soft); }
+    .actions { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:10px; margin-top:18px; }
+    .primary { min-height:47px; padding:10px 17px; border:0; border-radius:11px; background:var(--red); color:white; font-size:.82rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; }
+    .primary:disabled { background:#c9c3b8; color:#6b6258; cursor:not-allowed; }
+    .feedback { min-height:82px; margin-top:17px; padding:14px 16px; border-radius:14px; background:var(--paper); border:1px solid rgba(23,32,51,.1); line-height:1.38; }
+    .feedback:empty { display:none; }
+    .feedback strong { display:block; margin-bottom:4px; font-size:1.05rem; }
+    .feedback.correct { border-left:6px solid var(--green); background:var(--success-soft); }
+    .feedback.incorrect { border-left:6px solid var(--danger); background:var(--danger-soft); }
+    .result { display:none; padding:30px; }
+    .result.active { display:block; }
+    .result h2 { margin:0 0 8px; font-size:clamp(2rem,6vw,3.15rem); }
+    .result-summary { margin:0; color:var(--muted); font-size:1.1rem; }
+    .score-card { display:grid; grid-template-columns:repeat(4,1fr); gap:11px; margin:23px 0; }
+    .score-card div { padding:15px; border-radius:13px; background:white; box-shadow:0 7px 20px #0001; }
+    .score-card small { display:block; color:var(--muted); font-size:.7rem; font-weight:900; letter-spacing:.09em; text-transform:uppercase; }
+    .score-card strong { display:block; margin-top:5px; color:var(--red); font-size:1.32rem; }
+    .result-message { margin:0 0 22px; padding:15px 17px; border-left:6px solid var(--gold); border-radius:13px; background:white; font-weight:800; }
+    @media (max-width:700px) { .page{padding:22px 14px 22px}.top{padding-right:110px;align-items:flex-start;flex-direction:column}.hero{margin:23px 0 15px}.status,.score-card{grid-template-columns:1fr}.exercise,.result{padding:21px 16px}.options{grid-template-columns:1fr}.actions{flex-direction:column}.primary{width:100%} }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { transition:none !important; } }
+  </style>
+</head>
+<body>
+  <div class="font-controls" aria-label="Tamaño de fuente">
+    <button type="button" data-font="down" aria-label="Disminuir tamaño de fuente">A−</button>
+    <button type="button" data-font="reset" aria-label="Restaurar tamaño de fuente">A</button>
+    <button type="button" data-font="up" aria-label="Aumentar tamaño de fuente">A+</button>
+  </div>
+  <main class="page">
+    <header class="top"><div class="course">Curso de Español · Workbook</div><div>Lección 5 · Repaso 1</div></header>
+    <section class="hero" aria-labelledby="workbook-title"><div class="eyebrow">Práctica dirigida</div><h1 id="workbook-title">Estructuras básicas</h1><p class="subtitle">Recordamos y practicamos juntos.</p><span class="activity-tag">10 ejercicios · trabajo colectivo</span></section>
+    <section class="shell" aria-label="Ejercicio interactivo">
+      <div class="status" aria-label="Estado del ejercicio"><div><small>Pregunta</small><strong id="question-count">1 / 10</strong></div><div><small>Puntuación</small><strong id="score-count">0 / 10</strong></div><div><small>Mejor resultado</small><strong id="best-score">—</strong></div></div>
+      <div class="progress-track" aria-hidden="true"><div id="progress-bar" class="progress-bar"></div></div>
+      <div id="exercise-panel" class="exercise">
+        <div id="block-status" class="block-status" aria-live="polite"></div>
+        <p id="question-prompt" class="prompt"></p><h2 id="question-title" class="question-title" tabindex="-1"></h2>
+        <form id="answer-form"><div id="answer-area" class="answer-area"></div><div class="actions"><button id="check-button" class="primary" type="submit">Comprobar</button><button id="next-button" class="primary" type="button" disabled>Siguiente</button></div></form>
+        <div id="feedback" class="feedback" aria-live="polite"></div>
+      </div>
+      <section id="result-panel" class="result" tabindex="-1" aria-labelledby="result-title"><h2 id="result-title">Resultado</h2><p id="result-summary" class="result-summary"></p><div class="score-card"><div><small>Puntuación obtenida</small><strong id="result-score"></strong></div><div><small>Puntuación máxima</small><strong id="result-max"></strong></div><div><small>Porcentaje</small><strong id="result-percent"></strong></div><div><small>Mejor resultado</small><strong id="result-best"></strong></div></div><p id="result-message" class="result-message"></p><button id="restart-button" class="primary" type="button">Repetir ejercicio</button></section>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const questions = [
+        { id:1, block:'Artículos y concordancia', category:'Corrección', type:'text', prompt:'Corrige la frase.', title:'Los casa grandes están en Madrid.', accepted:['Las casas grandes están en Madrid'], model:'Las casas grandes están en Madrid.', explanation:'Artículo, sustantivo y adjetivo deben concordar en plural.' },
+        { id:2, block:'Ser / estar / hay', category:'Existencia', type:'text', prompt:'Completa con una palabra.', title:'En la sala ______ cuatro mesas.', accepted:['hay'], model:'hay', explanation:'Hay presenta la existencia de algo.' },
+        { id:3, block:'Ser / estar / hay', category:'Localización', type:'text', prompt:'Completa con una palabra.', title:'Las mesas ______ cerca de la puerta.', accepted:['están'], model:'están', explanation:'Usamos estar para indicar localización.' },
+        { id:4, block:'Ser / estar / hay', category:'Descripción', type:'text', prompt:'Completa con una palabra.', title:'La oficina ______ moderna y grande.', accepted:['es'], model:'es', explanation:'Usamos ser para describir.' },
+        { id:5, block:'Artículos y concordancia', category:'Transformación', type:'text', prompt:'Transforma la frase al plural.', title:'La silla blanca está en la cocina.', accepted:['Las sillas blancas están en la cocina'], model:'Las sillas blancas están en la cocina.', explanation:'Cambian el artículo, el sustantivo, el adjetivo y la forma verbal.' },
+        { id:6, block:'Artículos y concordancia', category:'Corrección', type:'text', prompt:'Corrige la frase. También se acepta una frase sin artículo.', title:'Hay una libros encima de la mesa.', accepted:['Hay unos libros encima de la mesa','Hay libros encima de la mesa'], model:'Hay unos libros encima de la mesa.', explanation:'“Libros” es plural: usamos “unos” o podemos omitir el artículo.' },
+        { id:7, block:'Ser / estar / hay', category:'Contexto', type:'choice', prompt:'Elige la forma correcta y explica oralmente.', title:'La reunión ______ en la sala 3.', options:['es','está'], correct:'es', model:'es', explanation:'Un evento ocurre en un lugar.' },
+        { id:8, block:'Construcción', category:'Existencia y concordancia', type:'text', prompt:'Construye una frase completa con las palabras dadas.', title:'dos / libro / rojo / mesa / hay', accepted:['Hay dos libros rojos en la mesa','Hay dos libros rojos encima de la mesa'], model:'Hay dos libros rojos en la mesa.', explanation:'Hay introduce la existencia; “libros rojos” concuerda en plural.' },
+        { id:9, block:'Ser / estar / hay', category:'Corrección', type:'text', prompt:'Corrige la frase.', title:'Las ventanas es grandes y están al lado de la puerta.', accepted:['Las ventanas son grandes y están al lado de la puerta'], model:'Las ventanas son grandes y están al lado de la puerta.', explanation:'“Ventanas” es plural: usamos “son” para la descripción.' },
+        { id:10, block:'Integración', category:'Corrección', type:'text', prompt:'Corrige el texto.', title:'La oficina es grande. Hay tres mesa. Las mesas está cerca de la ventana.', accepted:['La oficina es grande. Hay tres mesas. Las mesas están cerca de la ventana'], model:'La oficina es grande. Hay tres mesas. Las mesas están cerca de la ventana.', explanation:'Revisa el plural y la concordancia verbal: “tres mesas” y “las mesas están”.' }
+      ];
+      const BEST_SCORE_KEY = 'workbook-leccion-05-repaso-01-best-score';
+      const FONT_KEY = 'workbook-leccion-05-repaso-01-font-scale';
+      let index = 0; let score = 0; let closed = false; let selected = '';
+      const $ = id => document.getElementById(id);
+      const normalize = value => value.trim().toLocaleLowerCase('es').replace(/[.!?]+$/g,'').replace(/\s+/g,' ');
+      const read = key => { try { return localStorage.getItem(key); } catch (_) { return null; } };
+      const write = (key,value) => { try { localStorage.setItem(key,String(value)); } catch (_) {} };
+      const best = () => { const value = Number(read(BEST_SCORE_KEY)); return Number.isFinite(value) ? value : null; };
+      function renderStatus(){ $('question-count').textContent = `${index+1} / ${questions.length}`; $('score-count').textContent = `${score} / ${questions.length}`; $('progress-bar').style.width = `${((index+1)/questions.length)*100}%`; $('best-score').textContent = best() === null ? '—' : `${best()} / ${questions.length}`; }
+      function renderQuestion(){
+        const q = questions[index]; closed = false; selected = ''; $('exercise-panel').style.display='block'; $('result-panel').classList.remove('active'); $('block-status').innerHTML = `<small>Área · ${q.category}</small><strong>${q.block}</strong>`; $('question-prompt').textContent=q.prompt; $('question-title').textContent=q.title; $('answer-area').innerHTML=''; $('feedback').className='feedback'; $('feedback').innerHTML=''; $('check-button').disabled=false; $('next-button').disabled=true; $('next-button').textContent=index===questions.length-1?'Ver resultado':'Siguiente';
+        if(q.type==='choice'){ const wrap=document.createElement('div'); wrap.className='options'; q.options.forEach(option=>{ const button=document.createElement('button'); button.type='button'; button.className='option'; button.textContent=option; button.setAttribute('aria-pressed','false'); button.addEventListener('click',()=>{ if(closed)return; selected=option; wrap.querySelectorAll('button').forEach(item=>{ item.classList.toggle('selected',item===button); item.setAttribute('aria-pressed',String(item===button)); }); }); wrap.appendChild(button); }); $('answer-area').appendChild(wrap); }
+        if(q.type==='text'){ const label=document.createElement('label'); label.className='answer-label'; label.textContent='Respuesta escrita'; const input=document.createElement('input'); input.className='answer-input'; input.type='text'; input.autocomplete='off'; input.spellcheck=false; input.placeholder='Escribe tu respuesta.'; input.setAttribute('aria-label','Respuesta escrita'); label.appendChild(input); $('answer-area').appendChild(label); }
+        if(q.type==='multi-text'){ q.labels.forEach((text,i)=>{ const label=document.createElement('label'); label.className='answer-label'; label.textContent=text; const input=document.createElement('input'); input.className='answer-input'; input.type='text'; input.autocomplete='off'; input.spellcheck=false; input.placeholder='Escribe una frase.'; input.dataset.index=i; input.setAttribute('aria-label',text); label.appendChild(input); $('answer-area').appendChild(label); }); }
+        renderStatus();
+      }
+      function values(){ const q=questions[index]; if(q.type==='choice') return [selected]; return [...$('answer-area').querySelectorAll('input')].map(input=>input.value); }
+      function check(){
+        if(closed)return; const q=questions[index]; const answers=values(); let correct=false; if(q.type==='choice') correct=normalize(selected)===normalize(q.correct); else if(q.type==='multi-text') correct=answers.every((answer,i)=>q.acceptedGroups[i].some(item=>normalize(item)===normalize(answer))); else correct=q.accepted.some(item=>normalize(item)===normalize(answers[0]));
+        closed=true; if(correct)score+=1; const feedback=$('feedback'); feedback.className=`feedback ${correct?'correct':'incorrect'}`; feedback.innerHTML=`<strong>${correct?'Correcto.':'Revisa tu respuesta.'}</strong><span>${correct?'Muy bien. ':`Respuesta modelo: ${q.type==='multi-text'?q.models.join(' · '):q.model}. `}${q.explanation}</span>`; $('answer-area').querySelectorAll('input,select,button').forEach(control=>{ control.disabled=true; }); $('check-button').disabled=true; $('next-button').disabled=false; renderStatus(); }
+      $('answer-form').addEventListener('submit',event=>{ event.preventDefault(); check(); });
+      $('next-button').addEventListener('click',()=>{ if(!closed)return; if(index<questions.length-1){ index+=1; renderQuestion(); $('question-title').focus({preventScroll:true}); } else showResult(); });
+      function showResult(){ $('exercise-panel').style.display='none'; $('result-panel').classList.add('active'); const percentage=Math.round(score/questions.length*100); const previous=best(); if(previous===null||score>previous)write(BEST_SCORE_KEY,score); $('result-score').textContent=`${score}`; $('result-max').textContent=`${questions.length}`; $('result-percent').textContent=`${percentage}%`; $('result-best').textContent=`${Math.max(score,previous??0)} / ${questions.length}`; $('result-summary').textContent=`Has completado los ${questions.length} ejercicios.`; $('result-message').textContent=percentage>=80?'Buen trabajo: las estructuras básicas están activas.':'Revisa las respuestas y vuelve a intentarlo para consolidar las estructuras.'; $('result-panel').focus({preventScroll:true}); }
+      $('restart-button').addEventListener('click',()=>{ index=0; score=0; renderQuestion(); $('question-title').focus({preventScroll:true}); });
+      document.querySelector('.font-controls').addEventListener('click',event=>{ const button=event.target.closest('[data-font]'); if(!button)return; const current=Number(document.documentElement.style.getPropertyValue('--font-scale'))||1; const next=button.dataset.font==='down'?current-.05:button.dataset.font==='up'?current+.05:1; const scale=Math.round(Math.min(1.7,Math.max(.85,next))*100)/100; document.documentElement.style.setProperty('--font-scale',scale); write(FONT_KEY,scale); document.querySelectorAll('[data-font]').forEach(item=>item.setAttribute('aria-pressed',String(item.dataset.font==='reset'&&scale===1))); });
+      const stored=Number(read(FONT_KEY)); document.documentElement.style.setProperty('--font-scale',Number.isFinite(stored)&&stored?stored:1); renderQuestion();
+    })();
+  </script>
+</body>
+</html>
