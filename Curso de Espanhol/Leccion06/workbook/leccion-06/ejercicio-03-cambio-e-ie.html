@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Workbook · Lección 6 · Cambio E → IE</title>
+  <style>
+    :root{--red:#aa151b;--gold:#f1bf00;--ink:#172033;--muted:#667085;--paper:#fffdf8;--soft:#f4efe4;--line:rgba(23,32,51,.12);--green:#2d7a5b;--blue:#2d5ea8;--focus:rgba(45,94,168,.38)}
+    *{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#fff,#f7f1e5);color:var(--ink);font-family:Arial,Helvetica,sans-serif}main{width:min(92%,900px);margin:0 auto;padding:34px 0}header{border-bottom:2px solid rgba(170,21,27,.2);padding-bottom:14px}.course{margin:0;color:var(--red);font-size:.8rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}h1{margin:10px 0 5px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(2rem,5vw,3.5rem);line-height:1.05}.sub{margin:0;color:var(--muted);font-weight:700}.shell{margin-top:24px;padding:clamp(22px,4vw,42px);border-left:5px solid var(--gold);background:rgba(255,255,255,.96);box-shadow:0 12px 28px rgba(20,28,38,.1)}.progress{margin:0 0 20px;color:var(--muted);font-weight:800}.prompt{margin:0;font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.45rem,3.5vw,2.25rem);font-weight:700;line-height:1.2}.instruction{margin:10px 0 0;color:var(--muted);font-weight:700}.answer-row{display:flex;gap:12px;margin-top:24px}.answer-row input{min-width:0;flex:1;border:1px solid var(--line);border-bottom:3px solid var(--blue);padding:12px 14px;color:var(--ink);font:700 1.1rem Arial,Helvetica,sans-serif}.answer-row input:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px}.answer-row button,button{min-height:42px;border:1px solid var(--red);padding:9px 16px;background:var(--red);color:#fff;font-weight:900;letter-spacing:.06em;cursor:pointer}.feedback{min-height:48px;margin:18px 0 0;padding:12px 14px;background:var(--soft);font-weight:750;line-height:1.4}.feedback.correct{background:#ecfdf3;color:#17603f}.feedback.incorrect{background:#fff1f0;color:#8e1116}.done{text-align:center}.done[hidden],.question-wrap[hidden]{display:none}.done h2{font-family:Georgia,"Times New Roman",serif}.repeat{margin-top:16px}.answer-row button[disabled]{cursor:default;opacity:.75}.item-type{margin:0 0 9px;color:var(--red);font-size:.78rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}@media(max-width:560px){.answer-row{display:grid}.answer-row button{width:100%}}
+  </style>
+</head>
+<body>
+  <main>
+    <header><p class="course">Curso de Español · Lección 6 · Práctica</p><h1>Cambio E → IE</h1><p class="sub">Completa, transforma y produce frases breves.</p></header>
+    <section class="shell">
+      <div class="question-wrap">
+        <p class="progress" data-progress></p>
+        <p class="item-type" data-type></p>
+        <p class="prompt" data-prompt></p>
+        <p class="instruction" data-instruction></p>
+        <div class="answer-row"><input type="text" data-answer aria-label="Tu respuesta" autocomplete="off"><button type="button" data-check>COMPROBAR</button></div>
+        <p class="feedback" aria-live="polite" data-feedback>Escribe tu respuesta.</p>
+      </div>
+      <div class="done" hidden><h2>¡Práctica terminada!</h2><p>Has practicado el cambio e → ie.</p><button class="repeat" type="button" data-repeat>REPETIR</button></div>
+    </section>
+  </main>
+  <script>
+    (()=>{
+      const items=[
+        {type:'Completa',prompt:'Yo ______ viajar. (querer)',instruction:'Escribe la forma verbal o la frase completa.',answers:['quiero','yo quiero viajar.'],feedback:'Correcto. En “yo”, querer cambia e → ie.'},
+        {type:'Transforma',prompt:'Yo quiero viajar. → nosotros',instruction:'Escribe la frase completa.',answers:['nosotros queremos viajar.'],feedback:'Correcto. En nosotros: queremos. La raíz no cambia.'},
+        {type:'Completa',prompt:'Marta ______ en su trabajo. (pensar)',instruction:'Escribe la forma verbal o la frase completa.',answers:['piensa','marta piensa en su trabajo.'],feedback:'Correcto. Pensar cambia e → ie en “ella”.'},
+        {type:'Completa',prompt:'¿Tú ______ la pregunta? (entender)',instruction:'Escribe la forma verbal o la frase completa.',answers:['entiendes','¿tú entiendes la pregunta?'],feedback:'Correcto. Entender cambia e → ie en “tú”.'},
+        {type:'Completa',prompt:'Nosotros ______ café. (preferir)',instruction:'Escribe la forma verbal o la frase completa.',answers:['preferimos','nosotros preferimos café.'],feedback:'Correcto. Preferir no cambia la raíz con nosotros: preferimos.'},
+        {type:'Produce',prompt:'Ellos ______ aprender español. (querer)',instruction:'Escribe la forma verbal o la frase completa.',answers:['quieren','ellos quieren aprender español.'],feedback:'Correcto. En “ellos”, querer cambia e → ie.'}
+      ];
+      let index=0;const progress=document.querySelector('[data-progress]'),type=document.querySelector('[data-type]'),prompt=document.querySelector('[data-prompt]'),instruction=document.querySelector('[data-instruction]'),input=document.querySelector('[data-answer]'),check=document.querySelector('[data-check]'),feedback=document.querySelector('[data-feedback]'),wrap=document.querySelector('.question-wrap'),done=document.querySelector('.done');
+      const clean=value=>value.trim().toLocaleLowerCase('es-ES').replace(/[.!?]+$/g,'').replace(/\s+/g,' ');
+      function render(){const item=items[index];progress.textContent=`Ejercicio ${index+1} de ${items.length}`;type.textContent=item.type;prompt.textContent=item.prompt;instruction.textContent=item.instruction;input.value='';input.disabled=false;check.disabled=false;feedback.className='feedback';feedback.textContent='Escribe tu respuesta.';input.focus()}
+      function answer(){const item=items[index],value=clean(input.value),correct=item.answers.some(answer=>clean(answer)===value);if(!value){feedback.className='feedback incorrect';feedback.textContent='Escribe una respuesta antes de comprobar.';return}input.disabled=true;check.disabled=true;feedback.className=`feedback ${correct?'correct':'incorrect'}`;feedback.textContent=correct?item.feedback:`Revisa la raíz y la persona. Una respuesta posible es “${item.answers[1]||item.answers[0]}”.`;setTimeout(()=>{if(correct){index++;if(index===items.length){wrap.hidden=true;done.hidden=false}else render()}else{input.disabled=false;check.disabled=false;input.focus()}},correct?900:0)}
+      check.addEventListener('click',answer);input.addEventListener('keydown',event=>{if(event.key==='Enter')answer()});document.querySelector('[data-repeat]').addEventListener('click',()=>{index=0;done.hidden=true;wrap.hidden=false;render()});render();
+    })();
+  </script>
+</body>
+</html>
