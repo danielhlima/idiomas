@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exercise 7.1 · El verbo ir</title>
+  <style>
+    :root { --red:#aa151b; --gold:#f1bf00; --ink:#172033; --muted:#667085; --paper:#fffdf8; --soft:#f4efe4; --line:rgba(23,32,51,.12); --green:#2d7a5b; --blue:#2d5ea8; --focus:rgba(45,94,168,.38); --font-scale:1; --shadow:0 12px 28px rgba(20,28,38,.1); --radius:8px; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:linear-gradient(135deg,#fff,var(--soft)); color:var(--ink); font-family:Arial,Helvetica,sans-serif; font-size:calc(1rem * var(--font-scale)); line-height:1.5; }
+    button,input { font:inherit; }
+    button { cursor:pointer; }
+    button:disabled { cursor:not-allowed; opacity:.55; }
+    [hidden] { display:none !important; }
+    main { margin:0 auto; max-width:960px; padding:28px 0 42px; width:min(92%,960px); }
+    header { border-bottom:2px solid rgba(170,21,27,.2); padding-bottom:16px; }
+    .course { color:var(--red); font-size:.8rem; font-weight:900; letter-spacing:.11em; text-transform:uppercase; }
+    h1,h2 { font-family:Georgia,"Times New Roman",serif; line-height:1.05; }
+    h1 { font-size:clamp(2rem,5vw,3.5rem); margin:10px 0 6px; }
+    h2 { font-size:clamp(1.6rem,4vw,2.4rem); margin:0 0 10px; }
+    .sub { color:var(--muted); font-weight:700; margin:0; }
+    .font-controls { align-items:center; display:flex; gap:8px; justify-content:flex-end; margin-top:14px; }
+    .font-controls button { background:#fff; border:1px solid var(--line); border-radius:5px; color:var(--ink); min-height:36px; min-width:42px; padding:6px 9px; }
+    .font-controls button[aria-pressed="true"] { background:var(--red); border-color:var(--red); color:#fff; font-weight:900; }
+    .font-controls button:focus-visible, .answer-row input:focus-visible, .answer-row button:focus-visible, .repeat:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
+    .shell { background:rgba(255,255,255,.96); border-left:5px solid var(--gold); box-shadow:var(--shadow); margin-top:20px; padding:clamp(22px,4vw,42px); }
+    .question-wrap { display:grid; gap:16px; }
+    .progress { color:var(--muted); font-weight:800; margin:0; }
+    .item-type { color:var(--red); font-size:.78rem; font-weight:900; letter-spacing:.11em; margin:0; text-transform:uppercase; }
+    .prompt { font-family:Georgia,"Times New Roman",serif; font-size:clamp(1.45rem,3.5vw,2.25rem); font-weight:700; line-height:1.2; margin:0; }
+    .instruction { color:var(--muted); font-weight:700; margin:0; }
+    .answer-row { display:flex; gap:12px; margin-top:4px; }
+    .answer-row input { background:#fff; border:1px solid var(--line); border-bottom:3px solid var(--blue); color:var(--ink); flex:1; min-width:0; padding:12px 14px; }
+    .answer-row input.is-correct { border-color:var(--green); background:#ecfdf3; }
+    .answer-row input.is-incorrect { border-color:var(--red); background:#fff1f0; }
+    .answer-row button,.repeat { background:var(--red); border:1px solid var(--red); color:#fff; font-weight:900; min-height:42px; padding:9px 16px; }
+    .feedback { background:var(--soft); line-height:1.4; margin:0; min-height:48px; padding:12px 14px; }
+    .feedback.correct { background:#ecfdf3; color:#17603f; }
+    .feedback.incorrect { background:#fff1f0; color:#8e1116; }
+    .done { text-align:center; }
+    .done p { color:var(--muted); font-weight:700; }
+    .result-summary { display:grid; gap:6px; margin:18px auto; max-width:30rem; text-align:left; }
+    .result-summary strong { color:var(--red); }
+    .review { border-top:1px solid var(--line); margin:20px 0 0; padding:18px 0 0; text-align:left; }
+    .review ol { display:grid; gap:10px; margin:12px 0 0; padding-left:24px; }
+    .review li { line-height:1.35; }
+    .review-answer { color:var(--green); display:block; font-weight:800; margin-top:3px; }
+    .repeat { margin-top:18px; }
+    @media(max-width:560px) { main { padding-top:18px; } .answer-row { display:grid; } .answer-row button { width:100%; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="course">Curso de Español · Lección 7 · Práctica</p>
+      <h1>Exercise 7.1 · El verbo ir</h1>
+      <p class="sub">Completa las siguientes frases con la forma correcta de ir.</p>
+      <div class="font-controls" aria-label="Controles de tamaño del texto">
+        <button type="button" data-font="small" aria-label="Reducir tamaño del texto">A−</button>
+        <button type="button" data-font="normal" aria-label="Tamaño normal del texto" aria-pressed="true">A</button>
+        <button type="button" data-font="large" aria-label="Aumentar tamaño del texto">A+</button>
+      </div>
+    </header>
+    <section class="shell">
+      <div class="question-wrap" data-question-wrap>
+        <p class="progress" data-progress aria-live="polite"></p>
+        <p class="item-type">Completa</p>
+        <p class="prompt" data-prompt></p>
+        <p class="instruction">Escribe la forma correcta y pulsa COMPROBAR.</p>
+        <div class="answer-row" data-answer-row></div>
+        <p class="feedback" data-feedback aria-live="polite">Escribe tu respuesta.</p>
+      </div>
+      <div class="done" data-done hidden>
+        <h2>¡Ejercicio terminado!</h2>
+        <div class="result-summary" data-summary></div>
+        <div class="review"><strong>Revisión de respuestas</strong><ol data-review></ol></div>
+        <button class="repeat" type="button" data-repeat>REPETIR EJERCICIO</button>
+      </div>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const BEST_SCORE_KEY = "workbook-leccion-07-ejercicio-07-01-best-score";
+      const items = [
+        { prompt: "El hombre y la mujer ______ al trabajo a las siete de la mañana.", answers: ["van"], feedback: "Correcto. Ellos → van." },
+        { prompt: "Nosotros ______ al cine los sábados.", answers: ["vamos"], feedback: "Correcto. Nosotros → vamos." },
+        { prompt: "¿Quiere Ud. ______ con nosotros?", answers: ["ir"], feedback: "Correcto. Después de “quiere”, usamos el infinitivo: ir." },
+        { prompt: "La estudiante ______ a la escuela los martes.", answers: ["va"], feedback: "Correcto. Ella → va." },
+        { prompt: "Los niños quieren ______ al circo porque quieren ver los elefantes.", answers: ["ir"], feedback: "Correcto. Después de “quieren”, usamos el infinitivo: ir." },
+        { prompt: "Yo ______ al gimnasio porque quiero hacer ejercicio.", answers: ["voy"], feedback: "Correcto. Yo → voy." },
+        { prompt: "¿______ tú al campo los fines de semana?", answers: ["vas"], feedback: "Correcto. Revisa la forma de tú: vas." },
+        { prompt: "Ernesto no quiere ______ a España pero Mariana sí quiere ______.", answers: ["ir", "ir"], feedback: "Correcto. Después de “quiere”, usamos el infinitivo: ir." }
+      ];
+      const progress = document.querySelector("[data-progress]");
+      const prompt = document.querySelector("[data-prompt]");
+      const answerRow = document.querySelector("[data-answer-row]");
+      const feedback = document.querySelector("[data-feedback]");
+      const wrap = document.querySelector("[data-question-wrap]");
+      const done = document.querySelector("[data-done]");
+      const summary = document.querySelector("[data-summary]");
+      const review = document.querySelector("[data-review]");
+      let index = 0;
+      let score = 0;
+      let errors = 0;
+      const responses = [];
+      const normalize = (value) => value.trim().toLocaleLowerCase("es-ES");
+      function render() {
+        const item = items[index];
+        progress.textContent = "Ejercicio " + (index + 1) + " de " + items.length;
+        prompt.textContent = item.prompt;
+        answerRow.replaceChildren();
+        item.answers.forEach((answer, answerIndex) => {
+          const input = document.createElement("input");
+          input.type = "text";
+          input.autocomplete = "off";
+          input.setAttribute("aria-label", item.answers.length === 1 ? "Tu respuesta" : "Respuesta " + (answerIndex + 1));
+          input.dataset.answerIndex = String(answerIndex);
+          answerRow.append(input);
+        });
+        const check = document.createElement("button");
+        check.type = "button";
+        check.textContent = "COMPROBAR";
+        check.dataset.check = "";
+        answerRow.append(check);
+        feedback.className = "feedback";
+        feedback.textContent = "Escribe tu respuesta.";
+        answerRow.querySelector("input").focus();
+        check.addEventListener("click", checkAnswer);
+        answerRow.querySelectorAll("input").forEach((input) => input.addEventListener("keydown", (event) => { if (event.key === "Enter") checkAnswer(); }));
+      }
+      function checkAnswer() {
+        const item = items[index];
+        const fields = Array.from(answerRow.querySelectorAll("input"));
+        const values = fields.map((field) => normalize(field.value));
+        if (values.some((value) => !value)) { errors += 1; feedback.className = "feedback incorrect"; feedback.textContent = "Completa todos los espacios antes de comprobar."; return; }
+        const correct = values.every((value, answerIndex) => value === normalize(item.answers[answerIndex]));
+        fields.forEach((field, answerIndex) => field.classList.add(values[answerIndex] === normalize(item.answers[answerIndex]) ? "is-correct" : "is-incorrect"));
+        if (!correct) { errors += 1; feedback.className = "feedback incorrect"; feedback.textContent = "Revisa la forma de ir. La respuesta correcta es: " + item.answers.join(" / ") + "."; return; }
+        score += 1;
+        fields.forEach((field) => { field.disabled = true; });
+        answerRow.querySelector("button").disabled = true;
+        feedback.className = "feedback correct";
+        feedback.textContent = item.feedback;
+        responses[index] = values;
+        window.setTimeout(() => { index += 1; if (index === items.length) finish(); else render(); }, 700);
+      }
+      function finish() {
+        wrap.hidden = true;
+        done.hidden = false;
+        const percentage = Math.round((score / (score + errors)) * 100);
+        const storedBest = Number(window.localStorage.getItem(BEST_SCORE_KEY) || 0);
+        const previousBest = storedBest <= items.length ? (storedBest ? 100 : 0) : storedBest;
+        if (percentage > previousBest) window.localStorage.setItem(BEST_SCORE_KEY, String(percentage));
+        summary.innerHTML = "<div><strong>Acertadas:</strong> " + score + " / " + items.length + "</div><div><strong>Errores:</strong> " + errors + "</div><div><strong>Resultado:</strong> " + percentage + "%</div><div><strong>Mejor resultado:</strong> " + Math.max(percentage, previousBest) + "%</div>";
+        review.replaceChildren();
+        items.forEach((item) => { const li = document.createElement("li"); li.textContent = item.prompt; const answer = document.createElement("span"); answer.className = "review-answer"; answer.textContent = "Respuesta: " + item.answers.join(" / "); li.append(answer); review.append(li); });
+      }
+      document.querySelectorAll("[data-font]").forEach((button) => button.addEventListener("click", () => { const size = button.dataset.font; document.documentElement.style.setProperty("--font-scale", size === "small" ? ".9" : size === "large" ? "1.16" : "1"); document.querySelectorAll("[data-font]").forEach((item) => item.setAttribute("aria-pressed", String(item === button))); }));
+      document.querySelector("[data-repeat]").addEventListener("click", () => { index = 0; score = 0; errors = 0; responses.length = 0; done.hidden = true; wrap.hidden = false; render(); });
+      render();
+    })();
+  </script>
+</body>
+</html>
