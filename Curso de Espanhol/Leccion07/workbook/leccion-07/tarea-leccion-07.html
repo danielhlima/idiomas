@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tarea para casa · Lección 7</title>
+  <style>
+    :root { --red:#aa151b; --gold:#f1bf00; --ink:#172033; --muted:#667085; --paper:#fffdf8; --soft:#f4efe4; --line:rgba(23,32,51,.12); --green:#2d7a5b; --blue:#2d5ea8; --focus:rgba(45,94,168,.38); --font-scale:1; --shadow:0 12px 28px rgba(20,28,38,.1); }
+    * { box-sizing:border-box; }
+    body { margin:0; background:linear-gradient(135deg,#fff,var(--soft)); color:var(--ink); font-family:Arial,Helvetica,sans-serif; font-size:calc(1rem * var(--font-scale)); line-height:1.5; }
+    button,input,textarea { font:inherit; } button { cursor:pointer; } button:disabled { cursor:not-allowed; opacity:.55; } [hidden] { display:none !important; }
+    main { margin:0 auto; max-width:980px; padding:28px 0 42px; width:min(92%,980px); } header { border-bottom:2px solid rgba(170,21,27,.2); padding-bottom:16px; }
+    .course { color:var(--red); font-size:.8rem; font-weight:900; letter-spacing:.11em; text-transform:uppercase; } h1,h2 { font-family:Georgia,"Times New Roman",serif; line-height:1.05; } h1 { font-size:clamp(2rem,5vw,3.5rem); margin:10px 0 6px; } h2 { font-size:clamp(1.6rem,4vw,2.4rem); margin:0 0 10px; } .sub { color:var(--muted); font-weight:700; margin:0; }
+    .font-controls { align-items:center; display:flex; gap:8px; justify-content:flex-end; margin-top:14px; } .font-controls button { background:#fff; border:1px solid var(--line); border-radius:5px; color:var(--ink); min-height:36px; min-width:42px; padding:6px 9px; } .font-controls button[aria-pressed="true"] { background:var(--red); border-color:var(--red); color:#fff; font-weight:900; }
+    .font-controls button:focus-visible,.answer-row input:focus-visible,.answer-row textarea:focus-visible,.answer-row button:focus-visible,.repeat:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
+    .shell { background:rgba(255,255,255,.96); border-left:5px solid var(--gold); box-shadow:var(--shadow); margin-top:20px; padding:clamp(22px,4vw,42px); } .question-wrap { display:grid; gap:16px; } .progress { color:var(--muted); font-weight:800; margin:0; } .item-type { color:var(--red); font-size:.78rem; font-weight:900; letter-spacing:.11em; margin:0; text-transform:uppercase; }
+    .prompt { font-family:Georgia,"Times New Roman",serif; font-size:clamp(1.3rem,3.2vw,2.05rem); font-weight:700; line-height:1.25; margin:0; } .instruction { color:var(--muted); font-weight:700; margin:0; } .answer-row { display:flex; gap:12px; margin-top:4px; } .answer-row input,.answer-row textarea { background:#fff; border:1px solid var(--line); border-bottom:3px solid var(--blue); color:var(--ink); flex:1; min-width:0; padding:12px 14px; } .answer-row textarea { min-height:8rem; resize:vertical; }
+    .answer-row input.is-correct,.answer-row textarea.is-correct { background:#ecfdf3; border-color:var(--green); } .answer-row input.is-incorrect,.answer-row textarea.is-incorrect { background:#fff1f0; border-color:var(--red); } .answer-row button,.repeat { background:var(--red); border:1px solid var(--red); color:#fff; font-weight:900; min-height:42px; padding:9px 16px; }
+    .feedback { background:var(--soft); line-height:1.4; margin:0; min-height:48px; padding:12px 14px; } .feedback.correct { background:#ecfdf3; color:#17603f; } .feedback.incorrect { background:#fff1f0; color:#8e1116; } .done { text-align:center; } .result-summary { display:grid; gap:8px; margin:18px auto; max-width:32rem; text-align:left; } .result-summary strong { color:var(--red); } .repeat { margin-top:18px; }
+    @media(max-width:560px) { main { padding-top:18px; } .answer-row { display:grid; } .answer-row button { width:100%; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="course">Curso de Español · Lección 7 · Tarea</p>
+      <h1>Tarea para casa</h1>
+      <p class="sub">Practica el verbo ir, “ir a + infinitivo” y los verbos que ya conoces.</p>
+      <div class="font-controls" aria-label="Controles de tamaño del texto"><button type="button" data-font="small" aria-label="Reducir tamaño del texto">A−</button><button type="button" data-font="normal" aria-label="Tamaño normal del texto" aria-pressed="true">A</button><button type="button" data-font="large" aria-label="Aumentar tamaño del texto">A+</button></div>
+    </header>
+    <section class="shell">
+      <div class="question-wrap" data-question-wrap>
+        <p class="progress" data-progress aria-live="polite"></p><p class="item-type" data-item-type></p><p class="prompt" data-prompt></p><p class="instruction" data-instruction></p><div class="answer-row" data-answer-row></div><p class="feedback" data-feedback aria-live="polite">Escribe tu respuesta.</p>
+      </div>
+      <div class="done" data-done hidden><h2>¡Tarea terminada!</h2><div class="result-summary" data-summary></div><button class="repeat" type="button" data-repeat>REPETIR EJERCICIO</button></div>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const items = [
+        { prompt: "Yo ______ al banco los sábados.", answers: ["voy"], type: "Completa" },
+        { prompt: "Mañana nosotros ______ a estudiar en casa.", answers: ["vamos"], type: "Completa" },
+        { prompt: "¿______ tú al cine los viernes?", answers: ["vas"], type: "Completa" },
+        { prompt: "Esta noche Marta ______ a ______ una película. (ver)", answers: ["va", "ver"], type: "Completa" },
+        { prompt: "Ellos ______ a la playa en verano.", answers: ["van"], type: "Completa" },
+        { prompt: "¿Quién ______ a salir primero? (sair)", answers: ["va"], type: "Completa" },
+        { prompt: "Los sábados yo ______ al supermercado.", answers: ["voy"], type: "Ir literal" },
+        { prompt: "Esta noche Marta ______ a ______ una película. (ver)", answers: ["va", "ver"], type: "Plan" },
+        { prompt: "Yo no ______ a trabajar mañana. (trabalhar)", answers: ["voy"], type: "Negativa" },
+        { prompt: "Quiero ______ contigo.", answers: ["ir"], type: "Infinitivo" },
+        { prompt: "¿Adónde ______ Uds. después de la clase?", answers: ["van"], type: "Pregunta" },
+        { prompt: "Nosotros ______ a Chile en julio.", answers: ["vamos"], type: "Ir literal" },
+        { prompt: "Pedro ______ al centro y después ______ a ______ a casa. (voltar)", answers: ["va", "va", "volver"], type: "Completa" },
+        { prompt: "Transforma en negativa: Carlos va a salir esta noche.", answers: ["carlos no va a salir esta noche."], type: "Transforma" },
+        { prompt: "Tú vas a viajar mañana. — Transforma en pregunta.", answers: ["¿vas a viajar mañana?"], acceptedAnswers: ["¿vas a viajar mañana?", "¿tú vas a viajar mañana?", "¿vas tú a viajar mañana?"], type: "Transforma" },
+        { prompt: "Completa: ¿Qué ______ a hacer este fin de semana?", answers: ["vas"], acceptedAnswers: ["vas", "va", "voy", "vamos", "van"], type: "Pregunta" },
+        { prompt: "Puedo ______ contigo mañana. (trabalhar)", answers: ["trabajar"], type: "Infinitivo" },
+        { prompt: "Prefiero ______ en casa esta noche. (descansar)", answers: ["descansar"], type: "Infinitivo" },
+        { prompt: "Mañana yo ______ a ______ la cena. (preparar)", answers: ["voy", "preparar"], type: "Plan" },
+        { prompt: "Escribe una frase sobre algo que vas a hacer mañana.", open: true, model: "Modelo posible: Mañana voy a estudiar." , type: "Producción" },
+        { prompt: "Yo ______ hablar con Ana sobre el plan. (querer)", answers: ["quiero"], type: "Querer" },
+        { prompt: "Ella ______ en sus planes antes de responder. (pensar)", answers: ["piensa"], type: "Pensar" },
+        { prompt: "Nosotros no ______ la pregunta. (entender)", answers: ["entendemos"], type: "Entender" },
+        { prompt: "Yo ______ descansar después del trabajo. (preferir)", answers: ["prefiero"], type: "Preferir" },
+        { prompt: "Carlos ______ salir a las cinco. (poder)", answers: ["puede"], type: "Poder" },
+        { prompt: "La niña ______ ocho horas. (dormir)", answers: ["duerme"], type: "Dormir" },
+        { prompt: "Nosotros ______ a casa después de la cena. (voltar)", answers: ["volvemos"], type: "Volver" },
+        { prompt: "Ellos ______ juntos al mediodía. (almoçar)", answers: ["almuerzan"], type: "Almorzar" },
+        { prompt: "Ud. ______ ayuda cuando la necesita. (pedir)", answers: ["pide"], type: "Pedir" },
+        { prompt: "Nosotros ______ una reunión el lunes. (ter)", answers: ["tenemos"], type: "Tener" },
+        { prompt: "Cambia la persona: Yo voy a estudiar. → nosotros", answers: ["nosotros vamos a estudiar."], acceptedAnswers: ["nosotros vamos a estudiar.", "vamos a estudiar."], type: "Cambia la persona" },
+        { prompt: "Cambia a la forma negativa: Carlos va a salir esta noche.", answers: ["carlos no va a salir esta noche."], acceptedAnswers: ["carlos no va a salir esta noche.", "no va a salir esta noche."], type: "Negativa" },
+        { prompt: "Escribe una pregunta: Tú vas a trabajar mañana.", answers: ["¿vas a trabajar mañana?"], acceptedAnswers: ["¿vas a trabajar mañana?", "¿tú vas a trabajar mañana?", "¿vas tú a trabajar mañana?"], type: "Pregunta" },
+        { prompt: "Corrige el error: Nosotros vamos a trabajamos mañana.", answers: ["nosotros vamos a trabajar mañana."], type: "Corrige" },
+        { prompt: "Reconstruye la frase: a / mañana / voy / viajar", answers: ["voy a viajar mañana."], acceptedAnswers: ["voy a viajar mañana.", "mañana voy a viajar."], type: "Reconstruye" },
+        { prompt: "Escribe una frase con “ir a + infinitivo”.", open: true, model: "Modelo posible: Voy a cocinar esta noche.", type: "Producción" },
+        { prompt: "Escribe qué vas a hacer este fin de semana.", open: true, model: "Modelo posible: Este fin de semana voy a descansar.", type: "Producción" },
+        { prompt: "Escribe una pregunta con “vas a”.", open: true, model: "Modelo posible: ¿Vas a estudiar mañana?", type: "Producción" },
+        { prompt: "Reformula en negativa: Quiero ir al parque.", answers: ["no quiero ir al parque."], type: "Reformula" },
+        { prompt: "Escribe dos frases: una con ir a + infinitivo y otra con ir + lugar.", open: true, model: "Modelo posible: Voy a estudiar. Después voy al banco.", type: "Producción" }
+      ];
+      const progress = document.querySelector("[data-progress]"), itemType = document.querySelector("[data-item-type]"), prompt = document.querySelector("[data-prompt]"), instruction = document.querySelector("[data-instruction]"), answerRow = document.querySelector("[data-answer-row]"), feedback = document.querySelector("[data-feedback]"), wrap = document.querySelector("[data-question-wrap]"), done = document.querySelector("[data-done]"), summary = document.querySelector("[data-summary]");
+      let index = 0, completed = 0, errors = 0, attempts = 0;
+      const normalize = (value) => value.trim().toLocaleLowerCase("es-ES").replace(/[¿?¡!.,;:]+/g, "").replace(/\s+/g, " ");
+      function render() {
+        const item = items[index]; progress.textContent = "Ejercicio " + (index + 1) + " de " + items.length; itemType.textContent = item.type; prompt.textContent = item.prompt; instruction.textContent = item.open ? "Escribe tu respuesta y pulsa COMPROBAR. Después, compara con el modelo." : "Escribe la respuesta y pulsa COMPROBAR."; answerRow.replaceChildren();
+        const fieldCount = item.open ? 1 : item.answers.length;
+        for (let i = 0; i < fieldCount; i += 1) { const field = document.createElement(item.open ? "textarea" : "input"); field.type = item.open ? undefined : "text"; field.autocomplete = "off"; field.setAttribute("aria-label", fieldCount === 1 ? "Tu respuesta" : "Respuesta " + (i + 1)); field.dataset.answerIndex = String(i); answerRow.append(field); }
+        const check = document.createElement("button"); check.type = "button"; check.textContent = "COMPROBAR"; answerRow.append(check); feedback.className = "feedback"; feedback.textContent = "Escribe tu respuesta."; answerRow.querySelector("textarea, input").focus(); check.addEventListener("click", checkAnswer); answerRow.querySelectorAll("textarea, input").forEach((field) => field.addEventListener("keydown", (event) => { if (event.key === "Enter" && event.target.tagName !== "TEXTAREA") checkAnswer(); }));
+      }
+      function checkAnswer() {
+        const item = items[index], fields = Array.from(answerRow.querySelectorAll("textarea, input")), values = fields.map((field) => normalize(field.value)); attempts += 1;
+        if (values.some((value) => !value)) { errors += 1; feedback.className = "feedback incorrect"; feedback.textContent = "Completa la respuesta antes de comprobar."; return; }
+        if (item.open) { completed += 1; fields.forEach((field) => { field.disabled = true; field.classList.add("is-correct"); }); answerRow.querySelector("button").disabled = true; feedback.className = "feedback correct"; feedback.textContent = item.model; window.setTimeout(nextItem, 650); return; }
+        const accepted = item.answers.map(normalize); const wholeAnswerAccepted = item.acceptedAnswers && fields.length === 1 && item.acceptedAnswers.map(normalize).includes(values[0]); const correct = wholeAnswerAccepted || (values.length === accepted.length && values.every((value, answerIndex) => accepted[answerIndex] === value));
+        fields.forEach((field, answerIndex) => field.classList.add(correct || accepted[answerIndex] === values[answerIndex] ? "is-correct" : "is-incorrect"));
+        if (!correct) { errors += 1; feedback.className = "feedback incorrect"; feedback.textContent = "Revisa la respuesta y vuelve a intentarlo."; return; }
+        completed += 1; fields.forEach((field) => { field.disabled = true; }); answerRow.querySelector("button").disabled = true; feedback.className = "feedback correct"; feedback.textContent = "Correcto. Continúa cuando estés listo."; window.setTimeout(nextItem, 650);
+      }
+      function nextItem() { index += 1; if (index === items.length) finish(); else render(); }
+      function finish() { wrap.hidden = true; done.hidden = false; const precision = Math.round((completed / attempts) * 1000) / 10; summary.innerHTML = "<div><strong>Ejercicios completados:</strong> " + completed + " / " + items.length + "</div><div><strong>Errores cometidos:</strong> " + errors + "</div><div><strong>Intentos totales:</strong> " + attempts + "</div><div><strong>Precisión:</strong> " + precision.toLocaleString("es-ES") + "%</div>"; }
+      document.querySelectorAll("[data-font]").forEach((button) => button.addEventListener("click", () => { const size = button.dataset.font; document.documentElement.style.setProperty("--font-scale", size === "small" ? ".9" : size === "large" ? "1.16" : "1"); document.querySelectorAll("[data-font]").forEach((item) => item.setAttribute("aria-pressed", String(item === button))); }));
+      document.querySelector("[data-repeat]").addEventListener("click", () => { index = 0; completed = 0; errors = 0; attempts = 0; done.hidden = true; wrap.hidden = false; render(); }); render();
+    })();
+  </script>
+</body>
+</html>
