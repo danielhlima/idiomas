@@ -4057,17 +4057,24 @@
       width: min(100%, 9rem);
     }
 
+    .darius-time .busy-gap {
+      min-width: 0;
+      width: 100%;
+    }
+
     .preposition-input {
       min-width: 4rem;
       text-align: center;
       width: 4.2rem;
     }
 
+    .busy-gap.is-correct,
     .preposition-input.is-correct {
       background: rgba(44, 138, 99, 0.14);
       border-color: #2c8a63;
     }
 
+    .busy-gap.is-incorrect,
     .preposition-input.is-incorrect {
       background: rgba(193, 63, 63, 0.12);
       border-color: #c13f3f;
@@ -4085,6 +4092,21 @@
     }
 
     .preposition-listening audio {
+      width: 100%;
+    }
+
+    .darius-listening {
+      align-items: center;
+      background: rgba(44, 138, 99, 0.1);
+      border: 1px solid rgba(44, 138, 99, 0.25);
+      border-radius: var(--radius-sm);
+      display: grid;
+      gap: 0.52rem;
+      grid-template-columns: auto minmax(0, 1fr);
+      padding: 0.52rem;
+    }
+
+    .darius-listening audio {
       width: 100%;
     }
 
@@ -5827,7 +5849,8 @@
       .typical-day-bank,
       .typical-day-talk,
       .typical-day-question-grid,
-      .preposition-listening {
+      .preposition-listening,
+      .darius-listening {
         grid-template-columns: 1fr;
       }
 
@@ -6984,7 +7007,7 @@
           <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="1" aria-valuenow="1">
             <span></span>
           </div>
-          <p class="slide-count" data-slide-count>Slide 1 / 18</p>
+          <p class="slide-count" data-slide-count>Slide 1 / 17</p>
         </footer>
       </section>
 
@@ -7047,7 +7070,7 @@
           <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="2" aria-valuenow="2">
             <span></span>
           </div>
-          <p class="slide-count" data-slide-count>Slide 2 / 18</p>
+          <p class="slide-count" data-slide-count>Slide 2 / 17</p>
         </footer>
       </section>
 
@@ -7135,7 +7158,7 @@
           <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="3" aria-valuenow="3">
             <span></span>
           </div>
-          <p class="slide-count" data-slide-count>Slide 3 / 18</p>
+          <p class="slide-count" data-slide-count>Slide 3 / 17</p>
         </footer>
       </section>
 
@@ -7268,7 +7291,7 @@
           <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="4" aria-valuenow="4">
             <span></span>
           </div>
-          <p class="slide-count" data-slide-count>Slide 4 / 18</p>
+          <p class="slide-count" data-slide-count>Slide 4 / 17</p>
         </footer>
       </section>
 
@@ -7442,7 +7465,7 @@
           <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="5" aria-valuenow="5">
             <span></span>
           </div>
-          <p class="slide-count" data-slide-count>Slide 5 / 18</p>
+          <p class="slide-count" data-slide-count>Slide 5 / 17</p>
         </footer>
       </section>
 
@@ -7523,7 +7546,7 @@
           <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="6" aria-valuenow="6">
             <span></span>
           </div>
-          <p class="slide-count" data-slide-count>Slide 6 / 18</p>
+          <p class="slide-count" data-slide-count>Slide 6 / 17</p>
         </footer>
       </section>
 
@@ -7630,7 +7653,7 @@
           <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="7" aria-valuenow="7">
             <span></span>
           </div>
-          <p class="slide-count" data-slide-count>Slide 7 / 18</p>
+          <p class="slide-count" data-slide-count>Slide 7 / 17</p>
         </footer>
       </section>
 
@@ -7724,8 +7747,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="8"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 8 / 18</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="8"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 8 / 17</p>
         </footer>
       </section>
 
@@ -7804,8 +7827,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="9"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 9 / 18</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="9"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 9 / 17</p>
         </footer>
       </section>
 
@@ -7870,8 +7893,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="10"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 10 / 18</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="10"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 10 / 17</p>
         </footer>
       </section>
 
@@ -7937,30 +7960,39 @@
                 </ol>
               </section>
 
-              <section class="darius-day-card" aria-labelledby="darius-day-title">
+              <section class="darius-day-card" data-darius-practice aria-labelledby="darius-day-title">
                 <p class="activity-eyebrow">Listening</p>
                 <h3 id="darius-day-title">Listen to Darius, Marjan&#39;s 17-year-old son, talking about his day. Complete gaps 1-12.</h3>
+                <div class="darius-listening">
+                  <span class="audio-pill">4.11 Listen</span>
+                  <audio controls preload="metadata" src="assets/audio/lesson-5-slide-11-darius-day.mp3"></audio>
+                </div>
                 <div class="busy-lives-title">
                   <span>...and son</span>
                 </div>
                 <div class="darius-day">
                   <section class="darius-section">
                     <h4>Morning</h4>
-                    <div class="darius-row"><span class="darius-time">1 7.30</span><p>He gets up. He has breakfast and then he goes to school by Tube.</p></div>
-                    <div class="darius-row"><span class="darius-time">8.20</span><p><strong>2</strong> He <input class="busy-gap" aria-label="Gap 2"> to school.</p></div>
-                    <div class="darius-row"><span class="darius-time">9.00</span><p>Lessons start. <strong>3</strong> He has <input class="busy-gap" aria-label="Gap 3 first answer"> or <input class="busy-gap" aria-label="Gap 3 second answer"> lessons before lunch.</p></div>
+                    <div class="darius-row"><span class="darius-time"><input class="busy-gap" data-darius-answers="7:30|7.30" aria-label="Gap 1"></span><p>He gets up. He has breakfast and then he goes to school by Tube.</p></div>
+                    <div class="darius-row"><span class="darius-time">8:20</span><p>He <input class="busy-gap" data-darius-answers="goes" aria-label="Gap 2"> to school.</p></div>
+                    <div class="darius-row"><span class="darius-time">9:00</span><p>Lessons start. He has <input class="busy-gap" data-darius-answers="four|4" aria-label="Gap 3 first answer"> or <input class="busy-gap" data-darius-answers="five|5" aria-label="Gap 3 second answer"> lessons before lunch.</p></div>
                   </section>
                   <section class="darius-section">
                     <h4>Afternoon</h4>
-                    <div class="darius-row"><span class="darius-time">1.00</span><p>He has lunch at <strong>4</strong> <input class="busy-gap" aria-label="Gap 4">.</p></div>
-                    <div class="darius-row"><span class="darius-time"><strong>5</strong> <input class="busy-gap" aria-label="Gap 5"></span><p>He starts lessons again.</p></div>
-                    <div class="darius-row"><span class="darius-time">4.15</span><p>He finishes school. He doesn&#39;t <strong>6</strong> <input class="busy-gap" aria-label="Gap 6"> then. He studies in the library or plays music. On Tuesdays, he <strong>7</strong> <input class="busy-gap" aria-label="Gap 7"> in the school choir and on <strong>8</strong> <input class="busy-gap" aria-label="Gap 8"> he <strong>9</strong> <input class="busy-gap" aria-label="Gap 9"> percussion in the school orchestra.</p></div>
+                    <div class="darius-row"><span class="darius-time">1:00</span><p>He has lunch at <input class="busy-gap" data-darius-answers="school" aria-label="Gap 4">.</p></div>
+                    <div class="darius-row"><span class="darius-time"><input class="busy-gap" data-darius-answers="1:45|1.45" aria-label="Gap 5"></span><p>He starts lessons again.</p></div>
+                    <div class="darius-row"><span class="darius-time">4:15</span><p>He finishes school. He doesn&#39;t <input class="busy-gap" data-darius-answers="go home" aria-label="Gap 6"> then. He studies in the library or plays music. On Tuesdays, he <input class="busy-gap" data-darius-answers="sings" aria-label="Gap 7"> in the school choir and on <input class="busy-gap" data-darius-answers="thursdays" aria-label="Gap 8"> he <input class="busy-gap" data-darius-answers="plays" aria-label="Gap 9"> percussion in the school orchestra.</p></div>
                   </section>
                   <section class="darius-section">
                     <h4>Evening</h4>
-                    <div class="darius-row"><span class="darius-time">6.00</span><p>He gets home. <strong>10</strong> He <input class="busy-gap" aria-label="Gap 10 first answer"> a <input class="busy-gap" aria-label="Gap 10 second answer"> and then has dinner. After dinner, he does homework for <strong>11</strong> <input class="busy-gap" aria-label="Gap 11 first answer"> or <input class="busy-gap" aria-label="Gap 11 second answer"> hours.</p></div>
-                    <div class="darius-row"><span class="darius-time"><strong>12</strong> <input class="busy-gap" aria-label="Gap 12"></span><p>He goes to bed.</p></div>
+                    <div class="darius-row"><span class="darius-time">6:00</span><p>He gets home. He <input class="busy-gap" data-darius-answers="have" aria-label="Gap 10 first answer"> a <input class="busy-gap" data-darius-answers="shower" aria-label="Gap 10 second answer"> and then has dinner. After dinner, he does homework for <input class="busy-gap" data-darius-answers="two|2" aria-label="Gap 11 first answer"> or <input class="busy-gap" data-darius-answers="three|3" aria-label="Gap 11 second answer"> hours.</p></div>
+                    <div class="darius-row"><span class="darius-time"><input class="busy-gap" data-darius-answers="10:30|10.30" aria-label="Gap 12"></span><p>He goes to bed.</p></div>
                   </section>
+                </div>
+                <div class="preposition-actions darius-actions">
+                  <button class="family-reasoning-button" type="button" data-darius-check>CHECK ANSWERS</button>
+                  <button class="family-reasoning-button secondary" type="button" data-darius-view-answers>VIEW ANSWERS</button>
+                  <p class="preposition-feedback" data-darius-feedback aria-live="polite"></p>
                 </div>
                 <p>What do Marjan and Darius have in common? Who do you think is more tired in the evening?</p>
               </section>
@@ -8041,8 +8073,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="11"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 11 / 18</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="11"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 11 / 17</p>
         </footer>
       </section>
 
@@ -8175,8 +8207,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="12"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 12 / 18</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="12"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 12 / 17</p>
         </footer>
       </section>
 
@@ -8275,8 +8307,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="13"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 13 / 18</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="13"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 13 / 17</p>
         </footer>
       </section>
 
@@ -8351,41 +8383,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="14"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 14 / 18</p>
-        </footer>
-      </section>
-
-      <section class="slide frequency-position-slide" id="slide-frequency-position" data-slide aria-labelledby="slide-frequency-position-title" tabindex="-1" hidden>
-        <header class="slide-header">
-          <p class="slide-kicker">Lesson 5 &middot; Grammar Reference</p>
-          <h2 id="slide-frequency-position-title">Position of Adverbs &amp; Frequency Expressions</h2>
-        </header>
-
-        <div class="slide-content" data-no-slide-advance>
-          <div class="frequency-position-layout">
-            <section class="frequency-position-examples" aria-labelledby="frequency-position-examples-title">
-              <p class="activity-eyebrow">Listen</p>
-              <h3 id="frequency-position-examples-title">Examples</h3>
-              <div class="frequency-example-group"><strong>1</strong><p>I <mark>always</mark> watch TV in the evening.</p><p>Do you <mark>usually</mark> sleep eight hours a day?</p><p>She <mark>sometimes</mark> does sport.</p><p>She doesn't <mark>often</mark> go to bed late.</p></div>
-              <div class="frequency-example-group"><strong>2</strong><p>They're <mark>hardly ever</mark> late.</p><p>He isn't <mark>often</mark> stressed.</p><p>Are you <mark>usually</mark> in this classroom?</p></div>
-              <div class="frequency-example-group"><strong>3</strong><p>I have English classes <mark>twice a week</mark>.</p><p>She doesn't work <mark>every day</mark>.</p></div>
-              <div class="frequency-audio-strip"><span class="audio-pill">4.20</span><audio controls preload="metadata" src="assets/audio/lesson-5-slide-15-frequency-position.mp3"></audio></div>
-            </section>
-
-            <section class="frequency-position-rules" aria-labelledby="frequency-position-rules-title">
-              <p class="activity-eyebrow">Grammar</p>
-              <h3 id="frequency-position-rules-title">How frequency words work</h3>
-              <article class="frequency-rule-group"><h4>1</h4><p>We use adverbs and expressions of frequency to say <strong>how often</strong> you do something.</p><p><em>How often do you cook?</em> &nbsp; <em>I cook every evening.</em></p><ul><li>Adverbs of frequency go <mark>before</mark> the main verb.</li><li>In negative sentences, the adverb of frequency goes between <em>don't / doesn't</em> and the verb.</li></ul></article>
-              <article class="frequency-rule-group"><h4>2</h4><p>Adverbs of frequency go <mark>after</mark> <strong>be</strong> in positive and negative sentences.</p><p>In questions with <strong>be</strong>, the adverb of frequency goes after the subject.</p><div class="frequency-rule-note">Use a positive verb with <strong>hardly ever</strong> and <strong>never</strong>:<br>He's <strong>never</strong> stressed. &nbsp; <strong>NOT</strong> <s>He isn't never stressed.</s></div></article>
-              <article class="frequency-rule-group"><h4>3</h4><p>Expressions of frequency usually go at the <mark>end</mark> of a sentence or verb phrase.</p></article>
-            </section>
-          </div>
-        </div>
-
-        <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="15"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 15 / 18</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="14"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 14 / 17</p>
         </footer>
       </section>
 
@@ -8464,8 +8463,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="16"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 16 / 18</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="15"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 15 / 17</p>
         </footer>
       </section>
 
@@ -8491,8 +8490,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="17"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 17 / 18</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="16"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 16 / 17</p>
         </footer>
       </section>
 
@@ -8513,8 +8512,8 @@
         </div>
 
         <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="18"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 18 / 18</p>
+          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="17" aria-valuenow="17"><span></span></div>
+          <p class="slide-count" data-slide-count>Slide 17 / 17</p>
         </footer>
       </section>
     </main>
@@ -9533,6 +9532,108 @@
       };
     })(window);
 
+    (function attachDariusPractice(window) {
+      "use strict";
+
+      var Utils = window.CourseUtils;
+
+      window.createDariusPractice = function createDariusPractice(root) {
+        var slide = Utils.query("[data-darius-practice]", root);
+        var inputs;
+        var checkButton;
+        var viewAnswersButton;
+        var feedback;
+        var navigationKeys = [" ", "Spacebar", "Enter", "ArrowRight", "ArrowLeft", "PageDown", "PageUp", "Home", "End"];
+
+        if (!slide || slide.dataset.dariusPracticeReady === "true") {
+          return;
+        }
+
+        slide.dataset.dariusPracticeReady = "true";
+        inputs = Utils.queryAll("[data-darius-answers]", slide);
+        checkButton = Utils.query("[data-darius-check]", slide);
+        viewAnswersButton = Utils.query("[data-darius-view-answers]", slide);
+        feedback = Utils.query("[data-darius-feedback]", slide);
+
+        function normalize(value) {
+          return String(value || "")
+            .toLowerCase()
+            .trim()
+            .replace(/\s+/g, " ")
+            .replace(/\./g, ":");
+        }
+
+        function clearState(input) {
+          input.classList.remove("is-correct", "is-incorrect");
+          input.removeAttribute("aria-invalid");
+        }
+
+        function stopNavigationKey(event) {
+          if (navigationKeys.indexOf(event.key) >= 0) {
+            event.stopPropagation();
+          }
+        }
+
+        inputs.forEach(function bindInput(input) {
+          input.addEventListener("input", function onInput() {
+            clearState(input);
+            if (feedback) {
+              feedback.textContent = "";
+              feedback.classList.remove("is-complete");
+            }
+          });
+          input.addEventListener("keydown", stopNavigationKey);
+        });
+
+        if (checkButton) {
+          checkButton.addEventListener("click", function onCheck(event) {
+            var correctCount = 0;
+            event.stopPropagation();
+
+            inputs.forEach(function checkInput(input) {
+              var answers = input.dataset.dariusAnswers.split("|").map(normalize);
+              var isCorrect = answers.indexOf(normalize(input.value)) >= 0;
+              input.classList.toggle("is-correct", isCorrect);
+              input.classList.toggle("is-incorrect", !isCorrect);
+              input.setAttribute("aria-invalid", String(!isCorrect));
+              if (isCorrect) {
+                correctCount += 1;
+              }
+            });
+
+            if (feedback) {
+              feedback.textContent = correctCount + " / " + inputs.length + " correct";
+              feedback.classList.toggle("is-complete", correctCount === inputs.length);
+            }
+          });
+          checkButton.addEventListener("keydown", stopNavigationKey);
+        }
+
+        if (viewAnswersButton) {
+          viewAnswersButton.addEventListener("click", function onViewAnswers(event) {
+            event.stopPropagation();
+
+            inputs.forEach(function showAnswer(input) {
+              input.value = input.dataset.dariusAnswers.split("|")[0];
+              input.classList.remove("is-incorrect");
+              input.classList.add("is-correct");
+              input.setAttribute("aria-invalid", "false");
+            });
+
+            if (feedback) {
+              feedback.textContent = "Answers shown";
+              feedback.classList.add("is-complete");
+            }
+          });
+          viewAnswersButton.addEventListener("keydown", stopNavigationKey);
+        }
+
+        Utils.queryAll("audio", slide).forEach(function bindAudio(audio) {
+          audio.addEventListener("keydown", stopNavigationKey);
+        });
+      };
+    })(window);
+
     (function attachPrepositionPractice(window) {
       "use strict";
 
@@ -10285,6 +10386,7 @@
         window.createFamilyReview(root);
         window.createLostFound(root);
         window.createRoutineMatch(root);
+        window.createDariusPractice(root);
         window.createPrepositionPractice(root);
         window.createPrepConsolidation(root);
         window.createFrequencyPractice(root);
