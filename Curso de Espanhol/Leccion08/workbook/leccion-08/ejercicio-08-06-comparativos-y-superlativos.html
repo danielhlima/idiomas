@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Exercise 8.6 de comparativos y superlativos.">
+  <title>Exercise 8.6 · Comparativos y superlativos</title>
+  <style>
+    :root { --red:#aa151b; --gold:#f1bf00; --ink:#172033; --muted:#667085; --paper:#fffdf8; --soft:#f4efe4; --line:rgba(23,32,51,.12); --green:#2d7a5b; --blue:#2d5ea8; --focus:rgba(45,94,168,.38); --font-scale:1; --shadow:0 12px 28px rgba(20,28,38,.1); }
+    * { box-sizing:border-box; }
+    body { margin:0; background:linear-gradient(135deg,#fff,var(--soft)); color:var(--ink); font-family:Arial,Helvetica,sans-serif; font-size:calc(1rem * var(--font-scale)); line-height:1.5; }
+    button,input { font:inherit; }
+    button { cursor:pointer; }
+    button:disabled { cursor:not-allowed; opacity:.58; }
+    [hidden] { display:none !important; }
+    .sr-only { height:1px; margin:-1px; overflow:hidden; padding:0; position:absolute; width:1px; clip:rect(0,0,0,0); white-space:nowrap; }
+    main { margin:0 auto; max-width:1000px; padding:28px 0 42px; width:min(92%,1000px); }
+    header { border-bottom:2px solid rgba(170,21,27,.2); padding-bottom:16px; }
+    .course { color:var(--red); font-size:.8rem; font-weight:900; letter-spacing:.11em; text-transform:uppercase; }
+    h1,h2 { font-family:Georgia,"Times New Roman",serif; line-height:1.05; }
+    h1 { font-size:clamp(2rem,5vw,3.5rem); margin:10px 0 6px; }
+    h2 { font-size:clamp(1.6rem,4vw,2.4rem); margin:0 0 10px; }
+    .sub { color:var(--muted); font-weight:700; margin:0; }
+    .font-controls { align-items:center; display:flex; gap:8px; justify-content:flex-end; margin-top:14px; }
+    .font-controls button { background:#fff; border:1px solid var(--line); border-radius:5px; color:var(--ink); min-height:40px; min-width:44px; padding:6px 9px; }
+    .font-controls button[aria-pressed="true"] { background:var(--red); border-color:var(--red); color:#fff; font-weight:900; }
+    .font-controls button:focus-visible,.prompt input:focus-visible,.answer-form button:focus-visible,.repeat:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
+    .shell { background:rgba(255,255,255,.96); border-left:5px solid var(--gold); box-shadow:var(--shadow); margin-top:20px; padding:clamp(20px,4vw,38px); }
+    .question-wrap { display:grid; gap:15px; }
+    .progress { color:var(--muted); font-weight:800; margin:0; }
+    .progress-track { background:var(--soft); border-radius:999px; height:10px; overflow:hidden; }
+    .progress-track span { background:linear-gradient(90deg,var(--red),var(--gold)); display:block; height:100%; transition:width .2s ease; width:0; }
+    .item-type { color:var(--red); font-size:.78rem; font-weight:900; letter-spacing:.11em; margin:0; text-transform:uppercase; }
+    .instruction { color:var(--muted); font-weight:700; margin:0; }
+    .prompt { align-items:baseline; column-gap:.18em; display:flex; flex-wrap:wrap; font-family:Georgia,"Times New Roman",serif; font-size:clamp(1.25rem,3vw,1.85rem); font-weight:700; line-height:1.5; margin:0; row-gap:.42em; }
+    .prompt input { background:#fff; border:1px solid var(--line); border-bottom:3px solid var(--blue); border-radius:3px; color:var(--ink); font-family:Arial,Helvetica,sans-serif; font-size:.68em; font-weight:700; min-height:2.15em; min-width:5.2em; max-width:min(15ch,100%); padding:.18em .3em; text-align:center; }
+    .prompt input.is-correct { background:#ecfdf3; border-color:var(--green); }
+    .prompt input.is-incorrect { background:#fff1f0; border-color:var(--red); }
+    .prompt input:disabled { color:var(--ink); opacity:1; }
+    .clue { background:var(--soft); border-left:4px solid var(--gold); color:var(--ink); font-weight:800; margin:0; padding:10px 13px; }
+    .answer-form { display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; }
+    .answer-form button,.repeat { background:var(--red); border:1px solid var(--red); color:#fff; font-weight:900; min-height:46px; padding:9px 16px; }
+    .answer-form [data-show-answer] { background:#fff; color:var(--red); }
+    .feedback { background:var(--soft); line-height:1.4; margin:0; min-height:48px; padding:12px 14px; }
+    .feedback.correct { background:#ecfdf3; color:#17603f; }
+    .feedback.incorrect { background:#fff1f0; color:#8e1116; }
+    .done { text-align:center; }
+    .done > p { color:var(--muted); font-weight:700; }
+    .result-summary { display:grid; gap:8px; margin:18px auto; max-width:36rem; text-align:left; }
+    .result-summary p { border-bottom:1px solid var(--line); margin:0; padding:8px 0; }
+    .result-summary strong { color:var(--red); }
+    .performance { color:var(--muted); font-weight:800; }
+    .repeat { margin-top:10px; }
+    @media(max-width:560px) { main { padding-top:18px; } .prompt { column-gap:.12em; } .prompt input { min-width:4.5em; } .answer-form { display:grid; } .answer-form button { width:100%; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="course">Curso de Español · Lección 8 · Práctica</p>
+      <h1>Exercise 8.6 · Comparativos y superlativos</h1>
+      <p class="sub">Completa las siguientes frases usando las palabras indicadas entre paréntesis.</p>
+      <div class="font-controls" role="group" aria-label="Controles de tamaño del texto">
+        <button type="button" data-font="small" aria-label="Reducir tamaño del texto" aria-pressed="false">A−</button>
+        <button type="button" data-font="normal" aria-label="Tamaño normal del texto" aria-pressed="true">A</button>
+        <button type="button" data-font="large" aria-label="Aumentar tamaño del texto" aria-pressed="false">A+</button>
+      </div>
+    </header>
+    <section class="shell" aria-label="Ejercicio de comparativos y superlativos">
+      <div class="question-wrap" data-question-wrap>
+        <p class="progress" data-progress aria-live="polite"></p>
+        <div class="progress-track" role="progressbar" data-exercise-progress aria-label="Progreso del ejercicio" aria-valuemin="0" aria-valuemax="30" aria-valuenow="0"><span></span></div>
+        <p class="item-type">Completa</p>
+        <p class="instruction">Escribe todas las respuestas. Debes acertar cada espacio para avanzar.</p>
+        <div class="prompt" data-prompt aria-label="Frase para completar"></div>
+        <p class="clue" data-clue lang="pt-BR"></p>
+        <form class="answer-form" data-answer-form novalidate>
+          <button type="button" data-show-answer>VER RESPUESTA</button>
+          <button type="submit" data-submit>COMPROBAR</button>
+        </form>
+        <p class="feedback" id="answer-feedback" data-feedback aria-live="polite">Completa la frase y comprueba tu respuesta.</p>
+      </div>
+      <div class="done" data-done hidden>
+        <h2>¡Ejercicio terminado!</h2>
+        <p class="performance" data-performance></p>
+        <div class="result-summary" data-summary aria-live="polite"></div>
+        <button class="repeat" type="button" data-repeat>REPETIR EJERCICIO</button>
+      </div>
+    </section>
+  </main>
+  <script>
+    (() => {
+      "use strict";
+      const BEST_SCORE_KEY = "workbook-leccion-08-ejercicio-08-06-best-precision";
+      const items = [
+        { sentence: "Esta película es buena; es ______ de todas.", clue: "(a melhor)", answers: ["la mejor"], hints: ["Revisa el artículo y la forma superlativa."] },
+        { sentence: "Su carro es caro, pero no es ______ como mi carro.", clue: "(tão caro)", answers: ["tan caro"], hints: ["Recuerda: tan + adjetivo + como."] },
+        { sentence: "El apartamento de María es ______ del edificio.", clue: "(o maior)", answers: ["el más grande"], hints: ["Revisa el artículo y la estructura del superlativo."] },
+        { sentence: "Nuestra clase de matemáticas es ______ que la clase de historia.", clue: "(mais interessante)", answers: ["más interesante"], hints: ["Compara una característica: más + adjetivo + que."] },
+        { sentence: "Uds. tienen ______ exámenes como nosotros.", clue: "(tantos quanto)", answers: ["tantos"], hints: ["Recuerda: tanto concuerda con el sustantivo."] },
+        { sentence: "Su casa es ______ que mi apartamento.", clue: "(menor)", answers: ["más pequeña"], hints: ["Revisa el género del adjetivo y la forma indicada para comparar el tamaño."] },
+        { sentence: "Ella es ______ que él, pero él no es el estudiante ______ de la clase.", clue: "(mais alta / o mais alto)", answers: ["más alta", "más alto"], hints: ["Revisa género y concordancia con «ella».", "Revisa género y concordancia con «el estudiante»."] },
+        { sentence: "Estas películas son ______ que los programas de televisión.", clue: "(mais emocionantes)", answers: ["más emocionantes"], hints: ["Revisa el número del adjetivo: «películas» está en plural."] },
+        { sentence: "Mi hermana ______ está ______ que mi hermano ______.", clue: "(mais nova / mais feliz / mais velho)", answers: ["menor", "más contenta", "mayor"], hints: ["Aquí se compara la edad de personas. Revisa la forma para edad.", "Revisa género y concordancia con «mi hermana».", "Aquí se compara la edad de personas. Revisa la forma para edad."] },
+        { sentence: "Las calles son ______ que las avenidas.", clue: "(menos largas / menos amplas)", answers: ["menos anchas"], hints: ["Revisa el adjetivo de anchura y la estructura menos + adjetivo + que."] },
+        { sentence: "¿Piensa Ud. que los caballos son ______ como los perros?", clue: "(tão inteligentes)", answers: ["tan inteligentes"], hints: ["Recuerda: tan + adjetivo + como. Revisa el plural."] },
+        { sentence: "Esa casa roja es ______ que la casa amarilla.", clue: "(mais velha)", answers: ["más vieja"], hints: ["Para comparar la antigüedad de objetos, revisa el comparativo regular y el género."] },
+        { sentence: "Yo leo ______ tú.", clue: "(mais que)", answers: ["más que"], hints: ["Aquí se comparan acciones: verbo + más que."] },
+        { sentence: "Él sabe ______ nosotros.", clue: "(menos que)", answers: ["menos que"], hints: ["Aquí se comparan acciones: verbo + menos que."] },
+        { sentence: "Ellos viven en el sitio ______ del país.", clue: "(mais bonito)", answers: ["más bello"], hints: ["Revisa la estructura del superlativo y el adjetivo indicado."] },
+        { sentence: "Este restaurante sirve ______ comida de la ciudad.", clue: "(a melhor)", answers: ["la mejor"], hints: ["«Bueno» tiene una forma superlativa irregular. Revisa el artículo de «comida»."] },
+        { sentence: "Pienso que Mónica es ______ que Martina.", clue: "(mais velha)", answers: ["mayor"], hints: ["Aquí se compara la edad de dos personas."] },
+        { sentence: "Anita tiene dos años. Ella es ______ de su familia.", clue: "(a mais nova)", answers: ["la menor"], hints: ["Aquí se compara la edad. Revisa el artículo y la forma superlativa."] },
+        { sentence: "La comida hindú es ______ que la comida china.", clue: "(mais picante)", answers: ["más picante"], hints: ["Revisa la estructura más + adjetivo + que."] },
+        { sentence: "El baño está ______ que el comedor.", clue: "(mais limpo)", answers: ["más limpio"], hints: ["Revisa género y concordancia con «el baño»."] },
+        { sentence: "Somos ______ que nuestros vecinos.", clue: "(mais carinhosos)", answers: ["más cariñosos"], hints: ["Revisa género y número del adjetivo."] },
+        { sentence: "¿Quién es ______ político de los Estados Unidos? ¿Quién es ______?", clue: "(o melhor / o pior)", answers: ["el mejor", "el peor"], hints: ["«Bueno» tiene una forma comparativa irregular. Revisa el artículo.", "«Malo» tiene una forma comparativa irregular. Revisa el artículo."] },
+        { sentence: "Isabel piensa que el sol es ______ que la luna. Ramón piensa que la luna es ______.", clue: "(mais importante)", answers: ["más importante", "más importante"], hints: ["Revisa la forma comparativa del adjetivo.", "Revisa la forma comparativa del adjetivo."] },
+        { sentence: "Estoy ______ que ellos.", clue: "(mais triste)", answers: ["más triste"], hints: ["Revisa la estructura más + adjetivo + que."] },
+        { sentence: "Los padres están ______ que sus hijos.", clue: "(mais cansados)", answers: ["más cansados"], hints: ["Revisa el número del adjetivo: «los padres» está en plural."] },
+        { sentence: "Ella tiene ______ energía como sus estudiantes.", clue: "(tanta quanto)", answers: ["tanta"], hints: ["Recuerda: tanto concuerda con el sustantivo. Revisa el género de «energía»."] },
+        { sentence: "Las muchachas juegan ______ deportes como los muchachos.", clue: "(tantos quanto)", answers: ["tantos"], hints: ["Recuerda: tanto concuerda con el sustantivo. Revisa el número de «deportes»."] },
+        { sentence: "Ellas cantan ______ que sus hermanos.", clue: "(melhor)", answers: ["mejor"], hints: ["Aquí se comparan acciones. Revisa la forma irregular de «bueno»."] },
+        { sentence: "Vendo ______ cigarrillos que compro.", clue: "(menos)", answers: ["menos"], hints: ["Aquí se compara una cantidad de sustantivos."] },
+        { sentence: "Ellos ganan ______ dinero que Pedro.", clue: "(mais)", answers: ["más"], hints: ["Aquí se compara una cantidad de sustantivos."] }
+      ];
+      const progress = document.querySelector("[data-progress]");
+      const progressBar = document.querySelector("[data-exercise-progress]");
+      const prompt = document.querySelector("[data-prompt]");
+      const clue = document.querySelector("[data-clue]");
+      const form = document.querySelector("[data-answer-form]");
+      const showAnswerButton = document.querySelector("[data-show-answer]");
+      const submitButton = document.querySelector("[data-submit]");
+      const feedback = document.querySelector("[data-feedback]");
+      const wrap = document.querySelector("[data-question-wrap]");
+      const done = document.querySelector("[data-done]");
+      const summary = document.querySelector("[data-summary]");
+      const performance = document.querySelector("[data-performance]");
+      let index = 0;
+      let errors = 0;
+      let attempts = 0;
+      let completed = 0;
+      let accepted = false;
+
+      function normalize(value) { return value.trim().toLocaleLowerCase("es-ES"); }
+      function updateProgress() {
+        progress.textContent = "Ejercicio " + (index + 1) + " de " + items.length + " · Completados: " + completed + " de " + items.length;
+        progressBar.setAttribute("aria-valuemax", String(items.length));
+        progressBar.setAttribute("aria-valuenow", String(completed));
+        progressBar.firstElementChild.style.width = ((completed / items.length) * 100) + "%";
+      }
+      function clearGapFeedback(event) {
+        if (accepted || event.currentTarget.disabled) return;
+        event.currentTarget.classList.remove("is-correct", "is-incorrect");
+        event.currentTarget.removeAttribute("aria-invalid");
+        feedback.textContent = "Respuesta actualizada. Pulsa COMPROBAR.";
+        feedback.className = "feedback";
+      }
+      function render() {
+        const item = items[index];
+        updateProgress();
+        prompt.replaceChildren();
+        const fragments = item.sentence.split("______");
+        fragments.forEach((fragment, gapIndex) => {
+          if (fragment) prompt.append(document.createTextNode(fragment));
+          if (gapIndex < item.answers.length) {
+            const input = document.createElement("input");
+            input.type = "text";
+            input.autocomplete = "off";
+            input.autocapitalize = "none";
+            input.spellcheck = false;
+            input.placeholder = "______";
+            input.style.width = Math.max(5.5, Math.min(15, item.answers[gapIndex].length + 1)) + "ch";
+            input.dataset.gapIndex = String(gapIndex);
+            input.setAttribute("aria-label", item.answers.length > 1 ? "Respuesta " + (gapIndex + 1) + " de " + item.answers.length : "Respuesta");
+            input.setAttribute("aria-describedby", "answer-feedback");
+            input.addEventListener("input", clearGapFeedback);
+            prompt.append(input);
+          }
+        });
+        clue.textContent = item.clue;
+        accepted = false;
+        showAnswerButton.disabled = false;
+        submitButton.textContent = "COMPROBAR";
+        feedback.textContent = "Completa la frase y comprueba tu respuesta.";
+        feedback.className = "feedback";
+      }
+      function feedbackForError(item, inputs, results) {
+        const missingIndex = inputs.findIndex((input, gapIndex) => !input.disabled && !input.value.trim());
+        if (missingIndex >= 0) return "Completa la respuesta " + (missingIndex + 1) + " antes de continuar. " + item.hints[missingIndex];
+        const incorrectIndex = results.findIndex((isCorrect) => !isCorrect);
+        if (incorrectIndex >= 0 && inputs.length > 1) return "La respuesta " + (incorrectIndex + 1) + " necesita revisión. " + item.hints[incorrectIndex];
+        return item.hints[incorrectIndex] || "Revisa la estructura, la concordancia y la palabra de comparación.";
+      }
+      function showSummary() {
+        const precision = attempts ? Math.round((completed / attempts) * 100) : 0;
+        let bestPrecision = 0;
+        try { bestPrecision = Number(localStorage.getItem(BEST_SCORE_KEY)) || 0; } catch (error) { bestPrecision = 0; }
+        bestPrecision = Math.max(bestPrecision, precision);
+        try { localStorage.setItem(BEST_SCORE_KEY, String(bestPrecision)); } catch (error) { /* El ejercicio funciona aunque el almacenamiento no esté disponible. */ }
+        const rows = [
+          ["Ejercicios completados", completed + " / " + items.length],
+          ["Errores cometidos", String(errors)],
+          ["Intentos totales", String(attempts)],
+          ["Precisión", precision + "%"],
+          ["Mejor precisión", bestPrecision + "%"]
+        ];
+        summary.replaceChildren(...rows.map(([label, value]) => {
+          const row = document.createElement("p");
+          const strong = document.createElement("strong");
+          strong.textContent = label + ": ";
+          row.append(strong, document.createTextNode(value));
+          return row;
+        }));
+        performance.textContent = precision >= 90 ? "Desempeño excelente." : precision >= 70 ? "Buen trabajo. Sigue practicando." : "Sigue practicando para mejorar tu precisión.";
+        wrap.hidden = true;
+        done.hidden = false;
+        document.querySelector("[data-repeat]").focus();
+      }
+      showAnswerButton.addEventListener("click", () => {
+        if (accepted) return;
+        const inputs = Array.from(prompt.querySelectorAll("input"));
+        inputs.forEach((input, gapIndex) => {
+          if (input.disabled) return;
+          input.value = items[index].answers[gapIndex];
+          input.classList.remove("is-correct", "is-incorrect");
+          input.removeAttribute("aria-invalid");
+        });
+        feedback.textContent = inputs.length > 1 ? "Respuestas mostradas. Pulsa COMPROBAR para validarlas." : "Respuesta mostrada. Pulsa COMPROBAR para validarla.";
+        feedback.className = "feedback";
+        submitButton.focus();
+      });
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (accepted) {
+          if (index === items.length - 1) showSummary();
+          else { index += 1; render(); prompt.querySelector("input").focus(); }
+          return;
+        }
+        attempts += 1;
+        const item = items[index];
+        const inputs = Array.from(prompt.querySelectorAll("input"));
+        const results = inputs.map((input, gapIndex) => normalize(input.value) === normalize(item.answers[gapIndex]));
+        inputs.forEach((input, gapIndex) => {
+          if (input.disabled) return;
+          input.classList.toggle("is-correct", results[gapIndex]);
+          input.classList.toggle("is-incorrect", !results[gapIndex]);
+          input.setAttribute("aria-invalid", String(!results[gapIndex]));
+          if (results[gapIndex]) input.disabled = true;
+        });
+        if (results.every(Boolean)) {
+          completed += 1;
+          updateProgress();
+          accepted = true;
+          showAnswerButton.disabled = true;
+          feedback.textContent = "Correcto. Ahora puedes continuar.";
+          feedback.className = "feedback correct";
+          submitButton.textContent = index === items.length - 1 ? "VER RESULTADOS" : "SIGUIENTE";
+          return;
+        }
+        errors += 1;
+        feedback.textContent = feedbackForError(item, inputs, results);
+        feedback.className = "feedback incorrect";
+        const firstIncorrect = results.findIndex((isCorrect, gapIndex) => !isCorrect && !inputs[gapIndex].disabled);
+        if (inputs[firstIncorrect]) inputs[firstIncorrect].focus();
+      });
+      document.querySelector("[data-repeat]").addEventListener("click", () => {
+        index = 0;
+        errors = 0;
+        attempts = 0;
+        completed = 0;
+        accepted = false;
+        done.hidden = true;
+        wrap.hidden = false;
+        render();
+        prompt.querySelector("input").focus();
+      });
+      document.querySelectorAll("[data-font]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const size = button.dataset.font;
+          document.documentElement.style.setProperty("--font-scale", size === "small" ? ".9" : size === "large" ? "1.16" : "1");
+          document.querySelectorAll("[data-font]").forEach((control) => control.setAttribute("aria-pressed", String(control === button)));
+        });
+      });
+      render();
+    })();
+  </script>
+</body>
+</html>
