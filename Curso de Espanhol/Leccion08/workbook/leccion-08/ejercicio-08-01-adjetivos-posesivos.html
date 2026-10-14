@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ejercicio 8.1 de adjetivos posesivos.">
+  <title>Ejercicio 8.1 · Adjetivos posesivos</title>
+  <style>
+    :root { --red:#aa151b; --gold:#f1bf00; --ink:#172033; --muted:#667085; --paper:#fffdf8; --soft:#f4efe4; --line:rgba(23,32,51,.12); --green:#2d7a5b; --blue:#2d5ea8; --focus:rgba(45,94,168,.38); --font-scale:1; --shadow:0 12px 28px rgba(20,28,38,.1); }
+    * { box-sizing:border-box; }
+    body { margin:0; background:linear-gradient(135deg,#fff,var(--soft)); color:var(--ink); font-family:Arial,Helvetica,sans-serif; font-size:calc(1rem * var(--font-scale)); line-height:1.5; }
+    button,input { font:inherit; }
+    button { cursor:pointer; }
+    button:disabled { cursor:not-allowed; opacity:.55; }
+    [hidden] { display:none !important; }
+    .sr-only { height:1px; margin:-1px; overflow:hidden; padding:0; position:absolute; width:1px; clip:rect(0,0,0,0); white-space:nowrap; }
+    main { margin:0 auto; max-width:960px; padding:28px 0 42px; width:min(92%,960px); }
+    header { border-bottom:2px solid rgba(170,21,27,.2); padding-bottom:16px; }
+    .course { color:var(--red); font-size:.8rem; font-weight:900; letter-spacing:.11em; text-transform:uppercase; }
+    h1,h2 { font-family:Georgia,"Times New Roman",serif; line-height:1.05; }
+    h1 { font-size:clamp(2rem,5vw,3.5rem); margin:10px 0 6px; }
+    h2 { font-size:clamp(1.6rem,4vw,2.4rem); margin:0 0 10px; }
+    .sub { color:var(--muted); font-weight:700; margin:0; }
+    .font-controls { align-items:center; display:flex; gap:8px; justify-content:flex-end; margin-top:14px; }
+    .font-controls button { background:#fff; border:1px solid var(--line); border-radius:5px; color:var(--ink); min-height:40px; min-width:44px; padding:6px 9px; }
+    .font-controls button[aria-pressed="true"] { background:var(--red); border-color:var(--red); color:#fff; font-weight:900; }
+    .font-controls button:focus-visible, .answer-row input:focus-visible, .answer-row button:focus-visible, .repeat:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
+    .shell { background:rgba(255,255,255,.96); border-left:5px solid var(--gold); box-shadow:var(--shadow); margin-top:20px; padding:clamp(22px,4vw,42px); }
+    .question-wrap { display:grid; gap:16px; }
+    .progress { color:var(--muted); font-weight:800; margin:0; }
+    .progress-track { background:var(--soft); border-radius:999px; height:10px; overflow:hidden; }
+    .progress-track span { background:linear-gradient(90deg,var(--red),var(--gold)); display:block; height:100%; transition:width .2s ease; width:0; }
+    .item-type { color:var(--red); font-size:.78rem; font-weight:900; letter-spacing:.11em; margin:0; text-transform:uppercase; }
+    .prompt { font-family:Georgia,"Times New Roman",serif; font-size:clamp(1.45rem,3.5vw,2.25rem); font-weight:700; line-height:1.2; margin:0; }
+    .instruction { color:var(--muted); font-weight:700; margin:0; }
+    .word-bank { background:var(--soft); border-left:4px solid var(--gold); margin:0; padding:12px 14px; }
+    .answer-row { display:flex; gap:12px; margin-top:4px; }
+    .answer-row input { background:#fff; border:1px solid var(--line); border-bottom:3px solid var(--blue); color:var(--ink); flex:1; min-height:48px; min-width:0; padding:12px 14px; }
+    .answer-row input.is-correct { border-color:var(--green); background:#ecfdf3; }
+    .answer-row input.is-incorrect { border-color:var(--red); background:#fff1f0; }
+    .answer-row button,.repeat { background:var(--red); border:1px solid var(--red); color:#fff; font-weight:900; min-height:48px; padding:9px 16px; }
+    .answer-row [data-show-answer] { background:#fff; color:var(--red); }
+    .feedback { background:var(--soft); line-height:1.4; margin:0; min-height:48px; padding:12px 14px; }
+    .feedback.correct { background:#ecfdf3; color:#17603f; }
+    .feedback.incorrect { background:#fff1f0; color:#8e1116; }
+    .done { text-align:center; }
+    .done > p { color:var(--muted); font-weight:700; }
+    .result-summary { display:grid; gap:8px; margin:18px auto; max-width:30rem; text-align:left; }
+    .result-summary p { border-bottom:1px solid var(--line); margin:0; padding:8px 0; }
+    .result-summary strong { color:var(--red); }
+    .repeat { margin-top:10px; }
+    @media(max-width:560px) { main { padding-top:18px; } .answer-row { display:grid; } .answer-row button { width:100%; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="course">Curso de Español · Lección 8 · Práctica</p>
+      <h1>Ejercicio 8.1 · Adjetivos posesivos</h1>
+      <p class="sub">Completa las frases usando mi, mis, tu, tus, su, sus, nuestro, nuestros, nuestra o nuestras.</p>
+      <div class="font-controls" role="group" aria-label="Controles de tamaño del texto">
+        <button type="button" data-font="small" aria-label="Reducir tamaño del texto" aria-pressed="false">A−</button>
+        <button type="button" data-font="normal" aria-label="Tamaño normal del texto" aria-pressed="true">A</button>
+        <button type="button" data-font="large" aria-label="Aumentar tamaño del texto" aria-pressed="false">A+</button>
+      </div>
+    </header>
+    <section class="shell" aria-label="Actividad de completar frases">
+      <div class="question-wrap" data-question-wrap>
+        <p class="progress" data-progress aria-live="polite"></p>
+        <div class="progress-track" role="progressbar" data-exercise-progress aria-label="Progreso del ejercicio" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0"><span></span></div>
+        <p class="item-type">Completa</p>
+        <p class="prompt" data-prompt></p>
+        <p class="instruction">Escribe una respuesta y pulsa COMPROBAR. Debes acertar para continuar.</p>
+        <p class="word-bank" id="word-bank">Banco de palabras: mi · mis · tu · tus · su · sus · nuestro · nuestra · nuestros · nuestras</p>
+        <form class="answer-row" data-answer-form novalidate>
+          <label class="sr-only" for="answer-input">Adjetivo posesivo</label>
+          <input id="answer-input" name="respuesta" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="answer-feedback word-bank" required>
+          <button type="button" data-show-answer>VER RESPUESTA</button>
+          <button type="submit" data-submit>COMPROBAR</button>
+        </form>
+        <p class="feedback" id="answer-feedback" data-feedback aria-live="polite">Escribe tu respuesta.</p>
+      </div>
+      <div class="done" data-done hidden>
+        <h2>¡Ejercicio terminado!</h2>
+        <p>Resumen de este intento:</p>
+        <div class="result-summary" data-summary aria-live="polite"></div>
+        <button class="repeat" type="button" data-repeat>REPETIR EJERCICIO</button>
+      </div>
+    </section>
+  </main>
+  <script>
+    (() => {
+      "use strict";
+      const items = [
+        { prompt: "Soy estudiante; ______ libros están en la mesa.", answer: "mis", hint: "Revisa el número del sustantivo." },
+        { prompt: "Él es un profesor excelente; ______ ideas son interesantes.", answer: "sus", hint: "Recuerda: el posesivo concuerda con la cosa poseída." },
+        { prompt: "Ellos son abogados; ______ clientes pueden ser culpables o inocentes.", answer: "sus", hint: "¿El sustantivo es singular o plural?" },
+        { prompt: "Nuestro hermano es profesor; ______ padres enseñan también.", answer: "nuestros", hint: "Con nosotros, revisa género y número." },
+        { prompt: "Ella es mi abuela; ______ casa está en Florida.", answer: "su", hint: "Recuerda: el posesivo concuerda con la cosa poseída." },
+        { prompt: "El cuñado de Cecilia es carpintero; ______ nombre es Manuel.", answer: "su", hint: "¿El sustantivo es singular o plural?" },
+        { prompt: "Uds. son estudiantes; ______ libros son nuevos.", answer: "sus", hint: "Revisa el número del sustantivo." },
+        { prompt: "Liliana está en Texas; ______ hermanas están en Arizona.", answer: "sus", hint: "Recuerda: el posesivo concuerda con la cosa poseída." },
+        { prompt: "Vivo con cuatro amigos y dos gatos; ______ casa es grande.", answer: "nuestra", hint: "Con nosotros, revisa género y número." },
+        { prompt: "Somos principiantes; ______ tarea no es fácil.", answer: "nuestra", hint: "Recuerda: el posesivo concuerda con la cosa poseída." },
+        { prompt: "Mis primos escriben libros; ______ trabajo es interesante.", answer: "su", hint: "¿El sustantivo es singular o plural?" },
+        { prompt: "La hija de Beatriz es doctora; ______ hijo es arquitecto.", answer: "su", hint: "Recuerda: el posesivo concuerda con la cosa poseída." }
+      ];
+      const progress = document.querySelector("[data-progress]");
+      const progressBar = document.querySelector("[data-exercise-progress]");
+      const prompt = document.querySelector("[data-prompt]");
+      const form = document.querySelector("[data-answer-form]");
+      const input = document.querySelector("#answer-input");
+      const submitButton = document.querySelector("[data-submit]");
+      const showAnswerButton = document.querySelector("[data-show-answer]");
+      const feedback = document.querySelector("[data-feedback]");
+      const wrap = document.querySelector("[data-question-wrap]");
+      const done = document.querySelector("[data-done]");
+      const summary = document.querySelector("[data-summary]");
+      let index = 0;
+      let errors = 0;
+      let attempts = 0;
+      let completed = 0;
+      let accepted = false;
+
+      function render() {
+        const item = items[index];
+        progress.textContent = "Frase " + (index + 1) + " de " + items.length + " · Completadas: " + completed + " de " + items.length;
+        progressBar.setAttribute("aria-valuemax", String(items.length));
+        progressBar.setAttribute("aria-valuenow", String(completed));
+        progressBar.firstElementChild.style.width = ((completed / items.length) * 100) + "%";
+        prompt.textContent = item.prompt;
+        input.value = "";
+        input.disabled = false;
+        input.removeAttribute("aria-invalid");
+        input.classList.remove("is-correct", "is-incorrect");
+        accepted = false;
+        showAnswerButton.disabled = false;
+        submitButton.textContent = "COMPROBAR";
+        feedback.textContent = "Escribe tu respuesta.";
+        feedback.className = "feedback";
+        input.focus();
+      }
+      function showSummary() {
+        const precision = attempts ? Math.round((completed / attempts) * 100) : 0;
+        const rows = [
+          ["Ejercicios completados", completed + " / " + items.length],
+          ["Errores cometidos", String(errors)],
+          ["Intentos totales", String(attempts)],
+          ["Precisión", precision + "%"]
+        ];
+        summary.replaceChildren(...rows.map(([label, value]) => {
+          const row = document.createElement("p");
+          const strong = document.createElement("strong");
+          strong.textContent = label + ": ";
+          row.append(strong, document.createTextNode(value));
+          return row;
+        }));
+        wrap.hidden = true;
+        done.hidden = false;
+        document.querySelector("[data-repeat]").focus();
+      }
+      showAnswerButton.addEventListener("click", () => {
+        if (accepted) return;
+        input.value = items[index].answer;
+        input.classList.remove("is-incorrect");
+        input.removeAttribute("aria-invalid");
+        feedback.textContent = "Respuesta mostrada. Pulsa COMPROBAR para validarla.";
+        feedback.className = "feedback";
+        submitButton.focus();
+      });
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (accepted) {
+          if (index === items.length - 1) showSummary();
+          else { index += 1; render(); }
+          return;
+        }
+        attempts += 1;
+        const response = input.value.trim().toLocaleLowerCase("es-ES");
+        if (response && response === items[index].answer) {
+          completed += 1;
+          progressBar.setAttribute("aria-valuenow", String(completed));
+          progressBar.firstElementChild.style.width = ((completed / items.length) * 100) + "%";
+          accepted = true;
+          input.disabled = true;
+          showAnswerButton.disabled = true;
+          input.classList.remove("is-incorrect");
+          input.classList.add("is-correct");
+          input.setAttribute("aria-invalid", "false");
+          feedback.textContent = "Correcto. El posesivo concuerda con la cosa poseída.";
+          feedback.className = "feedback correct";
+          submitButton.textContent = index === items.length - 1 ? "VER ESTADÍSTICAS" : "SIGUIENTE";
+          return;
+        }
+        errors += 1;
+        input.classList.remove("is-correct");
+        input.classList.add("is-incorrect");
+        input.setAttribute("aria-invalid", "true");
+        feedback.textContent = response ? items[index].hint : "Escribe una respuesta antes de comprobar.";
+        feedback.className = "feedback incorrect";
+        input.focus();
+      });
+      input.addEventListener("input", () => {
+        if (accepted) return;
+        input.classList.remove("is-incorrect");
+        input.removeAttribute("aria-invalid");
+        feedback.textContent = "Escribe tu respuesta.";
+        feedback.className = "feedback";
+      });
+      document.querySelector("[data-repeat]").addEventListener("click", () => {
+        index = 0;
+        errors = 0;
+        attempts = 0;
+        completed = 0;
+        done.hidden = true;
+        wrap.hidden = false;
+        render();
+      });
+      document.querySelectorAll("[data-font]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const size = button.dataset.font;
+          document.documentElement.style.setProperty("--font-scale", size === "small" ? ".9" : size === "large" ? "1.16" : "1");
+          document.querySelectorAll("[data-font]").forEach((control) => control.setAttribute("aria-pressed", String(control === button)));
+        });
+      });
+      render();
+    })();
+  </script>
+</body>
+</html>

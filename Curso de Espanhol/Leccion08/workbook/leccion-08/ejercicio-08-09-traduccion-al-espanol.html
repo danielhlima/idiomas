@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Traduce 18 frases al español y compara tus respuestas con modelos posibles.">
+  <title>Ejercicio 8.9 · Traducción al español</title>
+  <style>
+    :root { --red:#aa151b; --gold:#f1bf00; --ink:#172033; --muted:#667085; --paper:#fffdf8; --soft:#f4efe4; --line:rgba(23,32,51,.12); --green:#2d7a5b; --blue:#2d5ea8; --focus:rgba(45,94,168,.38); --font-scale:1; --shadow:0 12px 28px rgba(20,28,38,.1); }
+    * { box-sizing:border-box; }
+    body { margin:0; background:linear-gradient(135deg,#fff,var(--soft)); color:var(--ink); font-family:Arial,Helvetica,sans-serif; font-size:calc(1rem * var(--font-scale)); line-height:1.5; }
+    button,textarea { font:inherit; }
+    button { cursor:pointer; }
+    button:disabled { cursor:not-allowed; opacity:.55; }
+    [hidden] { display:none !important; }
+    main { margin:0 auto; max-width:1000px; padding:28px 0 42px; width:min(92%,1000px); }
+    header { border-bottom:2px solid rgba(170,21,27,.2); padding-bottom:16px; }
+    .course { color:var(--red); font-size:.8rem; font-weight:900; letter-spacing:.11em; text-transform:uppercase; }
+    h1,h2 { font-family:Georgia,"Times New Roman",serif; line-height:1.05; }
+    h1 { font-size:clamp(2rem,5vw,3.5rem); margin:10px 0 6px; }
+    h2 { font-size:clamp(1.6rem,4vw,2.4rem); margin:0 0 10px; }
+    .sub { color:var(--muted); font-weight:700; margin:0; }
+    .font-controls { align-items:center; display:flex; gap:8px; justify-content:flex-end; margin-top:14px; }
+    .font-controls button { background:#fff; border:1px solid var(--line); border-radius:5px; color:var(--ink); min-height:40px; min-width:44px; padding:6px 9px; }
+    .font-controls button[aria-pressed="true"] { background:var(--red); border-color:var(--red); color:#fff; font-weight:900; }
+    .font-controls button:focus-visible,textarea:focus-visible,.actions button:focus-visible,.repeat:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
+    .shell { background:rgba(255,255,255,.96); border-left:5px solid var(--gold); box-shadow:var(--shadow); margin-top:20px; padding:clamp(22px,4vw,42px); }
+    .question-wrap { display:grid; gap:16px; }
+    .progress { color:var(--muted); font-weight:800; margin:0; }
+    .progress-track { background:var(--soft); border-radius:999px; height:10px; overflow:hidden; }
+    .progress-track span { background:linear-gradient(90deg,var(--red),var(--gold)); display:block; height:100%; transition:width .2s ease; width:0; }
+    .instruction { color:var(--muted); font-weight:700; margin:0; }
+    .source { background:var(--soft); border-left:5px solid var(--blue); font-family:Georgia,"Times New Roman",serif; font-size:clamp(1.4rem,3vw,2rem); font-weight:700; line-height:1.3; margin:0; padding:clamp(18px,3vw,28px); }
+    .answer-label { color:var(--ink); display:block; font-weight:900; margin:0 0 7px; }
+    textarea { background:#fff; border:1px solid var(--line); border-bottom:3px solid var(--blue); border-radius:4px; color:var(--ink); line-height:1.45; min-height:8.5rem; padding:12px 14px; resize:vertical; width:100%; }
+    textarea:disabled { background:#f8f8f7; color:var(--ink); }
+    .actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; }
+    .actions button,.repeat { background:var(--red); border:1px solid var(--red); color:#fff; font-weight:900; line-height:1.1; min-height:44px; padding:10px 15px; }
+    .actions [data-reveal] { background:#fff; color:var(--red); }
+    .feedback { background:var(--soft); line-height:1.4; margin:0; min-height:48px; padding:12px 14px; }
+    .feedback.info { background:#eef4fc; color:#21497f; }
+    .feedback.ready { background:#ecfdf3; color:#17603f; }
+    .reference { background:#ecfdf3; border-left:5px solid var(--green); display:grid; gap:8px; padding:16px 18px; }
+    .reference-label { color:#17603f; font-size:.78rem; font-weight:900; letter-spacing:.08em; margin:0; text-transform:uppercase; }
+    .reference-answer { color:var(--ink); font-family:Georgia,"Times New Roman",serif; font-size:clamp(1.2rem,2.5vw,1.65rem); font-weight:700; line-height:1.4; margin:0; }
+    .reference-note { color:#17603f; font-size:.95rem; font-weight:700; line-height:1.4; margin:0; }
+    .navigation { display:flex; justify-content:flex-end; }
+    .navigation button { background:#fff; border:1px solid var(--line); border-radius:4px; color:var(--red); font-weight:900; min-height:42px; padding:9px 15px; }
+    .done { text-align:center; }
+    .done > p { color:var(--muted); font-weight:700; }
+    .result-summary { display:grid; gap:8px; margin:18px auto; max-width:38rem; text-align:left; }
+    .result-summary p { border-bottom:1px solid var(--line); margin:0; padding:8px 0; }
+    .result-summary strong { color:var(--red); }
+    .result-note { background:var(--soft); line-height:1.45; margin:16px 0 0; padding:12px 14px; text-align:left; }
+    .repeat { margin-top:10px; }
+    @media(max-width:560px) { main { padding-top:18px; } .actions { display:grid; } .actions button { width:100%; } .shell { padding:20px 16px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="course">Curso de Español · Lección 8 · Práctica</p>
+      <h1>Ejercicio 8.9 · Traducción al español</h1>
+      <p class="sub">Escribe una traducción completa y después compárala con un modelo posible.</p>
+      <div class="font-controls" role="group" aria-label="Controles de tamaño del texto">
+        <button type="button" data-font="small" aria-label="Reducir tamaño del texto" aria-pressed="false">A−</button>
+        <button type="button" data-font="normal" aria-label="Tamaño normal del texto" aria-pressed="true">A</button>
+        <button type="button" data-font="large" aria-label="Aumentar tamaño del texto" aria-pressed="false">A+</button>
+      </div>
+    </header>
+    <section class="shell" aria-label="Ejercicio de traducción">
+      <div class="question-wrap" data-question-wrap>
+        <p class="progress" data-progress aria-live="polite"></p>
+        <div class="progress-track" role="progressbar" data-progressbar aria-label="Frases comparadas" aria-valuemin="0" aria-valuemax="18" aria-valuenow="0"><span></span></div>
+        <p class="instruction">Traduce la frase al español. No hay una única traducción literal posible.</p>
+        <p class="source" data-source lang="pt-BR"></p>
+        <div>
+          <label class="answer-label" for="translation-input">Tu traducción al español</label>
+          <textarea id="translation-input" data-input rows="4" lang="es" spellcheck="true" placeholder="Escribe tu traducción completa aquí" aria-describedby="translation-feedback"></textarea>
+        </div>
+        <div class="actions" data-no-slide-advance>
+          <button type="button" data-reveal disabled>VER RESPUESTA</button>
+          <button type="button" data-check>COMPROBAR</button>
+        </div>
+        <p class="feedback" id="translation-feedback" data-feedback aria-live="polite">Escribe tu traducción antes de comprobarla.</p>
+        <div class="reference" data-reference hidden aria-live="polite">
+          <p class="reference-label">Un modelo posible</p>
+          <p class="reference-answer" data-model></p>
+          <p class="reference-note" data-note hidden></p>
+        </div>
+        <div class="navigation" data-no-slide-advance>
+          <button type="button" data-next disabled>Siguiente</button>
+        </div>
+      </div>
+      <div class="done" data-done hidden>
+        <h2>¡Revisión terminada!</h2>
+        <p>Has comparado tus traducciones con los modelos. La actividad no calcula una nota automática porque admite distintas traducciones correctas.</p>
+        <div class="result-summary" data-summary aria-live="polite"></div>
+        <button class="repeat" type="button" data-repeat>REPETIR EJERCICIO</button>
+      </div>
+    </section>
+  </main>
+  <script>
+    (() => {
+      "use strict";
+      const items = [
+        { source: "Meu irmão mais novo tem dez anos.", model: "Mi hermano menor tiene diez años." },
+        { source: "Ele entende este capítulo, mas não quer aprender todas as palavras.", model: "Él entiende este capítulo, pero no quiere aprender todas las palabras." },
+        { source: "Eu sei por que a irmã dele quer ir à Espanha. Os parentes dela estão lá.", model: "Sé por qué su hermana quiere ir a España. Sus parientes están allí.", note: "También puede usarse “allá” si el contexto lo permite. El sujeto “yo” puede omitirse." },
+        { source: "Todos os anos, no Dia de Ação de Graças, cozinhamos demais.", model: "Todos los años, en el Día de Acción de Gracias, cocinamos demasiado.", note: "También son posibles otras formulaciones que mantengan el sentido de frecuencia y exceso." },
+        { source: "Juan sempre perde suas luvas.", model: "Juan siempre pierde sus guantes." },
+        { source: "A avó dele é mais velha que o avô dele.", model: "Su abuela es mayor que su abuelo.", note: "Para comparar la edad de personas, se usa “mayor”." },
+        { source: "O último mês do ano é dezembro; o primeiro mês é janeiro.", model: "El último mes del año es diciembre; el primer mes es enero.", note: "También puede decirse: “El último mes del año es diciembre y el primero es enero”." },
+        { source: "Temos uma boa aula; aprendemos muito.", model: "Tenemos una buena clase; aprendemos mucho." },
+        { source: "Seu livro acabou de chegar.", model: "Tu libro acaba de llegar.", note: "“Su libro acaba de llegar” también es posible con un tratamiento formal o de usted." },
+        { source: "Eu sei que meu gato é mais inteligente que seu cachorro.", model: "Sé que mi gato es más inteligente que tu perro.", note: "“Su perro” también puede ser adecuado con un tratamiento formal o de usted." },
+        { source: "Estas árvores são mais velhas que aquelas árvores lá longe.", model: "Estos árboles son más viejos que aquellos árboles.", note: "Al comparar árboles, corresponde el comparativo regular “más viejos”, no “mayores”." },
+        { source: "Escutamos as mesmas músicas tristes todos os dias.", model: "Escuchamos las mismas canciones tristes todos los días." },
+        { source: "Você acha que o presidente dos Estados Unidos é um grande homem?", model: "¿Piensa Ud. que el presidente de los Estados Unidos es un gran hombre?", note: "“Grande” se convierte en “gran” delante de un sustantivo masculino singular. También es posible “¿Piensas que...?”." },
+        { source: "Você vem à nossa festa na sexta-feira? Ela começa às nove da noite.", model: "¿Vienes a nuestra fiesta el viernes? Empieza a las nueve de la noche.", note: "También es posible “¿Viene Ud. a nuestra fiesta...?”. El tratamiento debe ser coherente en la frase." },
+        { source: "Carolina é tão alta quanto Enrique; a irmã dela é a mais alta de todos.", model: "Carolina es tan alta como Enrique; su hermana es la más alta de todos.", note: "“La más alta de todas” también puede concordar con un referente femenino plural." },
+        { source: "Este livro é o livro mais interessante da biblioteca.", model: "Este libro es el libro más interesante de la biblioteca.", note: "La repetición de “libro” no es necesaria: “Este libro es el más interesante de la biblioteca”." },
+        { source: "Qual é o animal mais perigoso do mundo?", model: "¿Cuál es el animal más peligroso del mundo?", note: "“De + el” se contrae en “del”: “del mundo”." },
+        { source: "Eu sou a única pessoa da família que sabe jogar tênis. Às vezes eu ganho; às vezes eu perco.", model: "Soy la única persona de la familia que sabe jugar al tenis. A veces gano; a veces pierdo.", note: "También puede decirse “sabe jugar tenis” según el uso regional. El pronombre “yo” puede omitirse." }
+      ];
+      const progress = document.querySelector("[data-progress]");
+      const progressbar = document.querySelector("[data-progressbar]");
+      const source = document.querySelector("[data-source]");
+      const input = document.querySelector("[data-input]");
+      const checkButton = document.querySelector("[data-check]");
+      const revealButton = document.querySelector("[data-reveal]");
+      const nextButton = document.querySelector("[data-next]");
+      const feedback = document.querySelector("[data-feedback]");
+      const reference = document.querySelector("[data-reference]");
+      const model = document.querySelector("[data-model]");
+      const note = document.querySelector("[data-note]");
+      const wrap = document.querySelector("[data-question-wrap]");
+      const done = document.querySelector("[data-done]");
+      const summary = document.querySelector("[data-summary]");
+      let index = 0;
+      let checks = 0;
+      let compared = 0;
+      let checked = false;
+      let revealed = false;
+      const reviewed = new Set();
+
+      function updateProgress() {
+        progress.textContent = "Frase " + (index + 1) + " / " + items.length + " · Comparadas: " + compared + " / " + items.length;
+        progressbar.setAttribute("aria-valuenow", String(compared));
+        progressbar.firstElementChild.style.width = ((compared / items.length) * 100) + "%";
+      }
+      function render() {
+        const item = items[index];
+        source.textContent = item.source;
+        input.value = "";
+        reference.hidden = true;
+        model.textContent = "";
+        note.textContent = item.note || "";
+        note.hidden = !item.note;
+        revealButton.disabled = true;
+        checkButton.disabled = false;
+        nextButton.disabled = true;
+        nextButton.textContent = index === items.length - 1 ? "VER RESULTADOS" : "SIGUIENTE";
+        checked = false;
+        revealed = false;
+        feedback.textContent = "Escribe tu traducción antes de comprobarla.";
+        feedback.className = "feedback";
+        updateProgress();
+      }
+      input.addEventListener("input", () => {
+        if (revealed) {
+          reference.hidden = true;
+          nextButton.disabled = true;
+          revealed = false;
+        }
+        checked = false;
+        revealButton.disabled = true;
+        checkButton.disabled = false;
+        feedback.textContent = input.value.trim() ? "Traducción actualizada. Pulsa COMPROBAR y después compara con un modelo." : "Escribe tu traducción antes de comprobarla.";
+        feedback.className = "feedback";
+      });
+      input.addEventListener("keydown", (event) => {
+        if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+          event.preventDefault();
+          checkButton.click();
+        }
+      });
+      checkButton.addEventListener("click", () => {
+        if (!input.value.trim()) {
+          feedback.textContent = "Escribe una traducción antes de continuar.";
+          feedback.className = "feedback info";
+          input.focus();
+          return;
+        }
+        if (checked) return;
+        checks += 1;
+        checked = true;
+        revealButton.disabled = false;
+        checkButton.disabled = true;
+        feedback.textContent = "Respuesta registrada. No la calificamos por coincidencia literal: compárala con un modelo posible.";
+        feedback.className = "feedback info";
+        revealButton.focus();
+      });
+      revealButton.addEventListener("click", () => {
+        if (!checked) return;
+        const item = items[index];
+        model.textContent = item.model;
+        note.textContent = item.note || "Las traducciones pueden variar si conservan el significado y son gramaticalmente correctas.";
+        note.hidden = false;
+        reference.hidden = false;
+        revealButton.disabled = true;
+        nextButton.disabled = false;
+        revealed = true;
+        if (!reviewed.has(index)) {
+          reviewed.add(index);
+          compared += 1;
+          updateProgress();
+        }
+        feedback.textContent = "Compara el significado y las estructuras. Una formulación diferente también puede ser correcta.";
+        feedback.className = "feedback ready";
+        nextButton.focus();
+      });
+      nextButton.addEventListener("click", () => {
+        if (!revealed) return;
+        if (index === items.length - 1) {
+          const rows = [["Frases comparadas", compared + " / " + items.length], ["Comprobaciones realizadas", String(checks)]];
+          summary.replaceChildren(...rows.map(([label, value]) => {
+            const row = document.createElement("p");
+            const strong = document.createElement("strong");
+            strong.textContent = label + ": ";
+            row.append(strong, document.createTextNode(value));
+            return row;
+          }));
+          wrap.hidden = true;
+          done.hidden = false;
+          document.querySelector("[data-repeat]").focus();
+          return;
+        }
+        index += 1;
+        render();
+        input.focus();
+      });
+      document.querySelector("[data-repeat]").addEventListener("click", () => {
+        index = 0;
+        checks = 0;
+        compared = 0;
+        reviewed.clear();
+        done.hidden = true;
+        wrap.hidden = false;
+        render();
+        input.focus();
+      });
+      document.querySelectorAll("[data-font]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const size = button.dataset.font;
+          document.documentElement.style.setProperty("--font-scale", size === "small" ? ".9" : size === "large" ? "1.16" : "1");
+          document.querySelectorAll("[data-font]").forEach((control) => control.setAttribute("aria-pressed", String(control === button)));
+        });
+      });
+      render();
+      input.focus();
+    })();
+  </script>
+</body>
+</html>
