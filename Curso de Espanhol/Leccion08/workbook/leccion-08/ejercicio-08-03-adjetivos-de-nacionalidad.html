@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Exercise 8.3 de adjetivos de nacionalidad.">
+  <title>Exercise 8.3 · Adjetivos de nacionalidad</title>
+  <style>
+    :root { --red:#aa151b; --gold:#f1bf00; --ink:#172033; --muted:#667085; --paper:#fffdf8; --soft:#f4efe4; --line:rgba(23,32,51,.12); --green:#2d7a5b; --blue:#2d5ea8; --focus:rgba(45,94,168,.38); --font-scale:1; --shadow:0 12px 28px rgba(20,28,38,.1); }
+    * { box-sizing:border-box; }
+    body { margin:0; background:linear-gradient(135deg,#fff,var(--soft)); color:var(--ink); font-family:Arial,Helvetica,sans-serif; font-size:calc(1rem * var(--font-scale)); line-height:1.5; }
+    button,input { font:inherit; }
+    button { cursor:pointer; }
+    button:disabled { cursor:not-allowed; opacity:.55; }
+    [hidden] { display:none !important; }
+    .sr-only { height:1px; margin:-1px; overflow:hidden; padding:0; position:absolute; width:1px; clip:rect(0,0,0,0); white-space:nowrap; }
+    main { margin:0 auto; max-width:960px; padding:28px 0 42px; width:min(92%,960px); }
+    header { border-bottom:2px solid rgba(170,21,27,.2); padding-bottom:16px; }
+    .course { color:var(--red); font-size:.8rem; font-weight:900; letter-spacing:.11em; text-transform:uppercase; }
+    h1,h2 { font-family:Georgia,"Times New Roman",serif; line-height:1.05; }
+    h1 { font-size:clamp(2rem,5vw,3.5rem); margin:10px 0 6px; }
+    h2 { font-size:clamp(1.6rem,4vw,2.4rem); margin:0 0 10px; }
+    .sub { color:var(--muted); font-weight:700; margin:0; }
+    .font-controls { align-items:center; display:flex; gap:8px; justify-content:flex-end; margin-top:14px; }
+    .font-controls button { background:#fff; border:1px solid var(--line); border-radius:5px; color:var(--ink); min-height:40px; min-width:44px; padding:6px 9px; }
+    .font-controls button[aria-pressed="true"] { background:var(--red); border-color:var(--red); color:#fff; font-weight:900; }
+    .font-controls button:focus-visible,.prompt input:focus-visible,.answer-form button:focus-visible,.repeat:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
+    .shell { background:rgba(255,255,255,.96); border-left:5px solid var(--gold); box-shadow:var(--shadow); margin-top:20px; padding:clamp(22px,4vw,42px); }
+    .question-wrap { display:grid; gap:16px; }
+    .progress { color:var(--muted); font-weight:800; margin:0; }
+    .progress-track { background:var(--soft); border-radius:999px; height:10px; overflow:hidden; }
+    .progress-track span { background:linear-gradient(90deg,var(--red),var(--gold)); display:block; height:100%; transition:width .2s ease; width:0; }
+    .item-type { color:var(--red); font-size:.78rem; font-weight:900; letter-spacing:.11em; margin:0; text-transform:uppercase; }
+    .prompt { align-items:baseline; column-gap:.2em; display:flex; flex-wrap:wrap; font-family:Georgia,"Times New Roman",serif; font-size:clamp(1.35rem,3.2vw,2rem); font-weight:700; line-height:1.4; margin:0; row-gap:.35em; }
+    .prompt input { background:#fff; border:1px solid var(--line); border-bottom:3px solid var(--blue); border-radius:3px; color:var(--ink); font-family:Arial,Helvetica,sans-serif; font-size:.72em; font-weight:700; min-height:2.15em; min-width:7.7em; padding:.18em .35em; text-align:center; }
+    .prompt input.is-correct { background:#ecfdf3; border-color:var(--green); }
+    .prompt input.is-incorrect { background:#fff1f0; border-color:var(--red); }
+    .instruction { color:var(--muted); font-weight:700; margin:0; }
+    .answer-form { display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; }
+    .answer-form button,.repeat { background:var(--red); border:1px solid var(--red); color:#fff; font-weight:900; min-height:46px; padding:9px 16px; }
+    .answer-form [data-show-answer] { background:#fff; color:var(--red); }
+    .feedback { background:var(--soft); line-height:1.4; margin:0; min-height:48px; padding:12px 14px; }
+    .feedback.correct { background:#ecfdf3; color:#17603f; }
+    .feedback.incorrect { background:#fff1f0; color:#8e1116; }
+    .done { text-align:center; }
+    .done > p { color:var(--muted); font-weight:700; }
+    .result-summary { display:grid; gap:8px; margin:18px auto; max-width:34rem; text-align:left; }
+    .result-summary p { border-bottom:1px solid var(--line); margin:0; padding:8px 0; }
+    .result-summary strong { color:var(--red); }
+    .performance { color:var(--muted); font-weight:800; }
+    .repeat { margin-top:10px; }
+    @media(max-width:560px) { main { padding-top:18px; } .prompt { column-gap:.12em; } .prompt input { min-width:6.5em; } .answer-form { display:grid; } .answer-form button { width:100%; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="course">Curso de Español · Lección 8 · Práctica</p>
+      <h1>Exercise 8.3 · Adjetivos de nacionalidad</h1>
+      <p class="sub">Completa las siguientes frases usando el adjetivo de nacionalidad apropiado.</p>
+      <div class="font-controls" role="group" aria-label="Controles de tamaño del texto">
+        <button type="button" data-font="small" aria-label="Reducir tamaño del texto" aria-pressed="false">A−</button>
+        <button type="button" data-font="normal" aria-label="Tamaño normal del texto" aria-pressed="true">A</button>
+        <button type="button" data-font="large" aria-label="Aumentar tamaño del texto" aria-pressed="false">A+</button>
+      </div>
+    </header>
+    <section class="shell" aria-label="Actividad de completar frases">
+      <div class="question-wrap" data-question-wrap>
+        <p class="progress" data-progress aria-live="polite"></p>
+        <div class="progress-track" role="progressbar" data-exercise-progress aria-label="Progreso del ejercicio" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0"><span></span></div>
+        <p class="item-type">Completa</p>
+        <div class="prompt" data-prompt aria-label="Frase para completar"></div>
+        <p class="instruction">Escribe la nacionalidad adecuada y pulsa COMPROBAR. Debes acertar para continuar.</p>
+        <form class="answer-form" data-answer-form novalidate>
+          <button type="button" data-show-answer>VER RESPUESTA</button>
+          <button type="submit" data-submit>COMPROBAR</button>
+        </form>
+        <p class="feedback" id="answer-feedback" data-feedback aria-live="polite">Completa la frase y comprueba tu respuesta.</p>
+      </div>
+      <div class="done" data-done hidden>
+        <h2>¡Ejercicio terminado!</h2>
+        <p class="performance" data-performance></p>
+        <div class="result-summary" data-summary aria-live="polite"></div>
+        <button class="repeat" type="button" data-repeat>REPETIR EJERCICIO</button>
+      </div>
+    </section>
+  </main>
+  <script>
+    (() => {
+      "use strict";
+      const BEST_SCORE_KEY = "workbook-leccion-08-ejercicio-08-03-best-precision";
+      const items = [
+        { sentence: "Micaela es de España y habla español porque su padre es español; ella habla francés porque su madre es ______.", answers: ["francesa"], hint: "Revisa el género." },
+        { sentence: "Pensamos que la comida ______ es deliciosa. El sushi y el sashimi son platos típicos.", answers: ["japonesa"], hint: "Recuerda la nacionalidad correspondiente al país." },
+        { sentence: "Hay mucha arte en Guatemala. ¿Son artistas ______?", answers: ["guatemaltecos"], hint: "Revisa singular o plural." },
+        { sentence: "Para entrar en los Estados Unidos, el ciudadano ______ tiene que cruzar la frontera entre el Canadá y los Estados Unidos.", answers: ["canadiense"], hint: "Recuerda la nacionalidad correspondiente al país." },
+        { sentence: "______ tienen la reputación de ser poetas. La gente de Nicaragua trabaja duro y escribe poesía.", answers: ["Los nicaragüenses"], hint: "Revisa la nacionalidad correspondiente al país.", requiresArticle: true },
+        { sentence: "Costa Rica es un país con muchos parques nacionales. ______ visitan los parques todo el año.", answers: ["Los costarricenses"], hint: "Recuerda la nacionalidad correspondiente al país.", requiresArticle: true },
+        { sentence: "Este hombre de India es ______. Su esposa es ______ también.", answers: ["hindú", "hindú"], hint: "Algunos adjetivos tienen la misma forma en masculino y femenino." },
+        { sentence: "Soy portuguesa. Mi hermano es ______ también.", answers: ["portugués"], hint: "Revisa el género y la tilde." }
+      ];
+      const progress = document.querySelector("[data-progress]");
+      const progressBar = document.querySelector("[data-exercise-progress]");
+      const prompt = document.querySelector("[data-prompt]");
+      const form = document.querySelector("[data-answer-form]");
+      const showAnswerButton = document.querySelector("[data-show-answer]");
+      const submitButton = document.querySelector("[data-submit]");
+      const feedback = document.querySelector("[data-feedback]");
+      const wrap = document.querySelector("[data-question-wrap]");
+      const done = document.querySelector("[data-done]");
+      const summary = document.querySelector("[data-summary]");
+      const performance = document.querySelector("[data-performance]");
+      let index = 0;
+      let errors = 0;
+      let attempts = 0;
+      let completed = 0;
+      let accepted = false;
+
+      function normalize(value) { return value.trim().toLocaleLowerCase("es-ES"); }
+      function updateProgress() {
+        progress.textContent = "Ejercicio " + (index + 1) + " de " + items.length + " · Completados: " + completed + " de " + items.length;
+        progressBar.setAttribute("aria-valuemax", String(items.length));
+        progressBar.setAttribute("aria-valuenow", String(completed));
+        progressBar.firstElementChild.style.width = ((completed / items.length) * 100) + "%";
+      }
+      function render() {
+        const item = items[index];
+        updateProgress();
+        prompt.replaceChildren();
+        const fragments = item.sentence.split("______");
+        fragments.forEach((fragment, gapIndex) => {
+          if (fragment) prompt.append(document.createTextNode(fragment));
+          if (gapIndex < item.answers.length) {
+            const input = document.createElement("input");
+            input.type = "text";
+            input.autocomplete = "off";
+            input.autocapitalize = "none";
+            input.spellcheck = false;
+            input.required = true;
+            input.dataset.gapIndex = String(gapIndex);
+            input.setAttribute("aria-label", item.answers.length > 1 ? "Respuesta " + (gapIndex + 1) : "Adjetivo de nacionalidad");
+            input.setAttribute("aria-describedby", "answer-feedback");
+            input.addEventListener("input", clearFeedback);
+            prompt.append(input);
+          }
+        });
+        accepted = false;
+        showAnswerButton.disabled = false;
+        submitButton.textContent = "COMPROBAR";
+        feedback.textContent = item.answers.length > 1 ? "Completa las dos respuestas y compruébalas." : "Completa la frase y comprueba tu respuesta.";
+        feedback.className = "feedback";
+      }
+      function clearFeedback(event) {
+        if (accepted) return;
+        event.currentTarget.classList.remove("is-correct", "is-incorrect");
+        event.currentTarget.removeAttribute("aria-invalid");
+        feedback.textContent = "Respuesta actualizada. Pulsa COMPROBAR.";
+        feedback.className = "feedback";
+      }
+      function showSummary() {
+        const precision = attempts ? Math.round((completed / attempts) * 100) : 0;
+        let bestPrecision = 0;
+        try { bestPrecision = Number(localStorage.getItem(BEST_SCORE_KEY)) || 0; } catch (error) { bestPrecision = 0; }
+        bestPrecision = Math.max(bestPrecision, precision);
+        try { localStorage.setItem(BEST_SCORE_KEY, String(bestPrecision)); } catch (error) { /* El ejercicio funciona aunque el almacenamiento no esté disponible. */ }
+        const rows = [
+          ["Ejercicios completados", completed + " / " + items.length],
+          ["Puntuación", completed + " / " + items.length],
+          ["Errores cometidos", String(errors)],
+          ["Intentos totales", String(attempts)],
+          ["Precisión", precision + "%"],
+          ["Mejor precisión", bestPrecision + "%"]
+        ];
+        summary.replaceChildren(...rows.map(([label, value]) => {
+          const row = document.createElement("p");
+          const strong = document.createElement("strong");
+          strong.textContent = label + ": ";
+          row.append(strong, document.createTextNode(value));
+          return row;
+        }));
+        performance.textContent = precision >= 90 ? "Desempeño excelente." : precision >= 70 ? "Buen trabajo. Sigue practicando." : "Sigue practicando para mejorar tu precisión.";
+        wrap.hidden = true;
+        done.hidden = false;
+        document.querySelector("[data-repeat]").focus();
+      }
+      showAnswerButton.addEventListener("click", () => {
+        if (accepted) return;
+        const inputs = Array.from(prompt.querySelectorAll("input"));
+        inputs.forEach((input, gapIndex) => {
+          input.value = items[index].answers[gapIndex];
+          input.classList.remove("is-correct", "is-incorrect");
+          input.removeAttribute("aria-invalid");
+        });
+        feedback.textContent = "Respuesta mostrada. Pulsa COMPROBAR para validarla.";
+        feedback.className = "feedback";
+        submitButton.focus();
+      });
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (accepted) {
+          if (index === items.length - 1) showSummary();
+          else { index += 1; render(); prompt.querySelector("input").focus(); }
+          return;
+        }
+        attempts += 1;
+        const item = items[index];
+        const inputs = Array.from(prompt.querySelectorAll("input"));
+        const values = inputs.map((input) => normalize(input.value));
+        const results = values.map((value, gapIndex) => value === normalize(item.answers[gapIndex]));
+        inputs.forEach((input, gapIndex) => {
+          input.classList.toggle("is-correct", results[gapIndex]);
+          input.classList.toggle("is-incorrect", !results[gapIndex]);
+          input.setAttribute("aria-invalid", String(!results[gapIndex]));
+        });
+        if (results.every(Boolean)) {
+          completed += 1;
+          updateProgress();
+          accepted = true;
+          inputs.forEach((input) => { input.disabled = true; });
+          showAnswerButton.disabled = true;
+          feedback.textContent = "Correcto. La nacionalidad concuerda con el contexto.";
+          feedback.className = "feedback correct";
+          submitButton.textContent = index === items.length - 1 ? "VER RESULTADOS" : "SIGUIENTE";
+          return;
+        }
+        errors += 1;
+        const emptyIndex = values.findIndex((value) => !value);
+        const incorrectIndexes = results.map((isCorrect, gapIndex) => isCorrect ? -1 : gapIndex).filter((gapIndex) => gapIndex >= 0);
+        const firstIncorrect = emptyIndex >= 0 ? emptyIndex : incorrectIndexes[0];
+        if (emptyIndex >= 0) feedback.textContent = item.answers.length > 1 ? "Completa las dos respuestas antes de comprobar." : "Completa la respuesta antes de comprobar.";
+        else if (item.requiresArticle && values[firstIncorrect] === normalize(item.answers[firstIncorrect]).replace(/^los\s+/, "")) feedback.textContent = "La respuesta necesita también el artículo.";
+        else if (item.answers.length > 1) feedback.textContent = "La respuesta " + (firstIncorrect + 1) + " necesita revisión. " + item.hint;
+        else if (index === 7 && values[firstIncorrect] === "portugues") feedback.textContent = "Revisa la tilde.";
+        else feedback.textContent = item.hint;
+        feedback.className = "feedback incorrect";
+        inputs[firstIncorrect].focus();
+      });
+      document.querySelector("[data-repeat]").addEventListener("click", () => {
+        index = 0;
+        errors = 0;
+        attempts = 0;
+        completed = 0;
+        accepted = false;
+        done.hidden = true;
+        wrap.hidden = false;
+        render();
+        prompt.querySelector("input").focus();
+      });
+      document.querySelectorAll("[data-font]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const size = button.dataset.font;
+          document.documentElement.style.setProperty("--font-scale", size === "small" ? ".9" : size === "large" ? "1.16" : "1");
+          document.querySelectorAll("[data-font]").forEach((control) => control.setAttribute("aria-pressed", String(control === button)));
+        });
+      });
+      render();
+    })();
+  </script>
+</body>
+</html>
