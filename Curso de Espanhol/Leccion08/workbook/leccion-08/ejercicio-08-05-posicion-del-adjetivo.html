@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Exercise 8.5 sobre la posición y el significado de algunos adjetivos.">
+  <title>Exercise 8.5 · La posición cambia el significado</title>
+  <style>
+    :root { --red:#aa151b; --gold:#f1bf00; --ink:#172033; --muted:#667085; --paper:#fffdf8; --soft:#f4efe4; --line:rgba(23,32,51,.12); --green:#2d7a5b; --blue:#2d5ea8; --focus:rgba(45,94,168,.38); --font-scale:1; --shadow:0 12px 28px rgba(20,28,38,.1); }
+    * { box-sizing:border-box; }
+    body { margin:0; background:linear-gradient(135deg,#fff,var(--soft)); color:var(--ink); font-family:Arial,Helvetica,sans-serif; font-size:calc(1rem * var(--font-scale)); line-height:1.5; }
+    button,input { font:inherit; }
+    button { cursor:pointer; }
+    button:disabled { cursor:not-allowed; opacity:.55; }
+    [hidden] { display:none !important; }
+    .sr-only { height:1px; margin:-1px; overflow:hidden; padding:0; position:absolute; width:1px; clip:rect(0,0,0,0); white-space:nowrap; }
+    main { margin:0 auto; max-width:1000px; padding:28px 0 42px; width:min(92%,1000px); }
+    header { border-bottom:2px solid rgba(170,21,27,.2); padding-bottom:16px; }
+    .course { color:var(--red); font-size:.8rem; font-weight:900; letter-spacing:.11em; text-transform:uppercase; }
+    h1,h2 { font-family:Georgia,"Times New Roman",serif; line-height:1.05; }
+    h1 { font-size:clamp(2rem,5vw,3.5rem); margin:10px 0 6px; }
+    h2 { font-size:clamp(1.6rem,4vw,2.4rem); margin:0 0 10px; }
+    .sub { color:var(--muted); font-weight:700; margin:0; }
+    .font-controls { align-items:center; display:flex; gap:8px; justify-content:flex-end; margin-top:14px; }
+    .font-controls button { background:#fff; border:1px solid var(--line); border-radius:5px; color:var(--ink); min-height:40px; min-width:44px; padding:6px 9px; }
+    .font-controls button[aria-pressed="true"] { background:var(--red); border-color:var(--red); color:#fff; font-weight:900; }
+    .font-controls button:focus-visible,.position-field input:focus-visible,.answer-form button:focus-visible,.repeat:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
+    .shell { background:rgba(255,255,255,.96); border-left:5px solid var(--gold); box-shadow:var(--shadow); margin-top:20px; padding:clamp(22px,4vw,42px); }
+    .question-wrap { display:grid; gap:16px; }
+    .progress { color:var(--muted); font-weight:800; margin:0; }
+    .progress-track { background:var(--soft); border-radius:999px; height:10px; overflow:hidden; }
+    .progress-track span { background:linear-gradient(90deg,var(--red),var(--gold)); display:block; height:100%; transition:width .2s ease; width:0; }
+    .item-type { color:var(--red); font-size:.78rem; font-weight:900; letter-spacing:.11em; margin:0; text-transform:uppercase; }
+    .word-bank { background:var(--soft); border-left:4px solid var(--gold); display:grid; gap:9px; margin:0; padding:12px 14px; }
+    .word-bank-label { font-size:.9rem; font-weight:900; }
+    .word-bank-list { display:flex; flex-wrap:wrap; gap:7px; list-style:none; margin:0; padding:0; }
+    .word-bank-list li { background:#fff; border:1px solid var(--line); border-radius:4px; font-size:.92rem; font-weight:800; padding:3px 9px; }
+    .instruction { color:var(--muted); font-weight:700; margin:0; }
+    .prompt { align-items:baseline; column-gap:.2em; display:flex; flex-wrap:wrap; font-family:Georgia,"Times New Roman",serif; font-size:clamp(1.3rem,3vw,1.9rem); font-weight:700; line-height:1.5; margin:0; row-gap:.5em; }
+    .position-field { align-items:center; display:inline-flex; flex-direction:column; gap:.08rem; vertical-align:middle; }
+    .position-field-label { color:var(--red); font-family:Arial,Helvetica,sans-serif; font-size:.43em; font-weight:900; line-height:1.1; text-transform:uppercase; }
+    .position-field input { background:#fff; border:1px solid var(--line); border-bottom:3px solid var(--blue); border-radius:3px; color:var(--ink); font-family:Arial,Helvetica,sans-serif; font-size:.72em; font-weight:700; min-height:2.15em; min-width:5.7em; padding:.18em .3em; text-align:center; }
+    .position-field input.is-correct { background:#ecfdf3; border-color:var(--green); }
+    .position-field input.is-incorrect { background:#fff1f0; border-color:var(--red); }
+    .position-field input:disabled { color:var(--ink); opacity:1; }
+    .answer-form { display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; }
+    .answer-form button,.repeat { background:var(--red); border:1px solid var(--red); color:#fff; font-weight:900; min-height:46px; padding:9px 16px; }
+    .answer-form [data-show-answer] { background:#fff; color:var(--red); }
+    .feedback { background:var(--soft); line-height:1.4; margin:0; min-height:48px; padding:12px 14px; }
+    .feedback.correct { background:#ecfdf3; color:#17603f; }
+    .feedback.incorrect { background:#fff1f0; color:#8e1116; }
+    .done { text-align:center; }
+    .done > p { color:var(--muted); font-weight:700; }
+    .result-summary { display:grid; gap:8px; margin:18px auto; max-width:36rem; text-align:left; }
+    .result-summary p { border-bottom:1px solid var(--line); margin:0; padding:8px 0; }
+    .result-summary strong { color:var(--red); }
+    .performance { color:var(--muted); font-weight:800; }
+    .repeat { margin-top:10px; }
+    @media(max-width:560px) { main { padding-top:18px; } .prompt { column-gap:.12em; } .position-field input { min-width:4.8em; } .answer-form { display:grid; } .answer-form button { width:100%; } .word-bank-list { gap:5px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="course">Curso de Español · Lección 8 · Práctica</p>
+      <h1>Exercise 8.5 · La posición cambia el significado</h1>
+      <p class="sub">En cada frase, coloca uno de los siguientes adjetivos antes o después del sustantivo, según el significado de la frase.</p>
+      <div class="font-controls" role="group" aria-label="Controles de tamaño del texto">
+        <button type="button" data-font="small" aria-label="Reducir tamaño del texto" aria-pressed="false">A−</button>
+        <button type="button" data-font="normal" aria-label="Tamaño normal del texto" aria-pressed="true">A</button>
+        <button type="button" data-font="large" aria-label="Aumentar tamaño del texto" aria-pressed="false">A+</button>
+      </div>
+    </header>
+    <section class="shell" aria-label="Actividad sobre la posición de los adjetivos">
+      <div class="question-wrap" data-question-wrap>
+        <p class="progress" data-progress aria-live="polite"></p>
+        <div class="progress-track" role="progressbar" data-exercise-progress aria-label="Progreso del ejercicio" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><span></span></div>
+        <p class="item-type">Completa</p>
+        <p class="instruction">Elige el adjetivo, escribe la forma correcta en el campo antes o después del sustantivo y deja vacío el otro campo.</p>
+        <div class="word-bank" aria-label="Banco de adjetivos">
+          <p class="word-bank-label">Banco de adjetivos</p>
+          <ul class="word-bank-list" aria-label="Antiguo, cierto, grande, pobre, mismo y viejo">
+            <li>antiguo</li><li>cierto</li><li>grande</li><li>pobre</li><li>mismo</li><li>viejo</li>
+          </ul>
+        </div>
+        <div class="prompt" data-prompt aria-label="Frase para completar"></div>
+        <form class="answer-form" data-answer-form novalidate>
+          <button type="button" data-show-answer>VER RESPUESTA</button>
+          <button type="submit" data-submit>COMPROBAR</button>
+        </form>
+        <p class="feedback" id="answer-feedback" data-feedback aria-live="polite">Completa la frase y comprueba la posición.</p>
+      </div>
+      <div class="done" data-done hidden>
+        <h2>¡Ejercicio terminado!</h2>
+        <p class="performance" data-performance></p>
+        <div class="result-summary" data-summary aria-live="polite"></div>
+        <button class="repeat" type="button" data-repeat>REPETIR EJERCICIO</button>
+      </div>
+    </section>
+  </main>
+  <script>
+    (() => {
+      "use strict";
+      const BEST_SCORE_KEY = "workbook-leccion-08-ejercicio-08-05-best-precision";
+      const items = [
+        { sentence: "Mi amiga y yo asistimos a la ______ clase ______.", answers: ["misma", ""], noun: "clase", positionHint: "El adjetivo es correcto, pero revisa la posición: aquí queremos decir que es la misma clase, no otra.", wrongForms: { "mismo": "Revisa el género: clase es femenino singular." } },
+        { sentence: "Atenas y Roma son ______ ciudades ______.", answers: ["", "antiguas"], noun: "ciudades", positionHint: "Aquí se habla de ciudades de mucha antigüedad. Revisa la posición.", wrongForms: { "antiguo": "Revisa género y número: ciudades está en femenino plural." } },
+        { sentence: "El ______ hombre ______ no tiene dinero.", answers: ["", "pobre"], noun: "hombre", positionHint: "Aquí hablamos de falta de dinero. El adjetivo es correcto, pero revisa la posición." },
+        { sentence: "La ______ niña ______ está triste porque no tiene amigos.", answers: ["pobre", ""], noun: "niña", positionHint: "Aquí “pobre” expresa compasión. Revisa la posición." },
+        { sentence: "¿Quién es una ______ mujer ______ de nuestra generación?", answers: ["gran", ""], noun: "mujer", positionHint: "Aquí describes a una mujer importante, destacada o admirable. Revisa la posición.", wrongForms: { "grande": "Recuerda: grande → gran antes de un sustantivo singular." } },
+        { sentence: "Somos ______ amigas ______. Pasamos mucho tiempo juntas.", answers: ["viejas", ""], noun: "amigas", positionHint: "Aquí “viejo” significa una relación de muchos años. Revisa la posición.", wrongForms: { "viejo": "Revisa género y número: amigas está en femenino plural. Aquí “viejo” significa una relación de muchos años y va antes del sustantivo." } }
+      ];
+      const progress = document.querySelector("[data-progress]");
+      const progressBar = document.querySelector("[data-exercise-progress]");
+      const prompt = document.querySelector("[data-prompt]");
+      const form = document.querySelector("[data-answer-form]");
+      const showAnswerButton = document.querySelector("[data-show-answer]");
+      const submitButton = document.querySelector("[data-submit]");
+      const feedback = document.querySelector("[data-feedback]");
+      const wrap = document.querySelector("[data-question-wrap]");
+      const done = document.querySelector("[data-done]");
+      const summary = document.querySelector("[data-summary]");
+      const performance = document.querySelector("[data-performance]");
+      let index = 0;
+      let errors = 0;
+      let attempts = 0;
+      let completed = 0;
+      let accepted = false;
+
+      function normalize(value) { return value.trim().toLocaleLowerCase("es-ES"); }
+      function updateProgress() {
+        progress.textContent = "Ejercicio " + (index + 1) + " de " + items.length + " · Completados: " + completed + " de " + items.length;
+        progressBar.setAttribute("aria-valuemax", String(items.length));
+        progressBar.setAttribute("aria-valuenow", String(completed));
+        progressBar.firstElementChild.style.width = ((completed / items.length) * 100) + "%";
+      }
+      function clearFeedback(event) {
+        const input = event.currentTarget;
+        if (accepted || input.disabled) return;
+        input.classList.remove("is-correct", "is-incorrect");
+        input.removeAttribute("aria-invalid");
+        feedback.textContent = "Respuesta actualizada. Pulsa COMPROBAR.";
+        feedback.className = "feedback";
+      }
+      function render() {
+        const item = items[index];
+        updateProgress();
+        prompt.replaceChildren();
+        const fragments = item.sentence.split("______");
+        fragments.forEach((fragment, gapIndex) => {
+          if (fragment) prompt.append(document.createTextNode(fragment));
+          if (gapIndex < 2) {
+            const field = document.createElement("span");
+            field.className = "position-field";
+            const label = document.createElement("span");
+            label.className = "position-field-label";
+            label.textContent = gapIndex === 0 ? "Antes" : "Después";
+            const input = document.createElement("input");
+            input.type = "text";
+            input.autocomplete = "off";
+            input.autocapitalize = "none";
+            input.spellcheck = false;
+            input.placeholder = "________";
+            input.dataset.position = gapIndex === 0 ? "antes" : "despues";
+            input.setAttribute("aria-label", "Adjetivo " + (gapIndex === 0 ? "antes de " : "después de ") + item.noun);
+            input.setAttribute("aria-describedby", "answer-feedback");
+            input.addEventListener("input", clearFeedback);
+            field.append(label, input);
+            prompt.append(field);
+          }
+        });
+        accepted = false;
+        showAnswerButton.disabled = false;
+        submitButton.textContent = "COMPROBAR";
+        feedback.textContent = "Completa la frase y comprueba la posición.";
+        feedback.className = "feedback";
+      }
+      function feedbackForError(item, values, results) {
+        if (values.every((value, position) => value && value === normalize(item.answers[1 - position]) && !results[position])) return item.positionHint || "El adjetivo es correcto, pero revisa la posición.";
+        const misplaced = values.findIndex((value, position) => value && value === normalize(item.answers[1 - position]) && !results[position]);
+        if (misplaced >= 0) return (item.positionHint || "El adjetivo es correcto, pero revisa la posición.") + (values[1 - misplaced] ? " Deja vacío el otro campo." : "");
+        const wrongForm = values.map((value) => item.wrongForms && item.wrongForms[value]).find(Boolean);
+        if (wrongForm) return wrongForm;
+        if (values.every(Boolean)) return "El otro campo debe permanecer vacío. Revisa la posición del adjetivo.";
+        if (values.some((value) => !value)) return "Completa la respuesta correcta y deja vacío el otro campo.";
+        return "Revisa el adjetivo, su forma y la posición según el significado de la frase.";
+      }
+      function showSummary() {
+        const precision = attempts ? Math.round((completed / attempts) * 100) : 0;
+        let bestPrecision = 0;
+        try { bestPrecision = Number(localStorage.getItem(BEST_SCORE_KEY)) || 0; } catch (error) { bestPrecision = 0; }
+        bestPrecision = Math.max(bestPrecision, precision);
+        try { localStorage.setItem(BEST_SCORE_KEY, String(bestPrecision)); } catch (error) { /* El ejercicio funciona aunque el almacenamiento no esté disponible. */ }
+        const rows = [
+          ["Ejercicios completados", completed + " / " + items.length],
+          ["Puntuación", completed + " / " + items.length],
+          ["Errores cometidos", String(errors)],
+          ["Intentos totales", String(attempts)],
+          ["Precisión", precision + "%"],
+          ["Mejor precisión", bestPrecision + "%"]
+        ];
+        summary.replaceChildren(...rows.map(([label, value]) => {
+          const row = document.createElement("p");
+          const strong = document.createElement("strong");
+          strong.textContent = label + ": ";
+          row.append(strong, document.createTextNode(value));
+          return row;
+        }));
+        performance.textContent = precision >= 90 ? "Desempeño excelente." : precision >= 70 ? "Buen trabajo. Sigue practicando." : "Sigue practicando para mejorar tu precisión.";
+        wrap.hidden = true;
+        done.hidden = false;
+        document.querySelector("[data-repeat]").focus();
+      }
+      showAnswerButton.addEventListener("click", () => {
+        if (accepted) return;
+        const inputs = Array.from(prompt.querySelectorAll("input"));
+        inputs.forEach((input, position) => {
+          if (input.disabled) return;
+          input.value = items[index].answers[position];
+          input.classList.remove("is-correct", "is-incorrect");
+          input.removeAttribute("aria-invalid");
+        });
+        feedback.textContent = "Respuesta mostrada. Pulsa COMPROBAR para validarla.";
+        feedback.className = "feedback";
+        submitButton.focus();
+      });
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (accepted) {
+          if (index === items.length - 1) showSummary();
+          else { index += 1; render(); prompt.querySelector("input").focus(); }
+          return;
+        }
+        attempts += 1;
+        const item = items[index];
+        const inputs = Array.from(prompt.querySelectorAll("input"));
+        const values = inputs.map((input) => normalize(input.value));
+        const results = values.map((value, position) => value === normalize(item.answers[position]));
+        inputs.forEach((input, position) => {
+          if (input.disabled) return;
+          input.classList.toggle("is-correct", results[position]);
+          input.classList.toggle("is-incorrect", !results[position]);
+          input.setAttribute("aria-invalid", String(!results[position]));
+          if (results[position]) input.disabled = true;
+        });
+        if (results.every(Boolean)) {
+          completed += 1;
+          updateProgress();
+          accepted = true;
+          showAnswerButton.disabled = true;
+          feedback.textContent = "Correcto. El adjetivo concuerda con el sustantivo y ocupa la posición adecuada.";
+          feedback.className = "feedback correct";
+          submitButton.textContent = index === items.length - 1 ? "VER RESULTADOS" : "SIGUIENTE";
+          return;
+        }
+        errors += 1;
+        feedback.textContent = feedbackForError(item, values, results);
+        feedback.className = "feedback incorrect";
+        const firstIncorrect = results.findIndex((isCorrect) => !isCorrect);
+        if (inputs[firstIncorrect] && !inputs[firstIncorrect].disabled) inputs[firstIncorrect].focus();
+      });
+      document.querySelector("[data-repeat]").addEventListener("click", () => {
+        index = 0;
+        errors = 0;
+        attempts = 0;
+        completed = 0;
+        accepted = false;
+        done.hidden = true;
+        wrap.hidden = false;
+        render();
+        prompt.querySelector("input").focus();
+      });
+      document.querySelectorAll("[data-font]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const size = button.dataset.font;
+          document.documentElement.style.setProperty("--font-scale", size === "small" ? ".9" : size === "large" ? "1.16" : "1");
+          document.querySelectorAll("[data-font]").forEach((control) => control.setAttribute("aria-pressed", String(control === button)));
+        });
+      });
+      render();
+    })();
+  </script>
+</body>
+</html>

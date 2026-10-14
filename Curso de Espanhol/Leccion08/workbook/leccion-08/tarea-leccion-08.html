@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tarea de repaso integrado de la Lección 8 del Curso de Español.">
+  <title>Tarea para casa · Lección 8</title>
+  <style>
+    :root { --red:#aa151b; --gold:#f1bf00; --ink:#172033; --muted:#667085; --paper:#fffdf8; --soft:#f4efe4; --line:rgba(23,32,51,.12); --green:#2d7a5b; --blue:#2d5ea8; --focus:rgba(45,94,168,.38); --font-scale:1; --shadow:0 8px 28px rgba(20,28,38,.1); }
+    * { box-sizing:border-box; }
+    body { margin:0; background:linear-gradient(135deg,#fff,var(--soft)); color:var(--ink); font-family:Arial,Helvetica,sans-serif; font-size:calc(1rem * var(--font-scale)); line-height:1.5; }
+    button,input,textarea { font:inherit; } button { cursor:pointer; } button:disabled { cursor:not-allowed; opacity:.55; } [hidden] { display:none !important; }
+    button:focus-visible,input:focus-visible,textarea:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
+    main { margin:0 auto; max-width:980px; padding:24px 0 40px; width:min(92%,980px); }
+    .tarea08-header { align-items:center; border-bottom:2px solid rgba(170,21,27,.2); display:flex; flex-wrap:wrap; gap:12px 24px; justify-content:space-between; padding-bottom:18px; }
+    .tarea08-course { color:var(--red); font-size:.8rem; font-weight:900; letter-spacing:.11em; margin:0; text-transform:uppercase; }
+    h1,h2 { font-family:Georgia,"Times New Roman",serif; line-height:1.05; }
+    h1 { font-size:clamp(2rem,5vw,3.4rem); margin:8px 0 5px; }
+    h2 { color:var(--red); font-size:clamp(1.55rem,4vw,2.3rem); margin:0 0 10px; }
+    .tarea08-subtitle { color:var(--muted); font-weight:700; margin:0; }
+    .tarea08-font-controls { align-items:center; display:flex; gap:6px; }
+    .tarea08-font-controls button { background:#fff; border:1px solid var(--line); border-radius:var(--radius-sm,6px); color:var(--ink); font-weight:900; min-height:42px; min-width:44px; padding:6px 9px; }
+    .tarea08-font-controls button[aria-pressed="true"] { background:var(--red); border-color:var(--red); color:#fff; }
+    .tarea08-overview { color:var(--muted); margin:16px 0 10px; }
+    .tarea08-track { background:rgba(23,32,51,.12); border-radius:999px; height:10px; margin:0 0 20px; overflow:hidden; }
+    .tarea08-track span { background:linear-gradient(90deg,var(--red),var(--gold)); display:block; height:100%; transition:width .2s ease; width:0; }
+    .tarea08-shell { background:rgba(255,255,255,.96); border-left:5px solid var(--gold); box-shadow:var(--shadow); padding:clamp(20px,4vw,38px); }
+    .tarea08-question-wrap { display:grid; gap:16px; }
+    .tarea08-progress { color:var(--muted); font-size:.95rem; font-weight:800; margin:0; }
+    .tarea08-block { color:var(--red); font-size:.78rem; font-weight:900; letter-spacing:.1em; margin:0; text-transform:uppercase; }
+    .tarea08-kind { color:var(--muted); font-size:.82rem; font-weight:800; margin:0; }
+    .tarea08-prompt { font-family:Georgia,"Times New Roman",serif; font-size:clamp(1.35rem,3.2vw,2rem); font-weight:700; line-height:1.3; margin:0; }
+    .tarea08-source { background:var(--soft); border-left:4px solid var(--gold); margin:0; padding:12px 15px; }
+    .tarea08-field { background:#fff; border:1px solid var(--line); border-bottom:3px solid var(--blue); color:var(--ink); min-height:48px; padding:12px 14px; width:100%; }
+    textarea.tarea08-field { min-height:8rem; resize:vertical; }
+    .tarea08-reference { background:#f0f7f3; border-left:4px solid var(--green); display:grid; gap:8px; padding:14px 16px; }
+    .tarea08-reference-label { color:var(--green); font-size:.78rem; font-weight:900; letter-spacing:.08em; margin:0; text-transform:uppercase; }
+    .tarea08-reference-answer { font-family:Georgia,"Times New Roman",serif; font-size:1.08rem; font-weight:700; margin:0; white-space:pre-wrap; }
+    .tarea08-reference-note { color:var(--muted); font-size:.9rem; font-weight:700; margin:0; }
+    .tarea08-actions { display:flex; flex-wrap:wrap; gap:10px; }
+    .tarea08-button { border:1px solid var(--red); border-radius:6px; font-weight:900; min-height:44px; padding:9px 15px; }
+    .tarea08-primary { background:var(--red); color:#fff; }
+    .tarea08-secondary { background:#fff; color:var(--red); }
+    .tarea08-feedback { background:var(--soft); color:var(--muted); line-height:1.4; margin:0; min-height:48px; padding:12px 14px; }
+    .tarea08-feedback.correct { background:#ecfdf3; color:#17603f; }
+    .tarea08-feedback.incorrect { background:#fff1f0; color:#8e1116; }
+    .tarea08-field.is-correct { background:#ecfdf3; border-color:var(--green); }
+    .tarea08-field.is-incorrect { background:#fff1f0; border-color:var(--red); }
+    .tarea08-done { text-align:center; }
+    .tarea08-done > p { color:var(--muted); font-weight:700; }
+    .tarea08-summary { display:grid; gap:8px; margin:20px auto 10px; max-width:34rem; text-align:left; }
+    .tarea08-summary p { border-bottom:1px solid var(--line); margin:0; padding:8px 0; }
+    .tarea08-summary strong { color:var(--red); }
+    .tarea08-repeat { background:var(--red); border:1px solid var(--red); color:#fff; font-weight:900; margin-top:16px; min-height:46px; padding:10px 18px; }
+    @media(max-width:600px) { main { padding-top:16px; width:calc(100% - 24px); } .tarea08-header { align-items:flex-start; flex-direction:column; } .tarea08-font-controls { align-self:flex-end; } .tarea08-actions { display:grid; } .tarea08-button { width:100%; } }
+  </style>
+</head>
+<body>
+  <main data-tarea08>
+    <header class="tarea08-header">
+      <div>
+        <p class="tarea08-course">Curso de Español · Lección 8</p>
+        <h1>Tarea para casa</h1>
+        <p class="tarea08-subtitle">Repaso integrado · 40 ejercicios</p>
+      </div>
+      <div class="tarea08-font-controls" role="group" aria-label="Controles de tamaño del texto">
+        <button type="button" data-tarea08-font="small" aria-label="Reducir tamaño del texto" aria-pressed="false">A−</button>
+        <button type="button" data-tarea08-font="normal" aria-label="Tamaño normal del texto" aria-pressed="true">A</button>
+        <button type="button" data-tarea08-font="large" aria-label="Aumentar tamaño del texto" aria-pressed="false">A+</button>
+      </div>
+    </header>
+    <p class="tarea08-overview" data-tarea08-progress aria-live="polite">Ejercicio 1 / 40 · Posesivos y demostrativos</p>
+    <div class="tarea08-track" role="progressbar" aria-label="Progreso de la tarea" aria-valuemin="0" aria-valuemax="40" aria-valuenow="0" data-tarea08-progressbar><span></span></div>
+    <section class="tarea08-shell">
+      <div class="tarea08-question-wrap" data-tarea08-work>
+        <p class="tarea08-block" data-tarea08-block></p>
+        <p class="tarea08-kind" data-tarea08-kind></p>
+        <p class="tarea08-prompt" data-tarea08-prompt></p>
+        <p class="tarea08-source" data-tarea08-source lang="pt-BR" hidden></p>
+        <form data-tarea08-form novalidate>
+          <label class="sr-only" for="tarea08-answer">Tu respuesta</label>
+          <input class="tarea08-field" id="tarea08-answer" data-tarea08-answer type="text" lang="es" autocomplete="off" autocapitalize="sentences" spellcheck="true" aria-describedby="tarea08-feedback">
+          <div class="tarea08-actions" data-no-slide-advance>
+            <button class="tarea08-button tarea08-secondary" type="button" data-tarea08-reveal>VER RESPUESTA</button>
+            <button class="tarea08-button tarea08-primary" type="submit" data-tarea08-check>COMPROBAR</button>
+            <button class="tarea08-button tarea08-primary" type="button" data-tarea08-next hidden>SIGUIENTE</button>
+          </div>
+        </form>
+        <div class="tarea08-reference" data-tarea08-reference hidden aria-live="polite">
+          <p class="tarea08-reference-label" data-tarea08-reference-label>Respuesta modelo</p>
+          <p class="tarea08-reference-answer" data-tarea08-reference-answer></p>
+          <p class="tarea08-reference-note" data-tarea08-reference-note></p>
+        </div>
+        <p class="tarea08-feedback" id="tarea08-feedback" data-tarea08-feedback aria-live="polite">Escribe tu respuesta y pulsa COMPROBAR.</p>
+      </div>
+      <div class="tarea08-done" data-tarea08-done hidden>
+        <h2>¡Tarea terminada!</h2>
+        <div class="tarea08-summary" data-tarea08-summary aria-live="polite"></div>
+        <button class="tarea08-repeat" type="button" data-tarea08-repeat>REPETIR EJERCICIO</button>
+      </div>
+    </section>
+  </main>
+  <script>
+    (() => {
+      "use strict";
+      const blocks = [
+        "Posesivos y demostrativos",
+        "Adjetivos y nacionalidades",
+        "Comparar",
+        "Adverbios",
+        "Producción integrada"
+      ];
+      const items = [
+        { block:0, kind:"Completa", prompt:"Soy estudiante. ______ libros están sobre la mesa.", accepted:["mis"], answer:"Mis", feedback:"Revisa el posesivo y el número del sustantivo." },
+        { block:0, kind:"Completa", prompt:"María vive con sus dos hermanas. ______ casa es muy grande.", accepted:["su"], answer:"Su", feedback:"Revisa el posesivo: concuerda con la cosa poseída." },
+        { block:0, kind:"Completa", prompt:"Somos nuevos en la empresa. ______ oficina está en el segundo piso.", accepted:["nuestra"], answer:"Nuestra", feedback:"Revisa el género y el número de “oficina”." },
+        { block:0, kind:"Completa", prompt:"Pedro y Ana tienen un coche nuevo. ______ coche es azul.", accepted:["su"], answer:"Su", feedback:"Revisa el posesivo y el número de “coche”." },
+        { block:0, kind:"Completa", prompt:"¿Prefieres ______ camisa de aquí o aquella camisa de la otra tienda?", accepted:["esta"], answer:"esta", feedback:"Observa la distancia indicada por el demostrativo." },
+        { block:0, kind:"Completa", prompt:"¿Quién es ______ hombre que está allí, cerca de la puerta?", accepted:["ese"], answer:"ese", feedback:"Observa la distancia indicada por el demostrativo." },
+        { block:0, kind:"Completa", prompt:"No sé qué es ______ que tienes en la mano.", accepted:["eso"], answer:"eso", feedback:"Revisa el demostrativo neutro para referirse a algo no identificado." },
+        { block:0, kind:"Producción escrita", prompt:"Escribe una pregunta usando “¿De quién...?” y responde con “de + persona”.", mode:"production", validator:"ownerQuestion", answer:"¿De quién es este libro? — Es de Laura.", feedback:"Revisa que incluyas una pregunta con “¿De quién...?” y una respuesta coherente con “de + persona”.", note:"Tu pregunta y la persona pueden ser diferentes del modelo." },
+        { block:1, kind:"Completa", prompt:"Lucía es de España. Es ______.", accepted:["española"], answer:"española", feedback:"Revisa la nacionalidad y la concordancia de género." },
+        { block:1, kind:"Completa", prompt:"Kenji es de Japón. Es ______.", accepted:["japonés"], answer:"japonés", feedback:"Revisa la nacionalidad y la acentuación." },
+        { block:1, kind:"Completa", prompt:"Claire es de Francia. Es ______.", accepted:["francesa"], answer:"francesa", feedback:"Revisa la nacionalidad y la concordancia de género." },
+        { block:1, kind:"Completa", prompt:"Ana y Carlos son de Brasil. Son ______.", accepted:["brasileños"], answer:"brasileños", feedback:"Revisa la concordancia en plural y la ñ." },
+        { block:1, kind:"Transformación", prompt:"Transforma correctamente: un bueno estudiante", mode:"exact", accepted:["un buen estudiante"], answer:"un buen estudiante", feedback:"Revisa la posición del adjetivo y su forma antes del sustantivo." },
+        { block:1, kind:"Transformación", prompt:"Transforma correctamente: un grande hombre", mode:"exact", accepted:["un gran hombre"], answer:"un gran hombre", feedback:"Revisa la forma de “grande” antes del sustantivo singular." },
+        { block:1, kind:"Producción escrita", prompt:"Un hombre sin dinero. Usa “pobre” y escribe la expresión completa.", mode:"exact", accepted:["un hombre pobre"], answer:"un hombre pobre", feedback:"Revisa la posición del adjetivo: aquí describe la falta de dinero." },
+        { block:1, kind:"Producción escrita", prompt:"Escribe dos frases sobre una persona: una con una nacionalidad y otra con un adjetivo.", mode:"production", validator:"nationalityDescription", answer:"Julia es mexicana. Es una persona muy tranquila.", feedback:"Escribe dos frases: incluye una nacionalidad y un adjetivo que concuerde.", note:"Comprueba el género y el número del adjetivo. La persona y las palabras pueden cambiar." },
+        { block:2, kind:"Completa", prompt:"Completa con la palabra adecuada o escribe la frase completa: Un coche es ______ caro que una bicicleta.", mode:"exact", accepted:["más","un coche es más caro que una bicicleta"], answer:"Un coche es más caro que una bicicleta.", feedback:"Recuerda la estructura de comparación." },
+        { block:2, kind:"Completa", prompt:"Completa con la palabra adecuada o escribe la frase completa: Esta película es ______ interesante que la otra.", hint:"(menos)", mode:"exact", accepted:["menos","esta película es menos interesante que la otra"], answer:"Esta película es menos interesante que la otra.", feedback:"Revisa la palabra de cantidad que expresa una comparación inferior." },
+        { block:2, kind:"Completa", prompt:"Completa con la palabra adecuada o escribe la frase completa: Ana es ______ alta como Marta.", mode:"exact", accepted:["tan","ana es tan alta como marta"], answer:"Ana es tan alta como Marta.", feedback:"Revisa si necesitas “que” o “como”." },
+        { block:2, kind:"Completa", prompt:"Completa con la palabra adecuada o escribe la frase completa: Este es ______ restaurante más famoso de la ciudad.", mode:"exact", accepted:["el","este es el restaurante más famoso de la ciudad"], answer:"Este es el restaurante más famoso de la ciudad.", feedback:"Revisa el artículo del superlativo." },
+        { block:2, kind:"Completa", prompt:"Mi hermana tiene veinte años y yo tengo veinticinco. Yo soy ______ que ella.", accepted:["mayor"], answer:"mayor", feedback:"Para comparar la edad de personas, revisa el comparativo irregular." },
+        { block:2, kind:"Completa", prompt:"Esta comida está mala, pero aquella está todavía ______.", accepted:["peor"], answer:"peor", feedback:"Revisa el comparativo irregular de “malo”." },
+        { block:2, kind:"Producción escrita", prompt:"Compara un coche y una bicicleta usando “más... que”. Escribe una frase completa.", mode:"production", validator:"compareMore", answer:"Un coche es más caro que una bicicleta.", feedback:"Incluye los dos elementos comparados y “más + adjetivo + que”.", note:"Puedes escoger otro adjetivo si la comparación es coherente." },
+        { block:2, kind:"Producción escrita", prompt:"Escribe tres frases: una con “más... que”, una con “menos... que” y una con “tan... como”.", mode:"production", validator:"threeComparisons", answer:"Un coche tiene más espacio que una bicicleta. Una bicicleta cuesta menos que un coche. Una bicicleta es tan rápida como una moto.", feedback:"Comprueba que aparezcan las tres estructuras: más... que, menos... que y tan... como.", note:"Puedes comparar características, cantidades o acciones con sujetos diferentes." },
+        { block:3, kind:"Transformación", prompt:"Transforma el adjetivo “rápido” en adverbio.", accepted:["rápidamente"], answer:"rápidamente", feedback:"Revisa la forma del adverbio y la acentuación." },
+        { block:3, kind:"Transformación", prompt:"Transforma el adjetivo “feliz” en adverbio.", accepted:["felizmente"], answer:"felizmente", feedback:"Revisa la formación del adverbio." },
+        { block:3, kind:"Transformación", prompt:"Transforma el adjetivo “claro” en adverbio.", accepted:["claramente"], answer:"claramente", feedback:"Revisa la forma del adverbio." },
+        { block:3, kind:"Completa", prompt:"Completa la coordinación: Ella habla ______ y sinceramente. (claro + sinceramente)", accepted:["clara"], answer:"clara", feedback:"Recuerda que solo el último adverbio conserva “-mente”." },
+        { block:3, kind:"Completa", prompt:"Trabajo ocho horas todos los días. Trabajo ______.", hint:"(muito)", accepted:["mucho"], answer:"mucho", feedback:"Revisa el adverbio de cantidad." },
+        { block:3, kind:"Completa", prompt:"Son las ocho y la reunión empieza a las nueve. Llegamos ______.", accepted:["temprano"], answer:"temprano", feedback:"Revisa la expresión de tiempo." },
+        { block:3, kind:"Completa", prompt:"¿Dónde está Ana? Está ______, en el segundo piso.", accepted:["arriba"], answer:"arriba", feedback:"Revisa la expresión de lugar." },
+        { block:3, kind:"Completa", prompt:"Completa y escribe la frase completa: No gires a la derecha ni a la izquierda. Sigue ______.", mode:"exact", accepted:["derecho","recto","sigue derecho","sigue recto"], answer:"Sigue derecho", feedback:"Revisa la expresión de dirección." },
+        { block:4, kind:"Traducción al español", prompt:"Traduce la frase al español.", source:"Meu irmão trabalha muito e sempre chega cedo.", lang:"pt-BR", mode:"production", validator:"translationBrother", answer:"Mi hermano trabaja mucho y siempre llega temprano.", feedback:"Comprueba las ideas clave: hermano, trabajar mucho, siempre y llegar temprano.", note:"El orden de “siempre” puede cambiar si la frase conserva el sentido." },
+        { block:4, kind:"Traducción al español", prompt:"Traduce la frase al español.", source:"Esta casa é maior que aquela, mas aquela é mais bonita.", lang:"pt-BR", mode:"production", validator:"translationHouses", answer:"Esta casa es más grande que aquella, pero aquella es más bonita.", feedback:"Comprueba las dos comparaciones, las dos casas y el contraste con “pero”.", note:"También son posibles demostrativos como “esa” o “la otra” si el contraste queda claro." },
+        { block:4, kind:"Traducción al español", prompt:"Traduce la frase al español.", source:"Minha amiga é francesa e fala espanhol muito bem.", lang:"pt-BR", mode:"production", validator:"translationFriend", answer:"Mi amiga es francesa y habla español muy bien.", feedback:"Comprueba la nacionalidad, la concordancia y la expresión “muy bien”." },
+        { block:4, kind:"Traducción al español", prompt:"Traduce la frase al español.", source:"Eles fazem o trabalho com cuidado e respondem educadamente.", lang:"pt-BR", mode:"production", validator:"translationWork", answer:"Ellos hacen el trabajo con cuidado y responden educadamente.", feedback:"Comprueba las dos acciones en plural y las expresiones “con cuidado” y “educadamente”.", note:"El pronombre “ellos” puede omitirse." },
+        { block:4, kind:"Producción escrita", prompt:"Describe dos personas y compáralas. Escribe tres frases. Incluye al menos dos adjetivos, un comparativo y un posesivo o demostrativo.", mode:"production", validator:"describePeople", answer:"Mi hermano es tranquilo y mi amiga es muy activa. Mi hermano es más alto que ella, pero mi amiga trabaja más que él. Esa diferencia no es importante.", feedback:"Revisa los requisitos: dos personas, dos adjetivos, un comparativo y un posesivo o demostrativo.", note:"El validador comprueba esos elementos; compara también la concordancia y el sentido con el modelo." },
+        { block:4, kind:"Producción escrita", prompt:"Describe cómo haces tres actividades de tu vida diaria. Puedes empezar con: Trabajo... · Estudio... · Hablo...", mode:"production", validator:"dailyActivities", answer:"Trabajo con cuidado. Estudio mucho. Hablo claramente.", feedback:"Escribe tres actividades diferentes y añade cómo o cuándo haces cada una.", note:"Puedes usar adverbios o expresiones con “con / sin + sustantivo”." },
+        { block:4, kind:"Producción escrita", prompt:"Escribe una pregunta y una respuesta usando un demostrativo. Después escribe una comparación.", mode:"production", validator:"demonstrativeExchange", answer:"¿Prefieres este libro o aquel? Prefiero este. Este es más interesante que aquel.", feedback:"Incluye una pregunta, una respuesta, demostrativos y una comparación.", note:"La pregunta admite órdenes gramaticales naturales; no es obligatoria la inversión del sujeto." },
+        { block:4, kind:"Desafío final · Producción escrita", prompt:"Escribe cuatro o cinco frases sobre dos personas, lugares u objetos. Usa un posesivo, un demostrativo, un adjetivo, una comparación y un adverbio o una expresión con “con / sin + sustantivo”.", mode:"production", validator:"finalChallenge", answer:"Mi hermano vive en esta ciudad. Su barrio es más tranquilo que el mío. Ese parque es muy grande y él camina allí todos los días. Normalmente camina lentamente y con cuidado.", feedback:"Comprueba que tu texto incluya todos los elementos pedidos y tenga cuatro o cinco frases.", note:"No hace falta seguir el orden del modelo ni repetir sus palabras." }
+      ];
+      const root = document.querySelector("[data-tarea08]");
+      const work = root.querySelector("[data-tarea08-work]");
+      const done = root.querySelector("[data-tarea08-done]");
+      const progress = root.querySelector("[data-tarea08-progress]");
+      const progressbar = root.querySelector("[data-tarea08-progressbar]");
+      const blockLabel = root.querySelector("[data-tarea08-block]");
+      const kindLabel = root.querySelector("[data-tarea08-kind]");
+      const prompt = root.querySelector("[data-tarea08-prompt]");
+      const source = root.querySelector("[data-tarea08-source]");
+      const form = root.querySelector("[data-tarea08-form]");
+      let answer = root.querySelector("[data-tarea08-answer]");
+      const checkButton = root.querySelector("[data-tarea08-check]");
+      const revealButton = root.querySelector("[data-tarea08-reveal]");
+      const nextButton = root.querySelector("[data-tarea08-next]");
+      const reference = root.querySelector("[data-tarea08-reference]");
+      const referenceAnswer = root.querySelector("[data-tarea08-reference-answer]");
+      const referenceNote = root.querySelector("[data-tarea08-reference-note]");
+      const feedback = root.querySelector("[data-tarea08-feedback]");
+      const summary = root.querySelector("[data-tarea08-summary]");
+      const BEST_PRECISION_KEY = "workbook-leccion-08-tarea-general-best-precision";
+      let index = 0;
+      let completed = 0;
+      let attempts = 0;
+      let errors = 0;
+      let correctAttempts = 0;
+      let accepted = false;
+      let revealed = false;
+
+      function normalize(value) {
+        return String(value).toLocaleLowerCase("es-ES").replace(/[¿¡?!.;,]+/g, " ").replace(/\s+/g, " ").trim();
+      }
+      function words(value) { return normalize(value).split(" ").filter(Boolean); }
+      function hasWord(value, list) { const set = new Set(words(value)); return list.some((word) => set.has(word)); }
+      function hasPhrase(value, phrase) { return (" " + normalize(value) + " ").includes(" " + normalize(phrase) + " "); }
+      function countWord(value, word) { return words(value).filter((entry) => entry === word).length; }
+      function matches(value, expression) { return expression.test(value.toLocaleLowerCase("es-ES")); }
+      function sentenceUnits(value) { return String(value).split(/[.!?\n]+/).map((part) => part.trim()).filter(Boolean); }
+      function finiteVerbCount(value) {
+        const verbs = ["es","son","está","están","vive","viven","trabaja","trabajan","habla","hablan","hace","hacen","responde","responden","camina","caminan","estudia","estudian","llega","llegan","tiene","tienen","prefiere","prefieren","parece","parecen","dice","dicen","escribe","escriben","come","comen","lee","leen","viaja","viajan","llega","llegan","estudia","estudio","trabajo","hablo","camino","cocino","descanso","vivo","vive","espero","llego","salgo","aprendo","compra","compran","conduce","conducen"];
+        return words(value).filter((word) => verbs.includes(word)).length;
+      }
+      function hasThreeClauses(value) { return Math.max(sentenceUnits(value).length, finiteVerbCount(value)) >= 3; }
+      function hasAdjectives(value, count) {
+        const adjectiveWords = ["bueno","buen","buena","buenos","buenas","grande","gran","grandes","pequeño","pequeña","pequeños","pequeñas","pobre","pobres","antiguo","antigua","antiguos","antiguas","cierto","cierta","ciertos","ciertas","mismo","misma","mismos","mismas","viejo","vieja","viejos","viejas","tranquilo","tranquila","tranquilos","tranquilas","activo","activa","activos","activas","alto","alta","altos","altas","bajo","baja","bajos","bajas","rápido","rápida","lento","lenta","interesante","interesantes","caro","cara","barato","barata","famoso","famosa","bonito","bonita","hermoso","hermosa","feliz","francés","francesa","mexicano","mexicana","español","española","japonés","japonesa","brasileño","brasileña","canadiense","ordenado","ordenada","limpio","limpia","importante","difícil","fácil","nuevo","nueva","azul","rojo","roja","amable","inteligente","serio","seria","educado","educada","cansado","cansada","moderno","moderna","gracioso","graciosa","joven","mayor","menor","mejor","peor"];
+        return words(value).filter((word) => adjectiveWords.includes(word)).length >= count;
+      }
+      function isValidProduction(item, raw) {
+        switch (item.validator) {
+          case "ownerQuestion": {
+            const questionEnd = raw.indexOf("?");
+            const question = questionEnd >= 0 ? raw.slice(0, questionEnd + 1) : "";
+            const response = questionEnd >= 0 ? raw.slice(questionEnd + 1) : "";
+            return /¿\s*de\s+quién(?:es)?\b[\s\S]*\?/i.test(question) && /\b(?:es|son)\s+(?:de|del|de\s+la|de\s+los|de\s+las)\s+[\p{L}]+/iu.test(response);
+          }
+          case "nationalityDescription":
+            return sentenceUnits(raw).length >= 2 && countWord(raw, "es") >= 2 && hasWord(raw, ["española","español","mexicana","mexicano","brasileña","brasileño","francesa","francés","japonesa","japonés","canadiense","argentina","argentino","chilena","chileno","peruana","peruano","colombiana","colombiano","italiana","italiano"]) && hasAdjectives(raw, 1);
+          case "compareMore":
+            return hasWord(raw, ["coche","coches"]) && hasWord(raw, ["bicicleta","bicicletas"]) && matches(raw, /\bmás\s+[\p{L}áéíóúñ]+\s+que\b/u);
+          case "threeComparisons":
+            return matches(raw, /\bmás\s+[\p{L}áéíóúñ]+\s+que\b/u) && matches(raw, /\bmenos(?:\s+[\p{L}áéíóúñ]+)?\s+que\b/u) && matches(raw, /\btan\s+[\p{L}áéíóúñ]+\s+como\b/u);
+          case "translationBrother":
+            return hasWord(raw, ["hermano"]) && hasWord(raw, ["trabaja"]) && hasWord(raw, ["mucho"]) && hasWord(raw, ["siempre"]) && hasWord(raw, ["llega"]) && hasWord(raw, ["temprano"]);
+          case "translationHouses":
+            return hasWord(raw, ["casa"]) && hasWord(raw, ["esta"]) && hasWord(raw, ["pero"]) && hasWord(raw, ["esa","aquella","otra"]) && countWord(raw, "más") >= 2 && hasWord(raw, ["grande","mayor"]) && hasWord(raw, ["bonita","bella","hermosa"]);
+          case "translationFriend":
+            return hasWord(raw, ["amiga"]) && hasWord(raw, ["mi"]) && hasWord(raw, ["francesa"]) && hasWord(raw, ["habla"]) && hasWord(raw, ["español"]) && hasPhrase(raw, "muy bien");
+          case "translationWork":
+            return hasWord(raw, ["hacen"]) && hasPhrase(raw, "el trabajo") && hasPhrase(raw, "con cuidado") && hasWord(raw, ["responden"]) && (hasWord(raw, ["educadamente"]) || hasPhrase(raw, "de manera educada"));
+          case "describePeople":
+            return hasThreeClauses(raw) && hasWord(raw, ["hermano","hermana","amigo","amiga","compañero","compañera","persona","hombre","mujer","madre","padre","profesor","profesora","él","ella"]) && hasAdjectives(raw, 2) && matches(raw, /\b(?:más|menos|tan)\s+[\p{L}áéíóúñ]+\s+(?:que|como)\b/u) && hasWord(raw, ["mi","mis","tu","tus","su","sus","nuestro","nuestra","nuestros","nuestras","este","esta","estos","estas","ese","esa","esos","esas","aquel","aquella","aquellos","aquellas"]);
+          case "dailyActivities": {
+            const actions = ["trabajo","estudio","hablo","camino","cocino","leo","escribo","descanso","desayuno","almuerzo","ceno","limpio","corro","conduzco","practico","duermo","llego","salgo"];
+            const distinctActions = new Set(words(raw).filter((word) => actions.includes(word)));
+            const modifiers = ["mucho","poco","bien","mal","rápidamente","lentamente","claramente","temprano","tarde"];
+            const modifierCount = words(raw).filter((word) => modifiers.includes(word)).length + (hasPhrase(raw,"con cuidado") ? 1 : 0) + (hasPhrase(raw,"con dificultad") ? 1 : 0) + (hasPhrase(raw,"sin dificultad") ? 1 : 0);
+            return distinctActions.size >= 3 && modifierCount >= 3;
+          }
+          case "demonstrativeExchange": {
+            const questionEnd = raw.indexOf("?");
+            const question = questionEnd >= 0 ? raw.slice(0, questionEnd + 1) : "";
+            const afterQuestion = questionEnd >= 0 ? raw.slice(questionEnd + 1) : "";
+            return /¿[^?]*\b(?:prefieres|prefiere|preferís|preferimos|prefiero)\b[^?]*\b(?:este|esta|estos|estas|ese|esa|esos|esas|aquel|aquella|aquellos|aquellas)\b[^?]*\?/i.test(question) && hasWord(afterQuestion,["prefiero","prefiere","prefieren","elijo","escojo"]) && hasWord(afterQuestion,["este","esta","estos","estas","ese","esa","esos","esas","aquel","aquella","aquellos","aquellas"]) && matches(afterQuestion,/\b(?:más|menos|tan)\s+[\p{L}áéíóúñ]+\s+(?:que|como)\b/u);
+          }
+          case "finalChallenge": {
+            const clauseCount = Math.max(sentenceUnits(raw).length, finiteVerbCount(raw));
+            const hasPossessive = hasWord(raw,["mi","mis","tu","tus","su","sus","nuestro","nuestra","nuestros","nuestras","mío","mía","míos","mías","tuyo","tuya"]);
+            const hasDemonstrative = hasWord(raw,["este","esta","estos","estas","ese","esa","esos","esas","aquel","aquella","aquellos","aquellas","esto","eso","aquello"]);
+            const hasComparison = matches(raw,/\b(?:más|menos|tan)\s+[\p{L}áéíóúñ]+\s+(?:que|como)\b/u);
+            const hasAdverbOrPrepPhrase = hasWord(raw,["rápidamente","lentamente","claramente","bien","mal","mucho","poco","temprano","tarde","aquí","allí","allá","arriba","abajo","siempre","cuidadosamente"]) || matches(raw,/\b(?:con|sin)\s+[\p{L}áéíóúñ]+/u);
+            return clauseCount >= 4 && clauseCount <= 7 && hasPossessive && hasDemonstrative && hasAdjectives(raw,1) && hasComparison && hasAdverbOrPrepPhrase;
+          }
+          default: return false;
+        }
+      }
+      function renderProgress() {
+        progress.textContent = "Ejercicio " + (index + 1) + " / " + items.length + " · " + blocks[items[index].block];
+        progressbar.setAttribute("aria-valuenow", String(completed));
+        progressbar.firstElementChild.style.width = ((completed / items.length) * 100) + "%";
+      }
+      function clearFeedback() {
+        if (accepted) return;
+        answer.classList.remove("is-incorrect","is-correct");
+        answer.removeAttribute("aria-invalid");
+        feedback.textContent = "Respuesta actualizada. Pulsa COMPROBAR.";
+        feedback.className = "tarea08-feedback";
+      }
+      function render() {
+        const item = items[index];
+        accepted = false;
+        revealed = false;
+        blockLabel.textContent = blocks[item.block];
+        kindLabel.textContent = item.kind;
+        prompt.textContent = item.prompt;
+        source.hidden = !item.source;
+        source.textContent = item.source || "";
+        source.lang = item.lang || "es";
+        answer.value = "";
+        answer.disabled = false;
+        answer.removeAttribute("aria-invalid");
+        answer.classList.remove("is-correct","is-incorrect");
+        answer.setAttribute("aria-label", item.mode === "production" ? "Tu respuesta escrita" : "Tu respuesta");
+        answer.setAttribute("aria-describedby", "tarea08-feedback");
+        const longResponse = item.mode === "production" || item.mode === "exact";
+        const textarea = document.createElement(longResponse ? "textarea" : "input");
+        if (!longResponse) textarea.type = "text";
+        textarea.className = "tarea08-field";
+        textarea.id = "tarea08-answer";
+        textarea.dataset.tarea08Answer = "";
+        textarea.lang = "es";
+        textarea.autocomplete = "off";
+        textarea.spellcheck = true;
+        textarea.setAttribute("aria-label", item.mode === "production" ? "Tu respuesta escrita" : "Tu respuesta");
+        textarea.setAttribute("aria-describedby", "tarea08-feedback");
+        answer.replaceWith(textarea);
+        // Keep the control reference aligned with the newly rendered field.
+        answer = textarea;
+        reference.hidden = true;
+        referenceAnswer.textContent = "";
+        referenceNote.textContent = "";
+        revealButton.disabled = false;
+        checkButton.disabled = false;
+        checkButton.hidden = false;
+        nextButton.hidden = true;
+        nextButton.disabled = true;
+        nextButton.textContent = index === items.length - 1 ? "VER RESULTADOS" : "SIGUIENTE";
+        feedback.textContent = item.hint ? "Pista: " + item.hint + " · Escribe tu respuesta y pulsa COMPROBAR." : "Escribe tu respuesta y pulsa COMPROBAR.";
+        feedback.className = "tarea08-feedback";
+        renderProgress();
+        answer.addEventListener("input", clearFeedback);
+        answer.addEventListener("keydown", (event) => {
+          if ((event.ctrlKey || event.metaKey) && event.key === "Enter") { event.preventDefault(); checkButton.click(); }
+          if (event.key === "Enter" && answer.tagName === "INPUT") { event.preventDefault(); checkButton.click(); }
+        });
+        answer.focus();
+      }
+      function revealAnswer() {
+        if (accepted) return;
+        const item = items[index];
+        revealed = true;
+        if (item.mode === "production") {
+          referenceAnswer.textContent = item.answer;
+          referenceNote.textContent = item.note || "Es un modelo posible; tu respuesta puede expresarse de otra forma correcta.";
+          reference.hidden = false;
+          feedback.textContent = "Compara con este modelo y revisa tu respuesta. Pulsa COMPROBAR para continuar.";
+          feedback.className = "tarea08-feedback";
+        } else {
+          answer.value = item.answer;
+          answer.classList.remove("is-incorrect");
+          answer.removeAttribute("aria-invalid");
+          feedback.textContent = "Respuesta mostrada. Pulsa COMPROBAR para validarla.";
+          feedback.className = "tarea08-feedback";
+          answer.focus();
+        }
+      }
+      function checkAnswer(event) {
+        event.preventDefault();
+        if (accepted) return;
+        attempts += 1;
+        const item = items[index];
+        const raw = answer.value.trim();
+        let correct = false;
+        if (raw) {
+          if (item.mode === "production") correct = isValidProduction(item, raw);
+          else correct = item.accepted.some((acceptedAnswer) => normalize(acceptedAnswer) === normalize(raw));
+        }
+        if (!correct) {
+          errors += 1;
+          answer.classList.remove("is-correct");
+          answer.classList.add("is-incorrect");
+          answer.setAttribute("aria-invalid","true");
+          feedback.textContent = raw ? item.feedback : "Escribe una respuesta antes de comprobar.";
+          feedback.className = "tarea08-feedback incorrect";
+          answer.focus();
+          return;
+        }
+        completed += 1;
+        correctAttempts += 1;
+        accepted = true;
+        answer.classList.remove("is-incorrect");
+        answer.classList.add("is-correct");
+        answer.setAttribute("aria-invalid","false");
+        answer.disabled = true;
+        checkButton.hidden = true;
+        revealButton.disabled = true;
+        nextButton.hidden = false;
+        nextButton.disabled = false;
+        feedback.textContent = item.mode === "production" ? "La respuesta cumple los elementos principales. Revisa también la gramática y el sentido con el modelo." : "Correcto. Puedes continuar.";
+        feedback.className = "tarea08-feedback correct";
+        renderProgress();
+        nextButton.focus();
+      }
+      function finish() {
+        const precision = attempts ? Math.round((correctAttempts / attempts) * 100) : 0;
+        let bestPrecision = 0;
+        try { bestPrecision = Number(window.localStorage.getItem(BEST_PRECISION_KEY)) || 0; } catch (error) { bestPrecision = 0; }
+        bestPrecision = Math.max(bestPrecision, precision);
+        try { window.localStorage.setItem(BEST_PRECISION_KEY, String(bestPrecision)); } catch (error) { /* La tarea sigue funcionando sin almacenamiento local. */ }
+        const rows = [
+          ["Ejercicios completados", completed + " / " + items.length],
+          ["Errores cometidos", String(errors)],
+          ["Intentos totales", String(attempts)],
+          ["Precisión", precision + "%"],
+          ["Mejor precisión", bestPrecision + "%"]
+        ];
+        summary.replaceChildren(...rows.map(([label, value]) => {
+          const row = document.createElement("p");
+          const strong = document.createElement("strong");
+          strong.textContent = label + ": ";
+          row.append(strong, document.createTextNode(value));
+          return row;
+        }));
+        work.hidden = true;
+        done.hidden = false;
+        root.querySelector(".tarea08-header").hidden = true;
+        progress.hidden = true;
+        progressbar.hidden = true;
+        root.querySelector("[data-tarea08-repeat]").focus();
+      }
+      function advance() {
+        if (!accepted) return;
+        if (index === items.length - 1) { finish(); return; }
+        index += 1;
+        render();
+      }
+      revealButton.addEventListener("click", revealAnswer);
+      form.addEventListener("submit", checkAnswer);
+      nextButton.addEventListener("click", advance);
+      root.querySelector("[data-tarea08-repeat]").addEventListener("click", () => {
+        index = 0; completed = 0; attempts = 0; errors = 0; correctAttempts = 0; accepted = false; revealed = false;
+        done.hidden = true;
+        work.hidden = false;
+        root.querySelector(".tarea08-header").hidden = false;
+        progress.hidden = false;
+        progressbar.hidden = false;
+        render();
+      });
+      root.querySelectorAll("[data-tarea08-font]").forEach((button) => button.addEventListener("click", () => {
+        const size = button.dataset.tarea08Font;
+        document.documentElement.style.setProperty("--font-scale", size === "small" ? ".9" : size === "large" ? "1.16" : "1");
+        root.querySelectorAll("[data-tarea08-font]").forEach((control) => control.setAttribute("aria-pressed", String(control === button)));
+      }));
+      if (items.length !== 40) throw new Error("La tarea debe contener exactamente 40 ejercicios.");
+      render();
+    })();
+  </script>
+</body>
+</html>
