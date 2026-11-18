@@ -35,9 +35,10 @@
     textarea { background:#fff; border:1px solid var(--line); border-bottom:3px solid var(--blue); border-radius:4px; color:var(--ink); line-height:1.45; min-height:8.5rem; padding:12px 14px; resize:vertical; width:100%; }
     .actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; }
     .actions button,.repeat { background:var(--red); border:1px solid var(--red); color:#fff; font-weight:900; line-height:1.1; min-height:44px; padding:10px 15px; }
-    .actions [data-reveal] { background:#fff; color:var(--red); }
     .feedback { background:var(--soft); line-height:1.4; margin:0; min-height:48px; padding:12px 14px; }
     .feedback.info { background:#eef4fc; color:#21497f; }
+    .feedback.correct { background:#ecfdf3; color:#17603f; }
+    .feedback.incorrect { background:#fff1f0; color:#9f1d1d; }
     .feedback.ready { background:#ecfdf3; color:#17603f; }
     .reference { background:#ecfdf3; border-left:5px solid var(--green); display:grid; gap:8px; padding:16px 18px; }
     .reference-label { color:#17603f; font-size:.78rem; font-weight:900; letter-spacing:.08em; margin:0; text-transform:uppercase; }
@@ -59,7 +60,7 @@
     <header>
       <p class="course">Curso de Español · Lección 8 · Práctica</p>
       <h1>Ejercicio 8.10 · Traducción al portugués</h1>
-      <p class="sub">Escribe una traducción completa y después compárala con un modelo posible.</p>
+      <p class="sub">Escribe una traducción completa y comprueba si conserva el significado y las estructuras esperadas.</p>
       <div class="font-controls" role="group" aria-label="Controles de tamaño del texto">
         <button type="button" data-font="small" aria-label="Reducir tamaño del texto" aria-pressed="false">A−</button>
         <button type="button" data-font="normal" aria-label="Tamaño normal del texto" aria-pressed="true">A</button>
@@ -69,18 +70,17 @@
     <section class="shell" aria-label="Ejercicio de traducción al portugués">
       <div class="question-wrap" data-question-wrap>
         <p class="progress" data-progress aria-live="polite"></p>
-        <div class="progress-track" role="progressbar" data-progressbar aria-label="Frases comparadas" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><span></span></div>
-        <p class="instruction">Traduce la frase al portugués. No hay una única traducción literal posible.</p>
+        <div class="progress-track" role="progressbar" data-progressbar aria-label="Frases comprobadas" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><span></span></div>
+        <p class="instruction">Traduce la frase al portugués. Se aceptan distintas formulaciones correctas.</p>
         <p class="source" data-source lang="es"></p>
         <div>
           <label class="answer-label" for="translation-input">Tu traducción al portugués</label>
           <textarea id="translation-input" data-input rows="4" lang="pt-BR" spellcheck="true" placeholder="Escribe tu traducción completa aquí" aria-describedby="translation-feedback"></textarea>
         </div>
         <div class="actions" data-no-slide-advance>
-          <button type="button" data-reveal disabled>VER RESPUESTA</button>
           <button type="button" data-check>COMPROBAR</button>
         </div>
-        <p class="feedback" id="translation-feedback" data-feedback aria-live="polite">Escribe tu traducción antes de comprobarla.</p>
+        <p class="feedback" id="translation-feedback" data-feedback aria-live="polite">Escribe tu traducción y pulsa COMPROBAR.</p>
         <div class="reference" data-reference hidden aria-live="polite">
           <p class="reference-label">Una traducción modelo</p>
           <p class="reference-answer" data-model lang="pt-BR"></p>
@@ -92,7 +92,7 @@
       </div>
       <div class="done" data-done hidden>
         <h2>¡Revisión terminada!</h2>
-        <p>Has comparado tus traducciones con los modelos. La actividad no calcula una nota automática porque admite distintas traducciones correctas.</p>
+        <p>Las respuestas se validan con el modelo y las variantes naturales previstas para cada frase.</p>
         <div class="result-summary" data-summary aria-live="polite"></div>
         <button class="repeat" type="button" data-repeat>REPETIR EJERCICIO</button>
       </div>
@@ -102,18 +102,17 @@
     (() => {
       "use strict";
       const items = [
-        { source: "El señor Gómez hace su trabajo con dificultad.", model: "O senhor Gómez faz seu trabalho com dificuldade.", note: "También puede abreviarse “senhor” como “Sr.”." },
-        { source: "Ella habla sinceramente, y su amigo responde humildemente.", model: "Ela fala sinceramente, e seu amigo responde humildemente.", note: "La coma y la conjunción pueden variar según la puntuación elegida, sin cambiar el sentido." },
-        { source: "Esta mujer siempre explica todo claramente.", model: "Esta mulher sempre explica tudo claramente." },
-        { source: "Francamente, no quiero salir esta noche. Prefiero leer y escribir tranquilamente.", model: "Francamente, não quero sair esta noite. Prefiro ler e escrever tranquilamente.", note: "“Sinceramente” también puede ser aceptable si conserva la intención de la frase." },
-        { source: "Bernardo va siempre al mismo restaurante. Él piensa que es el mejor restaurante de la ciudad.", model: "Bernardo vai sempre ao mesmo restaurante. Ele acha que é o melhor restaurante da cidade.", note: "“Ele pensa que é o melhor restaurante da cidade” también es correcto." }
+        { source: "El señor Gómez hace su trabajo con dificultad.", model: "O senhor Gómez faz seu trabalho com dificuldade.", accepted: ["O Sr. Gómez faz seu trabalho com dificuldade.", "O senhor Gómez faz o seu trabalho com dificuldade.", "O senhor Gómez realiza seu trabalho com dificuldade."], note: "Também pode abreviar-se “senhor” como “Sr.”." },
+        { source: "Ella habla sinceramente, y su amigo responde humildemente.", model: "Ela fala sinceramente, e seu amigo responde humildemente.", accepted: ["Ela fala sinceramente e o amigo dela responde humildemente.", "Ela fala com sinceridade, e seu amigo responde com humildade."], note: "La coma y la conjunción pueden variar según la puntuación elegida, sin cambiar el sentido." },
+        { source: "Esta mujer siempre explica todo claramente.", model: "Esta mulher sempre explica tudo claramente.", accepted: ["Essa mulher sempre explica tudo claramente."] },
+        { source: "Francamente, no quiero salir esta noche. Prefiero leer y escribir tranquilamente.", model: "Francamente, não quero sair esta noite. Prefiro ler e escrever tranquilamente.", accepted: ["Sinceramente, não quero sair esta noite. Prefiro ler e escrever tranquilamente.", "Francamente, não quero sair hoje à noite. Prefiro ler e escrever tranquilamente.", "Francamente, não quero sair esta noite. Prefiro ler e escrever com tranquilidade.", "Sinceramente, não quero sair hoje à noite. Prefiro ler e escrever com tranquilidade."], note: "“Sinceramente” también puede ser aceptable si conserva la intención de la frase." },
+        { source: "Bernardo va siempre al mismo restaurante. Él piensa que es el mejor restaurante de la ciudad.", model: "Bernardo vai sempre ao mesmo restaurante. Ele acha que é o melhor restaurante da cidade.", accepted: ["Bernardo sempre vai ao mesmo restaurante. Ele pensa que é o melhor restaurante da cidade.", "Bernardo vai sempre ao mesmo restaurante. Ele pensa que é o melhor restaurante da cidade.", "Bernardo sempre vai ao mesmo restaurante. Ele acha que é o melhor restaurante da cidade.", "Bernardo vai sempre ao mesmo restaurante. Acha que é o melhor restaurante da cidade.", "Bernardo sempre vai ao mesmo restaurante. Acha que é o melhor restaurante da cidade."], note: "“Ele pensa que é o melhor restaurante da cidade” también es correcto." }
       ];
       const progress = document.querySelector("[data-progress]");
       const progressbar = document.querySelector("[data-progressbar]");
       const source = document.querySelector("[data-source]");
       const input = document.querySelector("[data-input]");
       const checkButton = document.querySelector("[data-check]");
-      const revealButton = document.querySelector("[data-reveal]");
       const nextButton = document.querySelector("[data-next]");
       const feedback = document.querySelector("[data-feedback]");
       const reference = document.querySelector("[data-reference]");
@@ -122,17 +121,35 @@
       const wrap = document.querySelector("[data-question-wrap]");
       const done = document.querySelector("[data-done]");
       const summary = document.querySelector("[data-summary]");
+      const header = document.querySelector("header");
+      const BEST_SCORE_KEY = "workbook-leccion-08-ejercicio-10-best-score";
       let index = 0;
-      let checks = 0;
-      let compared = 0;
+      let attempts = 0;
+      let errors = 0;
+      let correct = 0;
+      let completed = 0;
       let checked = false;
-      let revealed = false;
-      const reviewed = new Set();
+      let currentCorrect = false;
+      function normalize(value) {
+        return value.toLocaleLowerCase("pt-BR").normalize("NFC").replace(/[¿?¡!.,;:“”"'()]/g, " ").replace(/\s+/g, " ").trim();
+      }
+      function bestScore() {
+        try { return Number(localStorage.getItem(BEST_SCORE_KEY)) || 0; } catch { return 0; }
+      }
+      function saveBestScore(score) {
+        const best = Math.max(bestScore(), score);
+        try { localStorage.setItem(BEST_SCORE_KEY, String(best)); } catch { /* El ejercicio sigue funcionando sin almacenamiento local. */ }
+        return best;
+      }
 
       function updateProgress() {
-        progress.textContent = "Frase " + (index + 1) + " / " + items.length + " · Comparadas: " + compared + " / " + items.length;
-        progressbar.setAttribute("aria-valuenow", String(compared));
-        progressbar.firstElementChild.style.width = ((compared / items.length) * 100) + "%";
+        progress.textContent = "Frase " + (index + 1) + " / " + items.length + " · Comprobadas: " + completed + " / " + items.length;
+        progressbar.setAttribute("aria-valuenow", String(completed));
+        progressbar.firstElementChild.style.width = ((completed / items.length) * 100) + "%";
+      }
+      function isCorrect(item, value) {
+        const answer = normalize(value);
+        return [item.model, ...(item.accepted || [])].some((candidate) => normalize(candidate) === answer);
       }
       function render() {
         const item = items[index];
@@ -142,26 +159,18 @@
         model.textContent = "";
         note.textContent = item.note || "";
         note.hidden = !item.note;
-        revealButton.disabled = true;
+        input.disabled = false;
         checkButton.disabled = false;
         nextButton.disabled = true;
         nextButton.textContent = index === items.length - 1 ? "VER RESULTADOS" : "SIGUIENTE";
         checked = false;
-        revealed = false;
-        feedback.textContent = "Escribe tu traducción antes de comprobarla.";
+        currentCorrect = false;
+        feedback.textContent = "Escribe tu traducción y pulsa COMPROBAR.";
         feedback.className = "feedback";
         updateProgress();
       }
       input.addEventListener("input", () => {
-        if (revealed) {
-          reference.hidden = true;
-          nextButton.disabled = true;
-          revealed = false;
-        }
-        checked = false;
-        revealButton.disabled = true;
-        checkButton.disabled = false;
-        feedback.textContent = input.value.trim() ? "Traducción actualizada. Pulsa COMPROBAR y después compara con un modelo." : "Escribe tu traducción antes de comprobarla.";
+        feedback.textContent = input.value.trim() ? "Respuesta actualizada. Pulsa COMPROBAR." : "Escribe tu traducción y pulsa COMPROBAR.";
         feedback.className = "feedback";
       });
       input.addEventListener("keydown", (event) => {
@@ -172,43 +181,36 @@
       });
       checkButton.addEventListener("click", () => {
         if (!input.value.trim()) {
-          feedback.textContent = "Escribe una traducción antes de continuar.";
+          feedback.textContent = "Escribe una traducción antes de comprobarla.";
           feedback.className = "feedback info";
           input.focus();
           return;
         }
         if (checked) return;
-        checks += 1;
+        attempts += 1;
         checked = true;
-        revealButton.disabled = false;
+        input.disabled = true;
         checkButton.disabled = true;
-        feedback.textContent = "Respuesta registrada. No la calificamos por coincidencia literal: compárala con un modelo posible.";
-        feedback.className = "feedback info";
-        revealButton.focus();
-      });
-      revealButton.addEventListener("click", () => {
-        if (!checked) return;
-        const item = items[index];
-        model.textContent = item.model;
-        note.textContent = item.note || "Las traducciones pueden variar si conservan el significado y son gramaticalmente correctas.";
+        currentCorrect = isCorrect(items[index], input.value);
+        completed += 1;
+        if (currentCorrect) correct += 1;
+        else errors += 1;
+        model.textContent = items[index].model;
+        note.textContent = items[index].note || "Se aceptan las variantes naturales previstas para esta frase.";
         note.hidden = false;
         reference.hidden = false;
-        revealButton.disabled = true;
         nextButton.disabled = false;
-        revealed = true;
-        if (!reviewed.has(index)) {
-          reviewed.add(index);
-          compared += 1;
-          updateProgress();
-        }
-        feedback.textContent = "Compara el significado y las estructuras. Una formulación diferente también puede ser correcta.";
-        feedback.className = "feedback ready";
+        feedback.textContent = currentCorrect ? "Correcto. La respuesta modelo aparece abajo." : "Incorrecto. Revisa la respuesta modelo que aparece abajo.";
+        feedback.className = currentCorrect ? "feedback correct" : "feedback incorrect";
+        updateProgress();
         nextButton.focus();
       });
       nextButton.addEventListener("click", () => {
-        if (!revealed) return;
+        if (!checked) return;
         if (index === items.length - 1) {
-          const rows = [["Frases comparadas", compared + " / " + items.length], ["Comprobaciones realizadas", String(checks)]];
+          const percentage = Math.round((correct / items.length) * 100);
+          const best = saveBestScore(correct);
+          const rows = [["Puntuación", correct + " / " + items.length], ["Porcentaje", percentage + "%"], ["Errores", String(errors)], ["Intentos", String(attempts)], ["Mejor resultado", best + " / " + items.length]];
           summary.replaceChildren(...rows.map(([label, value]) => {
             const row = document.createElement("p");
             const strong = document.createElement("strong");
@@ -218,6 +220,7 @@
           }));
           wrap.hidden = true;
           done.hidden = false;
+          header.hidden = true;
           document.querySelector("[data-repeat]").focus();
           return;
         }
@@ -227,11 +230,13 @@
       });
       document.querySelector("[data-repeat]").addEventListener("click", () => {
         index = 0;
-        checks = 0;
-        compared = 0;
-        reviewed.clear();
+        attempts = 0;
+        errors = 0;
+        correct = 0;
+        completed = 0;
         done.hidden = true;
         wrap.hidden = false;
+        header.hidden = false;
         render();
         input.focus();
       });
