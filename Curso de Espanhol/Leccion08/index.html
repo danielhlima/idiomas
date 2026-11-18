@@ -749,43 +749,13 @@
     .hablamos-questions { align-items: baseline; border-left: 4px solid var(--color-warm); display: flex; flex-wrap: wrap; gap: .35rem .8rem; padding-left: var(--space-3); }
     .hablamos-questions strong { color: var(--color-muted); font-size: .9rem; }
     .hablamos-questions span { color: var(--color-accent-strong); font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; }
-    .hablamos-closing { background: var(--color-accent-soft); border-left: 5px solid var(--color-accent); display: grid; gap: var(--space-3); padding: var(--space-4); }
-    .hablamos-closing > p { color: var(--color-accent-strong); font-family: var(--font-display); font-size: clamp(1.35rem, 2.3vw, 1.8rem); font-weight: 700; margin: 0; }
-    .hablamos-closing-examples { display: grid; gap: var(--space-2); grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .hablamos-closing-examples p { color: var(--color-ink); font-size: .95rem; font-weight: 700; line-height: 1.35; margin: 0; }
     .hablamos-actions { display: flex; justify-content: space-between; }
     .hablamos-nav { display: flex; gap: var(--space-2); }
     .hablamos-nav button { background: var(--color-accent); border: 1px solid var(--color-accent); border-radius: var(--radius-sm); color: #fff; font-size: .9rem; font-weight: 900; line-height: 1.1; min-height: 2.35rem; padding: .5rem .85rem; }
     .hablamos-nav button.secondary { background: var(--color-surface); color: var(--color-accent-strong); }
     .hablamos-nav button:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
     @media (max-width: 850px) { .hablamos-comparisons { grid-template-columns: 1fr; } }
-    @media (max-width: 700px) { .hablamos-slide { padding-top: 8.5rem; } .hablamos-stage { min-height: 0; } .hablamos-turns, .hablamos-sentence-list, .hablamos-closing-examples { grid-template-columns: 1fr; } }
-    .listening35-slide { background: linear-gradient(135deg, rgba(45, 94, 168, .07), transparent 46%), var(--color-surface); grid-template-rows: auto minmax(0, 1fr) auto; padding-top: 4.75rem; }
-    .listening35-slide .slide-header { padding-top: var(--space-6); }
-    .listening35-slide .slide-content { align-items: start; min-height: 0; overflow: auto; padding-bottom: var(--space-4); padding-top: var(--space-3); }
-    .listening35-shell { display: grid; gap: var(--space-3); margin: 0 auto; max-width: 92rem; width: 100%; }
-    .listening35-top { align-items: center; display: flex; flex-wrap: wrap; gap: var(--space-3); justify-content: space-between; }
-    .listening35-counter { color: var(--color-accent-strong); font-size: .95rem; font-weight: 900; margin: 0; }
-    .listening35-placeholder { background: var(--color-surface-soft); border-left: 5px solid var(--color-warm); color: var(--color-muted); display: grid; gap: .2rem; padding: .55rem var(--space-3); }
-    .listening35-placeholder strong { color: var(--color-accent-strong); font-size: .82rem; text-transform: uppercase; }
-    .listening35-placeholder span { font-size: .8rem; }
-    .listening35-stage { align-content: start; display: grid; gap: var(--space-3); min-height: min(25rem, 43vh); }
-    .listening35-stage h3 { color: var(--color-accent-strong); font-size: calc(var(--slide-h3-size) * var(--slide-font-scale)); margin: 0; }
-    .listening35-instruction { color: var(--color-muted); font-weight: 800; margin: 0; }
-    .listening35-questions { display: grid; gap: var(--space-2) var(--space-4); grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .listening35-question { display: grid; gap: .35rem; }
-    .listening35-question label { font-family: var(--font-display); font-size: 1rem; font-weight: 700; line-height: 1.25; }
-    .listening35-answer { background: var(--color-surface); border: 1px solid var(--color-line); border-bottom: 3px solid var(--blue); color: var(--color-ink); font: inherit; min-height: 3.1rem; padding: .45rem .65rem; resize: vertical; width: 100%; }
-    .listening35-answer:focus-visible, .listening35-nav button:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
-    .listening35-interpretation { min-height: 8rem; }
-    .listening35-nav { display: flex; gap: var(--space-2); }
-    .listening35-nav button, .listening35-reveal { background: var(--color-accent); border: 1px solid var(--color-accent); border-radius: var(--radius-sm); color: #fff; font-size: .9rem; font-weight: 900; line-height: 1.1; min-height: 2.35rem; padding: .5rem .85rem; }
-    .listening35-nav button.secondary { background: var(--color-surface); color: var(--color-accent-strong); }
-    .listening35-nav button:disabled { cursor: not-allowed; opacity: .45; }
-    .listening35-transcript { border-left: 5px solid var(--color-warm); display: grid; gap: var(--space-2); max-height: min(20rem, 35vh); overflow: auto; padding: var(--space-2) var(--space-4); }
-    .listening35-transcript p { font-family: var(--font-display); font-size: 1rem; line-height: 1.35; margin: 0; }
-    .listening35-transcript strong { color: var(--color-accent-strong); font-family: Arial, Helvetica, sans-serif; font-size: .88em; }
-    @media (max-width: 700px) { .listening35-slide { padding-top: 4.75rem; } .listening35-slide .slide-header { padding-top: 4rem; } .listening35-slide .slide-header h2 { font-size: clamp(2rem, 9vw, 2.75rem); } .listening35-stage { min-height: 0; } .listening35-questions { grid-template-columns: 1fr; } }
+    @media (max-width: 700px) { .hablamos-slide { padding-top: 8.5rem; } .hablamos-stage { min-height: 0; } .hablamos-turns, .hablamos-sentence-list { grid-template-columns: 1fr; } }
     .cierre36-slide { background: linear-gradient(135deg, rgba(241, 191, 0, .12), transparent 42%), var(--color-surface); grid-template-rows: auto minmax(0, 1fr) auto; padding-top: 4.75rem; }
     .cierre36-slide .slide-header { padding-top: var(--space-6); }
     .cierre36-slide .slide-content { align-items: stretch; min-height: 0; overflow: auto; padding-bottom: var(--space-4); padding-top: var(--space-3); }
@@ -2704,7 +2674,7 @@
         </header>
         <div class="slide-content">
           <div class="hablamos-shell" data-hablamos>
-            <p class="hablamos-counter" data-hablamos-counter aria-live="polite">Paso 1 de 4 · Posesión y demostrativos</p>
+            <p class="hablamos-counter" data-hablamos-counter aria-live="polite">Paso 1 de 3 · Posesión y demostrativos</p>
             <section class="hablamos-stage" data-hablamos-stage aria-labelledby="hablamos-stage-posesion">
               <h3 id="hablamos-stage-posesion">1 · Posesión y demostrativos</h3>
               <p class="hablamos-instruction">En parejas · 2 preguntas por persona · Pregunta, responde y cambia de turno.</p>
@@ -2737,18 +2707,6 @@
               <p class="hablamos-bank">También pueden decir: Trabajo bien / mal · Llego temprano / tarde · Hablo con cuidado.</p>
               <div class="hablamos-questions"><strong>El compañero pregunta:</strong><span>¿Siempre?</span><span>¿Por qué?</span><span>¿Y los fines de semana?</span><span>¿En el trabajo también?</span></div>
             </section>
-            <section class="hablamos-stage" data-hablamos-stage aria-labelledby="hablamos-stage-compartir" hidden>
-              <h3 id="hablamos-stage-compartir">Compartir una frase</h3>
-              <p class="hablamos-instruction">Cada pareja elige una frase breve para compartir con la clase.</p>
-              <div class="hablamos-closing">
-                <p>Comparte una frase con la clase.</p>
-                <div class="hablamos-closing-examples">
-                  <p>Mi compañero prefiere aquel coche.</p>
-                  <p>Esta ciudad es más grande que aquella.</p>
-                  <p>Mi compañero estudia mucho.</p>
-                </div>
-              </div>
-            </section>
             <div class="hablamos-actions" data-no-slide-advance>
               <div class="hablamos-nav">
                 <button class="secondary" type="button" data-hablamos-prev aria-label="Ronda anterior">Anterior</button>
@@ -2760,75 +2718,6 @@
         <footer class="slide-footer">
           <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Progreso de la lección"><span></span></div>
           <p class="slide-count" data-slide-count>Slide 34 / 34</p>
-        </footer>
-      </section>
-      <section class="slide listening35-slide" id="slide-35" data-slide aria-labelledby="slide-35-title" tabindex="-1" hidden>
-        <header class="slide-header">
-          <p class="slide-kicker">Lección 8 · Listening · 8–10 minutos</p>
-          <h2 id="slide-35-title">Listening · Dos personas muy diferentes</h2>
-          <p class="slide-subtitle">Escucha, compara e interpreta</p>
-        </header>
-        <div class="slide-content" data-no-slide-advance>
-          <div class="listening35-shell" data-listening35>
-            <div class="listening35-top">
-              <p class="listening35-counter" data-listening35-counter aria-live="polite">Paso 1 de 4 · Comprensión global</p>
-              <div class="listening35-placeholder" role="note" aria-label="Audio pendiente">
-                <strong>AUDIO PLACEHOLDER — generar en Edge</strong>
-                <span>Una sola grabación continua · assets/audio/l08-s35-dos-personas-muy-diferentes.mp3</span>
-              </div>
-            </div>
-            <section class="listening35-stage" data-listening35-stage aria-labelledby="listening35-global-title">
-              <h3 id="listening35-global-title">1 · Comprensión global</h3>
-              <p class="listening35-instruction">Escucha la conversación completa por primera vez y responde brevemente.</p>
-              <div class="listening35-questions">
-                <div class="listening35-question"><label for="listening35-global-1">¿De quiénes hablan Laura y Marta?</label><textarea class="listening35-answer" id="listening35-global-1" data-no-slide-advance></textarea></div>
-                <div class="listening35-question"><label for="listening35-global-2">¿Pablo y Marta son parecidos o diferentes?</label><textarea class="listening35-answer" id="listening35-global-2" data-no-slide-advance></textarea></div>
-                <div class="listening35-question"><label for="listening35-global-3">¿Cuál es la idea principal de la conversación?</label><textarea class="listening35-answer" id="listening35-global-3" data-no-slide-advance></textarea></div>
-              </div>
-            </section>
-            <section class="listening35-stage" data-listening35-stage aria-labelledby="listening35-details-title" hidden>
-              <h3 id="listening35-details-title">2 · Detalles</h3>
-              <p class="listening35-instruction">Escucha por segunda vez y responde las seis preguntas.</p>
-              <div class="listening35-questions">
-                <div class="listening35-question"><label for="listening35-detail-1">¿Cómo trabaja Pablo?</label><textarea class="listening35-answer" id="listening35-detail-1" data-no-slide-advance></textarea></div>
-                <div class="listening35-question"><label for="listening35-detail-2">¿Cómo prefiere trabajar Marta?</label><textarea class="listening35-answer" id="listening35-detail-2" data-no-slide-advance></textarea></div>
-                <div class="listening35-question"><label for="listening35-detail-3">¿Qué objeto muestra Laura en su teléfono?</label><textarea class="listening35-answer" id="listening35-detail-3" data-no-slide-advance></textarea></div>
-                <div class="listening35-question"><label for="listening35-detail-4">¿Cómo es la oficina de Daniel comparada con la de Laura?</label><textarea class="listening35-answer" id="listening35-detail-4" data-no-slide-advance></textarea></div>
-                <div class="listening35-question"><label for="listening35-detail-5">¿Cómo está normalmente la mesa de Pablo?</label><textarea class="listening35-answer" id="listening35-detail-5" data-no-slide-advance></textarea></div>
-                <div class="listening35-question"><label for="listening35-detail-6">Según Marta, ¿quién trabaja más?</label><textarea class="listening35-answer" id="listening35-detail-6" data-no-slide-advance></textarea></div>
-              </div>
-            </section>
-            <section class="listening35-stage" data-listening35-stage aria-labelledby="listening35-interpret-title" hidden>
-              <h3 id="listening35-interpret-title">3 · Interpretación</h3>
-              <label class="listening35-instruction" for="listening35-interpret-answer">Escucha por tercera vez. Escribe 2–3 frases comparando a una de las personas con su hermano.</label>
-              <textarea class="listening35-answer listening35-interpretation" id="listening35-interpret-answer" data-no-slide-advance></textarea>
-              <p class="listening35-instruction">Respuesta abierta: compara tus ideas con la transcripción cuando la muestres.</p>
-            </section>
-            <section class="listening35-stage" data-listening35-stage aria-labelledby="listening35-transcript-title" hidden>
-              <h3 id="listening35-transcript-title">4 · Transcripción</h3>
-              <p class="listening35-instruction">Muestra el texto solo después de las tres escuchas.</p>
-              <button class="listening35-reveal" type="button" data-listening35-reveal aria-expanded="false" aria-controls="listening35-transcript">MOSTRAR TEXTO</button>
-              <div class="listening35-transcript" id="listening35-transcript" data-listening35-transcript hidden>
-                <p><strong>Laura:</strong> Marta, ¿tu hermano Pablo trabaja en la misma empresa que tú?</p>
-                <p><strong>Marta:</strong> Sí, pero somos muy diferentes. Pablo es más tranquilo que yo y trabaja lentamente, pero siempre hace todo con mucho cuidado. Yo prefiero terminar las cosas rápidamente.</p>
-                <p><strong>Laura:</strong> Mi hermano Daniel es todo lo contrario. Él habla muchísimo y siempre tiene alguna historia nueva. Mira, esa foto de mi teléfono es de su oficina.</p>
-                <p><strong>Marta:</strong> ¿Ese hombre de la camisa azul es Daniel?</p>
-                <p><strong>Laura:</strong> Sí. Su oficina es más grande que la mía, pero mi escritorio está mucho más ordenado que el suyo.</p>
-                <p><strong>Marta:</strong> Pablo también es muy ordenado. Su mesa siempre está limpia. La mía, no tanto.</p>
-                <p><strong>Laura:</strong> ¿Y cuál de los dos trabaja más?</p>
-                <p><strong>Marta:</strong> Creo que Pablo trabaja más que yo, pero yo trabajo más rápidamente.</p>
-                <p><strong>Laura:</strong> Entonces son diferentes, pero ambos trabajan bien.</p>
-              </div>
-            </section>
-            <div class="listening35-nav" data-no-slide-advance>
-              <button class="secondary" type="button" data-listening35-prev aria-label="Etapa anterior">Anterior</button>
-              <button type="button" data-listening35-next aria-label="Etapa siguiente">Siguiente</button>
-            </div>
-          </div>
-        </div>
-        <footer class="slide-footer">
-          <div class="slide-progress" data-slide-progress role="progressbar" aria-label="Progreso de la lección"><span></span></div>
-          <p class="slide-count" data-slide-count>Slide 35 / 35</p>
         </footer>
       </section>
       <section class="slide cierre36-slide" id="slide-36" data-slide aria-labelledby="slide-36-title" tabindex="-1" hidden>
@@ -3528,7 +3417,7 @@
         const counter = hablamos.querySelector("[data-hablamos-counter]");
         const previousButton = hablamos.querySelector("[data-hablamos-prev]");
         const nextButton = hablamos.querySelector("[data-hablamos-next]");
-        const labels = ["Posesión y demostrativos", "Comparación", "Cómo hacemos las cosas", "Compartir una frase"];
+        const labels = ["Posesión y demostrativos", "Comparación", "Cómo hacemos las cosas"];
         let stageIndex = 0;
 
         function renderHablamos() {
@@ -3550,66 +3439,6 @@
           renderHablamos();
         });
         renderHablamos();
-      }
-      const listening35 = app.querySelector("[data-listening35]");
-      if (listening35) {
-        const stages = Array.from(listening35.querySelectorAll("[data-listening35-stage]"));
-        const counter = listening35.querySelector("[data-listening35-counter]");
-        const previousButton = listening35.querySelector("[data-listening35-prev]");
-        const nextButton = listening35.querySelector("[data-listening35-next]");
-        const revealButton = listening35.querySelector("[data-listening35-reveal]");
-        const transcript = listening35.querySelector("[data-listening35-transcript]");
-        const labels = ["Comprensión global", "Detalles", "Interpretación", "Transcripción"];
-        let stageIndex = 0;
-
-        function renderListening35() {
-          stages.forEach(function (stage, index) { stage.hidden = index !== stageIndex; });
-          listening35.dataset.listening35Stage = String(stageIndex + 1);
-          counter.textContent = "Paso " + (stageIndex + 1) + " de " + stages.length + " · " + labels[stageIndex];
-          previousButton.disabled = stageIndex === 0;
-          nextButton.disabled = stageIndex === stages.length - 1;
-        }
-        function revealListening35Transcript() {
-          transcript.hidden = false;
-          revealButton.hidden = true;
-          revealButton.setAttribute("aria-expanded", "true");
-        }
-        previousButton.addEventListener("click", function (event) {
-          event.stopPropagation();
-          stageIndex = Math.max(0, stageIndex - 1);
-          renderListening35();
-        });
-        nextButton.addEventListener("click", function (event) {
-          event.stopPropagation();
-          stageIndex = Math.min(stages.length - 1, stageIndex + 1);
-          renderListening35();
-        });
-        revealButton.addEventListener("click", function (event) {
-          event.stopPropagation();
-          revealListening35Transcript();
-        });
-        document.addEventListener("keydown", function (event) {
-          const activeSlide = listening35.closest(".slide");
-          if (activeSlide.hidden || event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey || event.target.closest("input, textarea, select, button, [contenteditable='true']")) return;
-          if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
-            if (stageIndex < stages.length - 1) {
-              event.preventDefault();
-              event.stopImmediatePropagation();
-              stageIndex += 1;
-              renderListening35();
-            } else if (transcript.hidden) {
-              event.preventDefault();
-              event.stopImmediatePropagation();
-              revealListening35Transcript();
-            }
-          } else if ((event.key === "ArrowLeft" || event.key === "PageUp") && stageIndex > 0) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-            stageIndex -= 1;
-            renderListening35();
-          }
-        });
-        renderListening35();
       }
       const cierre36 = app.querySelector("[data-cierre36]");
       if (cierre36) {

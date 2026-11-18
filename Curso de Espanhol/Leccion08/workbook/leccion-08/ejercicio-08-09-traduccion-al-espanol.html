@@ -31,14 +31,16 @@
     .progress-track span { background:linear-gradient(90deg,var(--red),var(--gold)); display:block; height:100%; transition:width .2s ease; width:0; }
     .instruction { color:var(--muted); font-weight:700; margin:0; }
     .source { background:var(--soft); border-left:5px solid var(--blue); font-family:Georgia,"Times New Roman",serif; font-size:clamp(1.4rem,3vw,2rem); font-weight:700; line-height:1.3; margin:0; padding:clamp(18px,3vw,28px); }
+    .hint { color:var(--muted); font-size:.95rem; font-weight:800; margin:-8px 0 0; }
     .answer-label { color:var(--ink); display:block; font-weight:900; margin:0 0 7px; }
     textarea { background:#fff; border:1px solid var(--line); border-bottom:3px solid var(--blue); border-radius:4px; color:var(--ink); line-height:1.45; min-height:8.5rem; padding:12px 14px; resize:vertical; width:100%; }
     textarea:disabled { background:#f8f8f7; color:var(--ink); }
     .actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; }
     .actions button,.repeat { background:var(--red); border:1px solid var(--red); color:#fff; font-weight:900; line-height:1.1; min-height:44px; padding:10px 15px; }
-    .actions [data-reveal] { background:#fff; color:var(--red); }
     .feedback { background:var(--soft); line-height:1.4; margin:0; min-height:48px; padding:12px 14px; }
     .feedback.info { background:#eef4fc; color:#21497f; }
+    .feedback.correct { background:#ecfdf3; color:#17603f; }
+    .feedback.incorrect { background:#fff1f0; color:#9f1d1d; }
     .feedback.ready { background:#ecfdf3; color:#17603f; }
     .reference { background:#ecfdf3; border-left:5px solid var(--green); display:grid; gap:8px; padding:16px 18px; }
     .reference-label { color:#17603f; font-size:.78rem; font-weight:900; letter-spacing:.08em; margin:0; text-transform:uppercase; }
@@ -61,7 +63,7 @@
     <header>
       <p class="course">Curso de Español · Lección 8 · Práctica</p>
       <h1>Ejercicio 8.9 · Traducción al español</h1>
-      <p class="sub">Escribe una traducción completa y después compárala con un modelo posible.</p>
+      <p class="sub">Escribe una traducción completa y comprueba si conserva el significado y las estructuras esperadas.</p>
       <div class="font-controls" role="group" aria-label="Controles de tamaño del texto">
         <button type="button" data-font="small" aria-label="Reducir tamaño del texto" aria-pressed="false">A−</button>
         <button type="button" data-font="normal" aria-label="Tamaño normal del texto" aria-pressed="true">A</button>
@@ -71,18 +73,18 @@
     <section class="shell" aria-label="Ejercicio de traducción">
       <div class="question-wrap" data-question-wrap>
         <p class="progress" data-progress aria-live="polite"></p>
-        <div class="progress-track" role="progressbar" data-progressbar aria-label="Frases comparadas" aria-valuemin="0" aria-valuemax="18" aria-valuenow="0"><span></span></div>
-        <p class="instruction">Traduce la frase al español. No hay una única traducción literal posible.</p>
+        <div class="progress-track" role="progressbar" data-progressbar aria-label="Frases comprobadas" aria-valuemin="0" aria-valuemax="18" aria-valuenow="0"><span></span></div>
+        <p class="instruction">Traduce la frase al español. Se aceptan distintas formulaciones correctas.</p>
         <p class="source" data-source lang="pt-BR"></p>
+        <p class="hint" id="translation-hint" data-hint lang="es" hidden></p>
         <div>
           <label class="answer-label" for="translation-input">Tu traducción al español</label>
-          <textarea id="translation-input" data-input rows="4" lang="es" spellcheck="true" placeholder="Escribe tu traducción completa aquí" aria-describedby="translation-feedback"></textarea>
+          <textarea id="translation-input" data-input rows="4" lang="es" spellcheck="true" placeholder="Escribe tu traducción completa aquí" aria-describedby="translation-feedback translation-hint"></textarea>
         </div>
         <div class="actions" data-no-slide-advance>
-          <button type="button" data-reveal disabled>VER RESPUESTA</button>
           <button type="button" data-check>COMPROBAR</button>
         </div>
-        <p class="feedback" id="translation-feedback" data-feedback aria-live="polite">Escribe tu traducción antes de comprobarla.</p>
+        <p class="feedback" id="translation-feedback" data-feedback aria-live="polite">Escribe tu traducción y pulsa COMPROBAR.</p>
         <div class="reference" data-reference hidden aria-live="polite">
           <p class="reference-label">Un modelo posible</p>
           <p class="reference-answer" data-model></p>
@@ -94,7 +96,7 @@
       </div>
       <div class="done" data-done hidden>
         <h2>¡Revisión terminada!</h2>
-        <p>Has comparado tus traducciones con los modelos. La actividad no calcula una nota automática porque admite distintas traducciones correctas.</p>
+        <p>Las respuestas se validan con el modelo y las variantes naturales previstas para cada frase.</p>
         <div class="result-summary" data-summary aria-live="polite"></div>
         <button class="repeat" type="button" data-repeat>REPETIR EJERCICIO</button>
       </div>
@@ -104,31 +106,31 @@
     (() => {
       "use strict";
       const items = [
-        { source: "Meu irmão mais novo tem dez anos.", model: "Mi hermano menor tiene diez años." },
-        { source: "Ele entende este capítulo, mas não quer aprender todas as palavras.", model: "Él entiende este capítulo, pero no quiere aprender todas las palabras." },
-        { source: "Eu sei por que a irmã dele quer ir à Espanha. Os parentes dela estão lá.", model: "Sé por qué su hermana quiere ir a España. Sus parientes están allí.", note: "También puede usarse “allá” si el contexto lo permite. El sujeto “yo” puede omitirse." },
-        { source: "Todos os anos, no Dia de Ação de Graças, cozinhamos demais.", model: "Todos los años, en el Día de Acción de Gracias, cocinamos demasiado.", note: "También son posibles otras formulaciones que mantengan el sentido de frecuencia y exceso." },
-        { source: "Juan sempre perde suas luvas.", model: "Juan siempre pierde sus guantes." },
-        { source: "A avó dele é mais velha que o avô dele.", model: "Su abuela es mayor que su abuelo.", note: "Para comparar la edad de personas, se usa “mayor”." },
-        { source: "O último mês do ano é dezembro; o primeiro mês é janeiro.", model: "El último mes del año es diciembre; el primer mes es enero.", note: "También puede decirse: “El último mes del año es diciembre y el primero es enero”." },
-        { source: "Temos uma boa aula; aprendemos muito.", model: "Tenemos una buena clase; aprendemos mucho." },
-        { source: "Seu livro acabou de chegar.", model: "Tu libro acaba de llegar.", note: "“Su libro acaba de llegar” también es posible con un tratamiento formal o de usted." },
-        { source: "Eu sei que meu gato é mais inteligente que seu cachorro.", model: "Sé que mi gato es más inteligente que tu perro.", note: "“Su perro” también puede ser adecuado con un tratamiento formal o de usted." },
-        { source: "Estas árvores são mais velhas que aquelas árvores lá longe.", model: "Estos árboles son más viejos que aquellos árboles.", note: "Al comparar árboles, corresponde el comparativo regular “más viejos”, no “mayores”." },
-        { source: "Escutamos as mesmas músicas tristes todos os dias.", model: "Escuchamos las mismas canciones tristes todos los días." },
-        { source: "Você acha que o presidente dos Estados Unidos é um grande homem?", model: "¿Piensa Ud. que el presidente de los Estados Unidos es un gran hombre?", note: "“Grande” se convierte en “gran” delante de un sustantivo masculino singular. También es posible “¿Piensas que...?”." },
-        { source: "Você vem à nossa festa na sexta-feira? Ela começa às nove da noite.", model: "¿Vienes a nuestra fiesta el viernes? Empieza a las nueve de la noche.", note: "También es posible “¿Viene Ud. a nuestra fiesta...?”. El tratamiento debe ser coherente en la frase." },
-        { source: "Carolina é tão alta quanto Enrique; a irmã dela é a mais alta de todos.", model: "Carolina es tan alta como Enrique; su hermana es la más alta de todos.", note: "“La más alta de todas” también puede concordar con un referente femenino plural." },
-        { source: "Este livro é o livro mais interessante da biblioteca.", model: "Este libro es el libro más interesante de la biblioteca.", note: "La repetición de “libro” no es necesaria: “Este libro es el más interesante de la biblioteca”." },
-        { source: "Qual é o animal mais perigoso do mundo?", model: "¿Cuál es el animal más peligroso del mundo?", note: "“De + el” se contrae en “del”: “del mundo”." },
-        { source: "Eu sou a única pessoa da família que sabe jogar tênis. Às vezes eu ganho; às vezes eu perco.", model: "Soy la única persona de la familia que sabe jugar al tenis. A veces gano; a veces pierdo.", note: "También puede decirse “sabe jugar tenis” según el uso regional. El pronombre “yo” puede omitirse." }
+        { source: "Meu irmão mais novo tem dez anos.", model: "Mi hermano menor tiene diez años.", accepted: ["Mi hermano más joven tiene diez años."] },
+        { source: "Ele entende este capítulo, mas não quer aprender todas as palavras.", model: "Él entiende este capítulo, pero no quiere aprender todas las palabras.", accepted: ["Entiende este capítulo, pero no quiere aprender todas las palabras.", "Él comprende este capítulo, pero no quiere aprender todas las palabras."] },
+        { source: "Eu sei por que a irmã dele quer ir à Espanha. Os parentes dela estão lá.", model: "Sé por qué su hermana quiere ir a España. Sus parientes están allí.", accepted: ["Sé por qué su hermana quiere ir a España. Sus parientes están allá.", "Sé por qué su hermana quiere ir a España. Sus familiares están allí.", "Sé por qué su hermana quiere ir a España. Sus familiares están allá.", "Sé por qué la hermana de él quiere ir a España. Sus parientes están allí.", "Sé por qué la hermana de él quiere ir a España. Sus parientes están allá."], validator: "sisterLocation", note: "El último adverbio puede ser “allí” o “allá”. El sujeto “yo” puede omitirse." },
+        { source: "Todos os anos, no Dia de Ação de Graças, cozinhamos demais.", model: "Todos los años, en el Día de Acción de Gracias, cocinamos demasiado.", accepted: ["Cada año, en el Día de Acción de Gracias, cocinamos demasiado.", "En el Día de Acción de Gracias, todos los años cocinamos demasiado.", "Todos los años cocinamos demasiado en el Día de Acción de Gracias."], note: "También son posibles otras formulaciones que mantengan el sentido de frecuencia y exceso." },
+        { source: "Juan sempre perde suas luvas.", model: "Juan siempre pierde sus guantes.", accepted: ["Siempre pierde sus guantes."], hint: "(guantes)" },
+        { source: "A avó dele é mais velha que o avô dele.", model: "Su abuela es mayor que su abuelo.", accepted: ["Su abuela es más vieja que su abuelo.", "Su abuela es de más edad que su abuelo."], note: "Para comparar la edad de personas, se usa “mayor”." },
+        { source: "O último mês do ano é dezembro; o primeiro mês é janeiro.", model: "El último mes del año es diciembre; el primer mes es enero.", accepted: ["El último mes del año es diciembre y el primer mes es enero.", "Diciembre es el último mes del año; enero es el primer mes.", "Diciembre es el último mes del año y enero es el primero."], note: "También puede decirse: “El último mes del año es diciembre y el primero es enero”." },
+        { source: "Temos uma boa aula; aprendemos muito.", model: "Tenemos una buena clase; aprendemos mucho.", accepted: ["Tenemos una clase buena; aprendemos mucho.", "Tenemos una buena lección; aprendemos mucho."] },
+        { source: "Seu livro acabou de chegar.", model: "Tu libro acaba de llegar.", accepted: ["Su libro acaba de llegar.", "Acaba de llegar tu libro.", "Acaba de llegar su libro."], note: "“Su libro acaba de llegar” también es posible con un tratamiento formal o de usted." },
+        { source: "Eu sei que meu gato é mais inteligente que seu cachorro.", model: "Sé que mi gato es más inteligente que tu perro.", accepted: ["Sé que mi gato es más inteligente que su perro.", "Sé que mi gato es más listo que tu perro.", "Sé que mi gato es más listo que su perro."], note: "“Su perro” también puede ser adecuado con un tratamiento formal o de usted." },
+        { source: "Estas árvores são mais velhas que aquelas árvores lá longe.", model: "Estos árboles son más viejos que aquellos árboles.", accepted: ["Estos árboles son más viejos que aquellos.", "Estos árboles son más viejos que los árboles de allá.", "Estos árboles son más antiguos que aquellos árboles."], note: "Al comparar árboles, corresponde el comparativo regular “más viejos”, no “mayores”." },
+        { source: "Escutamos as mesmas canções tristes todos os dias.", model: "Escuchamos las mismas canciones tristes todos los días.", accepted: ["Oímos las mismas canciones tristes todos los días.", "Escuchamos las mismas canciones tristes cada día.", "Escuchamos las mismas canciones tristes diariamente."] },
+        { source: "Você acha que o presidente dos Estados Unidos é um grande homem?", model: "¿Piensa Ud. que el presidente de los Estados Unidos es un gran hombre?", accepted: ["¿Piensas que el presidente de los Estados Unidos es un gran hombre?", "¿Piensas tú que el presidente de los Estados Unidos es un gran hombre?", "¿Tú piensas que el presidente de los Estados Unidos es un gran hombre?", "¿Cree usted que el presidente de los Estados Unidos es un gran hombre?", "¿Usted cree que el presidente de los Estados Unidos es un gran hombre?", "¿Crees que el presidente de los Estados Unidos es un gran hombre?", "¿Crees tú que el presidente de los Estados Unidos es un gran hombre?", "¿Tú crees que el presidente de los Estados Unidos es un gran hombre?"], note: "“Grande” se convierte en “gran” delante de un sustantivo masculino singular. El sujeto puede aparecer antes o después del verbo, o quedar omitido." },
+        { source: "Você vem à nossa festa na sexta-feira? Ela começa às nove da noite.", model: "¿Vienes a nuestra fiesta el viernes? Empieza a las nueve de la noche.", accepted: ["¿Vienes tú a nuestra fiesta el viernes? Empieza a las nueve de la noche.", "¿Tú vienes a nuestra fiesta el viernes? Empieza a las nueve de la noche.", "¿Viene Ud. a nuestra fiesta el viernes? Empieza a las nueve de la noche.", "¿Viene usted a nuestra fiesta el viernes? Empieza a las nueve de la noche.", "¿Usted viene a nuestra fiesta el viernes? Empieza a las nueve de la noche.", "¿Vienes a nuestra fiesta el viernes? La fiesta empieza a las nueve de la noche.", "¿Viene usted a nuestra fiesta el viernes? La fiesta empieza a las nueve de la noche."], note: "Se aceptan las formas de tú y de usted; el tratamiento debe ser coherente en la frase." },
+        { source: "Carolina é tão alta quanto Enrique; a irmã dela é a mais alta de todos.", model: "Carolina es tan alta como Enrique; su hermana es la más alta de todos.", accepted: ["Carolina es tan alta como Enrique; su hermana es la más alta de todas.", "Carolina es igual de alta que Enrique; su hermana es la más alta de todos.", "Carolina es igual de alta que Enrique; su hermana es la más alta de todas."], note: "“La más alta de todas” también puede concordar con un referente femenino plural." },
+        { source: "Este livro é o livro mais interessante da biblioteca.", model: "Este libro es el libro más interesante de la biblioteca.", accepted: ["Este libro es el más interesante de la biblioteca.", "Este es el libro más interesante de la biblioteca."], note: "La repetición de “libro” no es necesaria: “Este libro es el más interesante de la biblioteca”." },
+        { source: "Qual é o animal mais perigoso do mundo?", model: "¿Cuál es el animal más peligroso del mundo?", accepted: ["¿Qué animal es el más peligroso del mundo?", "¿Cuál animal es el más peligroso del mundo?"] , note: "“De + el” se contrae en “del”: “del mundo”." },
+        { source: "Eu sou a única pessoa da família que sabe jogar tênis. Às vezes eu ganho; às vezes eu perco.", model: "Soy la única persona de la familia que sabe jugar al tenis. A veces gano; a veces pierdo.", accepted: ["Soy la única persona de la familia que sabe jugar tenis. A veces gano; a veces pierdo.", "Soy la única persona de la familia que sabe jugar al tenis. A veces gano y a veces pierdo.", "Soy la única persona de la familia que sabe jugar tenis. A veces gano y a veces pierdo.", "Soy la única persona de mi familia que sabe jugar al tenis. A veces gano; a veces pierdo.", "Soy la única persona de mi familia que sabe jugar tenis. A veces gano; a veces pierdo."], note: "También puede decirse “sabe jugar tenis” según el uso regional. El pronombre “yo” puede omitirse." }
       ];
       const progress = document.querySelector("[data-progress]");
       const progressbar = document.querySelector("[data-progressbar]");
       const source = document.querySelector("[data-source]");
+      const hint = document.querySelector("[data-hint]");
       const input = document.querySelector("[data-input]");
       const checkButton = document.querySelector("[data-check]");
-      const revealButton = document.querySelector("[data-reveal]");
       const nextButton = document.querySelector("[data-next]");
       const feedback = document.querySelector("[data-feedback]");
       const reference = document.querySelector("[data-reference]");
@@ -137,46 +139,61 @@
       const wrap = document.querySelector("[data-question-wrap]");
       const done = document.querySelector("[data-done]");
       const summary = document.querySelector("[data-summary]");
+      const header = document.querySelector("header");
+      const BEST_SCORE_KEY = "workbook-leccion-08-ejercicio-09-best-score";
       let index = 0;
-      let checks = 0;
-      let compared = 0;
+      let attempts = 0;
+      let errors = 0;
+      let correct = 0;
+      let completed = 0;
       let checked = false;
-      let revealed = false;
-      const reviewed = new Set();
+      let currentCorrect = false;
+      function normalize(value) {
+        return value.toLocaleLowerCase("es-ES").normalize("NFC").replace(/[¿?¡!.,;:“”"'()]/g, " ").replace(/\s+/g, " ").trim();
+      }
+      function isCorrect(item, value) {
+        const answer = normalize(value);
+        if (item.validator === "sisterLocation") {
+          return /^(sé por qué (su hermana|la hermana de él) quiere ir a españa) (sus (parientes|familiares) están (allí|allá))$/.test(answer);
+        }
+        return [item.model, ...(item.accepted || [])].some((candidate) => normalize(candidate) === answer);
+      }
+      function bestScore() {
+        try { return Number(localStorage.getItem(BEST_SCORE_KEY)) || 0; } catch { return 0; }
+      }
+      function saveBestScore(score) {
+        const best = Math.max(bestScore(), score);
+        try { localStorage.setItem(BEST_SCORE_KEY, String(best)); } catch { /* El ejercicio sigue funcionando sin almacenamiento local. */ }
+        return best;
+      }
 
       function updateProgress() {
-        progress.textContent = "Frase " + (index + 1) + " / " + items.length + " · Comparadas: " + compared + " / " + items.length;
-        progressbar.setAttribute("aria-valuenow", String(compared));
-        progressbar.firstElementChild.style.width = ((compared / items.length) * 100) + "%";
+        progress.textContent = "Frase " + (index + 1) + " / " + items.length + " · Comprobadas: " + completed + " / " + items.length;
+        progressbar.setAttribute("aria-valuenow", String(completed));
+        progressbar.firstElementChild.style.width = ((completed / items.length) * 100) + "%";
       }
       function render() {
         const item = items[index];
         source.textContent = item.source;
+        hint.textContent = item.hint || "";
+        hint.hidden = !item.hint;
         input.value = "";
         reference.hidden = true;
         model.textContent = "";
         note.textContent = item.note || "";
         note.hidden = !item.note;
-        revealButton.disabled = true;
+        input.disabled = false;
         checkButton.disabled = false;
         nextButton.disabled = true;
         nextButton.textContent = index === items.length - 1 ? "VER RESULTADOS" : "SIGUIENTE";
         checked = false;
-        revealed = false;
-        feedback.textContent = "Escribe tu traducción antes de comprobarla.";
+        currentCorrect = false;
+        feedback.textContent = "Escribe tu traducción y pulsa COMPROBAR.";
         feedback.className = "feedback";
         updateProgress();
       }
       input.addEventListener("input", () => {
-        if (revealed) {
-          reference.hidden = true;
-          nextButton.disabled = true;
-          revealed = false;
-        }
-        checked = false;
-        revealButton.disabled = true;
-        checkButton.disabled = false;
-        feedback.textContent = input.value.trim() ? "Traducción actualizada. Pulsa COMPROBAR y después compara con un modelo." : "Escribe tu traducción antes de comprobarla.";
+        feedback.textContent = input.value.trim() ? "Respuesta actualizada. Pulsa COMPROBAR." : "Escribe tu traducción y pulsa COMPROBAR.";
         feedback.className = "feedback";
       });
       input.addEventListener("keydown", (event) => {
@@ -193,37 +210,30 @@
           return;
         }
         if (checked) return;
-        checks += 1;
+        attempts += 1;
         checked = true;
-        revealButton.disabled = false;
+        input.disabled = true;
         checkButton.disabled = true;
-        feedback.textContent = "Respuesta registrada. No la calificamos por coincidencia literal: compárala con un modelo posible.";
-        feedback.className = "feedback info";
-        revealButton.focus();
-      });
-      revealButton.addEventListener("click", () => {
-        if (!checked) return;
-        const item = items[index];
-        model.textContent = item.model;
-        note.textContent = item.note || "Las traducciones pueden variar si conservan el significado y son gramaticalmente correctas.";
+        currentCorrect = isCorrect(items[index], input.value);
+        completed += 1;
+        if (currentCorrect) correct += 1;
+        else errors += 1;
+        model.textContent = items[index].model;
+        note.textContent = items[index].note || "Se aceptan las variantes naturales previstas para esta frase.";
         note.hidden = false;
         reference.hidden = false;
-        revealButton.disabled = true;
         nextButton.disabled = false;
-        revealed = true;
-        if (!reviewed.has(index)) {
-          reviewed.add(index);
-          compared += 1;
-          updateProgress();
-        }
-        feedback.textContent = "Compara el significado y las estructuras. Una formulación diferente también puede ser correcta.";
-        feedback.className = "feedback ready";
+        feedback.textContent = currentCorrect ? "Correcto. La respuesta de referencia aparece abajo." : "Incorrecto. Revisa la respuesta de referencia que aparece abajo.";
+        feedback.className = currentCorrect ? "feedback correct" : "feedback incorrect";
+        updateProgress();
         nextButton.focus();
       });
       nextButton.addEventListener("click", () => {
-        if (!revealed) return;
+        if (!checked) return;
         if (index === items.length - 1) {
-          const rows = [["Frases comparadas", compared + " / " + items.length], ["Comprobaciones realizadas", String(checks)]];
+          const percentage = Math.round((correct / items.length) * 100);
+          const best = saveBestScore(correct);
+          const rows = [["Puntuación", correct + " / " + items.length], ["Porcentaje", percentage + "%"], ["Errores", String(errors)], ["Intentos", String(attempts)], ["Mejor resultado", best + " / " + items.length]];
           summary.replaceChildren(...rows.map(([label, value]) => {
             const row = document.createElement("p");
             const strong = document.createElement("strong");
@@ -233,6 +243,7 @@
           }));
           wrap.hidden = true;
           done.hidden = false;
+          header.hidden = true;
           document.querySelector("[data-repeat]").focus();
           return;
         }
@@ -242,11 +253,13 @@
       });
       document.querySelector("[data-repeat]").addEventListener("click", () => {
         index = 0;
-        checks = 0;
-        compared = 0;
-        reviewed.clear();
+        attempts = 0;
+        errors = 0;
+        correct = 0;
+        completed = 0;
         done.hidden = true;
         wrap.hidden = false;
+        header.hidden = false;
         render();
         input.focus();
       });
