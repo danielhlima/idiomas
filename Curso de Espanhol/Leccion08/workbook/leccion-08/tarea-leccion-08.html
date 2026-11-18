@@ -116,7 +116,7 @@
         { block:0, kind:"Completa", prompt:"Somos nuevos en la empresa. ______ oficina está en el segundo piso.", accepted:["nuestra"], answer:"Nuestra", feedback:"Revisa el género y el número de “oficina”." },
         { block:0, kind:"Completa", prompt:"Pedro y Ana tienen un coche nuevo. ______ coche es azul.", accepted:["su"], answer:"Su", feedback:"Revisa el posesivo y el número de “coche”." },
         { block:0, kind:"Completa", prompt:"¿Prefieres ______ camisa de aquí o aquella camisa de la otra tienda?", accepted:["esta"], answer:"esta", feedback:"Observa la distancia indicada por el demostrativo." },
-        { block:0, kind:"Completa", prompt:"¿Quién es ______ hombre que está allí, cerca de la puerta?", accepted:["ese"], answer:"ese", feedback:"Observa la distancia indicada por el demostrativo." },
+        { block:0, kind:"Completa", prompt:"¿Quién es ______ hombre que está allí, cerca de la puerta?", accepted:["este","ese","aquel"], answer:"ese", feedback:"Observa la distancia indicada por el demostrativo." },
         { block:0, kind:"Completa", prompt:"No sé qué es ______ que tienes en la mano.", accepted:["eso"], answer:"eso", feedback:"Revisa el demostrativo neutro para referirse a algo no identificado." },
         { block:0, kind:"Producción escrita", prompt:"Escribe una pregunta usando “¿De quién...?” y responde con “de + persona”.", mode:"production", validator:"ownerQuestion", answer:"¿De quién es este libro? — Es de Laura.", feedback:"Revisa que incluyas una pregunta con “¿De quién...?” y una respuesta coherente con “de + persona”.", note:"Tu pregunta y la persona pueden ser diferentes del modelo." },
         { block:1, kind:"Completa", prompt:"Lucía es de España. Es ______.", accepted:["española"], answer:"española", feedback:"Revisa la nacionalidad y la concordancia de género." },
@@ -125,10 +125,10 @@
         { block:1, kind:"Completa", prompt:"Ana y Carlos son de Brasil. Son ______.", accepted:["brasileños"], answer:"brasileños", feedback:"Revisa la concordancia en plural y la ñ." },
         { block:1, kind:"Transformación", prompt:"Transforma correctamente: un bueno estudiante", mode:"exact", accepted:["un buen estudiante"], answer:"un buen estudiante", feedback:"Revisa la posición del adjetivo y su forma antes del sustantivo." },
         { block:1, kind:"Transformación", prompt:"Transforma correctamente: un grande hombre", mode:"exact", accepted:["un gran hombre"], answer:"un gran hombre", feedback:"Revisa la forma de “grande” antes del sustantivo singular." },
-        { block:1, kind:"Producción escrita", prompt:"Un hombre sin dinero. Usa “pobre” y escribe la expresión completa.", mode:"exact", accepted:["un hombre pobre"], answer:"un hombre pobre", feedback:"Revisa la posición del adjetivo: aquí describe la falta de dinero." },
+        { block:1, kind:"Producción escrita", prompt:"Escribe la frase «Un hombre sin dinero» usando la palabra «pobre». Atención a la posición del adjetivo.", mode:"exact", accepted:["un hombre pobre"], answer:"un hombre pobre", feedback:"Revisa la posición del adjetivo: aquí describe la falta de dinero." },
         { block:1, kind:"Producción escrita", prompt:"Escribe dos frases sobre una persona: una con una nacionalidad y otra con un adjetivo.", mode:"production", validator:"nationalityDescription", answer:"Julia es mexicana. Es una persona muy tranquila.", feedback:"Escribe dos frases: incluye una nacionalidad y un adjetivo que concuerde.", note:"Comprueba el género y el número del adjetivo. La persona y las palabras pueden cambiar." },
         { block:2, kind:"Completa", prompt:"Completa con la palabra adecuada o escribe la frase completa: Un coche es ______ caro que una bicicleta.", mode:"exact", accepted:["más","un coche es más caro que una bicicleta"], answer:"Un coche es más caro que una bicicleta.", feedback:"Recuerda la estructura de comparación." },
-        { block:2, kind:"Completa", prompt:"Completa con la palabra adecuada o escribe la frase completa: Esta película es ______ interesante que la otra.", hint:"(menos)", mode:"exact", accepted:["menos","esta película es menos interesante que la otra"], answer:"Esta película es menos interesante que la otra.", feedback:"Revisa la palabra de cantidad que expresa una comparación inferior." },
+        { block:2, kind:"Completa", prompt:"Completa con la palabra adecuada o escribe la frase completa: Esta película es ______ interesante que la otra.", mode:"exact", accepted:["más","menos","esta película es más interesante que la otra","esta película es menos interesante que la otra"], answer:"Esta película es menos interesante que la otra.", feedback:"Revisa la palabra de cantidad que expresa una comparación." },
         { block:2, kind:"Completa", prompt:"Completa con la palabra adecuada o escribe la frase completa: Ana es ______ alta como Marta.", mode:"exact", accepted:["tan","ana es tan alta como marta"], answer:"Ana es tan alta como Marta.", feedback:"Revisa si necesitas “que” o “como”." },
         { block:2, kind:"Completa", prompt:"Completa con la palabra adecuada o escribe la frase completa: Este es ______ restaurante más famoso de la ciudad.", mode:"exact", accepted:["el","este es el restaurante más famoso de la ciudad"], answer:"Este es el restaurante más famoso de la ciudad.", feedback:"Revisa el artículo del superlativo." },
         { block:2, kind:"Completa", prompt:"Mi hermana tiene veinte años y yo tengo veinticinco. Yo soy ______ que ella.", accepted:["mayor"], answer:"mayor", feedback:"Para comparar la edad de personas, revisa el comparativo irregular." },
@@ -139,9 +139,9 @@
         { block:3, kind:"Transformación", prompt:"Transforma el adjetivo “feliz” en adverbio.", accepted:["felizmente"], answer:"felizmente", feedback:"Revisa la formación del adverbio." },
         { block:3, kind:"Transformación", prompt:"Transforma el adjetivo “claro” en adverbio.", accepted:["claramente"], answer:"claramente", feedback:"Revisa la forma del adverbio." },
         { block:3, kind:"Completa", prompt:"Completa la coordinación: Ella habla ______ y sinceramente. (claro + sinceramente)", accepted:["clara"], answer:"clara", feedback:"Recuerda que solo el último adverbio conserva “-mente”." },
-        { block:3, kind:"Completa", prompt:"Trabajo ocho horas todos los días. Trabajo ______.", hint:"(muito)", accepted:["mucho"], answer:"mucho", feedback:"Revisa el adverbio de cantidad." },
+        { block:3, kind:"Completa", prompt:"Trabajo 16 horas todos los días. Trabajo ______.", hint:"(muito)", accepted:["mucho"], answer:"mucho", feedback:"Revisa el adverbio de cantidad." },
         { block:3, kind:"Completa", prompt:"Son las ocho y la reunión empieza a las nueve. Llegamos ______.", accepted:["temprano"], answer:"temprano", feedback:"Revisa la expresión de tiempo." },
-        { block:3, kind:"Completa", prompt:"¿Dónde está Ana? Está ______, en el segundo piso.", accepted:["arriba"], answer:"arriba", feedback:"Revisa la expresión de lugar." },
+        { block:3, kind:"Completa", prompt:"¿Dónde está Ana? Está ______, en el segundo piso.", accepted:["abajo","arriba"], answer:"arriba", feedback:"Revisa la expresión de lugar." },
         { block:3, kind:"Completa", prompt:"Completa y escribe la frase completa: No gires a la derecha ni a la izquierda. Sigue ______.", mode:"exact", accepted:["derecho","recto","sigue derecho","sigue recto"], answer:"Sigue derecho", feedback:"Revisa la expresión de dirección." },
         { block:4, kind:"Traducción al español", prompt:"Traduce la frase al español.", source:"Meu irmão trabalha muito e sempre chega cedo.", lang:"pt-BR", mode:"production", validator:"translationBrother", answer:"Mi hermano trabaja mucho y siempre llega temprano.", feedback:"Comprueba las ideas clave: hermano, trabajar mucho, siempre y llegar temprano.", note:"El orden de “siempre” puede cambiar si la frase conserva el sentido." },
         { block:4, kind:"Traducción al español", prompt:"Traduce la frase al español.", source:"Esta casa é maior que aquela, mas aquela é mais bonita.", lang:"pt-BR", mode:"production", validator:"translationHouses", answer:"Esta casa es más grande que aquella, pero aquella es más bonita.", feedback:"Comprueba las dos comparaciones, las dos casas y el contraste con “pero”.", note:"También son posibles demostrativos como “esa” o “la otra” si el contraste queda claro." },
@@ -179,6 +179,8 @@
       let correctAttempts = 0;
       let accepted = false;
       let revealed = false;
+      let resolutionReady = false;
+      let exerciseResults = Array(items.length).fill(null);
 
       function normalize(value) {
         return String(value).toLocaleLowerCase("es-ES").replace(/[¿¡?!.;,]+/g, " ").replace(/\s+/g, " ").trim();
@@ -215,7 +217,7 @@
           case "translationBrother":
             return hasWord(raw, ["hermano"]) && hasWord(raw, ["trabaja"]) && hasWord(raw, ["mucho"]) && hasWord(raw, ["siempre"]) && hasWord(raw, ["llega"]) && hasWord(raw, ["temprano"]);
           case "translationHouses":
-            return hasWord(raw, ["casa"]) && hasWord(raw, ["esta"]) && hasWord(raw, ["pero"]) && hasWord(raw, ["esa","aquella","otra"]) && countWord(raw, "más") >= 2 && hasWord(raw, ["grande","mayor"]) && hasWord(raw, ["bonita","bella","hermosa"]);
+            return hasWord(raw, ["casa"]) && hasWord(raw, ["esta"]) && hasWord(raw, ["pero"]) && hasWord(raw, ["esa","aquella","otra"]) && matches(raw, /\b(?:mayor|más\s+(?:grande|amplia|espaciosa))\s+que\b/u) && matches(raw, /\bmás\s+(?:bonita|bella|hermosa)\b/u);
           case "translationFriend":
             return hasWord(raw, ["amiga"]) && hasWord(raw, ["mi"]) && hasWord(raw, ["francesa"]) && hasWord(raw, ["habla"]) && hasWord(raw, ["español"]) && hasPhrase(raw, "muy bien");
           case "translationWork":
@@ -253,6 +255,8 @@
       }
       function clearFeedback() {
         if (accepted) return;
+        resolutionReady = false;
+        nextButton.disabled = true;
         answer.classList.remove("is-incorrect","is-correct");
         answer.removeAttribute("aria-invalid");
         feedback.textContent = "Respuesta actualizada. Pulsa COMPROBAR.";
@@ -262,6 +266,7 @@
         const item = items[index];
         accepted = false;
         revealed = false;
+        resolutionReady = false;
         blockLabel.textContent = blocks[item.block];
         kindLabel.textContent = item.kind;
         prompt.textContent = item.prompt;
@@ -294,7 +299,7 @@
         revealButton.disabled = false;
         checkButton.disabled = false;
         checkButton.hidden = false;
-        nextButton.hidden = true;
+        nextButton.hidden = false;
         nextButton.disabled = true;
         nextButton.textContent = index === items.length - 1 ? "VER RESULTADOS" : "SIGUIENTE";
         feedback.textContent = item.hint ? "Pista: " + item.hint + " · Escribe tu respuesta y pulsa COMPROBAR." : "Escribe tu respuesta y pulsa COMPROBAR.";
@@ -337,17 +342,22 @@
           if (item.mode === "production") correct = isValidProduction(item, raw);
           else correct = item.accepted.some((acceptedAnswer) => normalize(acceptedAnswer) === normalize(raw));
         }
+        resolutionReady = true;
+        if (exerciseResults[index] === null) completed += 1;
+        exerciseResults[index] = correct;
+        nextButton.hidden = false;
+        nextButton.disabled = false;
         if (!correct) {
           errors += 1;
           answer.classList.remove("is-correct");
           answer.classList.add("is-incorrect");
           answer.setAttribute("aria-invalid","true");
-          feedback.textContent = raw ? item.feedback : "Escribe una respuesta antes de comprobar.";
+          feedback.textContent = raw ? item.feedback + " Puedes corregirla o continuar con SIGUIENTE." : "No se registró una respuesta. Puedes responder o continuar con SIGUIENTE.";
           feedback.className = "tarea08-feedback incorrect";
+          renderProgress();
           answer.focus();
           return;
         }
-        completed += 1;
         correctAttempts += 1;
         accepted = true;
         answer.classList.remove("is-incorrect");
@@ -365,12 +375,16 @@
       }
       function finish() {
         const precision = attempts ? Math.round((correctAttempts / attempts) * 100) : 0;
+        const correctExercises = exerciseResults.filter((result) => result === true).length;
+        const incorrectExercises = exerciseResults.filter((result) => result === false).length;
         let bestPrecision = 0;
         try { bestPrecision = Number(window.localStorage.getItem(BEST_PRECISION_KEY)) || 0; } catch (error) { bestPrecision = 0; }
         bestPrecision = Math.max(bestPrecision, precision);
         try { window.localStorage.setItem(BEST_PRECISION_KEY, String(bestPrecision)); } catch (error) { /* La tarea sigue funcionando sin almacenamiento local. */ }
         const rows = [
           ["Ejercicios completados", completed + " / " + items.length],
+          ["Ejercicios correctos", String(correctExercises)],
+          ["Ejercicios incorrectos", String(incorrectExercises)],
           ["Errores cometidos", String(errors)],
           ["Intentos totales", String(attempts)],
           ["Precisión", precision + "%"],
@@ -391,7 +405,7 @@
         root.querySelector("[data-tarea08-repeat]").focus();
       }
       function advance() {
-        if (!accepted) return;
+        if (!resolutionReady) return;
         if (index === items.length - 1) { finish(); return; }
         index += 1;
         render();
@@ -400,7 +414,7 @@
       form.addEventListener("submit", checkAnswer);
       nextButton.addEventListener("click", advance);
       root.querySelector("[data-tarea08-repeat]").addEventListener("click", () => {
-        index = 0; completed = 0; attempts = 0; errors = 0; correctAttempts = 0; accepted = false; revealed = false;
+        index = 0; completed = 0; attempts = 0; errors = 0; correctAttempts = 0; accepted = false; revealed = false; resolutionReady = false; exerciseResults = Array(items.length).fill(null);
         done.hidden = true;
         work.hidden = false;
         root.querySelector(".tarea08-header").hidden = false;
