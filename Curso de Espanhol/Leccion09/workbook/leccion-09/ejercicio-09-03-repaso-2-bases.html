@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="20 ejercicios para integrar las bases de las Lecciones 1–8.">
+  <title>Repaso 2 · Bases</title>
+  <style>
+    :root { --red:#aa151b; --gold:#f1bf00; --ink:#172033; --muted:#667085; --paper:#fffdf8; --soft:#f4efe4; --line:rgba(23,32,51,.12); --green:#2d7a5b; --blue:#2d5ea8; --focus:rgba(45,94,168,.38); --font-scale:1; --shadow:0 12px 28px rgba(20,28,38,.1); }
+    * { box-sizing:border-box; } [hidden] { display:none !important; }
+    body { margin:0; background:linear-gradient(135deg,#fff,var(--soft)); color:var(--ink); font:calc(1rem * var(--font-scale))/1.5 Arial,Helvetica,sans-serif; }
+    button,input,textarea { font:inherit; } button { cursor:pointer; } button:disabled { cursor:not-allowed; opacity:.58; }
+    main { margin:0 auto; max-width:1000px; padding:28px 0 42px; width:min(92%,1000px); }
+    header { border-bottom:2px solid rgba(170,21,27,.2); padding-bottom:16px; }
+    .course { color:var(--red); font-size:.8rem; font-weight:900; letter-spacing:.11em; text-transform:uppercase; }
+    h1,h2 { font-family:Georgia,"Times New Roman",serif; line-height:1.05; } h1 { font-size:calc(clamp(2rem,5vw,3.5rem) * var(--font-scale)); margin:10px 0 6px; } h2 { font-size:calc(clamp(1.6rem,4vw,2.4rem) * var(--font-scale)); margin:0 0 10px; }
+    .sub { color:var(--muted); font-weight:700; margin:0; }
+    .font-controls { align-items:center; display:flex; gap:8px; justify-content:flex-end; margin-top:14px; }
+    .font-controls button { background:#fff; border:1px solid var(--line); border-radius:5px; color:var(--ink); min-height:40px; min-width:44px; padding:6px 9px; }
+    .font-controls button[aria-pressed="true"] { background:var(--red); border-color:var(--red); color:#fff; font-weight:900; }
+    button:focus-visible,input:focus-visible,textarea:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
+    .shell { background:rgba(255,255,255,.96); border-left:5px solid var(--gold); box-shadow:var(--shadow); margin-top:20px; padding:clamp(22px,4vw,42px); }
+    .question-wrap { display:grid; gap:16px; }
+    .progress { color:var(--muted); font-weight:800; margin:0; }
+    .progress-track { background:var(--soft); border-radius:999px; height:10px; overflow:hidden; }
+    .progress-track span { background:linear-gradient(90deg,var(--red),var(--gold)); display:block; height:100%; transition:width .2s ease; width:0; }
+    .item-block { color:var(--red); font-size:max(.97rem,calc(.97rem * var(--font-scale))); font-weight:900; letter-spacing:.03em; margin:0; }
+    .prompt { font-family:Georgia,"Times New Roman",serif; font-size:calc(clamp(1.45rem,3.8vw,2.15rem) * var(--font-scale)); font-weight:700; line-height:1.32; margin:0; }
+    .context { color:var(--muted); font-size:calc(1.1rem * var(--font-scale)); font-weight:700; margin:0; }
+    .answer-input,.answer-textarea { background:#fff; border:1px solid var(--line); border-bottom:3px solid var(--blue); border-radius:3px; color:var(--ink); font-size:calc(1.2rem * var(--font-scale)); font-weight:700; min-height:3rem; min-width:0; padding:.55rem .7rem; width:100%; }
+    .answer-textarea { line-height:1.45; min-height:8rem; resize:vertical; }
+    .answer-input.is-correct,.answer-textarea.is-correct { background:#ecfdf3; border-color:var(--green); }
+    .answer-input.is-incorrect,.answer-textarea.is-incorrect { background:#fff1f0; border-color:var(--red); }
+    .answer-input:disabled,.answer-textarea:disabled { color:var(--ink); opacity:1; }
+    .answer-form { display:grid; gap:12px; }
+    .answer-actions { align-items:center; display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; }
+    .answer-actions button,.repeat { background:var(--red); border:1px solid var(--red); color:#fff; font-weight:900; min-height:46px; padding:9px 16px; }
+    .answer-actions [data-show-answer] { background:#fff; color:var(--red); }
+    .response-model { background:var(--soft); border-left:4px solid var(--gold); font-family:Georgia,"Times New Roman",serif; font-size:calc(1.1rem * var(--font-scale)); font-weight:700; line-height:1.5; padding:12px 14px; }
+    .response-model p { margin:.25rem 0; }
+    .feedback { background:var(--soft); line-height:1.4; margin:0; min-height:48px; padding:12px 14px; }
+    .feedback.correct { background:#ecfdf3; color:#17603f; }
+    .feedback.incorrect { background:#fff1f0; color:#8e1116; }
+    .done { text-align:center; }
+    .done>p { color:var(--muted); font-weight:700; }
+    .result-summary { display:grid; gap:8px; margin:18px auto; max-width:36rem; text-align:left; }
+    .result-summary p { border-bottom:1px solid var(--line); margin:0; padding:8px 0; }
+    .result-summary strong { color:var(--red); }
+    .performance { color:var(--muted); font-weight:800; }
+    .repeat { margin-top:10px; }
+    .sr-only { clip:rect(0,0,0,0); clip-path:inset(50%); height:1px; overflow:hidden; position:absolute; white-space:nowrap; width:1px; }
+    @media(max-width:560px) { main { padding-top:18px; } .answer-actions { display:grid; } .answer-actions button { width:100%; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="course">Curso de Español · Lección 9 · Repaso</p>
+      <h1>Repaso 2 · Bases</h1>
+      <p class="sub">20 ejercicios para integrar las bases de las Lecciones 1–8.</p>
+      <div class="font-controls" data-font-controls role="group" aria-label="Controles de tamaño del texto">
+        <button type="button" data-font="small" aria-label="Reducir tamaño del texto" aria-pressed="false">A−</button>
+        <button type="button" data-font="normal" aria-label="Tamaño normal del texto" aria-pressed="true">A</button>
+        <button type="button" data-font="large" aria-label="Aumentar tamaño del texto" aria-pressed="false">A+</button>
+      </div>
+    </header>
+    <section class="shell" aria-label="Ejercicio de repaso de las bases">
+      <div class="question-wrap" data-question-wrap>
+        <p class="progress" data-progress aria-live="polite"></p>
+        <div class="progress-track" role="progressbar" data-exercise-progress aria-label="Progreso del ejercicio" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0"><span></span></div>
+        <p class="item-block" data-block></p>
+        <p class="prompt" id="exercise-prompt" data-prompt></p>
+        <p class="context" id="exercise-context" data-context hidden></p>
+        <form class="answer-form" data-answer-form novalidate>
+          <label class="sr-only" data-answer-label for="exercise-answer">Escribe tu respuesta</label>
+          <div data-answer-field></div>
+          <div class="response-model" id="response-model" data-response-model aria-live="polite" hidden></div>
+          <div class="answer-actions">
+            <button type="button" data-show-answer aria-expanded="false" aria-controls="exercise-answer response-model">VER RESPUESTA</button>
+            <button type="submit" data-submit>COMPROBAR</button>
+          </div>
+        </form>
+        <p class="feedback" id="exercise-feedback" data-feedback aria-live="polite">Escribe tu respuesta y pulsa COMPROBAR.</p>
+      </div>
+      <section class="done" data-done aria-labelledby="result-title" hidden>
+        <h2 id="result-title">¡Ejercicio terminado!</h2>
+        <p class="performance" data-performance></p>
+        <div class="result-summary" data-summary aria-live="polite"></div>
+        <button class="repeat" type="button" data-repeat>REPETIR EJERCICIO</button>
+      </section>
+    </section>
+  </main>
+  <script>
+    (() => {
+      "use strict";
+      const BEST_SCORE_KEY = "workbook-leccion-09-repaso-02-bases-best-precision";
+      const items = [
+        { id:1, block:"Artículos y concordancia · 1–4", prompt:"Completa: ______ casa grande.", type:"closed", answer:"la", feedback:"Revisa el artículo y el género del sustantivo." },
+        { id:2, block:"Artículos y concordancia · 1–4", prompt:"Completa: ______ libros interesantes.", type:"closed", answer:"los", feedback:"Revisa el artículo y el número del sustantivo." },
+        { id:3, block:"Artículos y concordancia · 1–4", prompt:"Transforma al plural: una oficina pequeña.", type:"closed", answer:"unas oficinas pequeñas", feedback:"Revisa el artículo, el sustantivo y la concordancia del adjetivo." },
+        { id:4, block:"Artículos y concordancia · 1–4", prompt:"Completa correctamente: dos coches ______.", context:"Adjetivo base: rápido.", type:"closed", answer:"rápidos", feedback:"El adjetivo concuerda en género y número con “coches”." },
+        { id:5, block:"Pronombres + ser / estar / hay · 5–8", prompt:"______ trabajo en una empresa.", context:"La persona que habla.", type:"closed", answer:"yo", feedback:"El pronombre se refiere a la persona que habla." },
+        { id:6, block:"Pronombres + ser / estar / hay · 5–8", prompt:"Laura ______ médica.", type:"closed", answer:"es", feedback:"Revisa el verbo “ser” y la información que expresa." },
+        { id:7, block:"Pronombres + ser / estar / hay · 5–8", prompt:"La oficina ______ en el centro.", type:"closed", answer:"está", feedback:"¿Describes, localizas o presentas algo que existe?" },
+        { id:8, block:"Pronombres + ser / estar / hay · 5–8", prompt:"______ tres mesas en la oficina.", type:"closed", answer:"hay", feedback:"¿Describes, localizas o presentas algo que existe?" },
+        { id:9, block:"Preposiciones e interrogativos · 9–12", prompt:"Soy ______ Brasil.", type:"closed", answer:"de", feedback:"Revisa la preposición que acompaña al origen." },
+        { id:10, block:"Preposiciones e interrogativos · 9–12", prompt:"Voy ______ trabajo a las ocho.", type:"closed", answer:"al", feedback:"Revisa la preposición y la contracción delante de “trabajo”." },
+        { id:11, block:"Preposiciones e interrogativos · 9–12", prompt:"¿______ trabajas?", context:"Quiero saber el lugar.", type:"closed", answer:"dónde", feedback:"¿Qué información quieres preguntar? Revisa el interrogativo de lugar." },
+        { id:12, block:"Preposiciones e interrogativos · 9–12", prompt:"¿______ reuniones tienes hoy?", type:"closed", answer:"cuántas", feedback:"Revisa el interrogativo y su concordancia con “reuniones”." },
+        { id:13, block:"Preguntas naturales · 13–16", prompt:"Frase base: Tú trabajas aquí. Escribe una pregunta natural.", type:"open", validator:"question13", models:["¿Trabajas aquí?","¿Tú trabajas aquí?","¿Trabajas tú aquí?"], feedback:"Recuerda que una pregunta puede tener más de un orden natural. Revisa la estructura y conserva el significado." },
+        { id:14, block:"Preguntas naturales · 13–16", prompt:"Frase base: Ana vive en Madrid. Escribe una pregunta natural.", type:"open", validator:"question14", models:["¿Ana vive en Madrid?","¿Vive Ana en Madrid?"], feedback:"Recuerda que una pregunta puede tener más de un orden natural. Conserva el sujeto o deja claro de quién hablas." },
+        { id:15, block:"Preguntas naturales · 13–16", prompt:"Ud. tiene una cita hoy. Escribe una pregunta natural.", type:"open", validator:"question15", models:["¿Tiene Ud. una cita hoy?","¿Ud. tiene una cita hoy?","¿Tiene una cita hoy?"], feedback:"Recuerda que una pregunta puede tener más de un orden natural. Revisa el verbo y conserva el significado." },
+        { id:16, block:"Preguntas naturales · 13–16", prompt:"Carlos trabaja en una empresa de tecnología. Pregunta por el lugar.", type:"open", validator:"question16", models:["¿Dónde trabaja Carlos?","¿Dónde trabaja él?"], feedback:"¿Qué información quieres preguntar? Usa un interrogativo de lugar y conserva la información." },
+        { id:17, block:"Números, hora y calendario · 17–20", prompt:"7:30 → Son las siete y ______.", type:"closed", answer:"media", feedback:"Revisa la expresión para indicar media hora." },
+        { id:18, block:"Números, hora y calendario · 17–20", prompt:"10:45 → Son las once menos ______.", type:"closed", answer:"cuarto", feedback:"Revisa la expresión para indicar los quince minutos que faltan." },
+        { id:19, block:"Números, hora y calendario · 17–20", prompt:"El día después del miércoles es ______.", type:"closed", answer:"jueves", feedback:"Recuerda el orden de los días de la semana." },
+        { id:20, block:"Números, hora y calendario · 17–20", prompt:"El mes después de noviembre es ______.", type:"closed", answer:"diciembre", feedback:"Recuerda el orden de los meses del año." }
+      ];
+      const progress=document.querySelector("[data-progress]"), progressBar=document.querySelector("[data-exercise-progress]"), block=document.querySelector("[data-block]"), prompt=document.querySelector("[data-prompt]"), context=document.querySelector("[data-context]"), form=document.querySelector("[data-answer-form]"), fieldHost=document.querySelector("[data-answer-field]"), answerLabel=document.querySelector("[data-answer-label]"), revealButton=document.querySelector("[data-show-answer]"), submitButton=document.querySelector("[data-submit]"), responseModel=document.querySelector("[data-response-model]"), feedback=document.querySelector("[data-feedback]"), wrap=document.querySelector("[data-question-wrap]"), done=document.querySelector("[data-done]"), summary=document.querySelector("[data-summary]"), performance=document.querySelector("[data-performance]"), fontControls=document.querySelector("[data-font-controls]");
+      let index=0, errors=0, attempts=0, completed=0, accepted=false, revealed=false, answerField=null;
+      function normalize(value) { return value.trim().normalize("NFC").toLocaleLowerCase("es-ES").replace(/\s+/gu," ").replace(/\.$/u,"").trim(); }
+      function questionBody(value) {
+        const raw=value.trim();
+        const beginsWithMark=raw.startsWith("¿"),hasQuestionMark=raw.includes("?");
+        if(beginsWithMark&&! /\?\.?$/u.test(raw))return null;
+        if(hasQuestionMark&&! /\?\.?$/u.test(raw))return null;
+        return normalize(raw.replace(/^¿/u,"").replace(/\?\.?$/u,"").replace(/\bud\./giu,"ud").replace(/\s+/gu," "));
+      }
+      function validateNaturalQuestion(item,value) {
+        const body=questionBody(value); if(body===null)return false;
+        const words=body.split(" ");
+        if(item.validator==="question13") return (words.length===2&&words[0]==="trabajas"&&words[1]==="aquí")||(words.length===3&&words[0]==="tú"&&words[1]==="trabajas"&&words[2]==="aquí")||(words.length===3&&words[0]==="trabajas"&&words[1]==="tú"&&words[2]==="aquí");
+        if(item.validator==="question14") return (words.length===4&&words[0]==="ana"&&words[1]==="vive"&&words[2]==="en"&&words[3]==="madrid")||(words.length===4&&words[0]==="vive"&&words[1]==="ana"&&words[2]==="en"&&words[3]==="madrid")||(words.length===3&&words[0]==="vive"&&words[1]==="en"&&words[2]==="madrid");
+        if(item.validator==="question15") return (words.length===5&&words[0]==="tiene"&&words[1]==="ud"&&words[2]==="una"&&words[3]==="cita"&&words[4]==="hoy")||(words.length===5&&words[0]==="ud"&&words[1]==="tiene"&&words[2]==="una"&&words[3]==="cita"&&words[4]==="hoy")||(words.length===4&&words[0]==="tiene"&&words[1]==="una"&&words[2]==="cita"&&words[3]==="hoy");
+        if(item.validator==="question16") return (words.length===3&&words[0]==="dónde"&&words[1]==="trabaja"&&words[2]==="carlos")||(words.length===3&&words[0]==="dónde"&&words[1]==="trabaja"&&words[2]==="él")||(words.length===2&&words[0]==="dónde"&&words[1]==="trabaja");
+        return false;
+      }
+      function validate(item,value) { return item.type==="closed"?normalize(value)===normalize(item.answer):validateNaturalQuestion(item,value); }
+      function createField(item) {
+        const field=item.type==="closed"?document.createElement("input"):document.createElement("textarea");
+        field.id="exercise-answer";field.className=item.type==="closed"?"answer-input":"answer-textarea";field.autocomplete="off";field.autocapitalize="sentences";field.spellcheck=false;field.setAttribute("aria-label",item.type==="closed"?"Respuesta escrita":"Escribe una pregunta natural");field.setAttribute("aria-describedby",item.context?"exercise-prompt exercise-context exercise-feedback":"exercise-prompt exercise-feedback");
+        if(item.type==="closed"){field.type="text";field.placeholder="Escribe tu respuesta";}else{field.rows=3;field.placeholder="Escribe una pregunta";}
+        field.addEventListener("input",()=>{if(accepted||field.disabled)return;revealed=false;revealButton.setAttribute("aria-expanded","false");responseModel.hidden=true;field.classList.remove("is-correct","is-incorrect");field.removeAttribute("aria-invalid");feedback.textContent="Respuesta actualizada. Pulsa COMPROBAR.";feedback.className="feedback";});
+        return field;
+      }
+      function updateProgress() {
+        progress.textContent="Ejercicio "+(index+1)+" / "+items.length+" · Completados: "+completed+" / "+items.length;
+        progressBar.setAttribute("aria-valuenow",String(index+1));progressBar.firstElementChild.style.width=((index+1)/items.length*100)+"%";
+      }
+      function render() {
+        const item=items[index];block.textContent=item.block;prompt.textContent=item.prompt;context.textContent=item.context||"";context.hidden=!item.context;
+        answerField=createField(item);fieldHost.replaceChildren(answerField);answerLabel.htmlFor=answerField.id;
+        responseModel.replaceChildren();responseModel.hidden=true;accepted=false;revealed=false;revealButton.disabled=false;revealButton.setAttribute("aria-expanded","false");submitButton.disabled=false;submitButton.textContent="COMPROBAR";
+        feedback.textContent="Escribe tu respuesta y pulsa COMPROBAR.";feedback.className="feedback";updateProgress();answerField.focus();
+      }
+      function showSummary() {
+        const precision=attempts?Math.round(completed/attempts*100):0;let best=0;
+        try{best=Number(localStorage.getItem(BEST_SCORE_KEY))||0;}catch(error){best=0;}
+        best=Math.max(best,precision);try{localStorage.setItem(BEST_SCORE_KEY,String(best));}catch(error){/* El ejercicio funciona aunque el almacenamiento local no esté disponible. */}
+        const rows=[["Puntuación validada",completed+" / "+items.length],["Ejercicios completados",completed+" / "+items.length],["Errores cometidos",String(errors)],["Intentos totales",String(attempts)],["Precisión por intento",precision+"%"],["Mejor precisión",best+"%"]];
+        summary.replaceChildren(...rows.map(([label,value])=>{const row=document.createElement("p"),strong=document.createElement("strong");strong.textContent=label+": ";row.append(strong,document.createTextNode(value));return row;}));
+        performance.textContent=precision>=90?"Desempeño excelente.":precision>=70?"Buen trabajo. Sigue practicando.":"Sigue practicando para mejorar tu precisión.";
+        wrap.hidden=true;done.hidden=false;fontControls.hidden=true;document.querySelector("[data-repeat]").focus();
+      }
+      revealButton.addEventListener("click",()=>{
+        if(accepted)return;const item=items[index];revealed=true;responseModel.replaceChildren();
+        const answers=item.type==="closed"?[item.answer]:item.models;
+        if(item.type==="closed") {answerField.value=item.answer;const line=document.createElement("p");line.textContent="Respuesta: "+item.answer;responseModel.append(line);}
+        else {answers.forEach(answer=>{const line=document.createElement("p");line.textContent=answer;responseModel.append(line);});answerField.value=answers[0];}
+        responseModel.hidden=false;revealButton.setAttribute("aria-expanded","true");answerField.classList.remove("is-correct","is-incorrect");answerField.removeAttribute("aria-invalid");feedback.textContent="Respuesta mostrada. Pulsa COMPROBAR para validarla.";feedback.className="feedback";answerField.focus();
+      });
+      form.addEventListener("submit",event=>{
+        event.preventDefault();if(accepted){if(index===items.length-1)showSummary();else{index++;render();}return;}
+        attempts++;const item=items[index],value=answerField.value;
+        if(validate(item,value)){
+          completed++;accepted=true;answerField.classList.remove("is-incorrect");answerField.classList.add("is-correct");answerField.disabled=true;answerField.removeAttribute("aria-invalid");revealButton.disabled=true;updateProgress();
+          feedback.textContent=(revealed?"Respuesta validada. ":"¡Correcto! ")+item.feedback;feedback.className="feedback correct";submitButton.textContent=index===items.length-1?"VER RESULTADOS":"SIGUIENTE";submitButton.focus();return;
+        }
+        errors++;answerField.classList.remove("is-correct");answerField.classList.add("is-incorrect");answerField.setAttribute("aria-invalid","true");
+        feedback.textContent=value.trim()?item.feedback+" Puedes intentarlo de nuevo.":"Escribe una respuesta. Errar cuenta para la estadística; puedes intentarlo de nuevo.";feedback.className="feedback incorrect";answerField.focus();
+      });
+      document.querySelector("[data-repeat]").addEventListener("click",()=>{index=0;errors=0;attempts=0;completed=0;accepted=false;revealed=false;done.hidden=true;wrap.hidden=false;fontControls.hidden=false;render();});
+      document.querySelectorAll("[data-font]").forEach(button=>button.addEventListener("click",()=>{const size=button.dataset.font;document.documentElement.style.setProperty("--font-scale",size==="small"?".9":size==="large"?"1.16":"1");document.querySelectorAll("[data-font]").forEach(control=>control.setAttribute("aria-pressed",String(control===button)));}));
+      form.addEventListener("keydown",event=>{if(event.key==="Enter"&&((event.target===answerField&&answerField.tagName==="INPUT")||(answerField.tagName==="TEXTAREA"&&event.ctrlKey))){event.preventDefault();form.requestSubmit();}});
+      render();
+    })();
+  </script>
+</body>
+</html>

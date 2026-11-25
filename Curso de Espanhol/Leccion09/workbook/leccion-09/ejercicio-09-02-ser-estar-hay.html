@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="18 ejercicios para elegir entre ser, estar y hay según la información que se quiere expresar.">
+  <title>Ejercicio · Ser, estar y hay</title>
+  <style>
+    :root { --red:#aa151b; --gold:#f1bf00; --ink:#172033; --muted:#667085; --paper:#fffdf8; --soft:#f4efe4; --line:rgba(23,32,51,.12); --green:#2d7a5b; --blue:#2d5ea8; --focus:rgba(45,94,168,.38); --font-scale:1; --shadow:0 12px 28px rgba(20,28,38,.1); }
+    * { box-sizing:border-box; } [hidden] { display:none !important; }
+    body { margin:0; background:linear-gradient(135deg,#fff,var(--soft)); color:var(--ink); font:calc(1rem * var(--font-scale))/1.5 Arial,Helvetica,sans-serif; }
+    button,input,textarea { font:inherit; } button { cursor:pointer; } button:disabled { cursor:not-allowed; opacity:.58; }
+    main { margin:0 auto; max-width:1000px; padding:28px 0 42px; width:min(92%,1000px); }
+    header { border-bottom:2px solid rgba(170,21,27,.2); padding-bottom:16px; }
+    .course { color:var(--red); font-size:.8rem; font-weight:900; letter-spacing:.11em; text-transform:uppercase; }
+    h1,h2 { font-family:Georgia,"Times New Roman",serif; line-height:1.05; } h1 { font-size:calc(clamp(2rem,5vw,3.5rem) * var(--font-scale)); margin:10px 0 6px; } h2 { font-size:calc(clamp(1.6rem,4vw,2.4rem) * var(--font-scale)); margin:0 0 10px; }
+    .sub { color:var(--muted); font-weight:700; margin:0; }
+    .font-controls { align-items:center; display:flex; gap:8px; justify-content:flex-end; margin-top:14px; }
+    .font-controls button { background:#fff; border:1px solid var(--line); border-radius:5px; color:var(--ink); min-height:40px; min-width:44px; padding:6px 9px; }
+    .font-controls button[aria-pressed="true"] { background:var(--red); border-color:var(--red); color:#fff; font-weight:900; }
+    button:focus-visible,input:focus-visible,textarea:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
+    .shell { background:rgba(255,255,255,.96); border-left:5px solid var(--gold); box-shadow:var(--shadow); margin-top:20px; padding:clamp(22px,4vw,42px); }
+    .question-wrap { display:grid; gap:16px; } .progress { color:var(--muted); font-weight:800; margin:0; }
+    .progress-track { background:var(--soft); border-radius:999px; height:10px; overflow:hidden; } .progress-track span { background:linear-gradient(90deg,var(--red),var(--gold)); display:block; height:100%; transition:width .2s ease; width:0; }
+    .item-block { color:var(--red); font-size:max(.97rem,calc(.97rem * var(--font-scale))); font-weight:900; letter-spacing:.03em; margin:0; }
+    .prompt { font-family:Georgia,"Times New Roman",serif; font-size:calc(clamp(1.45rem,3.8vw,2.15rem) * var(--font-scale)); font-weight:700; line-height:1.32; margin:0; }
+    .context { color:var(--muted); font-size:calc(1.1rem * var(--font-scale)); font-weight:700; margin:0; }
+    .answer-input,.answer-textarea { background:#fff; border:1px solid var(--line); border-bottom:3px solid var(--blue); border-radius:3px; color:var(--ink); font-size:calc(1.2rem * var(--font-scale)); font-weight:700; min-height:3rem; min-width:0; padding:.55rem .7rem; width:100%; }
+    .answer-textarea { line-height:1.45; min-height:8rem; resize:vertical; }
+    .answer-input.is-correct,.answer-textarea.is-correct { background:#ecfdf3; border-color:var(--green); } .answer-input.is-incorrect,.answer-textarea.is-incorrect { background:#fff1f0; border-color:var(--red); }
+    .answer-input:disabled,.answer-textarea:disabled { color:var(--ink); opacity:1; }
+    .answer-form { display:grid; gap:12px; }
+    .answer-actions { align-items:center; display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; }
+    .answer-actions button,.repeat { background:var(--red); border:1px solid var(--red); color:#fff; font-weight:900; min-height:46px; padding:9px 16px; }
+    .answer-actions [data-show-answer] { background:#fff; color:var(--red); }
+    .answer-textarea-wrap { display:grid; gap:10px; }
+    .response-model { background:var(--soft); border-left:4px solid var(--gold); font-family:Georgia,"Times New Roman",serif; font-size:calc(1.1rem * var(--font-scale)); font-weight:700; line-height:1.45; padding:12px 14px; }
+    .feedback { background:var(--soft); line-height:1.4; margin:0; min-height:48px; padding:12px 14px; } .feedback.correct { background:#ecfdf3; color:#17603f; } .feedback.incorrect { background:#fff1f0; color:#8e1116; }
+    .done { text-align:center; } .done>p { color:var(--muted); font-weight:700; } .result-summary { display:grid; gap:8px; margin:18px auto; max-width:36rem; text-align:left; } .result-summary p { border-bottom:1px solid var(--line); margin:0; padding:8px 0; } .result-summary strong { color:var(--red); } .performance { color:var(--muted); font-weight:800; }
+    .repeat { margin-top:10px; } .sr-only { clip:rect(0,0,0,0); clip-path:inset(50%); height:1px; overflow:hidden; position:absolute; white-space:nowrap; width:1px; }
+    @media(max-width:560px) { main { padding-top:18px; } .answer-actions { display:grid; } .answer-actions button { width:100%; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="course">Curso de Español · Lección 9 · Práctica</p>
+      <h1>Ejercicio · Ser, estar y hay</h1>
+      <p class="sub">Completa y decide si hablamos de descripción, estado, localización o existencia.</p>
+      <div class="font-controls" data-font-controls role="group" aria-label="Controles de tamaño del texto">
+        <button type="button" data-font="small" aria-label="Reducir tamaño del texto" aria-pressed="false">A−</button><button type="button" data-font="normal" aria-label="Tamaño normal del texto" aria-pressed="true">A</button><button type="button" data-font="large" aria-label="Aumentar tamaño del texto" aria-pressed="false">A+</button>
+      </div>
+    </header>
+    <section class="shell" aria-label="Ejercicio sobre ser, estar y hay">
+      <div class="question-wrap" data-question-wrap>
+        <p class="progress" data-progress aria-live="polite"></p>
+        <div class="progress-track" role="progressbar" data-exercise-progress aria-label="Progreso del ejercicio" aria-valuemin="0" aria-valuemax="18" aria-valuenow="0"><span></span></div>
+        <p class="item-block" data-block></p>
+        <p class="item-block" data-item-category></p>
+        <p class="prompt" data-prompt></p>
+        <p class="context" data-context hidden></p>
+        <form class="answer-form" data-answer-form novalidate>
+          <label class="sr-only" data-answer-label for="exercise-answer">Escribe tu respuesta</label>
+          <div class="answer-textarea-wrap" data-answer-field></div>
+          <div class="response-model" id="response-model" data-response-model aria-live="polite" hidden></div>
+          <div class="answer-actions"><button type="button" data-show-answer aria-expanded="false" aria-controls="exercise-answer response-model">VER RESPUESTA</button><button type="submit" data-submit>COMPROBAR</button></div>
+        </form>
+        <p class="feedback" id="exercise-feedback" data-feedback aria-live="polite">Escribe tu respuesta y pulsa COMPROBAR.</p>
+      </div>
+      <div class="done" data-done hidden>
+        <h2>¡Ejercicio terminado!</h2><p class="performance" data-performance></p><div class="result-summary" data-summary aria-live="polite"></div>
+        <button class="repeat" type="button" data-repeat>REPETIR EJERCICIO</button>
+      </div>
+    </section>
+  </main>
+  <script>
+    (() => {
+      "use strict";
+      const BEST_SCORE_KEY = "workbook-leccion-09-ejercicio-09-02-best-precision";
+      const items = [
+        { block:"Reconocimiento básico · 1–6", kind:"Completa con la forma adecuada", type:"closed", prompt:"Mi oficina ______ grande.", answer:"es", feedback:"Describe una característica." },
+        { block:"Reconocimiento básico · 1–6", kind:"Completa con la forma adecuada", type:"closed", prompt:"Mi oficina ______ en el centro.", answer:"está", feedback:"Indica una localización." },
+        { block:"Reconocimiento básico · 1–6", kind:"Completa con la forma adecuada", type:"closed", prompt:"______ tres mesas en la oficina.", answer:"Hay", feedback:"Presenta algo que existe." },
+        { block:"Reconocimiento básico · 1–6", kind:"Completa con la forma adecuada", type:"closed", prompt:"Laura ______ médica.", answer:"es", feedback:"Indica profesión." },
+        { block:"Reconocimiento básico · 1–6", kind:"Completa con la forma adecuada", type:"closed", prompt:"Laura ______ cansada.", answer:"está", feedback:"Indica un estado." },
+        { block:"Reconocimiento básico · 1–6", kind:"Completa con la forma adecuada", type:"closed", prompt:"Carlos ______ de México.", answer:"es", feedback:"Indica origen." },
+        { block:"Contrastes · 7–12", kind:"Completa con la forma adecuada", type:"closed", prompt:"______ un libro en la mesa.", answer:"Hay", feedback:"“Hay” presenta algo que existe." },
+        { block:"Contrastes · 7–12", kind:"Completa con la forma adecuada", type:"closed", prompt:"El libro ______ en la mesa.", answer:"está", feedback:"“Estar” localiza algo ya identificado." },
+        { block:"Contrastes · 7–12", kind:"Completa con la forma adecuada", type:"closed", prompt:"Ana ______ tranquila.", context:"Es una característica de su personalidad.", answer:"es", feedback:"¿Describes cómo es Ana o cómo se encuentra? Aquí hablamos de una característica." },
+        { block:"Contrastes · 7–12", kind:"Completa con la forma adecuada", type:"closed", prompt:"Ana ______ tranquila ahora.", context:"Describe cómo se encuentra en este momento.", answer:"está", feedback:"¿Hablas de un estado o de una característica? Aquí hablamos de un estado." },
+        { block:"Contrastes · 7–12", kind:"Completa con la forma adecuada", type:"closed", prompt:"La casa ______ pequeña.", answer:"es", feedback:"Describe una característica de la casa." },
+        { block:"Contrastes · 7–12", kind:"Completa con la forma adecuada", type:"closed", prompt:"______ dos dormitorios y un baño en la casa.", answer:"Hay", feedback:"“Hay” presenta lo que existe en la casa." },
+        { block:"Producción y decisión · 13–18", kind:"Completa con la forma adecuada", type:"closed", prompt:"Madrid ______ en España.", answer:"está", feedback:"La localización usa “estar”." },
+        { block:"Producción y decisión · 13–18", kind:"Completa con la forma adecuada", type:"closed", prompt:"Los pacientes ______ inquietos.", answer:"están", feedback:"Expresa el estado de varias personas. Revisa la concordancia." },
+        { block:"Producción y decisión · 13–18", kind:"Completa con la forma adecuada", type:"closed", prompt:"______ muchos pacientes en la sala de espera.", answer:"Hay", feedback:"“Hay” presenta personas que están allí." },
+        { block:"Producción y decisión · 13–18", kind:"Escribe una frase completa", type:"ser-production", prompt:"Escribe una frase con “ser” para describir una persona, lugar u objeto.", model:"Mi casa es grande.", feedback:"La frase expresa identidad, origen, profesión o una característica con “ser”." },
+        { block:"Producción y decisión · 13–18", kind:"Escribe una frase completa", type:"estar-production", prompt:"Escribe una frase con “estar” para indicar un estado o una localización.", model:"Mi oficina está en el centro.", feedback:"La frase expresa un estado o una localización con “estar”." },
+        { block:"Producción y decisión · 13–18", kind:"Escribe tres frases completas", type:"integrated-production", prompt:"Describe un lugar con 3 frases: una con “ser”, una con “estar” y una con “hay”.", model:"Mi oficina es pequeña. Está en el centro. Hay cuatro mesas.", feedback:"La descripción integra una característica con “ser”, una localización con “estar” y algo que existe con “hay”." }
+      ];
+      const progress=document.querySelector("[data-progress]"), progressBar=document.querySelector("[data-exercise-progress]"), block=document.querySelector("[data-block]"), itemCategory=document.querySelector("[data-item-category]"), prompt=document.querySelector("[data-prompt]"), context=document.querySelector("[data-context]"), form=document.querySelector("[data-answer-form]"), fieldHost=document.querySelector("[data-answer-field]"), answerLabel=document.querySelector("[data-answer-label]"), revealButton=document.querySelector("[data-show-answer]"), submitButton=document.querySelector("[data-submit]"), responseModel=document.querySelector("[data-response-model]"), feedback=document.querySelector("[data-feedback]"), wrap=document.querySelector("[data-question-wrap]"), done=document.querySelector("[data-done]"), summary=document.querySelector("[data-summary]"), performance=document.querySelector("[data-performance]"), fontControls=document.querySelector("[data-font-controls]");
+      let index=0, errors=0, attempts=0, completed=0, accepted=false, revealed=false, answerField=null;
+      function normalize(value) { return value.trim().toLocaleLowerCase("es-ES").replace(/[.!?]+$/u,"").replace(/\s+/gu," ").trim(); }
+      function tokens(value) { return normalize(value).match(/[\p{L}]+/gu)||[]; }
+      function formAgreement(text, verbSet) {
+        const words=tokens(text), forms=verbSet==="ser"?new Set(["soy","eres","es","somos","sois","son"]):new Set(["estoy","estás","está","estamos","estáis","están"]);
+        const verbIndex=words.findIndex(word=>forms.has(word)); if(verbIndex<0)return false;
+        const verb=words[verbIndex], before=words.slice(0,verbIndex), previous=before.at(-1);
+        const pronounForms={yo:verbSet==="ser"?"soy":"estoy",tú:verbSet==="ser"?"eres":"estás",él:verbSet==="ser"?"es":"está",ella:verbSet==="ser"?"es":"está",ud:verbSet==="ser"?"es":"está",usted:verbSet==="ser"?"es":"está",nosotros:verbSet==="ser"?"somos":"estamos",nosotras:verbSet==="ser"?"somos":"estamos",vosotros:verbSet==="ser"?"sois":"estáis",vosotras:verbSet==="ser"?"sois":"estáis",ellos:verbSet==="ser"?"son":"están",ellas:verbSet==="ser"?"son":"están",uds:verbSet==="ser"?"son":"están",ustedes:verbSet==="ser"?"son":"están"};
+        if(previous&&pronounForms[previous])return verb===pronounForms[previous];
+        if(before.includes("yo")&&before.includes("y"))return verb===(verbSet==="ser"?"somos":"estamos");
+        if(before.length){ const last=previous||"", plural=before.includes("y")||(/s$/u.test(last)&&!/(lunes)$/u.test(last)); const expected=verbSet==="ser"?(plural?"son":"es"):(plural?"están":"está"); return verb===expected; }
+        return true;
+      }
+      function hasPredicateAfter(text, verbSet) {
+        const words=tokens(text), forms=verbSet==="ser"?["soy","eres","es","somos","sois","son"]:["estoy","estás","está","estamos","estáis","están"];
+        const position=words.findIndex(word=>forms.includes(word)); if(position<0||position===words.length-1)return false;
+        const tail=words.slice(position+1); if(verbSet==="ser") {
+          const identity=text.trim().match(/\b(?:soy|eres|es|somos|sois|son)\s+([\p{L}]+)[.!?]?$/iu);
+          if(identity&&identity[1].charAt(0)===identity[1].charAt(0).toLocaleUpperCase("es-ES"))return true;
+          if(tail[0]==="de"&&tail.length>1)return true;
+          if(["un","una","unos","unas","el","la","los","las","mi","mis"].includes(tail[0])&&tail.length>1)return true;
+          return tail.some(word=>/(?:[oa]s?|e|es|ble|al|il|ente|ante|or|ora|dor|dora)$/u.test(word)||["feliz","felices","azul","azules","joven","jovenes","mayor","mayores","capaz","capaces"].includes(word));
+        }
+        if(["en","aquí","allí","cerca","lejos","dentro","fuera","sobre","debajo","detrás","delante","al","junto"].includes(tail[0]))return tail.length>1||["aquí","allí","cerca","lejos","dentro","fuera"].includes(tail[0]);
+        return ["bien","mal","cansado","cansada","cansados","cansadas","tranquilo","tranquila","tranquilos","tranquilas","enfermo","enferma","inquieto","inquieta","inquietos","inquietas","contento","contenta","ocupado","ocupada","vacío","vacía"].includes(tail[0])||/(?:[oa]s?|e|es|ble|al|il|ente|ante)$/u.test(tail[0]);
+      }
+      function validSerSentence(text) { return tokens(text).length>=2&&formAgreement(text,"ser")&&hasPredicateAfter(text,"ser"); }
+      function validEstarSentence(text) { return tokens(text).length>=2&&formAgreement(text,"estar")&&hasPredicateAfter(text,"estar"); }
+      function hasHayStructure(text) { const words=tokens(text), position=words.indexOf("hay"); return position>=0&&position<words.length-1&&!["que","de"].includes(words[position+1]); }
+      function validateOpen(item,value) {
+        const clean=value.trim(), sentences=clean.split(/[.!?]+|\n+/u).map(part=>part.trim()).filter(Boolean);
+        if(item.type==="ser-production") return sentences.some(validSerSentence);
+        if(item.type==="estar-production") return sentences.some(validEstarSentence);
+        return sentences.length>=3&&sentences.some(validSerSentence)&&sentences.some(validEstarSentence)&&sentences.some(hasHayStructure);
+      }
+      function createField(item) {
+        const field=item.type==="closed"?document.createElement("input"):document.createElement("textarea");
+        field.id="exercise-answer"; field.className=item.type==="closed"?"answer-input":"answer-textarea"; field.autocomplete="off"; field.autocapitalize="sentences"; field.spellcheck=false; field.setAttribute("aria-label",item.type==="closed"?"Respuesta escrita":"Tu producción escrita"); field.setAttribute("aria-describedby","exercise-feedback");
+        if(item.type==="closed"){field.type="text";field.placeholder="Escribe la forma";} else {field.rows=item.type==="integrated-production"?4:3;field.placeholder="Escribe tu respuesta";}
+        field.addEventListener("input",()=>{if(accepted||field.disabled)return;revealed=false;revealButton.setAttribute("aria-expanded","false");field.classList.remove("is-correct","is-incorrect");field.removeAttribute("aria-invalid");responseModel.hidden=true;feedback.textContent="Respuesta actualizada. Pulsa COMPROBAR.";feedback.className="feedback";});
+        return field;
+      }
+      function updateProgress() {
+        progress.textContent="Ejercicio "+(index+1)+" / "+items.length+" · Completados: "+completed+" / "+items.length;
+        progressBar.setAttribute("aria-valuenow",String(completed));progressBar.firstElementChild.style.width=(completed/items.length*100)+"%";
+      }
+      function render() {
+        const item=items[index]; block.textContent=item.block;itemCategory.textContent=item.kind;prompt.textContent=item.prompt;context.textContent=item.context||"";context.hidden=!item.context;
+        answerField=createField(item);fieldHost.replaceChildren(answerField);answerLabel.htmlFor=answerField.id;
+        responseModel.hidden=true;responseModel.textContent="";accepted=false;revealed=false;revealButton.disabled=false;revealButton.setAttribute("aria-expanded","false");submitButton.disabled=false;submitButton.textContent="COMPROBAR";
+        feedback.textContent="Escribe tu respuesta y pulsa COMPROBAR.";feedback.className="feedback";updateProgress();answerField.focus();
+      }
+      function showSummary() {
+        const precision=attempts?Math.round(completed/attempts*100):0;let best=0;
+        try{best=Number(localStorage.getItem(BEST_SCORE_KEY))||0;}catch(error){best=0;}
+        best=Math.max(best,precision);try{localStorage.setItem(BEST_SCORE_KEY,String(best));}catch(error){/* El ejercicio funciona aunque el almacenamiento local no esté disponible. */}
+        const rows=[["Puntuación",completed+" / "+items.length+" puntos"],["Ejercicios completados",completed+" / "+items.length],["Errores cometidos",String(errors)],["Intentos totales",String(attempts)],["Precisión",precision+"%"],["Mejor precisión",best+"%"]];
+        summary.replaceChildren(...rows.map(([label,value])=>{const row=document.createElement("p"),strong=document.createElement("strong");strong.textContent=label+": ";row.append(strong,document.createTextNode(value));return row;}));
+        performance.textContent=precision>=90?"Desempeño excelente.":precision>=70?"Buen trabajo. Sigue practicando.":"Sigue practicando para mejorar tu precisión.";
+        wrap.hidden=true;done.hidden=false;fontControls.hidden=true;document.querySelector("[data-repeat]").focus();
+      }
+      revealButton.addEventListener("click",()=>{
+        if(accepted)return;const item=items[index];revealed=true;
+        if(item.type==="closed")answerField.value=item.answer;
+        else {responseModel.textContent="Respuesta modelo: "+item.model;responseModel.hidden=false;answerField.value=item.model;}
+        revealButton.setAttribute("aria-expanded","true");answerField.classList.remove("is-correct","is-incorrect");answerField.removeAttribute("aria-invalid");feedback.textContent=item.type==="closed"?"Respuesta mostrada. Pulsa COMPROBAR para validarla.":"Modelo mostrado. Puedes usarlo como referencia y pulsar COMPROBAR.";feedback.className="feedback";answerField.focus();
+      });
+      form.addEventListener("submit",event=>{
+        event.preventDefault();if(accepted){if(index===items.length-1)showSummary();else{index++;render();}return;}
+        attempts++;const item=items[index],value=answerField.value;const correct=item.type==="closed"?normalize(value)===normalize(item.answer):validateOpen(item,value);
+        if(correct){completed++;accepted=true;answerField.classList.remove("is-incorrect");answerField.classList.add("is-correct");answerField.disabled=true;answerField.removeAttribute("aria-invalid");revealButton.disabled=true;updateProgress();feedback.textContent=(revealed?"Respuesta validada. ":"¡Correcto! ")+item.feedback;feedback.className="feedback correct";submitButton.textContent=index===items.length-1?"VER RESULTADOS":"SIGUIENTE";submitButton.focus();return;}
+        errors++;answerField.classList.remove("is-correct");answerField.classList.add("is-incorrect");answerField.setAttribute("aria-invalid","true");
+        feedback.textContent=item.type==="closed"?(value.trim()?item.feedback+" Revisa la forma verbal.":"Escribe una respuesta. Errar cuenta para la estadística; puedes intentarlo de nuevo."):(item.type==="ser-production"?"Escribe una frase completa con una forma correcta de “ser” y expresa identidad, origen, profesión o una característica.":item.type==="estar-production"?"Escribe una frase completa con una forma correcta de “estar” para expresar un estado o una localización.":"Escribe tres frases coherentes: una con “ser”, otra con “estar” y otra con “hay”. Presenta un lugar y algo que existe en él.");
+        feedback.className="feedback incorrect";answerField.focus();
+      });
+      document.querySelector("[data-repeat]").addEventListener("click",()=>{index=0;errors=0;attempts=0;completed=0;accepted=false;revealed=false;done.hidden=true;wrap.hidden=false;fontControls.hidden=false;render();});
+      document.querySelectorAll("[data-font]").forEach(button=>button.addEventListener("click",()=>{const size=button.dataset.font;document.documentElement.style.setProperty("--font-scale",size==="small"?".9":size==="large"?"1.16":"1");document.querySelectorAll("[data-font]").forEach(control=>control.setAttribute("aria-pressed",String(control===button)));}));
+      render();
+    })();
+  </script>
+</body>
+</html>
